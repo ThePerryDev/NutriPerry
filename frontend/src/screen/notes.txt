@@ -1,0 +1,2 @@
+screens/: contém os componentes de tela ou páginas principais do aplicativo. Cada tela geralmente
+corresponde a uma rota na navegação do aplicativo;
