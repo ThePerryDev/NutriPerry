@@ -1,0 +1,2 @@
+assets/: contém arquivos estáticos como imagens, fontes e outros recursos que são usados no
+aplicativo;

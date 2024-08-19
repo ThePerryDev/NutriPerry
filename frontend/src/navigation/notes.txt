@@ -1,0 +1,2 @@
+navigation/: diretório para a configuração de navegação do aplicativo, geralmente usando bibliotecas
+como React Navigation. Inclui definidores de navegação, como stacks, tabs e drawers;

@@ -1,0 +1,1 @@
+constants/: contém constantes que são usadas em todo o projeto, como cores e valores fixos;
