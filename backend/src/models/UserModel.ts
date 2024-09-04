@@ -1,5 +1,6 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
 import { isEmail } from 'validator';
+import NutricionistaModel from './NutricionistaModel';
 
 // Interface que representa a estrutura do usuário
 interface IUser extends Document {
@@ -12,6 +13,8 @@ interface IUser extends Document {
   gender: 'masculino' | 'feminino';
   goal: 'perda de peso' | 'manutenção de peso' | 'emagrecimento';
   birthdate: Date; // Data de nascimento
+  nutricionista?: Types.ObjectId; // Referência a um nutricionista existente
+  isLogged: boolean; // Indica se o usuário está logado
 }
 
 // Validação da senha
@@ -85,7 +88,40 @@ const UserSchema: Schema<IUser> = new Schema({
       validator: (v: Date) => v < new Date(),
       message: 'A data de nascimento deve ser uma data no passado.'
     }
+  },
+  nutricionista: {
+    type: Types.ObjectId, // Usando Types.ObjectId corretamente
+    ref: 'Nutricionista', // Referência ao modelo de Nutricionista
+    required: false, // Campo opcional
+  },
+  isLogged: {
+    type: Boolean,
+    trim: true,
+    required: true
   }
+}, {
+  toJSON: {
+    transform: function (doc, ret) {
+      ret.id = ret._id;
+      delete ret._id;
+      delete ret.__v;
+    }
+  }
+});
+
+// Middleware para validar se o nutricionista existe antes de salvar o documento
+UserSchema.pre('save', async function (next) {
+  const user = this as IUser;
+
+  if (user.nutricionista) {
+    const nutricionistaExists = await NutricionistaModel.findById(user.nutricionista);
+    if (!nutricionistaExists) {
+      const err = new Error('Nutricionista não encontrado');
+      return next(err);
+    }
+  }
+
+  next();
 });
 
 // Criando o modelo
