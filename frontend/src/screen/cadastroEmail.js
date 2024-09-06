@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
 
-function TelaCadNome({ navigation }) {
+function TelaCadEmail(navigation) {
 
-    const [nome, setNome] = useState("");
-    const [sobrenome, setSobrenome] = useState("");
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     return (
         <View style={styles.container}>
@@ -12,34 +12,37 @@ function TelaCadNome({ navigation }) {
                 <TouchableOpacity
                     style={styles.volta}
                     onPress={() => navigation.navigate('paginaAnterior')}>
-                    <Image source={require('../assets/setaVolta.png')} />
+                    <Image source={require('../assets/setaVolta.png')}></Image>
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20 }}>(1/5)</Text>
+                <Text style={{fontSize: 20}}>(2/5)</Text>
             </View>
-            <Image source={require('../assets/image01.png')} style={styles.image} resizeMode='contain' />
-            <Text style={styles.textgeral}>Insira o seu primeiro nome</Text>
+
+            <Image source={require('../assets/image02.png')} style={styles.image} resizeMode = 'contain' />
+            <Text style={styles.textgeral}>Insira seu email</Text>
             <TextInput
-                value={nome}
-                onChangeText={(nome) => setNome(nome)}
+                value={email}
+                onChangeText={(email) => setEmail(email)}
                 style={styles.input}
             />
-            <Text style={styles.textgeral}>Insira o seu sobrenome</Text>
+            <Text style={styles.textgeral}>Insira sua senha</Text>
             <TextInput
-                value={sobrenome}
-                onChangeText={(sobrenome) => setSobrenome(sobrenome)}
+                value={password}
+                onChangeText={(password) => setPassword(password)}
+                secureTextEntry={true}
                 style={styles.input}
             />
 
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('TelaCadEmail')}>
+                onPress={() => navigation.navigate('Pagina3')}>
+
                 <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
             </TouchableOpacity>
         </View>
-    );
+    )
 }
 
-export default TelaCadNome;
+export default TelaCadEmail;
 
 const styles = StyleSheet.create({
     container: {
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
     textgeral: {
         marginTop: 55,
         marginBottom: 7,
-        marginLeft: -130,
+        marginLeft: -180,
         fontSize: 20,
         fontFamily: 'Be Vietnam Pro'
     },
