@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types } from 'mongoose'; // Ajustando a importação correta
+import mongoose, { Schema } from 'mongoose'; // Ajustando a importação correta
 import User from './UserModel'; // Importação do modelo de usuário
 
 // Esquema para Alimento
@@ -21,6 +21,11 @@ const AlimentoSchema: Schema = new Schema({
     type: Number,
     required: true,
     min: 0,
+  },
+  peso: {
+    type: Number,
+    required: true,
+    min: 0, // Peso não pode ser negativo
   },
 });
 

@@ -1,5 +1,5 @@
 import User from "./UserModel";
-import ConsumoCalorico from "./ConsumoCalorico";
+import ConsumoCalorico from "./ConsumoCaloricoModel";
 import GastoCalorico from "./GastoCaloricoModel";
 import Nutricionista from "./NutricionistaModel"
 
