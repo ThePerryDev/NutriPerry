@@ -7,11 +7,24 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: 300,
+    paddingHorizontal: 20,
+    marginBottom: 20,
+    marginTop:20
+  },
+  arrow:{
+    width:30,
+    height:30,
+  },
   headerlabel:{
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#2C4B4E",
-    alignItems: "center"
+    alignItems: "flex-end"
   },
   imagecontainer: {
     alignItems: "center",

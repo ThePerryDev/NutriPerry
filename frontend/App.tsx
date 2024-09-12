@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import TelaPPObjetivo from "./src/screen/tela_pp_objetivo/tela_pp_objetivo";
+import TelaPPObjetivo from "./src/screen/cadastro/perfil_pessoal/tela_pp_objetivo/tela_pp_objetivo";
 
 const Stack = createStackNavigator();
 

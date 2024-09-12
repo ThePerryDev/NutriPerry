@@ -9,12 +9,18 @@ export default function TelaPPObjetivo() {
   return (
     <View style={styles.container}>
       <View>
-        <View>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity style={styles.arrow}>
+            <Image
+              source={require("../../../../assets/setaVolta.png")}
+              style={styles.arrow}
+            />
+          </TouchableOpacity>
           <Text style={styles.headerlabel}>(5/5)</Text>
         </View>
         <View style={styles.imagecontainer}>
           <Image
-            source={require("../../assets/pp_objetivos.png")}
+            source={require("../../../../assets/pp_objetivos.png")}
             style={styles.image}
           />
         </View>
