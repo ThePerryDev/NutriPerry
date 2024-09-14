@@ -22,6 +22,11 @@ const AlimentoSchema: Schema = new Schema({
     required: true,
     min: 0,
   },
+  peso: {
+    type: Number,
+    required: true,
+    min: 0, // Peso não pode ser negativo
+  },
 });
 
 // Esquema para Refeição
