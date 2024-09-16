@@ -11,7 +11,7 @@ function TelaCadFormacaoN() {
                 <TouchableOpacity style={styles.volta}>
                     <Image source={require('../../../assets/cadastro/setaVolta.png')}></Image>
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20 }}>(2/5)</Text>
+                <Text style={{ fontSize: 20 }}>(3/4)</Text>
             </View>
 
             <Image source={require('../../../assets/cadastro/profissao.png')} style={styles.image} resizeMode='contain' />

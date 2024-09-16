@@ -10,12 +10,12 @@ function TelaCadEmailP (){
         <View style={styles.container}>
             <View style={styles.cima}>
                 <TouchableOpacity style={styles.volta}>
-                    <Image source={require('../assets/setaVolta.png')}></Image>
+                    <Image source={require('../../../assets/cadastro/setaVolta.png')}></Image>
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20 }}>(2/5)</Text>
             </View>
 
-            <Image source={require('../assets/image02.png')} style={styles.image} resizeMode='contain' />
+            <Image source={require('../../../assets/cadastro/image02.png')} style={styles.image} resizeMode='contain' />
             <Text style={styles.textgeral}>Insira seu email</Text>
             <TextInput
                 value={email}
