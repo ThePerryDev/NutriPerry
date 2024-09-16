@@ -1,11 +1,17 @@
-import { View, StyleSheet } from 'react-native';
-import LoginForm from './components/LoginForm';
+import { View, StyleSheet, Button, Text } from 'react-native';
+import { InputWithIcons } from '../../components';
+import icone_perfil from "../../../assets/perfil.png";
+import icone_senha from "../../../assets/senha.png";
 
 
-export default function App() {
+export default function TelaLogin() {
   return (
     <View style={styles.container}>
-      <LoginForm />
+      <InputWithIcons iconSource={icone_perfil} placeholder='Insira seu email...'/>
+      <InputWithIcons iconSource={icone_senha} placeholder='Insira sua senha...'/>
+      
+      <Button title='ENTRAR' />
+      <Text>Ou cadastre-se...</Text>
     </View>
   );
 }
