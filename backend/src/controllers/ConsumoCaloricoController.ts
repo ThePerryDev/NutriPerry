@@ -1,36 +1,89 @@
 import { Request, Response } from 'express';
-import ConsumoCalorico from '../models/ConsumoCaloricoModel'; // Ajuste o caminho conforme necessário
-import User from '../models/UserModel'; // Ajuste o caminho conforme necessário
+import ConsumoCalorico from '../models/ConsumoCaloricoModel';
+import User from '../models/UserModel';
 
 class ConsumoCaloricoController {
-  
-  // Método para criar um novo registro de consumo calórico
-  public async create(req: Request, res: Response): Promise<Response> {
+  // Cria um novo registro de consumo calórico
+  async create(req: Request, res: Response) {
     try {
-      // Valida se o usuário existe
-      const user = await User.findById(req.body.userID);
+      const { userID, data, refeicoes } = req.body;
+
+      // Verifica se o usuário existe
+      const user = await User.findById(userID);
       if (!user) {
         return res.status(404).json({ message: 'Usuário não encontrado.' });
       }
-      
-      // Cria o novo registro de consumo calórico
-      const novoConsumoCalorico = new ConsumoCalorico({
-        userID: req.body.userID,
-        data: req.body.data,
-        refeicoes: req.body.refeicoes,
+
+      const newConsumoCalorico = new ConsumoCalorico({
+        userID,
+        data,
+        refeicoes,
       });
-      
-      // Salva o registro no banco de dados
-      const resultado = await novoConsumoCalorico.save();
-      
-      // Retorna a resposta com sucesso
-      return res.status(201).json(resultado);
+
+      await newConsumoCalorico.save();
+
+      res.status(201).json({ message: 'Registro de consumo calórico criado com sucesso.' });
     } catch (error) {
-      // Trata erros e retorna uma resposta de erro
-      console.error('Erro ao criar o consumo calórico:', error);
-      return res.status(500).json({ message: 'Erro ao criar o consumo calórico.', error });
+      console.error(error);
+      res.status(500).json({ message: 'Erro ao criar registro.' });
+    }
+  }
+
+  // Lista todos os registros de consumo calórico
+  async list(req: Request, res: Response) {
+    try {
+      const consumosCaloricos = await ConsumoCalorico.find();
+      res.json(consumosCaloricos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Erro ao listar registros.' });
+    }
+  }
+
+  // Lista registros de consumo calórico por usuário
+  async listByUser(req: Request, res: Response) {
+    try {
+      const { userId } = req.params;
+      const consumosCaloricos = await ConsumoCalorico.find({ userID: userId });
+      res.json(consumosCaloricos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Erro ao listar registros por usuário.' });
+    }
+  }
+
+  // Atualiza um registro de consumo calórico
+  async update(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const updates = req.body;
+
+      const consumoCalorico = await ConsumoCalorico.findByIdAndUpdate(id, updates, { new: true });
+
+      if (!consumoCalorico) {
+        return res.status(404).json({ message: 'Registro não encontrado.' });
+      }
+
+      res.json(consumoCalorico);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Erro ao atualizar registro.' });
+    }
+  }
+
+  // Deleta um registro de consumo calórico
+  async delete(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      await ConsumoCalorico.findByIdAndDelete(id);
+
+      res.status(204).send();
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Erro ao deletar registro.' });
     }
   }
 }
 
-export default ConsumoCaloricoController;
+export default new ConsumoCaloricoController();
