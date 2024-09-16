@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
+import styles from "./styles";
 
 function TelaCadFormacaoN() {
     const [formacao, setFormacao] = useState<string>("");
@@ -42,54 +43,3 @@ function TelaCadFormacaoN() {
 
 export default TelaCadFormacaoN;
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FBFBFB',
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-
-    cima: {
-        flexDirection: 'row',
-    },
-
-    volta: {
-        marginRight: 250
-    },
-
-    image: {
-        height: 270,
-        width: 290
-    },
-
-    textgeral: {
-        marginTop: 55,
-        marginBottom: 7,
-        marginLeft: -150,
-        fontSize: 20
-    },
-
-    input: {
-        backgroundColor: '#FFFFFF',
-        borderRadius: 25,
-        height: 68,
-        width: 300,
-        borderWidth: 2,
-        borderStyle: 'solid',
-        borderColor: '#00AD71'
-    },
-
-    button: {
-        height: 68,
-        width: 300,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 50,
-        backgroundColor: '#00AD71',
-        borderRadius: 25
-    },
-
-});
