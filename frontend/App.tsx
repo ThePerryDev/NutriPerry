@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
-import TelaCadEmail from './src/screen/cadastro/perfil_pessoal/cadastroEmail';
+import TelaCadEmailP from './src/screen/cadastro/perfil_pessoal/cadastroEmailP';
+import TelaCadNomeP from './src/screen/cadastro/perfil_pessoal/cadastroNomeP';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <TelaCadEmail></TelaCadEmail>
+      <TelaCadNomeP></TelaCadNomeP>
     </View>
   );
 }

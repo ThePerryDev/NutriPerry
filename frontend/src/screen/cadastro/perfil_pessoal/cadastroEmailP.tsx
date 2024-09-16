@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
 
-function TelaCadEmail (){
+function TelaCadEmailP (){
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -37,7 +37,7 @@ function TelaCadEmail (){
     );
 }
 
-export default TelaCadEmail;
+export default TelaCadEmailP;
 
 const styles = StyleSheet.create({
     container: {
