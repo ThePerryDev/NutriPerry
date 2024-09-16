@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 315,
     paddingHorizontal: 20,
-    marginBottom: 20,
-    marginTop:20
+    marginBottom: 70,
+    marginTop:30
   },
   headerlabel:{
     fontSize: 30,
@@ -23,30 +23,16 @@ const styles = StyleSheet.create({
   },
   imagecontainer: {
     alignItems: "center",
-    marginTop:10,
-    marginBottom: 15,
+    marginTop:30,
+    marginBottom: 30,
   },
   image: {
-    width: 300,
-    height: 250,
+    width: 280,
+    height: 242,
     resizeMode: "contain",
   },
   buttoncontainer: {
-    marginTop: 35,
-  },
-  continuebutton: {
-    width: 300,
-    height: 68,
-    borderRadius: 25,
-    backgroundColor: "#ffffff",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#00AD71",
-    alignItems: "center",
+    marginTop: 70,
   },
 });
 

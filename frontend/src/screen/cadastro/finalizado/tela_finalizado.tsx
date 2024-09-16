@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
+import ContinueButtonV2 from "../../../components/Cadastro/ContinuarV2/botao_continuar";
 
 export default function TelaFinalizado() {
+  const handleContinue = () => {
+    console.log("Botão Continuar pressionado");
+  };
 
   return (
     <View style={styles.container}>
@@ -19,9 +23,7 @@ export default function TelaFinalizado() {
         </View>
       </View>
       <View style={styles.buttoncontainer}>
-        <TouchableOpacity style={styles.continuebutton}>
-          <Text style={styles.buttonText}>CONTINUAR</Text>
-        </TouchableOpacity>
+        <ContinueButtonV2 onPress={handleContinue} />
       </View>
     </View>
   );

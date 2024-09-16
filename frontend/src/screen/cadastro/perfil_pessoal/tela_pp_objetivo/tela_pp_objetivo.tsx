@@ -1,10 +1,36 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import { Picker } from "@react-native-picker/picker";
+import CustomPicker from "../../../../components/Cadastro/Picker/picker";
+import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
 import styles from "./styles";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../../types/rootStack";
 
-export default function TelaPPObjetivo() {
-  const [selectRole, setSelectRole] = useState("");
+type ContinuarScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "TelaPPObjetivo"
+>;
+
+type Props = {
+  navigation: ContinuarScreenNavigationProp;
+};
+
+const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
+  const [selectGoal, setSelectGoal] = useState("");
+  const [selectExerciseTime, setSelectExerciseTime] = useState("");
+
+  const goalOptions = [
+    { label: "Perder peso", value: "lose" },
+    { label: "Manter peso", value: "keep" },
+    { label: "Ganhar peso", value: "gain" },
+  ];
+
+  const exerciseTimeOptions = [
+    { label: "15 a 30 minutos", value: "15-30" },
+    { label: "30 a 45 minutos", value: "30-45" },
+    { label: "45 a 60 minutos", value: "45-60" },
+    { label: "Mais de 60 minutos", value: "+60" },
+  ];
 
   return (
     <View style={styles.container}>
@@ -18,49 +44,32 @@ export default function TelaPPObjetivo() {
           </TouchableOpacity>
           <Text style={styles.headerlabel}>(5/5)</Text>
         </View>
+
         <View style={styles.imagecontainer}>
           <Image
             source={require("../../../../assets/pp_objetivos.png")}
             style={styles.image}
           />
         </View>
-        <View>
-          <Text style={styles.pickerLabel}>Qual seu objetivo com o App?</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={selectRole}
-              onValueChange={(itemValue: string) => setSelectRole(itemValue)}
-              style={styles.picker}
-              mode="dropdown"
-            >
-              <Picker.Item label="Perder peso" value="lose" />
-              <Picker.Item label="Manter peso" value="keep" />
-              <Picker.Item label="Ganhar peso" value="gain" />
-            </Picker>
-          </View>
-        </View>
-        <View>
-          <Text style={styles.pickerLabel}>Quanto tempo se exercitando?</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={selectRole}
-              onValueChange={(itemValue: string) => setSelectRole(itemValue)}
-              style={styles.picker}
-              mode="dropdown"
-            >
-              <Picker.Item label="15 a 30 minutos" value="15-30" />
-              <Picker.Item label="30 a 45 minutos" value="30-45" />
-              <Picker.Item label="45 a 60 minutos" value="45-60" />
-              <Picker.Item label="Mais de 60 minutos" value="+60" />
-            </Picker>
-          </View>
-        </View>
+        <CustomPicker
+          label="Qual seu objetivo com o App?"
+          selectedValue={selectGoal}
+          onValueChange={(itemValue) => setSelectGoal(itemValue)}
+          items={goalOptions}
+        />
+        <CustomPicker
+          label="Quanto tempo se exercitando?"
+          selectedValue={selectExerciseTime}
+          onValueChange={(itemValue) => setSelectExerciseTime(itemValue)}
+          items={exerciseTimeOptions}
+        />
       </View>
+
       <View style={styles.buttoncontainer}>
-        <TouchableOpacity style={styles.continuebutton}>
-          <Text style={styles.buttonText}>CONTINUAR</Text>
-        </TouchableOpacity>
+        <ContinueButton onPress={() => navigation.navigate("TelaFinalizado")} />
       </View>
     </View>
   );
-}
+};
+
+export default TelaPPObjetivo;

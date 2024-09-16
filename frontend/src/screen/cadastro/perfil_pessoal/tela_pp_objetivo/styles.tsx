@@ -61,20 +61,6 @@ const styles = StyleSheet.create({
   buttoncontainer: {
     marginTop: 35,
   },
-  continuebutton: {
-    width: 300,
-    height: 68,
-    borderRadius: 25,
-    backgroundColor: "#00AD71",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#ffffff",
-    alignItems: "center",
-  },
 });
 
 export default styles;

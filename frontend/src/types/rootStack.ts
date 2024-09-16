@@ -1,4 +1,4 @@
 export type RootStackParamList ={
-    telaPPObjetivo:undefined;
+    TelaPPObjetivo:undefined;
     TelaFinalizado:undefined;
 }
