@@ -1,45 +1,46 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
 
-function TelaCadNome() {
-
-    const [nome, setNome] = useState<string>("");
-    const [sobrenome, setSobrenome] = useState<string>("");
+function TelaCadFormacaoN() {
+    const [formacao, setFormacao] = useState<string>("");
+    const [anoformacao, setAnoformacao] = useState<string>("");
 
     return (
         <View style={styles.container}>
             <View style={styles.cima}>
                 <TouchableOpacity style={styles.volta}>
-                    <Image source={require('../../../assets/cadastro/setaVolta.png')} />
+                    <Image source={require('../../../assets/cadastro/setaVolta.png')}></Image>
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20 }}>(1/5)</Text>
+                <Text style={{ fontSize: 20 }}>(2/5)</Text>
             </View>
-            <Image source={require('../../../assets/cadastro/image01.png')}
-                style={styles.image}
-                resizeMode='contain'
-            />
-            <Text style={styles.textgeral}>Insira o seu primeiro nome</Text>
+
+            <Image source={require('../../../assets/cadastro/profissao.png')} style={styles.image} resizeMode='contain' />
+
+            <Text style={styles.textgeral}>Insira sua formação</Text>
+
             <TextInput
-                value={nome}
-                onChangeText={(nome) => setNome(nome)}
-                style={styles.input}
-            />
-            <Text style={styles.textgeral}>Insira o seu sobrenome</Text>
-            <TextInput
-                value={sobrenome}
-                onChangeText={(sobrenome) => setSobrenome(sobrenome)}
+                value={formacao}
+                onChangeText={(formacao) => setFormacao(formacao)}
                 style={styles.input}
             />
 
-            <TouchableOpacity
-                style={styles.button}>
+
+            <Text style={styles.textgeral}>                 Insira o ano da sua formação</Text>
+
+            <TextInput
+                value={anoformacao}
+                onChangeText={(anoformacao) => setAnoformacao(anoformacao)}
+                style={styles.input}
+            />
+
+            <TouchableOpacity style={styles.button}>
                 <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
             </TouchableOpacity>
         </View>
-    );
+    )
 }
 
-export default TelaCadNome;
+export default TelaCadFormacaoN;
 
 const styles = StyleSheet.create({
     container: {
@@ -59,26 +60,16 @@ const styles = StyleSheet.create({
         marginRight: 250
     },
 
-    button: {
-        height: 68,
-        width: 300,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 50,
-        backgroundColor: '#00AD71',
-        borderRadius: 25
+    image: {
+        height: 270,
+        width: 290
     },
 
     textgeral: {
         marginTop: 55,
         marginBottom: 7,
-        marginLeft: -130,
+        marginLeft: -150,
         fontSize: 20
-    },
-
-    image: {
-        height: 270,
-        width: 290
     },
 
     input: {
@@ -89,5 +80,16 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderStyle: 'solid',
         borderColor: '#00AD71'
-    }
+    },
+
+    button: {
+        height: 68,
+        width: 300,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 50,
+        backgroundColor: '#00AD71',
+        borderRadius: 25
+    },
+
 });

@@ -71,8 +71,7 @@ const styles = StyleSheet.create({
         marginTop: 55,
         marginBottom: 7,
         marginLeft: -180,
-        fontSize: 20,
-        fontFamily: 'Be Vietnam Pro'
+        fontSize: 20
     },
 
     image: {
