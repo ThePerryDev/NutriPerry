@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
 
-function TelaCadNome({ navigation }) {
+function TelaCadNome() {
 
-    const [nome, setNome] = useState("");
-    const [sobrenome, setSobrenome] = useState("");
+    const [nome, setNome] = useState<string>("");
+    const [sobrenome, setSobrenome] = useState<string>("");
 
     return (
         <View style={styles.container}>
             <View style={styles.cima}>
-                <TouchableOpacity
-                    style={styles.volta}
-                    onPress={() => navigation.navigate('paginaAnterior')}>
+                <TouchableOpacity style={styles.volta}>
                     <Image source={require('../assets/setaVolta.png')} />
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20 }}>(1/5)</Text>
             </View>
-            <Image source={require('../assets/image01.png')} style={styles.image} resizeMode='contain' />
+            <Image source={require('../assets/image01.png')}
+                style={styles.image}
+                resizeMode='contain'
+            />
             <Text style={styles.textgeral}>Insira o seu primeiro nome</Text>
             <TextInput
                 value={nome}
@@ -31,8 +32,7 @@ function TelaCadNome({ navigation }) {
             />
 
             <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('TelaCadEmail')}>
+                style={styles.button}>
                 <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
             </TouchableOpacity>
         </View>
