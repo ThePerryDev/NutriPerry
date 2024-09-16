@@ -10,11 +10,11 @@ function TelaCadNome() {
         <View style={styles.container}>
             <View style={styles.cima}>
                 <TouchableOpacity style={styles.volta}>
-                    <Image source={require('../assets/setaVolta.png')} />
+                    <Image source={require('../../../assets/cadastro/setaVolta.png')} />
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20 }}>(1/5)</Text>
             </View>
-            <Image source={require('../assets/image01.png')}
+            <Image source={require('../../../assets/cadastro/image01.png')}
                 style={styles.image}
                 resizeMode='contain'
             />
