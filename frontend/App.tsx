@@ -1,5 +1,5 @@
-import { Home } from "./src/screen";
+import { CadastroSexoIdade } from "./src/screen";
 
 export default function App() {
-  return <Home />;
+  return <CadastroSexoIdade />;
 }
