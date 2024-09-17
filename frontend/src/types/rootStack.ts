@@ -1,4 +1,5 @@
 export type RootStackParamList ={
+    AbrindoApp:undefined;
     TelaPPObjetivo:undefined;
     TelaFinalizado:undefined;
     TelaLogin:undefined;

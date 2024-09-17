@@ -10,14 +10,19 @@ import TelaCadNutriEmail from "./src/screen/cadastro/perfil_nutricionista/tela_n
 import TelaCadNutriNome from "./src/screen/cadastro/perfil_nutricionista/tela_nutri_nome/cadastroNomeP";
 import TelaCadNutriFormacao from "./src/screen/cadastro/perfil_nutricionista/tela_nutri_formacao/cadastroFormacaoN";
 import TelaCadNutriTelefone from "./src/screen/cadastro/perfil_nutricionista/tela_nutri_telefone/tela_telefone";
+import AbrindoApp from "./src/screen/abrindo/tela_abrindo";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
-
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TelaLogin">
+      <Stack.Navigator initialRouteName="AbrindoApp">
+        <Stack.Screen
+          name="AbrindoApp"
+          component={AbrindoApp}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="TelaLogin"
           component={TelaLogin}
