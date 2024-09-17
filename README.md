@@ -35,6 +35,7 @@ Cada entrega será realizada a partir da criação de uma **tag** no repositóri
 ## :dart: Backlog 
 
 <p align="center"> <img src="abp-documents/images_readme/requisitos.png" /></p>
+<p align="center"> <img src="abp-documents/images_readme/backlogSprints.png" /></p>
 
 → [Voltar ao topo](#topo)
 
