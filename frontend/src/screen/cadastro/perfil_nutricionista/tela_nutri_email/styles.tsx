@@ -50,3 +50,5 @@ const styles = StyleSheet.create({
         borderColor: '#00AD71'
     }
 });
+
+export default styles;

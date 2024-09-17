@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
-import styles from "./stylesNome";
+import styles from "./styles";
 
-function TelaCadNome() {
+function TelaCadNutriNome() {
 
     const [nome, setNome] = useState<string>("");
     const [sobrenome, setSobrenome] = useState<string>("");
@@ -11,11 +11,11 @@ function TelaCadNome() {
         <View style={styles.container}>
             <View style={styles.cima}>
                 <TouchableOpacity style={styles.volta}>
-                    <Image source={require('../../../assets/cadastro/setaVolta.png')} />
+                    <Image source={require('../../../../assets/cadastro/setaVolta.png')} />
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20 }}>(1/5)</Text>
             </View>
-            <Image source={require('../../../assets/cadastro/image01.png')}
+            <Image source={require('../../../../assets/cadastro/image01.png')}
                 style={styles.image}
                 resizeMode='contain'
             />
@@ -40,5 +40,5 @@ function TelaCadNome() {
     );
 }
 
-export default TelaCadNome;
+export default TelaCadNutriNome;
 

@@ -20,12 +20,14 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
   const [selectExerciseTime, setSelectExerciseTime] = useState("");
 
   const goalOptions = [
+    { label: "", value: "" },
     { label: "Perder peso", value: "lose" },
     { label: "Manter peso", value: "keep" },
     { label: "Ganhar peso", value: "gain" },
   ];
 
   const exerciseTimeOptions = [
+    { label: "", value: "" },
     { label: "15 a 30 minutos", value: "15-30" },
     { label: "30 a 45 minutos", value: "30-45" },
     { label: "45 a 60 minutos", value: "45-60" },

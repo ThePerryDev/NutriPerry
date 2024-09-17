@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import styles from "./styles";
 
-function TelaCadFormacaoN() {
+function TelaCadNutriFormacao() {
     const [formacao, setFormacao] = useState<string>("");
     const [anoformacao, setAnoformacao] = useState<string>("");
 
@@ -10,12 +10,12 @@ function TelaCadFormacaoN() {
         <View style={styles.container}>
             <View style={styles.cima}>
                 <TouchableOpacity style={styles.volta}>
-                    <Image source={require('../../../assets/cadastro/setaVolta.png')}></Image>
+                    <Image source={require('../../../../assets/cadastro/setaVolta.png')}></Image>
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20 }}>(3/4)</Text>
             </View>
 
-            <Image source={require('../../../assets/cadastro/profissao.png')} style={styles.image} resizeMode='contain' />
+            <Image source={require('../../../../assets/cadastro/profissao.png')} style={styles.image} resizeMode='contain' />
 
             <Text style={styles.textgeral}>Insira sua formação</Text>
 
@@ -26,7 +26,7 @@ function TelaCadFormacaoN() {
             />
 
 
-            <Text style={styles.textgeral}>                 Insira o ano da sua formação</Text>
+            <Text style={styles.textgeral}>Insira o ano da sua formação</Text>
 
             <TextInput
                 value={anoformacao}
@@ -41,5 +41,5 @@ function TelaCadFormacaoN() {
     )
 }
 
-export default TelaCadFormacaoN;
+export default TelaCadNutriFormacao;
 

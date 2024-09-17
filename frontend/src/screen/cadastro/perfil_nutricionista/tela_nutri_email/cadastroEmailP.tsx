@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
-import styles from "./stylesEmail";
+import styles from "./styles";
 
-function TelaCadEmailP (){
+function TelaCadNutriEmail(){
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -11,12 +11,12 @@ function TelaCadEmailP (){
         <View style={styles.container}>
             <View style={styles.cima}>
                 <TouchableOpacity style={styles.volta}>
-                    <Image source={require('../../../assets/cadastro/setaVolta.png')}></Image>
+                    <Image source={require('../../../../assets/cadastro/setaVolta.png')}></Image>
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20 }}>(2/5)</Text>
             </View>
 
-            <Image source={require('../../../assets/cadastro/image02.png')} style={styles.image} resizeMode='contain' />
+            <Image source={require('../../../../assets/cadastro/image02.png')} style={styles.image} resizeMode='contain' />
             <Text style={styles.textgeral}>Insira seu email</Text>
             <TextInput
                 value={email}
@@ -38,4 +38,4 @@ function TelaCadEmailP (){
     );
 }
 
-export default TelaCadEmailP;
+export default TelaCadNutriEmail;
