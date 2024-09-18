@@ -41,7 +41,7 @@ const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
         style={styles.input}
         keyboardType="numeric"
       />
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("TelaFinalizado")}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("TelaPPObjetivo")}>
         <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
       </TouchableOpacity>
     </View>

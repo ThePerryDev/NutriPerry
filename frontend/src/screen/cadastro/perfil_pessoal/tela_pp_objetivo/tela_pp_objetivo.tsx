@@ -5,6 +5,7 @@ import ContinueButton from "../../../../components/Cadastro/Continuar/botao_cont
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
 import styles from "./Styles";
+import { setaVolta } from "../../../../assets";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -38,7 +39,7 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
         <View style={styles.headerContainer}>
           <TouchableOpacity style={styles.arrow}>
             <Image
-              source={require("../../../../assets/setaVolta.png")}
+              source={setaVolta}
               style={styles.arrow}
             />
           </TouchableOpacity>
