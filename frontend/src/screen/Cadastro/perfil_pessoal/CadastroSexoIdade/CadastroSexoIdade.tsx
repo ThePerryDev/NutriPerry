@@ -3,8 +3,19 @@ import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { imagem3, setaVolta } from "../../../../assets";
 import styles from ".";
 import { Picker } from "@react-native-picker/picker";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../../types/rootStack";
 
-const CadastroSexoIdade = () => {
+type ContinuarScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "CadastroSexoIdade"
+>;
+
+type Props = {
+  navigation: ContinuarScreenNavigationProp;
+};
+
+const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
   const [sexo, setSexo] = useState<string>("");
   const [idade, setIdade] = useState<string>("");
 
@@ -31,7 +42,7 @@ const CadastroSexoIdade = () => {
         style={styles.input}
         keyboardType="numeric"
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CadastroAlturaPeso")}>
         <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
       </TouchableOpacity>
     </View>

@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { imagem4, setaVolta } from "../../../../assets";
-import styles from ".";
+import styles from "./Styles";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../../types/rootStack";
 
-const CadastroAlturaPeso = () => {
+type ContinuarScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "CadastroAlturaPeso"
+>;
+
+type Props = {
+  navigation: ContinuarScreenNavigationProp;
+};
+
+const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
   const [altura, setAltura] = useState<string>("");
   const [peso, setPeso] = useState<string>("");
 
@@ -30,7 +41,7 @@ const CadastroAlturaPeso = () => {
         style={styles.input}
         keyboardType="numeric"
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("TelaFinalizado")}>
         <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
       </TouchableOpacity>
     </View>

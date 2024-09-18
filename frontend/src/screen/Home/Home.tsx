@@ -3,8 +3,19 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import styles from "./Styles";
 import { MenuInferior } from "../../components";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../types/rootStack";
 
-const Home = () => {
+type ContinuarScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Home"
+>;
+
+type Props = {
+  navigation: ContinuarScreenNavigationProp;
+};
+
+const Home: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Hoje</Text>
