@@ -55,22 +55,6 @@ Como proposta para solucionar o projeto requisitado de uma aplicação mobile pa
 <p align="center"><img src="abp-documents/Wireframe - NutriPerry.PNG" /><p>
 
 
-
-→ [Voltar ao topo](#topo)
-
-
-
-<span id="prototipo">
-    
-## :desktop_computer: Desenvolvimento do protótipo
-A seguir, iniciou-se o trabalho de desenvolvimento do protótipo na plataforma figma onde era possível permitir ao usuário compreender a interação que o site irá possuir entre as telas e formato com que o mesmo será apresentado. O protótipo a seguir, já foi validado com o cliente.
-    
-
-<h2 align="center">Página Principal</h2>
-<p align="center"><img src="./Imagens_md/paginaPrincipal.png" /></p>
-
-[Confira o protótipo navegável na plataforma FIGMA](https://www.figma.com/proto/QdEmUPrhT49XvnToH1PQrl/Visiona-Espacial-Dashboard?type=design&node-id=1-2&t=YEoMTNcHwZBQqTsB-0&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A2)
-
 → [Voltar ao topo](#topo)
 
 ### Criação das Tabelas e Base do Front-End
@@ -85,12 +69,10 @@ Sendo assim, finalizamos os requisitos propostos para esta sprint.
  <span id="metricas">
      
 ## :chart_with_upwards_trend: Métricas do time
-Em prol de um melhor aproveitamento do tempo disponível durante a primeira sprint o time se dividiu em atividades como: planejamento, brieffing, estruturação do GitHub, criação do product backlog, sprint backlog, pesquisa e elaboração do design e da Identidade Visual, criação do wireframe e layout do site, desenvolvimento das tabelas resultantes do modelo do banco de dados, assim como estruturação da equipe para gestão das horas com o gráfico burndown.
+Em prol de um melhor aproveitamento do tempo disponível durante a primeira sprint o time se dividiu em atividades como: planejamento, brieffing, estruturação do GitHub, criação do product backlog, sprint backlog, pesquisa e elaboração do design e da Identidade Visual, criação do wireframe e layout do site, assim como estruturação da equipe para gestão das horas com o gráfico burndown.
     
 <p align="center"><img src="./Imagens_md/burndownsp1.png" /></p>
     
 
 
 → [Voltar ao topo](#topo)
-
-→ [Voltar a página de documentação principal](https://github.com/ThePerryDev/visiona-documentation/tree/main?tab=readme-ov-file)
