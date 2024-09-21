@@ -52,7 +52,7 @@ A partir do levantamento de requisitos, foi criado uma modelagem do banco de dad
 
 Como proposta para solucionar o projeto requisitado de uma aplicação mobile para o monitoramento dos ganhos e gastos calóricos, foi realizado o seguinte wireframe do nosso produto:
 
-<p align="center"><img src="abp-documents/Wireframe - NutriPerry.PNG" /><p>
+<p align="center"><img src="images/Wireframe - NutriPerry.PNG" /><p>
 
 
 → [Voltar ao topo](#topo)
@@ -71,7 +71,7 @@ Sendo assim, finalizamos os requisitos propostos para esta sprint.
 ## :chart_with_upwards_trend: Métricas do time
 Em prol de um melhor aproveitamento do tempo disponível durante a primeira sprint o time se dividiu em atividades como: planejamento, brieffing, estruturação do GitHub, criação do product backlog, sprint backlog, pesquisa e elaboração do design e da Identidade Visual, criação do wireframe e layout do site, assim como estruturação da equipe para gestão das horas com o gráfico burndown.
     
-<p align="center"><img src="./Imagens_md/burndownsp1.png" /></p>
+<p align="center"><img src="images/burndown_sp1.png" /></p>
     
 
 
