@@ -5,6 +5,7 @@
 <p align="center">
     <a href="#objetivos">Objetivos da sprint</a> &nbsp |&nbsp &nbsp
     <a href="#entregas">Entregas</a> &nbsp |&nbsp &nbsp
+    <a href="#prototipo">Desenvolvimento do Protótipo</a> &nbsp |&nbsp &nbsp 
     <a href="#metricas">Métricas do time</a> &nbsp |&nbsp &nbsp
 </p>
 
@@ -61,6 +62,23 @@ Com toda a pesquisa inicial desenvolvida, somado ao modelo do banco de dados for
 
 
 Sendo assim, finalizamos os requisitos propostos para esta sprint.
+
+→ [Voltar ao topo](#topo)
+
+
+<span id="prototipo">
+    
+## :desktop_computer: Desenvolvimento do protótipo
+A seguir, iniciou-se o trabalho de desenvolvimento do protótipo na plataforma figma onde era possível permitir ao usuário compreender a interação que o aplicativo irá possuir entre as telas e formato com que o mesmo será apresentado. O protótipo a seguir.
+    
+
+<h2 align="center">Tela de cadastro com o perfil nutricionista</h2>
+<p align="center"><img src="images/prototipo_perfil-nutricionista.gif" /></p>
+
+[Confira o protótipo navegável na plataforma FIGMA](https://www.figma.com/proto/MgHhIQvhboj07JHzJxJocS/NutriPerry?node-id=1-3&node-type=canvas&t=8IWPpj3SLI1qZUKX-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&show-proto-sidebar=1)
+
+<h2 align="center">Tela de cadastro com o perfil pessoal e as demais telas</h2>
+<p align="center"><img src="images/prototipo_perfil-pessoal.mp4" /></p>
 
 → [Voltar ao topo](#topo)
 
