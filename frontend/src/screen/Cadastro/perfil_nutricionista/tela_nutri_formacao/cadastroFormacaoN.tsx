@@ -1,9 +1,20 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import styles from "./styles";
-import { setaVolta } from "../../../assets";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../../types/rootStack";
+import { profissao, setaVolta } from "../../../../assets";
 
-function TelaCadFormacaoN() {
+type ContinuarScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    "CadastroNutriFormacao"
+>;
+
+type Props = {
+    navigation: ContinuarScreenNavigationProp;
+};
+
+const CadastroNutriFormacao: React.FC<Props> = ({ navigation }) =>  {
     const [formacao, setFormacao] = useState<string>("");
     const [anoformacao, setAnoformacao] = useState<string>("");
 
@@ -16,7 +27,7 @@ function TelaCadFormacaoN() {
                 <Text style={{ fontSize: 20 }}>(3/4)</Text>
             </View>
 
-            <Image source={require('../../../assets/cadastro/profissao.png')} style={styles.image} resizeMode='contain' />
+            <Image source={profissao} style={styles.image} resizeMode='contain' />
 
             <Text style={styles.textgeral}>Insira sua formação</Text>
 
@@ -27,7 +38,7 @@ function TelaCadFormacaoN() {
             />
 
 
-            <Text style={styles.textgeral}>                 Insira o ano da sua formação</Text>
+            <Text style={styles.textgeral}>Insira o ano da sua formação</Text>
 
             <TextInput
                 value={anoformacao}
@@ -35,12 +46,12 @@ function TelaCadFormacaoN() {
                 style={styles.input}
             />
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CadastroNutriTelefone")}>
                 <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
             </TouchableOpacity>
         </View>
     )
 }
 
-export default TelaCadFormacaoN;
+export default CadastroNutriFormacao;
 

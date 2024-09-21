@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose'; // Ajustando a importação correta
+import mongoose, { Schema, Types } from 'mongoose'; // Ajustando a importação correta
 import User from './UserModel'; // Importação do modelo de usuário
 
 // Esquema para Alimento

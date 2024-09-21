@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
-import styles from "./stylesEmail";
+import styles from "./styles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
 import { image02, setaVolta } from "../../../../assets";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
-    "CadastroEmail"
+    "CadastroNutriEmail"
 >;
 
 type Props = {
     navigation: ContinuarScreenNavigationProp;
 };
 
-const CadastroEmail: React.FC<Props> = ({ navigation }) => {
+const CadastroNutriEmail: React.FC<Props> = ({ navigation }) => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -41,11 +41,11 @@ const CadastroEmail: React.FC<Props> = ({ navigation }) => {
                 style={styles.input}
             />
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CadastroSexoIdade")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CadastroNutriFormacao")}>
                 <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-export default CadastroEmail;
+export default CadastroNutriEmail;

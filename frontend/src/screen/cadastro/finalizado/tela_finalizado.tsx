@@ -3,7 +3,7 @@ import { View, Text, Image } from "react-native";
 import ContinueButtonV2 from "../../../components/Cadastro/ContinuarV2/botao_continuar";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
-import styles from "./Styles";
+import styles from "./styles";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,

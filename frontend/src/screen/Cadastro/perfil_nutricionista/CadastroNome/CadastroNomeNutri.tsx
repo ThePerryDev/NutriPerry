@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
-import styles from "./stylesNome";
+import styles from "./styles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
 import { image01, setaVolta } from "../../../../assets";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
-    "CadastroNome"
+    "CadastroNutriNome"
 >;
 
 type Props = {
     navigation: ContinuarScreenNavigationProp;
 };
 
-const CadastroNome: React.FC<Props> = ({ navigation }) => {
+const CadastroNutriNome: React.FC<Props> = ({ navigation }) => {
     const [nome, setNome] = useState<string>("");
     const [sobrenome, setSobrenome] = useState<string>("");
 
@@ -42,11 +42,11 @@ const CadastroNome: React.FC<Props> = ({ navigation }) => {
                 onChangeText={(sobrenome) => setSobrenome(sobrenome)}
                 style={styles.input}
             />
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CadastroEmail")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CadastroNutriEmail")}>
                 <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-export default CadastroNome;
+export default CadastroNutriNome;

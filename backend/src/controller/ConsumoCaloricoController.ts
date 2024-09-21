@@ -89,4 +89,4 @@ class ConsumoCaloricoController {
   }
 }
 
-export default ConsumoCaloricoController;
+export default new ConsumoCaloricoController;
