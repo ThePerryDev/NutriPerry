@@ -73,12 +73,16 @@ A seguir, iniciou-se o trabalho de desenvolvimento do protótipo na plataforma f
     
 
 <h2 align="center">Tela de cadastro com o perfil nutricionista</h2>
-<p align="center"><img src="images/prototipo_perfil-nutricionista.gif" /></p>
-
-[Confira o protótipo navegável na plataforma FIGMA](https://www.figma.com/proto/MgHhIQvhboj07JHzJxJocS/NutriPerry?node-id=1-3&node-type=canvas&t=8IWPpj3SLI1qZUKX-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&show-proto-sidebar=1)
+<p align="center"><img width="600" src="images/prototipo_perfil-nutricionista.gif" /></p>
 
 <h2 align="center">Tela de cadastro com o perfil pessoal e as demais telas</h2>
-<p align="center"><img src="images/prototipo_perfil-pessoal-ezgif.com-video-to-gif-converter.gif" /></p>
+<p align="center"><img width="600" src="images/cadastro_pessoal.gif" /></p>
+<p align="center"><img width="600" src="images/tela_principal_e_mais.gif" /></p>
+<p align="center"><img width="600" src="images/dieta_exercicio.gif" /></p>
+<p align="center"><img width="600" src="images/perfil_logout.gif" /></p>
+
+
+[Confira o protótipo navegável na plataforma FIGMA](https://www.figma.com/proto/MgHhIQvhboj07JHzJxJocS/NutriPerry?node-id=1-3&node-type=canvas&t=8IWPpj3SLI1qZUKX-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&show-proto-sidebar=1)
 
 → [Voltar ao topo](#topo)
 
