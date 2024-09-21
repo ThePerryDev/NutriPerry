@@ -27,8 +27,8 @@ Cada entrega será realizada a partir da criação de uma **tag** no repositóri
 | Sprint | Previsão | Status | Histórico | Link da Apresentação
 |:------:|:----------:|:-------------|:-------------------------------------------------:|:-------------------------------------------------:|
 | 01 | De 02/09/24 a 17/09/24 | 🟢 Finalizado| [Ver relatório](https://github.com/ThePerryDev/NutriPerry/tree/sprint-01)| [SPRINT 01](https://drive.google.com/file/d/1X_RZB2BagwwqgAaqVM5RqBzSTGLluFpU/view?usp=drive_link)|
-| 02 | De 18/09/24 a 08/10/24 | 🟡 Em andamento| [Ver relatório](https://github.com/ThePerryDev/visiona-documentation/tree/sprint-02)| Não iniciado|
-| 03 | De 09/10/24 a 08/11/24 | 🔴 Não iniciado | [Ver relatório](https://github.com/ThePerryDev/visiona-documentation/tree/sprint-03) | Não iniciado |
+| 02 | De 18/09/24 a 08/10/24 | 🟡 Em andamento| [Ver relatório](https://github.com/ThePerryDev/NutriPerry/tree/sprint-02)| Não iniciado|
+| 03 | De 09/10/24 a 08/11/24 | 🔴 Não iniciado | [Ver relatório](https://github.com/ThePerryDev/NutriPerry/tree/sprint-03) | Não iniciado |
 
 
 <span id="backlogs">
