@@ -9,7 +9,7 @@
     <a href="#metricas">Métricas do time</a> &nbsp |&nbsp &nbsp
 </p>
 
-O projeto constitui na construção de uma aplicação mobile que auxilie o monitoramento da dieta de um usuário através da inserção de consumo e gtos calóricos. Com base nessa estruturação a sprint 01 consistiu em horas voltadas para o levantamento de dados, o desenvolvimento do wreframe, o desenvolvimento de design e identidade visual, a modelagem do banco de dados e o desenvolvimento das telas de cadastro e login.
+O projeto constitui na construção de uma aplicação mobile que auxilie o monitoramento da dieta de um usuário através da inserção de consumo e gastos calóricos. Com base nessa estruturação a sprint 01 consistiu em horas voltadas para o levantamento de dados, o desenvolvimento do wireframe, o desenvolvimento de design e identidade visual, a modelagem do banco de dados e o desenvolvimento das telas de cadastro e login.
 
 [LINK DE APRESENTAÇÃO DA SPRINT 01](https://drive.google.com/file/d/1X_RZB2BagwwqgAaqVM5RqBzSTGLluFpU/view?usp=drive_link)
 
