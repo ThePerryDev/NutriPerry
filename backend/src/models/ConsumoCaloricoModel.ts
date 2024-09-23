@@ -1,63 +1,72 @@
-import mongoose, { Schema, Types } from 'mongoose'; // Ajustando a importação correta
-import User from './UserModel'; // Importação do modelo de usuário
+import mongoose, { Schema, Document, Types } from 'mongoose';
+import UserModel from './UserModel';
 
-// Esquema para Alimento
-const AlimentoSchema: Schema = new Schema({
-  nome: {
+// Interface que representa a estrutura do consumo calórico
+interface IConsumoCalorico extends Document {
+  user: mongoose.Schema.Types.ObjectId; // Referência ao usuário
+  data: Date; // Data do consumo
+  tipoRefeicao: 'refeição 1' | 'refeição 2' | 'refeição 3' | 'refeição 4' | 'refeição 5' | 'refeição 6';
+  nomeAlimento: string; // Nome do alimento
+  kcal: number; // Calorias
+  proteina: number; // Proteínas em gramas
+  carboidrato: number; // Carboidratos em gramas
+  peso: number; // Peso do alimento em gramas
+  acucar: number; // Açúcares em gramas
+}
+
+// Definindo o esquema
+const ConsumoCaloricoSchema: Schema<IConsumoCalorico> = new Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Referência ao modelo de usuário
+    validate: {
+      validator: async function (id: string) {
+        const editora = await UserModel.findById(id); // verifica se id existe na coleção editoras
+        return !!editora; // true se a editora existir
+      },
+      message: 'A Editora fornecida não existe!',
+    },
+    required: true,
+  },
+  data: {
+    type: Date,
+    required: true,
+    default: Date.now, // Define a data atual como padrão
+  },
+  tipoRefeicao: {
+    type: String,
+    required: true,
+    enum: ['refeição 1', 'refeição 2', 'refeição 3', 'refeição 4', 'refeição 5', 'refeição 6'],
+  },
+  nomeAlimento: {
     type: String,
     required: true,
   },
   kcal: {
     type: Number,
     required: true,
-    min: 0,
   },
   proteina: {
     type: Number,
     required: true,
-    min: 0,
   },
   carboidrato: {
     type: Number,
     required: true,
-    min: 0,
   },
   peso: {
     type: Number,
     required: true,
-    min: 0, // Peso não pode ser negativo
   },
-});
+  acucar: {
+    type: Number,
+    required: true,
+  },
+}
 
-// Esquema para Refeição
-const RefeicaoSchema: Schema = new Schema({
-  tipo: {
-    type: String,
-    required: true,
-    enum: ['café da manhã', 'almoço', 'jantar', 'lanches'],
-  },
-  alimentos: [AlimentoSchema], // Uma refeição pode conter vários alimentos
-});
-
-// Esquema para Gasto Calórico
-const ConsumoCaloricoSchema: Schema = new Schema({
-  userID: {
-    type: mongoose.Schema.Types.ObjectId, // Usando mongoose.Types.ObjectId corretamente
-    ref: 'User', // Referência ao modelo de usuário
-    required: true,
-  },
-  data: {
-    type: Date,
-    required: true,
-    validate: {
-      validator: (v: Date) => v <= new Date(), // Garantir que a data seja no máximo a data atual
-      message: 'A data não pode ser no futuro.',
-    },
-  },
-  refeicoes: [RefeicaoSchema], // Um registro diário pode ter várias refeições
-});
+);
 
 // Criando o modelo
-const ConsumoCalorico = mongoose.model('GastoCalorico', ConsumoCaloricoSchema);
+const ConsumoCaloricoModel = mongoose.model<IConsumoCalorico>('ConsumoCalorico', ConsumoCaloricoSchema);
 
-export default ConsumoCalorico;
+export default ConsumoCaloricoModel;
