@@ -8,24 +8,27 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    fontSize: 32,
+    fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
-    marginVertical: 20,
+    marginVertical: 30,
+    color:"#2C4B4E",
   },
 
-  card: {
-    height: 120,
-    backgroundColor: "#F5F5F5",
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 20,
-  },
+  input: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 25,
+    height: 50,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: '#00AD71'
+},
 
   mealItem: {
+    height:120,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     backgroundColor: "#f9f9f9",
     padding: 15,
     borderRadius: 12,
@@ -45,6 +48,13 @@ const styles = StyleSheet.create({
   mealDetail: {
     fontSize: 14,
     color: "#888",
+  },
+
+  buttoncontainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent:"center",
+    paddingBottom: 5,
   },
 });
 
