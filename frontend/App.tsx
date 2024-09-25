@@ -84,14 +84,14 @@ export default function App() {
 */
 
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import ProdutoBusca from '../frontend/src/screen/busca/ProdutoBusca'; // Ajuste o caminho conforme necessário
+import { ConsumoCaloricoProvider } from './src/context';
+import ProdutoBusca from './src/screen/busca/ProdutoBusca';
 
 const App = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ConsumoCaloricoProvider>
       <ProdutoBusca />
-    </SafeAreaView>
+    </ConsumoCaloricoProvider>
   );
 };
 

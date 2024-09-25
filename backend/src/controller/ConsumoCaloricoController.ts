@@ -25,41 +25,6 @@ class ConsumoCaloricoController {
     }
   }
   
-  /*
-  public async create(req: Request, res: Response): Promise<Response> { 
-    try {
-      // Desestruturando os dados do corpo da requisição
-      const { user, data, tipoRefeicao, nomeAlimento, kcal, proteina, carboidrato, peso, acucar } = req.body;
-
-      // Verificar se todos os dados obrigatórios estão presentes
-      if (!user || !tipoRefeicao || !nomeAlimento || kcal == null || proteina == null || carboidrato == null || peso == null || acucar == null) {
-        return res.status(400).json({ message: 'Todos os campos são obrigatórios' });
-      }
-
-      // Criar o objeto do consumo calórico
-      const novoConsumo = new ConsumoCaloricoModel({
-        user,
-        data: data || new Date(), // Se a data não for fornecida, usa a data atual
-        tipoRefeicao,
-        nomeAlimento,
-        kcal,
-        proteina,
-        carboidrato,
-        peso,
-        acucar,
-      });
-
-      // Salvar no banco de dados
-      const consumoSalvo = await novoConsumo.save();
-
-      // Retornar o objeto salvo
-      return res.status(201).json(consumoSalvo);
-    } catch (error) {
-      console.error('Erro ao criar consumo calórico:', error);
-      return res.status(500).json({ message: 'Erro ao criar consumo calórico', error });
-    }
-  }
-*/
     // Listar todos os consumos calóricos
     async getAll(req: Request, res: Response): Promise<Response> {
       try {
