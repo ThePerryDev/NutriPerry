@@ -97,7 +97,7 @@ const UserSchema: Schema<IUser> = new Schema({
   isLogged: {
     type: Boolean,
     trim: true,
-    required: true
+    required: false
   }
 }, {
   toJSON: {

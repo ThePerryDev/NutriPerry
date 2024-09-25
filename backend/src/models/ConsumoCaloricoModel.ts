@@ -1,6 +1,8 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
 import UserModel from './UserModel';
 
+// TIRAR COMENTÁRIO DOS REQUIRED, AJUSTAR O TIPO STRING/NUMBER DA PROTEINA
+
 // Interface que representa a estrutura do consumo calórico
 interface IConsumoCalorico extends Document {
   user: mongoose.Schema.Types.ObjectId; // Referência ao usuário
@@ -8,7 +10,7 @@ interface IConsumoCalorico extends Document {
   tipoRefeicao: 'refeição 1' | 'refeição 2' | 'refeição 3' | 'refeição 4' | 'refeição 5' | 'refeição 6';
   nomeAlimento: string; // Nome do alimento
   kcal: number; // Calorias
-  proteina: number; // Proteínas em gramas
+  proteina: string; // Proteínas em gramas
   carboidrato: number; // Carboidratos em gramas
   peso: number; // Peso do alimento em gramas
   acucar: number; // Açúcares em gramas
@@ -26,41 +28,41 @@ const ConsumoCaloricoSchema: Schema<IConsumoCalorico> = new Schema({
       },
       message: 'A Editora fornecida não existe!',
     },
-    required: true,
+    //required: true,
   },
   data: {
     type: Date,
-    required: true,
+    //required: true,
     default: Date.now, // Define a data atual como padrão
   },
   tipoRefeicao: {
     type: String,
-    required: true,
+    //required: true,
     enum: ['refeição 1', 'refeição 2', 'refeição 3', 'refeição 4', 'refeição 5', 'refeição 6'],
   },
   nomeAlimento: {
     type: String,
-    required: true,
+    //required: true,
   },
   kcal: {
     type: Number,
-    required: true,
+    //required: true,
   },
   proteina: {
-    type: Number,
-    required: true,
+    type: String,
+    //required: true,
   },
   carboidrato: {
     type: Number,
-    required: true,
+    //required: true,
   },
   peso: {
     type: Number,
-    required: true,
+    //required: true,
   },
   acucar: {
     type: Number,
-    required: true,
+    //required: true,
   },
 }
 

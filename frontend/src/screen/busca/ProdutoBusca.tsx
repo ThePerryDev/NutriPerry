@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, FlatList, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, FlatList, Text, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 
 interface Nutriments {
   'energy-kcal_100g'?: number;
-  proteins_100g?: number;
+  proteins?: number;
   carbohydrates?: number;
   sugars?: number;
 }
@@ -24,7 +24,7 @@ const ProdutoBusca = () => {
 
     setLoading(true);
     try {
-      const response = await axios.get(`https://world.openfoodfacts.org/cgi/search.pl`, {
+      const response = await axios.get(`https://br.openfoodfacts.org/cgi/search.pl`, {
         params: {
           search_terms: produto,
           json: true,
@@ -44,11 +44,34 @@ const ProdutoBusca = () => {
     }
   };
 
+  const cadastrarConsumo = async (item: Product) => {
+    try {
+      const consumoData = {
+        user: '66f2b55fde79d5902647ab9d', // Substitua pelo ID do usuário que está cadastrado
+        data: new Date(),
+        tipoRefeicao: 'refeição 1', // Ou outro tipo de refeição que você desejar
+        nomeAlimento: item.product_name || 'Nome não disponível',
+        kcal: item.nutriments?.['energy-kcal_100g'] || 0,
+        proteina: item.nutriments?.proteins || 0,
+        carboidrato: item.nutriments?.carbohydrates || 0,
+        peso: 100, // Ajuste conforme necessário, por exemplo, o peso padrão pode ser 100g
+        acucar: item.nutriments?.sugars || 0,
+      };
+
+      await axios.post('http://localhost:3000/consumocalorico', consumoData); // Altere para a URL correta
+      Alert.alert('Sucesso', 'Consumo cadastrado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao cadastrar consumo:', error);
+      Alert.alert('Erro', 'Não foi possível cadastrar o consumo.');
+    }
+  };
+
   const renderItem = ({ item }: { item: Product }) => (
     <View style={styles.item}>
       <Text style={styles.nome}>{item.product_name || 'Nome não disponível'}</Text>
       <Text>Kcal: {item.nutriments?.['energy-kcal_100g'] || 0}</Text>
-      <Text>Proteínas: {item.nutriments?.proteins_100g || 0}g</Text>
+      <Text>Proteínas: {item.nutriments?.proteins || 0}g</Text>
+      <Button title="Cadastrar" onPress={() => cadastrarConsumo(item)} />
     </View>
   );
 
