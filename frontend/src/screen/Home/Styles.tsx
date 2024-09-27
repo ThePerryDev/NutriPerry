@@ -15,11 +15,52 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    height: 120,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#24B77F",
     borderRadius: 12,
     padding: 20,
     marginBottom: 20,
+  },
+
+  totalText: {
+    color: "#fff",
+    fontSize: 18,
+    textAlign: "center",
+    marginBottom: 10,
+    fontWeight: "bold",
+  },
+
+  statsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  stats: {
+    alignItems: "center",
+  },
+
+  statLabel: {
+    color: "#fff",
+    fontSize: 16,
+  },
+
+  statValue: {
+    color: "#fff",
+    fontSize: 14,
+  },
+
+  chart: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+
+  totalCalories: {
+    color: "#24B77F",
+    fontWeight: "bold",
   },
 
   mealItem: {
