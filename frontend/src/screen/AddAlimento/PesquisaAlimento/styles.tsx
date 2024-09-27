@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "left",
+    color: "#2C4B4E",
   },
   nutritionInfo: {
     flexDirection: "row",

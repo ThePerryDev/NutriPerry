@@ -18,7 +18,7 @@ type Props = {
 
 const product = [
   { name: "Nome do Produto", kcal: 250, protein: 10, carb: 30 },
-  { name: "Nome do ProdutoS", kcal: 500, protein: 200, carb: 500 },
+  { name: "Nome do ProdutoS", kcal: 5000, protein: 2000, carb: 5000},
   { name: "NomeS doS ProdutoS", kcal: 400, protein: 15, carb: 40 },
   { name: "NomeS do Produto", kcal: 150, protein: 5, carb: 20 },
 ];

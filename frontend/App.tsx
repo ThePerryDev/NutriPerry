@@ -3,13 +3,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
 import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin,} from "./src/screen";
 import PesquisaAlimento from "./src/screen/AddAlimento/PesquisaAlimento/PesquisaAlimento";
+import AdicionarAlimento from "./src/screen/AddAlimento/AdicionarAlimento/AdicionarAlimento";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="PesquisaAlimento">
+      <Stack.Navigator initialRouteName="AdicionarAlimento">
         <Stack.Screen
           name="AbrindoApp"
           component={AbrindoApp}
@@ -78,6 +79,11 @@ export default function App() {
         <Stack.Screen
           name="PesquisaAlimento"
           component={PesquisaAlimento}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AdicionarAlimento"
+          component={AdicionarAlimento}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -5,5 +5,5 @@ import Input from "./Login/Input";
 import InputWithIcons from "./Login/InputWithIcons";
 import Titulo from "./Login/Titulo";
 
-export {BotoesInferior, MenuInferior, Titulo, Input, InputWithIcons, Botao}
+export {BotoesInferior, MenuInferior, Titulo, Input, InputWithIcons, Botao,}
 
