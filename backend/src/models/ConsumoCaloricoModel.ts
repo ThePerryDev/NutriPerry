@@ -21,14 +21,14 @@ const ConsumoCaloricoSchema: Schema<IConsumoCalorico> = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Referência ao modelo de usuário
+    required: true, 
     validate: {
       validator: async function (id: string) {
-        const editora = await UserModel.findById(id); // verifica se id existe na coleção editoras
-        return !!editora; // true se a editora existir
+        const usuário = await UserModel.findById(id); // verifica se id existe na coleção 
+        return !!usuário; // true se o usuário existir
       },
-      message: 'A Editora fornecida não existe!',
+      message: 'O usuário não existe!',
     },
-    //required: true,
   },
   data: {
     type: Date,
