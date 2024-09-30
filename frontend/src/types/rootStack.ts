@@ -14,4 +14,5 @@ export type RootStackParamList = {
     CadastroNutriTelefone:undefined;
     PesquisaAlimento:undefined;
     AdicionarAlimento:undefined;
+    CadastrarAlimento:undefined;
 }
