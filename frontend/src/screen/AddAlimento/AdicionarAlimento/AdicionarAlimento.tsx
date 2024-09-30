@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, FlatList, TextInput, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
+import { Table, Row, Rows } from 'react-native-table-component';
 import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import { setaVolta } from "../../../assets";
 import styles from "./styles";
 import UnidadePicker from "../../../components/Cadastro/PickerAlimentos/pickeralimentos";
+import SaveButton from "../../../components/Cadastro/Salvar/botaosalvar";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -19,6 +21,7 @@ type Props = {
 const AdicionarAlimento: React.FC<Props> = ({ navigation }) => {
   const [selectUnit, setSelectUnit] = useState("");
   const [quantidade, setQuantidade] = useState<string>("");
+  const [productName, setProductName] = useState<string>(""); // Estado para o nome do produto
 
   const UnityOptions = [
     { label: "", value: "" },
@@ -26,6 +29,17 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation }) => {
     { label: "kilograma (kg)", value: "kilo" },
     { label: "mililitro (ml)", value: "ml" },
     { label: "litro (L)", value: "litro" },
+  ];
+
+  const tableHead = ['Dados Nutricionais', 'Valores por 100g/100ml', 'Valores que foram atribuídos'];
+  const tableData = [
+    ['Kcal', '-', '-'],
+    ['Proteína', '-', '-'],
+    ['Açúcar', '-', '-'],
+    ['Gordura', '-', '-'],
+    ['Gordura Saturada', '-', '-'],
+    ['Fibra', '-', '-'],
+    ['Sal', '-', '-'],
   ];
 
   return (
@@ -57,10 +71,20 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation }) => {
           />
         </View>
       </View>
+      <View style={styles.infocontainer}>
+        <Text style={styles.infotitle}>{productName || "Nome do Produto"}</Text>
+        <Table 
+          borderStyle={{ borderWidth: 0}} style={{ marginHorizontal: 10, marginBottom: 15 }}>
+          <Row data={tableHead} style={styles.head} textStyle={styles.textHead} />
+          <Rows data={tableData} style={styles.row} textStyle={styles.text} />
+        </Table>
+      </View>
+      <View style={styles.savebuttoncontainer}>
+        <SaveButton onPress={() => navigation.navigate("Home")} /*Alterar para salvar os dados no cliente*//>
+      </View>
       <MenuInferior />
     </View>
   );
 };
 
 export default AdicionarAlimento;
-
