@@ -5,27 +5,34 @@ class AlimentoTacoController {
   // Método para criar um novo alimento
   async create(req: Request, res: Response) {
     try {
-      const { id, description, energy, protein, carbohydrate } = req.body;
-
-      // Certifique-se de que todos os campos obrigatórios estão presentes
-      if (!id || !description || !energy || !protein || !carbohydrate) {
+      const { description, energy, protein, carbohydrate } = req.body;
+  
+      console.log('Body da requisição:', req.body); // Log para ver o que está sendo recebido
+  
+      if (!description || !energy || !protein || !carbohydrate) {
         return res.status(400).json({ message: 'Todos os campos são obrigatórios' });
       }
-
+  
+      const lastAlimento = await AlimentoTaco.findOne().sort({ id: -1 }).limit(1);
+      const newId = lastAlimento ? parseInt(lastAlimento.id) + 1 : 1;
+  
       const novoAlimento = new AlimentoTaco({
-        id,
+        id: newId.toString(),
         description,
         energy,
         protein,
         carbohydrate,
       });
-
+  
       await novoAlimento.save();
       return res.status(201).json(novoAlimento);
     } catch (error) {
+      console.error('Erro ao criar alimento:', error); // Log para ver o erro
       return res.status(500).json({ message: 'Erro ao criar alimento', error });
     }
   }
+  
+  
 
   // Método para listar alimentos com base na descrição
   async list(req: Request, res: Response) {

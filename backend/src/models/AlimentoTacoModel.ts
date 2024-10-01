@@ -3,10 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 interface IAlimentoTaco extends Document {
   id: string;
   description: string;
-  category: {
-    id: string;
-    name: string;
-  };
+
   energy: {
     label: string;
     value: number;
@@ -34,16 +31,6 @@ const AlimentoTacoSchema: Schema = new Schema({
     type: String,
     required: true,
     trim: true,
-  },
-  category: {
-    id: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
   },
   energy: {
     label: {
