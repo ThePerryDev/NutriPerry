@@ -17,7 +17,12 @@ type Props = {
 };
 
 const CadastrarAlimento: React.FC<Props> = ({ navigation }) => {
-  const [quantidade, setQuantidade] = useState<string>("");
+  const [productname, setProductName] = useState<string>("");
+  const [productcalories, setProductCalories] = useState<string>("");
+  const [productproteins, setProductProteins] = useState<string>("");
+  const [productcarbs, setProductCarbs] = useState<string>("");
+  const [productsugar, setProductSugar] = useState<string>("");
+
 
   return (
     <View style={styles.container}>
@@ -32,55 +37,55 @@ const CadastrarAlimento: React.FC<Props> = ({ navigation }) => {
       </View>
       <Text style={styles.explanation}>Insira o nome do alimento</Text>
       <TextInput
-        value={quantidade}
-        onChangeText={(quantidade) => setQuantidade(quantidade)}
+        value={productname}
+        onChangeText={(productname) => setProductName(productname)}
         style={styles.nameinput}
       />
       <Text style={styles.explanation}>Insira os dados do alimento</Text>
       <View>
-        <View style={styles.quantitycontainer}>
+        <View style={styles.inputcontainer}>
           <Text style={styles.textgeral}>Calorias:</Text>
           <TextInput
-            value={quantidade}
-            onChangeText={(quantidade) => setQuantidade(quantidade)}
+            value={productcalories}
+            onChangeText={(productcalories) => setProductCalories(productcalories)}
             style={styles.input}
             keyboardType="numeric"
           />
         </View>
-        <View style={styles.quantitycontainer}>
+        <View style={styles.inputcontainer}>
           <Text style={styles.textgeral}>Proteínas:</Text>
           <TextInput
-            value={quantidade}
-            onChangeText={(quantidade) => setQuantidade(quantidade)}
+            value={productproteins}
+            onChangeText={(productproteins) => setProductProteins(productproteins)}
             style={styles.input}
             keyboardType="numeric"
           />
         </View>
-        <View style={styles.quantitycontainer}>
+        <View style={styles.inputcontainer}>
           <Text style={styles.textgeral}>Carboidratos:</Text>
           <TextInput
-            value={quantidade}
-            onChangeText={(quantidade) => setQuantidade(quantidade)}
+            value={productcarbs}
+            onChangeText={(productcarbs) => setProductCarbs(productcarbs)}
             style={styles.input}
             keyboardType="numeric"
           />
         </View>
-        <View style={styles.quantitycontainer}>
+        <View style={styles.inputcontainer}>
           <Text style={styles.textgeral}>Açucar:</Text>
           <TextInput
-            value={quantidade}
-            onChangeText={(quantidade) => setQuantidade(quantidade)}
+            value={productsugar}
+            onChangeText={(productsugar) => setProductSugar(productsugar)}
             style={styles.input}
             keyboardType="numeric"
           />
         </View>
-      </View>
-      <View style={styles.finalizebuttoncontainer}>
-        <FinalizeButton
-          onPress={() =>
-            navigation.navigate("Home")
-          } /*Alterar para salvar os dados no cliente*/
-        />
+        <View style={styles.finalizebuttoncontainer}>
+          <FinalizeButton
+            onPress={() =>
+              navigation.navigate("Home")
+            } /*Alterar para salvar os dados no cliente*/
+          />
+        </View>
       </View>
       <MenuInferior />
     </View>

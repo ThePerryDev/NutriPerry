@@ -31,21 +31,21 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
     marginBottom:25
   },
-  quantitycontainer: {
+  inputcontainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent:"space-between",
     marginBottom: 25,
   },
   textgeral: {
-    alignItems:"flex-end",
+    alignItems:"flex-start",
     fontSize: 18,
     color: "#2C4B4E",
     fontWeight: "bold",
-    marginRight: 10,
+    marginLeft:5
   },
   nameinput:{
-    height:50,
+    height:45,
     borderStyle: "solid",
     borderWidth: 2,
     borderColor: "#00AD71",
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   input: {
     alignItems:"flex-end",
     width: 185,
-    height: 35,
+    height: 40,
     borderStyle: "solid",
     borderWidth: 2,
     borderColor: "#00AD71",
@@ -98,9 +98,8 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   finalizebuttoncontainer: {
-    flex:1,
-    marginTop:55,
-    marginBottom: 15,
+    marginTop:25,
+    justifyContent:"space-evenly"
   },
 });
 
