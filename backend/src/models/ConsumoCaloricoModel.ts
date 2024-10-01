@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
 import UserModel from './UserModel';
+import user from '../routes/user';
 
 // TIRAR COMENTÁRIO DOS REQUIRED, AJUSTAR O TIPO STRING/NUMBER DA PROTEINA
 
@@ -24,7 +25,7 @@ const ConsumoCaloricoSchema: Schema<IConsumoCalorico> = new Schema({
     validate: {
       validator: async function (id: string) {
         const editora = await UserModel.findById(id); // verifica se id existe na coleção editoras
-        return !!editora; // true se a editora existir
+        return !!user; // true se a editora existir
       },
       message: 'A Editora fornecida não existe!',
     },
