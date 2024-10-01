@@ -29,7 +29,7 @@ const CadastrarAlimento: React.FC<Props> = ({ navigation }) => {
       <View style={styles.headerContainer}>
         <TouchableOpacity
           style={styles.arrow}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("PesquisaAlimento")}
         >
           <Image source={setaVolta} style={styles.arrow} />
         </TouchableOpacity>

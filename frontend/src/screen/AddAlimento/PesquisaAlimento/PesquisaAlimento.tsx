@@ -35,7 +35,7 @@ const PesquisaAlimento: React.FC<Props> = ({ navigation }) => {
         <Text style={styles.nutritionText}>Carb: {item.carb}</Text>
       </View>
       <View style={styles.buttoncontainer}>
-        <AddAlimentoButton onPress={() => navigation.navigate("TelaFinalizado")} />
+        <AddAlimentoButton onPress={() => navigation.navigate("AdicionarAlimento")} />
       </View>
     </View>
   );

@@ -15,4 +15,5 @@ export type RootStackParamList = {
     PesquisaAlimento:undefined;
     AdicionarAlimento:undefined;
     CadastrarAlimento:undefined;
+    ErroAlimento:undefined;
 }

@@ -45,7 +45,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("PesquisaAlimento")}>
           <Image
             source={setaVolta}
             style={styles.arrow}
