@@ -1,14 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
-import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin,} from "./src/screen";
+import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, Configuracoes} from "./src/screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AbrindoApp">
+      <Stack.Navigator initialRouteName="Configuracoes">
         <Stack.Screen
           name="AbrindoApp"
           component={AbrindoApp}
@@ -72,6 +72,11 @@ export default function App() {
         <Stack.Screen
           name="CadastroNutriTelefone"
           component={CadastroNutriTelefone}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Configuracoes"
+          component={Configuracoes}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -12,4 +12,5 @@ export type RootStackParamList = {
     CadastroNutriNome: undefined;
     CadastroNutriFormacao:undefined;
     CadastroNutriTelefone:undefined;
+    Configuracoes:undefined;
 }
