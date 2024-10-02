@@ -16,4 +16,6 @@ export type RootStackParamList = {
     AdicionarAlimento:undefined;
     CadastrarAlimento:undefined;
     ErroAlimento:undefined;
+    MonitorCalorico:undefined;
+    MenuDietas:undefined;
 }

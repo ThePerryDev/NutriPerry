@@ -1,6 +1,7 @@
 import AbrindoApp from "./abrindo/tela_abrindo";
 import AdicionarAlimento from "./AddAlimento/AdicionarAlimento/AdicionarAlimento";
 import CadastrarAlimento from "./AddAlimento/CadastrarAlimento/CadastrarAlimento";
+import ErroAlimento from "./AddAlimento/ErroAlimento/ErroAlimento";
 import PesquisaAlimento from "./AddAlimento/PesquisaAlimento/PesquisaAlimento";
 import TelaFinalizado from "./Cadastro/finalizado/tela_finalizado";
 import CadastroNutriEmail from "./Cadastro/perfil_nutricionista/CadastroEmail/cadastroEmailNutri";
@@ -12,7 +13,9 @@ import CadastroEmail from "./Cadastro/perfil_pessoal/CadastroEmail/cadastroEmail
 import CadastroNome from "./Cadastro/perfil_pessoal/cadastroNome/CadastroNomeP";
 import CadastroSexoIdade from "./Cadastro/perfil_pessoal/CadastroSexoIdade/CadastroSexoIdade";
 import TelaPPObjetivo from "./Cadastro/perfil_pessoal/tela_pp_objetivo/tela_pp_objetivo";
+import MenuDietas from "./Dietas/MenuDietas/MenuDietas";
+import MonitorCalorico from "./Dietas/MonitorCalorico/MonitorCalorico";
 import Home from "./Home/Home";
 import TelaLogin from "./login/Login";
 
-export { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, TelaFinalizado, CadastroNutriNome, CadastroNutriEmail, CadastroNutriFormacao, CadastroNutriTelefone, TelaLogin, AbrindoApp, AdicionarAlimento, PesquisaAlimento, CadastrarAlimento };
+export { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, TelaFinalizado, CadastroNutriNome, CadastroNutriEmail, CadastroNutriFormacao, CadastroNutriTelefone, TelaLogin, AbrindoApp, AdicionarAlimento, PesquisaAlimento, CadastrarAlimento, ErroAlimento, MonitorCalorico, MenuDietas };
