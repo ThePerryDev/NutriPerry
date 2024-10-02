@@ -9,7 +9,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ErroAlimento">
+      <Stack.Navigator initialRouteName="AbrindoApp">
         <Stack.Screen
           name="AbrindoApp"
           component={AbrindoApp}

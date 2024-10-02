@@ -43,7 +43,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
               <Text style={styles.mealName}>{meal}</Text>
               <Text style={styles.mealDetail}>Sem cardápio cadastrado</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("PesquisaAlimento")}>
               <Ionicons name="add-circle-outline" size={28} color="green" />
             </TouchableOpacity>
           </View>
