@@ -11,9 +11,7 @@ const styles = StyleSheet.create({
     },
 
     cima: {
-        flex: 1,
         width: '100%',
-        height: 10,
         flexDirection: "row",
         marginTop: '10%'
     },
@@ -29,13 +27,14 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         flexDirection: "column",
+        alignItems: "center",
     },
 
     volta: {
         marginLeft: 25
     },
 
-    button: {
+    buttonLogout: {
         height: 50,
         width: 330,
         alignItems: "center",
@@ -43,6 +42,32 @@ const styles = StyleSheet.create({
         backgroundColor: "#FF725E",
         borderRadius: 15,
     },
+
+    buttonInfo: {
+        marginTop: "15%",
+        height: 50,
+        width: 330,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#F5F5F5",
+        borderRadius: 15,
+    },
+
+    buttonOutros: {
+        marginTop: "10%",
+        height: 50,
+        width: 330,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#F5F5F5",
+        borderRadius: 15,
+    },
+
+    textoButton: {
+        color: "#2C4B4E",
+        fontSize: 20,
+        fontWeight: 400,
+    }
 });
 
 export default styles;
