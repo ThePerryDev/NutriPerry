@@ -1,0 +1,1 @@
+utils/: contém funções utilitárias e helpers que são usados em várias partes do projeto.

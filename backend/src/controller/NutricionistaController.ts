@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 class NutricionistaController {
   
   // Função para criar um novo nutricionista
-  public async createNutricionista(req: Request, res: Response): Promise<void> {
+  public async create(req: Request, res: Response): Promise<void> {
     try {
       // Cria uma nova instância de Nutricionista com os dados do corpo da requisição
       const novoNutricionista = new NutricionistaModel({
@@ -51,7 +51,7 @@ class NutricionistaController {
   }
 
   // Função para atualizar um nutricionista
-  public async updateNutricionista(req: Request, res: Response): Promise<void> {
+  public async update(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
       const { nome, birthdate, genero, password } = req.body;
@@ -101,7 +101,7 @@ class NutricionistaController {
   }
 
   // Função para listar nutricionistas
-  public async listNutricionistas(req: Request, res: Response): Promise<void> {
+  public async list(req: Request, res: Response): Promise<void> {
     try {
       // Obtém parâmetros de consulta (query params) da requisição
       const { nome, genero } = req.query;
@@ -133,6 +133,21 @@ class NutricionistaController {
           error: 'Erro desconhecido',
         });
       }
+    }
+  }
+
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const nutricionista = await NutricionistaModel.findByIdAndDelete(id);
+      if (!nutricionista) {
+        return res.status(404).json({ message: 'Nutricionista não encontrado' });
+      }
+      return res.status(204).send(); // 204 No Content
+    } catch (error) {
+      console.error('Erro ao deletar nutricionista:', error);
+      return res.status(500).json({ message: 'Erro ao deletar nutricionista', error });
     }
   }
 }

@@ -1,3 +1,5 @@
+
+/*
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
@@ -99,3 +101,19 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+*/
+
+import React from 'react';
+import { ConsumoCaloricoProvider } from './src/context';
+import ProdutoBusca from './src/screen/busca/ProdutoBusca';
+
+const App = () => {
+  return (
+    <ConsumoCaloricoProvider>
+      <ProdutoBusca />
+    </ConsumoCaloricoProvider>
+  );
+};
+
+export default App;
