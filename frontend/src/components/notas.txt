@@ -1,0 +1,2 @@
+components/: diretório para componentes React reutilizáveis e customizados. Componentes podem
+ser organizados em subdiretórios conforme necessário;

@@ -1,0 +1,2 @@
+hooks/: contém hooks personalizados que encapsulam lógica reutilizável. Usado para compartilhar
+lógica entre componentes de forma limpa e modular;

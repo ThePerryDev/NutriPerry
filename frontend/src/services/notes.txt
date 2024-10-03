@@ -1,0 +1,1 @@
+services/: contém serviços que interagem com APIs externas, BD ou outras funcionalidades backend;
