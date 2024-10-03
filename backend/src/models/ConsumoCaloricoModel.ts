@@ -27,7 +27,7 @@ const ConsumoCaloricoSchema: Schema<IConsumoCalorico> = new Schema({
         const editora = await UserModel.findById(id); // verifica se id existe na coleção editoras
         return !!user; // true se a editora existir
       },
-      message: 'A Editora fornecida não existe!',
+      message: 'O usuário fornecida não existe!',
     },
     //required: true,
   },

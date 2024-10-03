@@ -56,19 +56,32 @@ const ProdutoBusca = () => {
   };
 
   const cadastrarConsumo = async (item: Product | AlimentoTaco) => {
+    const consumoData: any = {
+      user: '66fded5c0cf47108c33eac8c',
+      data: new Date(), // Formato de data ISO
+      tipoRefeicao: 'refeição 1',
+      nomeAlimento: isAlimentoTaco(item) ? item.description : item.product_name || 'Nome não disponível',
+      kcal: isAlimentoTaco(item) ? item.energy.value : item.nutriments?.['energy-kcal_100g'] || 0,
+      proteina: isAlimentoTaco(item) ? item.protein.value : item.nutriments?.proteins || 0,
+      carboidrato: isAlimentoTaco(item) ? item.carbohydrate.value : item.nutriments?.carbohydrates || 0,
+      peso: 100,
+      acucar: isAlimentoTaco(item) ? 0 : (item.nutriments?.sugars !== undefined ? item.nutriments.sugars : 0), // Aqui
+    };
+  
+    console.log('Dados a serem enviados:', consumoData); // Adicione esta linha para verificar os dados
+  
+    // Validação adicional
+    const camposFaltando = Object.keys(consumoData).filter(key => 
+      consumoData[key] === undefined || (consumoData[key] === '' && key !== 'acucar')
+    );
+  
+    if (camposFaltando.length > 0) {
+      console.error('Campos faltando:', camposFaltando);
+      Alert.alert('Erro', 'Todos os campos são obrigatórios.');
+      return;
+    }
+  
     try {
-      const consumoData: ConsumoCaloricoProps = {
-        user: '66f2b55fde79d5902647ab9d', // Substitua pelo ID do usuário
-        data: new Date(),
-        tipoRefeicao: 'refeição 1',
-        nomeAlimento: isAlimentoTaco(item) ? item.description : item.product_name || 'Nome não disponível',
-        kcal: isAlimentoTaco(item) ? item.energy.value : item.nutriments?.['energy-kcal_100g'] || 0,
-        proteina: isAlimentoTaco(item) ? item.protein.value : item.nutriments?.proteins || 0,
-        carboidrato: isAlimentoTaco(item) ? item.carbohydrate.value : item.nutriments?.carbohydrates || 0,
-        peso: 100,
-        acucar: isAlimentoTaco(item) ? 0 : item.nutriments?.sugars || 0,
-      };
-
       await create(consumoData);
       Alert.alert('Sucesso', 'Consumo cadastrado com sucesso!');
     } catch (error) {
@@ -76,6 +89,8 @@ const ProdutoBusca = () => {
       Alert.alert('Erro', 'Não foi possível cadastrar o consumo.');
     }
   };
+  
+  
 
   const isAlimentoTaco = (item: Product | AlimentoTaco): item is AlimentoTaco => {
     return (item as AlimentoTaco).description !== undefined;
