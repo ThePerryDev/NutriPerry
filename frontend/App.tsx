@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
-import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, Configuracoes} from "./src/screen";
+import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, Configuracoes, Informacoes} from "./src/screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -77,6 +77,11 @@ export default function App() {
         <Stack.Screen
           name="Configuracoes"
           component={Configuracoes}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Informacoes"
+          component={Informacoes}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

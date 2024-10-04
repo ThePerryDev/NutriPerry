@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
     conteudo: {
         flex: 1,
         width: '100%',
+        marginHorizontal: 20
+    },
+
+    viewAdendo: {
+        width: '100%',
         flexDirection: "column",
         alignItems: "center",
     },
@@ -34,40 +39,41 @@ const styles = StyleSheet.create({
         marginLeft: 25
     },
 
-    buttonLogout: {
+    buttonSalvar: {
         height: 50,
         width: 330,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#FF725E",
+        backgroundColor: "#00AD71",
         borderRadius: 15,
+        marginLeft: -5,
+        marginTop: "30%"
     },
 
-    buttonInfo: {
-        marginTop: "15%",
-        height: 50,
-        width: 330,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#F5F5F5",
-        borderRadius: 15,
-    },
-
-    buttonOutros: {
-        marginTop: "10%",
-        height: 50,
-        width: 330,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#F5F5F5",
-        borderRadius: 15,
-    },
-
-    textoButton: {
+    subtitulo: {
         color: "#2C4B4E",
         fontSize: 20,
-        fontWeight: 400,
-    }
+        marginTop: 20,
+        marginHorizontal: 55,
+        textAlign: 'center'
+    },
+
+    texto: {
+        color: "#2C4B4E",
+        fontSize: 20,
+        marginTop: 20
+    },
+
+    input: {
+        backgroundColor: "#FFFFFF",
+        borderRadius: 15,
+        height: 40,
+        width: 320,
+        borderWidth: 2,
+        borderStyle: "solid",
+        borderColor: "#00AD71",
+        marginTop: 10
+      },
 });
 
 export default styles;

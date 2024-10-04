@@ -11,6 +11,7 @@ import CadastroSexoIdade from "./Cadastro/perfil_pessoal/CadastroSexoIdade/Cadas
 import TelaPPObjetivo from "./Cadastro/perfil_pessoal/tela_pp_objetivo/tela_pp_objetivo";
 import Home from "./Home/Home";
 import TelaLogin from "./login/Login";
-import Configuracoes from "./Configuracoes/Configuracoes";
+import Configuracoes from "./Configuracoes/tela_config_principal/Configuracoes";
+import Informacoes from "./Configuracoes/tela_config_info_cad/Informacoes";
 
-export { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, TelaFinalizado, CadastroNutriNome, CadastroNutriEmail, CadastroNutriFormacao, CadastroNutriTelefone, TelaLogin, AbrindoApp, Configuracoes };
+export { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, TelaFinalizado, CadastroNutriNome, CadastroNutriEmail, CadastroNutriFormacao, CadastroNutriTelefone, TelaLogin, AbrindoApp, Configuracoes , Informacoes};
