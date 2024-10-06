@@ -1,28 +1,28 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import styles from "./styles";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../../types/rootStack";
-import { setaVolta } from "../../../assets";
-import { MenuInferior } from "../../../components";
+import { RootStackParamList } from "../../../../types/rootStack";
+import { setaVolta } from "../../../../assets";
+import { MenuInferior } from "../../../../components";
 import { useState } from "react";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
-    "Informacoes"
+    "TelaInformacoesNutri2"
 >;
 
 type Props = {
     navigation: ContinuarScreenNavigationProp;
 };
 
-const Informacoes: React.FC<Props> = ({ navigation }) => {
+const InformacoesNutri2: React.FC<Props> = ({ navigation }) => {
     const [idade, setIdade] = useState<string>("");
     const [altura, setAltura] = useState<string>("");
     const [peso, setPeso] = useState<string>("");
     return (
         <View style={styles.container}>
             <View style={styles.cima}>
-                <TouchableOpacity style={styles.volta} onPress={() => navigation.navigate("Configuracoes")}>
+                <TouchableOpacity style={styles.volta} onPress={() => navigation.navigate("TelaConfiguracoesNutri")}>
                     <Image source={setaVolta} />
                 </TouchableOpacity>
                 <Text style={styles.titulo}>Configurações</Text>
@@ -63,4 +63,4 @@ const Informacoes: React.FC<Props> = ({ navigation }) => {
     );
 }
 
-export default Informacoes;
+export default InformacoesNutri2;

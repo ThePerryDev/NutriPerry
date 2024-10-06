@@ -1,13 +1,13 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../../types/rootStack";
-import { setaVolta } from "../../../assets";
-import { MenuInferior } from "../../../components";
+import { RootStackParamList } from "../../../../types/rootStack";
+import { setaVolta } from "../../../../assets";
+import { MenuInferior } from "../../../../components";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
-    "Configuracoes"
+    "TelaConfiguracoes"
 >;
 
 type Props = {
@@ -25,10 +25,10 @@ const Configuracoes: React.FC<Props> = ({ navigation }) => {
                 <Text style={styles.titulo}>Configurações</Text>
             </View>
             <View style={styles.conteudo}>
-                <TouchableOpacity style={styles.buttonInformacoes} onPress={() => navigation.navigate("Informacoes")}>
+                <TouchableOpacity style={styles.buttonInformacoes} onPress={() => navigation.navigate("TelaInformacoes")}>
                     <Text style={styles.textoButton}>Informações de cadastro</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonOutros} onPress={() => navigation.navigate("TelaLogin")}>
+                <TouchableOpacity style={styles.buttonOutros} onPress={() => navigation.navigate("TelaTrocaSenha")}>
                     <Text style={styles.textoButton}>Mudar senha</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonOutros} onPress={() => navigation.navigate("TelaLogin")}>

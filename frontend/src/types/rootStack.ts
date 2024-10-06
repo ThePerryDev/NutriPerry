@@ -12,6 +12,11 @@ export type RootStackParamList = {
     CadastroNutriNome: undefined;
     CadastroNutriFormacao:undefined;
     CadastroNutriTelefone:undefined;
-    Configuracoes:undefined;
-    Informacoes:undefined;
+    TelaConfiguracoes:undefined;
+    TelaInformacoes:undefined;
+    TelaTrocaSenha:undefined;
+    TelaConfiguracoesNutri:undefined;
+    TelaInformacoesNutri1:undefined;
+    TelaInformacoesNutri2:undefined;
+    TelaTrocaSenhaNutri:undefined;
 }
