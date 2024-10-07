@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, TextInput, Image, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  ScrollView,
+} from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
 import MenuInferior from "../../../components/MenuInferior/MenuInferior";
@@ -23,11 +30,11 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("MonitorCalorico")}>
-          <Image
-            source={setaVolta}
-            style={styles.arrow}
-          />
+        <TouchableOpacity
+          style={styles.arrow}
+          onPress={() => navigation.navigate("MonitorCalorico")}
+        >
+          <Image source={setaVolta} style={styles.arrow} />
         </TouchableOpacity>
         <Text style={styles.header}>Suas Dietas</Text>
       </View>
@@ -46,14 +53,37 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
               <Text style={styles.mealName}>{meal}</Text>
               <Text style={styles.mealDetail}>Sem cardápio cadastrado</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("PesquisaAlimento")}>
-              <Ionicons name="add-circle-outline" size={28} color="green"/>
+            <TouchableOpacity
+              onPress={() => {
+                switch (meal) {
+                  case "Café da Manhã":
+                    navigation.navigate("CafedaManha");
+                    break;
+                  case "Almoço":
+                    navigation.navigate("Almoco");
+                    break;
+                  case "Jantar":
+                    navigation.navigate("Jantar");
+                    break;
+                  case "Lanches":
+                    navigation.navigate("Lanches");
+                    break;
+                  default:
+                    break;
+                }
+              }}
+            >
+              <Ionicons name="add-circle-outline" size={28} color="green" />
             </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
       <View style={styles.dietbuttoncontainer}>
-        <NewDietButton onPress={() => navigation.navigate("Home")} /*Alterar para salvar os dados no cliente*//>
+        <NewDietButton
+          onPress={() =>
+            navigation.navigate("Home")
+          } /*Alterar para salvar os dados no cliente*/
+        />
       </View>
       <MenuInferior />
     </View>
@@ -61,4 +91,3 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 };
 
 export default MenuDietas;
-

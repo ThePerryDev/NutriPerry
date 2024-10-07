@@ -10,5 +10,7 @@ import profissao from "./Cadastro/profissao.png";
 import camera from "./Dietas/camera.png";
 import setaVolta from "./Cadastro/setaVolta.png";
 import monitorcalorico from "./Dietas/monitorcalorico.png"
+import Editar from "./Dietas/Editar.png"
+import Deletar from "./Dietas/Deletar.png"
 
-export { TelaInicial, Receitas, Perfil, Configuração, setaVolta, image01, image02, imagem3, imagem4, profissao, camera, monitorcalorico };
+export { TelaInicial, Receitas, Perfil, Configuração, setaVolta, image01, image02, imagem3, imagem4, profissao, camera, monitorcalorico, Editar, Deletar };

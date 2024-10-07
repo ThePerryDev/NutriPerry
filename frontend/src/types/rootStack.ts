@@ -18,4 +18,8 @@ export type RootStackParamList = {
     ErroAlimento:undefined;
     MonitorCalorico:undefined;
     MenuDietas:undefined;
+    CafedaManha:undefined;
+    Almoco:undefined;
+    Jantar:undefined;
+    Lanches:undefined;
 }
