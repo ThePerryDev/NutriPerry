@@ -8,7 +8,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TelaConfiguracoesNutri">
+      <Stack.Navigator initialRouteName="AbrindoApp">
         <Stack.Screen
           name="AbrindoApp"
           component={AbrindoApp}
@@ -122,6 +122,9 @@ export default function App() {
         <Stack.Screen
           name="Lanches"
           component={Lanches}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="TelaConfiguracoes"
           component={Configuracoes}
           options={{ headerShown: false }}
