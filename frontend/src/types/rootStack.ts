@@ -22,4 +22,11 @@ export type RootStackParamList = {
     Almoco:undefined;
     Jantar:undefined;
     Lanches:undefined;
+    TelaConfiguracoes:undefined;
+    TelaInformacoes:undefined;
+    TelaTrocaSenha:undefined;
+    TelaConfiguracoesNutri:undefined;
+    TelaInformacoesNutri1:undefined;
+    TelaInformacoesNutri2:undefined;
+    TelaTrocaSenhaNutri:undefined;
 }

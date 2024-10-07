@@ -1,16 +1,14 @@
-
-/*
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
-import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches,} from "./src/screen";
+import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri } from "./src/screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AbrindoApp">
+      <Stack.Navigator initialRouteName="TelaConfiguracoesNutri">
         <Stack.Screen
           name="AbrindoApp"
           component={AbrindoApp}
@@ -124,25 +122,41 @@ export default function App() {
         <Stack.Screen
           name="Lanches"
           component={Lanches}
+          name="TelaConfiguracoes"
+          component={Configuracoes}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TelaInformacoes"
+          component={Informacoes}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TelaTrocaSenha"
+          component={Senha}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TelaConfiguracoesNutri"
+          component={ConfiguracoesNutri}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TelaInformacoesNutri1"
+          component={InformacoesNutri1}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TelaInformacoesNutri2"
+          component={InformacoesNutri2}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TelaTrocaSenhaNutri"
+          component={SenhaNutri}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-*/
-
-import React from 'react';
-import { ConsumoCaloricoProvider } from './src/context';
-import ProdutoBusca from './src/screen/busca/ProdutoBusca';
-
-const App = () => {
-  return (
-    <ConsumoCaloricoProvider>
-      <ProdutoBusca />
-    </ConsumoCaloricoProvider>
-  );
-};
-
-export default App;
