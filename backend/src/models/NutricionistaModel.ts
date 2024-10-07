@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { isEmail } from 'validator';
 
 // Interface para o documento de Nutricionista
 interface INutricionista extends Document {
@@ -30,14 +29,25 @@ const passwordValidator = [
   },
 ];
 
+// Para o validator do email
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 // Definição do esquema de Nutricionista
 const NutricionistaSchema: Schema<INutricionista> = new Schema({
   email: {
     type: String,
-    required: true,
-    unique: true,  // Garante que não haverá duplicatas de email
-    validate: [isEmail, 'Email inválido'],
-  },
+    trim: true,
+    lowercase: true,
+    unique: true,
+    required: [true, "O e-mail é obrigatório"],
+    maxlength: [50, "O e-mail deve ter no máximo 50 caracteres"],
+    validate: {
+        validator: function (value: string) {
+            return emailRegex.test(value);
+        },
+        message: "O e-mail informado não é válido"
+    }
+},
   password: {
     type: String,
     required: true,
