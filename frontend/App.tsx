@@ -3,8 +3,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
-import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento,} from "./src/screen";
-import ErroAlimento from "./src/screen/AddAlimento/ErroAlimento/ErroAlimento";
+import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches,} from "./src/screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -95,6 +94,36 @@ export default function App() {
         <Stack.Screen
           name="ErroAlimento"
           component={ErroAlimento}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MonitorCalorico"
+          component={MonitorCalorico}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MenuDietas"
+          component={MenuDietas}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CafedaManha"
+          component={CafedaManha}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Almoco"
+          component={Almoco}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Jantar"
+          component={Jantar}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Lanches"
+          component={Lanches}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
