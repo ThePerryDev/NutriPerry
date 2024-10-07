@@ -52,33 +52,7 @@ class UsersController {
           }
         }
       }
-    
-
-    try {
-      const response = await User.create({
-        email,
-        password,
-        name,
-        isLogged,
-        height,
-        weight,
-        activityLevel,
-        gender,
-        goal,
-        birthdate,
-        nutricionista,
-      });
-      res.send(response);
-    } catch (e: any) {
-      if (e.code === 11000) {
-        res.send({ message: `O e-mail ${email} já está em uso` });
-      } else if (e.errors?.mail) {
-        res.send({ message: e.errors.mail.message });
-      } else {
-        res.send({ message: e });
-      }
-    }
-  }
+  
 
   public async list(_: Request, res: Response): Promise<void> {
     res.send(await User.find());

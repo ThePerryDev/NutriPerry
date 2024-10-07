@@ -29,7 +29,7 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
       const isLogged = await auth.signin(email, password);
       if (isLogged) {
         alert('logou')
-        navigation.navigate("CadastroNutriTelefone");
+        navigation.navigate("CadastroNome");
       } else {
         alert("Falha ao logar");
       }
@@ -60,7 +60,7 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("CadastroNutriTelefone")}
+        onPress={() => navigation.navigate("CadastroNome")}
       >
         <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CADASTRE-SE</Text>
       </TouchableOpacity>

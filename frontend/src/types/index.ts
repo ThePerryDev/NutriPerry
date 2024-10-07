@@ -60,3 +60,37 @@ export interface ErrorProps {
 export interface ProviderProps {
   children: ReactNode;
 }
+
+// Interfaces para os dados de produtos
+export interface Nutriments {
+  'energy-kcal_100g'?: number;
+  proteins?: number;
+  carbohydrates?: number;
+  sugars?: number;
+}
+
+export interface Product {
+  product_name?: string;
+  nutriments?: Nutriments;
+}
+
+// Interface para o AlimentoTacoModel
+export interface AlimentoTaco {
+  id: string;
+  description: string;
+  energy: {
+    label: string;
+    value: number;
+    unit: string;
+  };
+  protein: {
+    label: string;
+    value: number;
+    unit: string;
+  };
+  carbohydrate: {
+    label: string;
+    value: number;
+    unit: string;
+  };
+}

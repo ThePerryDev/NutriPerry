@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
 import UserModel from './UserModel';
+import user from '../routes/user';
 
 // TIRAR COMENTÁRIO DOS REQUIRED, AJUSTAR O TIPO STRING/NUMBER DA PROTEINA
 
@@ -21,14 +22,14 @@ const ConsumoCaloricoSchema: Schema<IConsumoCalorico> = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Referência ao modelo de usuário
-    required: true, 
     validate: {
       validator: async function (id: string) {
-        const usuário = await UserModel.findById(id); // verifica se id existe na coleção 
-        return !!usuário; // true se o usuário existir
+        const editora = await UserModel.findById(id); // verifica se id existe na coleção editoras
+        return !!user; // true se a editora existir
       },
-      message: 'O usuário não existe!',
+      message: 'O usuário fornecida não existe!',
     },
+    //required: true,
   },
   data: {
     type: Date,
