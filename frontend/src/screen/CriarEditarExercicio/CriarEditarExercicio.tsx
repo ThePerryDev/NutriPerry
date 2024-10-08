@@ -11,6 +11,7 @@ import {
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/rootStack";
 import { setaVolta } from "../../assets";
+import MenuInferior from "../../components/MenuInferior/MenuInferior";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -29,11 +30,14 @@ const FormExercicio: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={Styles.container}>
-      <View style={Styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={setaVolta} />
+      <View style={Styles.headerContainer}>
+        <TouchableOpacity
+          style={Styles.arrow}
+          onPress={() => navigation.navigate("SeusExercicios")}
+        >
+          <Image source={setaVolta} style={Styles.arrow} />
         </TouchableOpacity>
-        <Text style={Styles.headerTitle}>Novo Exercício</Text>
+        <Text style={Styles.header}>Novo Exercício</Text>
       </View>
 
       <ScrollView style={Styles.form}>
@@ -64,6 +68,7 @@ const FormExercicio: React.FC<Props> = ({ navigation }) => {
           <Text style={Styles.saveButtonText}>Adicionar</Text>
         </TouchableOpacity>
       </View>
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };
@@ -75,15 +80,24 @@ const Styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#fff",
   },
-  header: {
+  headerContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
+    marginLeft: 5,
+    marginRight: 65,
+    marginBottom: 25,
+    marginTop: 30,
   },
-  headerTitle: {
-    fontSize: 22,
+  arrow: {
+    width: 30,
+    height: 30,
+  },
+  header: {
+    fontSize: 26,
     fontWeight: "bold",
-    marginLeft: 10,
+    textAlign: "center",
+    color: "#2C4B4E",
   },
   form: {
     marginBottom: 20,
@@ -91,24 +105,24 @@ const Styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "#0f9d58",
-    borderRadius: 8,
+    borderRadius: 15,
     marginBottom: 20,
     padding: 10,
     fontSize: 16,
     color: "#0f9d58",
   },
   buttonContainer: {
-    marginTop: 20,
+    marginBottom: 85,
   },
   saveButton: {
-    backgroundColor: "#0f9d58",
+    backgroundColor: "#00AD71",
     padding: 15,
     borderRadius: 8,
     alignItems: "center",
   },
   saveButtonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
   },
 });

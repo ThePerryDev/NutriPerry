@@ -5,6 +5,7 @@ import Styles from "./Styles";
 import { Configuração, Perfil, Receitas, TelaInicial } from "../../assets";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/rootStack";
+import MenuInferior from "../../components/MenuInferior/MenuInferior";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -49,7 +50,14 @@ const Home: React.FC<Props> = ({ navigation }) => {
           </View>
         ))}
       </ScrollView>
-      <View style={Styles.MenuInferior}>
+      <MenuInferior navigation={navigation} />
+    </View>
+  );
+};
+
+export default Home;
+
+/*<View style={Styles.MenuInferior}>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Image source={TelaInicial} style={Styles.logo} />
         </TouchableOpacity>
@@ -62,9 +70,4 @@ const Home: React.FC<Props> = ({ navigation }) => {
         <TouchableOpacity>
           <Image source={Configuração} style={Styles.logo} />
         </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
-
-export default Home;
+      </View>*/

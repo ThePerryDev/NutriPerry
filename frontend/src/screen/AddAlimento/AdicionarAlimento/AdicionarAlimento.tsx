@@ -82,7 +82,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation }) => {
       <View style={styles.savebuttoncontainer}>
         <SaveButton onPress={() => navigation.navigate("Home")} /*Alterar para salvar os dados no cliente*//>
       </View>
-      <MenuInferior />
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

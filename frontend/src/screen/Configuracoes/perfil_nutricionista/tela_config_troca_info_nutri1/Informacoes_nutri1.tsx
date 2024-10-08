@@ -49,7 +49,7 @@ const InformacoesNutri1: React.FC<Props> = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-            <MenuInferior></MenuInferior>
+            <MenuInferior navigation={navigation} />
         </View>
     );
 }

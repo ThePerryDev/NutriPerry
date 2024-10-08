@@ -85,7 +85,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
           } /*Alterar para salvar os dados no cliente*/
         />
       </View>
-      <MenuInferior />
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

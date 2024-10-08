@@ -68,7 +68,7 @@ const PesquisaAlimento: React.FC<Props> = ({ navigation }) => {
         renderItem={renderProductItem}
         contentContainerStyle={styles.listContent}
       />
-      <MenuInferior />
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

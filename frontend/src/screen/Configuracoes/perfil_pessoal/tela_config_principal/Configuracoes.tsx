@@ -19,7 +19,7 @@ const Configuracoes: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.cima}>
-                <TouchableOpacity style={styles.volta}>
+                <TouchableOpacity style={styles.volta} onPress={() => navigation.navigate("Home")}>
                     <Image source={setaVolta} />
                 </TouchableOpacity>
                 <Text style={styles.titulo}>Configurações</Text>
@@ -41,7 +41,7 @@ const Configuracoes: React.FC<Props> = ({ navigation }) => {
                     <Text style={{ color: "#FFFFFF", fontSize: 20, fontWeight: 900, }}>LOGOUT</Text>
                 </TouchableOpacity>
             </View>
-            <MenuInferior></MenuInferior>
+            <MenuInferior navigation={navigation} />
         </View>
     );
 }

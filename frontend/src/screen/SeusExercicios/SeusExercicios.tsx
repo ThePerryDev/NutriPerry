@@ -20,6 +20,7 @@ import {
 } from "../../assets";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/rootStack";
+import MenuInferior from "../../components/MenuInferior/MenuInferior";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -33,11 +34,14 @@ type Props = {
 const SeusExercicios: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={Styles.container}>
-      <View style={Styles.header}>
-        <TouchableOpacity>
-          <Image source={setaVolta} />
+      <View style={Styles.headerContainer}>
+        <TouchableOpacity
+          style={Styles.arrow}
+          onPress={() => navigation.navigate("MonitorCalorico")}
+        >
+          <Image source={setaVolta} style={Styles.arrow} />
         </TouchableOpacity>
-        <Text style={Styles.headerTitle}>Seus Exercícios</Text>
+        <Text style={Styles.header}>Seus Exercício</Text>
       </View>
       <View style={Styles.searchContainer}>
         <Image source={lupa} />
@@ -68,20 +72,7 @@ const SeusExercicios: React.FC<Props> = ({ navigation }) => {
           <Text style={Styles.addButtonText}>Criar novo exercício</Text>
         </TouchableOpacity>
       </View>
-      <View style={Styles.MenuInferior}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Image source={TelaInicial} style={Styles.logo} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("SeusExercicios")}>
-          <Image source={Receitas} style={Styles.logo} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={Perfil} style={Styles.logo} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={Configuração} style={Styles.logo} />
-        </TouchableOpacity>
-      </View>
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };
@@ -93,19 +84,24 @@ const Styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#fff",
   },
-
-  header: {
+  headerContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    fontSize: 32,
-    fontWeight: "bold",
-    marginVertical: 20,
+    marginLeft: 5,
+    marginRight: 65,
+    marginBottom: 25,
+    marginTop: 30,
   },
-
-  headerTitle: {
-    fontSize: 22,
+  arrow: {
+    width: 30,
+    height: 30,
+  },
+  header: {
+    fontSize: 26,
     fontWeight: "bold",
-    marginLeft: 10,
+    textAlign: "center",
+    color: "#2C4B4E",
   },
 
   searchContainer: {
@@ -151,7 +147,7 @@ const Styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#f5f5f5",
     padding: 15,
     borderRadius: 12,
     marginBottom: 10,
@@ -160,16 +156,18 @@ const Styles = StyleSheet.create({
   mealInfo: {
     flex: 1,
     marginLeft: 10,
+    color: "#2C4B4E",
   },
 
   mealName: {
     fontSize: 16,
     fontWeight: "bold",
+    color: "#2C4B4E",
   },
 
   mealDetail: {
     fontSize: 14,
-    color: "#888",
+    color: "#2C4B4E",
   },
 
   checkBoxContainer: {
@@ -177,17 +175,17 @@ const Styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonContainer: {
-    marginTop: 20,
+    marginBottom: 85,
   },
   addButton: {
-    backgroundColor: "#0f9d58",
+    backgroundColor: "#00AD71",
     padding: 15,
     borderRadius: 8,
     alignItems: "center",
   },
   addButtonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
   },
   bottomNavigation: {
@@ -201,17 +199,6 @@ const Styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#ddd",
   },
-
-  MenuInferior: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    borderTopWidth: 1,
-    borderTopColor: "#eee",
-    backgroundColor: "#fff",
-    height: 80,
-  },
-
   logo: {
     width: 50,
     height: 50,

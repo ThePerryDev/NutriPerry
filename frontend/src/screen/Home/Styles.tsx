@@ -76,28 +76,19 @@ const styles = StyleSheet.create({
   mealInfo: {
     flex: 1,
     marginLeft: 10,
+    color: "#2C4B4E",
   },
 
   mealName: {
     fontSize: 16,
     fontWeight: "bold",
+    color: "#2C4B4E",
   },
 
   mealDetail: {
     fontSize: 14,
-    color: "#888",
+    color: "#2C4B4E",
   },
-
-  MenuInferior: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    borderTopWidth: 1,
-    borderTopColor: "#eee",
-    backgroundColor: "#fff",
-    height: 80,
-  },
-
   logo: {
     width: 50,
     height: 50,
