@@ -11,7 +11,6 @@ export interface UsersProps {
   nickname: string;
   height: number; // em cm
   weight: number; // em kg
-  activityLevel: 'sedentario' | 'pouco ativo' | 'ativo' | 'muito ativo';
   gender: 'masculino' | 'feminino';
   goal: 'perda de peso' | 'manutenção de peso' | 'ganho de massa';
   birthdate: Date; // Data de nascimento
