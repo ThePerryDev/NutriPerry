@@ -27,29 +27,40 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
 
   // Função para obter dados nutricionais
   const getNutritionalData = () => {
-    if (!product) return { kcal: '-', protein: '-', carbohydrate: '-' }; // Retorna valores padrão se product for undefined
-
+    if (!product) {
+      console.log("Produto não encontrado ou indefinido:", product);
+      return { kcal: '-', protein: '-', carbohydrate: '-' };
+    }
+  
     if ('energy' in product) {
       // Produto do tipo AlimentoTaco
+      console.log("Produto do tipo AlimentoTaco selecionado:", product);
       return {
         kcal: product.energy.value || '-',
         protein: product.protein.value || '-',
         carbohydrate: product.carbohydrate.value || '-',
       };
     } else if (product.nutriments) {
-      // Produto do tipo Product
+      // Produto do tipo Open Food Facts
+      console.log("Produto do tipo Open Food Facts selecionado:", product);
+      console.log("Nutrientes recebidos:", product.nutriments);
+  
       return {
         kcal: product.nutriments['energy-kcal_100g'] || '-',
         protein: product.nutriments.proteins || '-',
         carbohydrate: product.nutriments.carbohydrates || '-',
       };
+    } else {
+      console.log("Produto sem informações nutricionais adequadas:", product);
+      return {
+        kcal: '-',
+        protein: '-',
+        carbohydrate: '-',
+      };
     }
-    return {
-      kcal: '-',
-      protein: '-',
-      carbohydrate: '-',
-    };
   };
+  
+  
 
   // Dados nutricionais
   const { kcal, protein, carbohydrate } = getNutritionalData();

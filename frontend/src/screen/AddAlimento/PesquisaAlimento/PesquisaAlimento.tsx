@@ -128,9 +128,9 @@ const PesquisaAlimento: React.FC<Props> = ({ navigation }) => {
       <View style={styles.buttoncontainer}>
         <AddAlimentoButton
           onPress={() => {
-            console.log("Produto selecionado:", item); // Log do produto selecionado
+            //console.log("Produto selecionado:", item); // Log do produto selecionado
             navigation.navigate("AdicionarAlimento", {
-              product: isAlimentoTaco(item) ? item : null, // Passa o produto selecionado
+              product: isAlimentoTaco(item) ? item : item, // Passa o produto selecionado
             });
           }}
         />
