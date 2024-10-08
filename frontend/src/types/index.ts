@@ -23,8 +23,6 @@ export interface Error {
   props: string;
 }
 
-
-
 // Interface para os dados de consumo calórico
 export interface ConsumoCaloricoProps {
   id?: string; // Opcional caso não tenha durante a criação
@@ -71,7 +69,12 @@ export interface Nutriments {
 
 export interface Product {
   product_name?: string;
-  nutriments?: Nutriments;
+  nutriments?: {
+    'energy-kcal_100g'?: number;
+    proteins?: number;
+    carbohydrates?: number;
+    // Adicione mais nutrientes se necessário
+  };
 }
 
 // Interface para o AlimentoTacoModel

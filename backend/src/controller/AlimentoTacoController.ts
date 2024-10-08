@@ -39,16 +39,22 @@ class AlimentoTacoController {
     try {
       const { description } = req.query;
   
+      console.log("Parâmetro de descrição:", description); // Log do parâmetro
+  
       const alimentos = description 
         ? await AlimentoTaco.find({ description: new RegExp(description as string, 'i') })
-            .select('id description energy protein carbohydrate') // Seleciona apenas os campos desejados
+            .select('id description energy protein carbohydrate')
         : await AlimentoTaco.find().select('id description energy protein carbohydrate');
+  
+      console.log("Alimentos encontrados:", alimentos); // Log dos alimentos encontrados
   
       return res.status(200).json(alimentos);
     } catch (error) {
+      console.error("Erro ao listar alimentos", error); // Log do erro
       return res.status(500).json({ message: 'Erro ao listar alimentos', error });
     }
   }
+  
   
 
   // Método para deletar um alimento pelo ID
