@@ -23,8 +23,6 @@ export interface Error {
   props: string;
 }
 
-
-
 // Interface para os dados de consumo calórico
 export interface ConsumoCaloricoProps {
   id?: string; // Opcional caso não tenha durante a criação
