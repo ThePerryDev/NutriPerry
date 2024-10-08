@@ -87,6 +87,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#888",
   },
+
+  MenuInferior: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderTopColor: "#eee",
+    backgroundColor: "#fff",
+    height: 80,
+  },
+
+  logo: {
+    width: 50,
+    height: 50,
+  },
 });
 
 export default styles;

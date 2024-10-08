@@ -8,5 +8,6 @@ import image02 from "./Cadastro/image02.png";
 import imagem3 from "./Cadastro/imagem3.png";
 import imagem4 from "./Cadastro/imagem4.png";
 import profissao from "./Cadastro/profissao.png";
+import lupa from "./lupa.png";
 
-export { TelaInicial, Receitas, Perfil, Configuração, setaVolta, image01, image02, imagem3, imagem4, profissao };
+export { TelaInicial, Receitas, Perfil, Configuração, setaVolta, image01, image02, imagem3, imagem4, profissao, lupa };

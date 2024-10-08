@@ -10,6 +10,11 @@ const Styles = StyleSheet.create({
     backgroundColor: "#fff",
     height: 80,
   },
+
+  logo: {
+    width: 50,
+    height: 50,
+  },
 });
 
 export default Styles;

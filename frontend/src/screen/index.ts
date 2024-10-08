@@ -9,7 +9,25 @@ import CadastroEmail from "./Cadastro/perfil_pessoal/CadastroEmail/cadastroEmail
 import CadastroNome from "./Cadastro/perfil_pessoal/cadastroNome/CadastroNomeP";
 import CadastroSexoIdade from "./Cadastro/perfil_pessoal/CadastroSexoIdade/CadastroSexoIdade";
 import TelaPPObjetivo from "./Cadastro/perfil_pessoal/tela_pp_objetivo/tela_pp_objetivo";
+import FormExercicio from "./CriarEditarExercicio/CriarEditarExercicio";
 import Home from "./Home/Home";
 import TelaLogin from "./login/Login";
+import SeusExercicios from "./SeusExercicios/SeusExercicios";
 
-export { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, TelaFinalizado, CadastroNutriNome, CadastroNutriEmail, CadastroNutriFormacao, CadastroNutriTelefone, TelaLogin, AbrindoApp };
+export {
+  CadastroAlturaPeso,
+  CadastroEmail,
+  CadastroNome,
+  CadastroSexoIdade,
+  Home,
+  SeusExercicios,
+  TelaPPObjetivo,
+  TelaFinalizado,
+  CadastroNutriNome,
+  CadastroNutriEmail,
+  CadastroNutriFormacao,
+  CadastroNutriTelefone,
+  TelaLogin,
+  AbrindoApp,
+  FormExercicio,
+};
