@@ -108,6 +108,40 @@ const PesquisaAlimento: React.FC<Props> = ({ navigation }) => {
     return (item as AlimentoTaco).description !== undefined;
   };
 
+
+  const renderProductItem = ({ item }: { item: Product | AlimentoTaco }) => (
+    <View style={styles.ProductItem}>
+      <Text style={styles.ProductName}>
+        {isAlimentoTaco(item) ? item.description : item.product_name || "Produto Sem Nome"}
+      </Text>
+      <View style={styles.nutritionInfo}>
+        <Text style={styles.nutritionText}>
+          Kcal: {isAlimentoTaco(item) ? item.energy.value : item.nutriments?.['energy-kcal_100g'] || 0}
+        </Text>
+        <Text style={styles.nutritionText}>
+          Proteína: {isAlimentoTaco(item) ? item.protein.value : item.nutriments?.proteins || 0}g
+        </Text>
+        <Text style={styles.nutritionText}>
+          Carboidratos: {isAlimentoTaco(item) ? item.carbohydrate.value : item.nutriments?.carbohydrates || 0}g
+        </Text>
+      </View>
+      <View style={styles.buttoncontainer}>
+        <AddAlimentoButton
+          onPress={() => {
+            console.log("Produto selecionado:", item); // Log do produto selecionado
+            navigation.navigate("AdicionarAlimento", {
+              product: isAlimentoTaco(item) ? item : null, // Passa o produto selecionado
+            });
+          }}
+        />
+      </View>
+    </View>
+  );
+  
+
+  
+
+  /*
   const renderProductItem = ({ item }: { item: Product | AlimentoTaco }) => (
     <View style={styles.ProductItem}>
       <Text style={styles.ProductName}>{isAlimentoTaco(item) ? item.description : item.product_name}</Text>
@@ -127,7 +161,7 @@ const PesquisaAlimento: React.FC<Props> = ({ navigation }) => {
       </View>
     </View>
   );
-
+*/
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>

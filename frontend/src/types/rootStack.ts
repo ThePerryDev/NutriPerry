@@ -1,3 +1,5 @@
+import { AlimentoTaco } from ".";
+
 export type RootStackParamList = {
     AbrindoApp:undefined;
     TelaLogin:undefined;
@@ -13,7 +15,8 @@ export type RootStackParamList = {
     CadastroNutriFormacao:undefined;
     CadastroNutriTelefone:undefined;
     PesquisaAlimento:undefined;
-    AdicionarAlimento:undefined;
+    AdicionarAlimento: { product: AlimentoTaco | null };
+    //AdicionarAlimento:undefined;
     CadastrarAlimento:undefined;
     ErroAlimento:undefined;
     MonitorCalorico:undefined;
