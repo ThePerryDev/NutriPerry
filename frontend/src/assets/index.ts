@@ -12,5 +12,6 @@ import setaVolta from "./Cadastro/setaVolta.png";
 import monitorcalorico from "./Dietas/monitorcalorico.png"
 import Editar from "./Dietas/Editar.png"
 import Deletar from "./Dietas/Deletar.png"
+import lupa from "./lupa.png"
 
-export { TelaInicial, Receitas, Perfil, Configuração, setaVolta, image01, image02, imagem3, imagem4, profissao, camera, monitorcalorico, Editar, Deletar };
+export { TelaInicial, Receitas, Perfil, Configuração, setaVolta, image01, image02, imagem3, imagem4, profissao, camera, monitorcalorico, Editar, Deletar, lupa };

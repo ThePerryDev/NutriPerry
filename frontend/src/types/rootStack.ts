@@ -29,4 +29,7 @@ export type RootStackParamList = {
     TelaInformacoesNutri1:undefined;
     TelaInformacoesNutri2:undefined;
     TelaTrocaSenhaNutri:undefined;
+    SeusExercicios: undefined;
+    FormExercicio: undefined;
 }
+

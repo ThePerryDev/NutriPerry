@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import styles from "./Styles";
-import { MenuInferior } from "../../components";
+import Styles from "./Styles";
+import { Configuração, Perfil, Receitas, TelaInicial } from "../../assets";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/rootStack";
 
@@ -17,31 +17,31 @@ type Props = {
 
 const Home: React.FC<Props> = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Hoje</Text>
-      <View style={styles.card}>
-        <Text style={styles.totalText}>Total</Text>
-        <View style={styles.statsContainer}>
-          <View style={styles.stats}>
-            <Text style={styles.statLabel}>Gastos</Text>
-            <Text style={styles.statValue}>- calorias</Text>
+    <View style={Styles.container}>
+      <Text style={Styles.header}>Hoje</Text>
+      <View style={Styles.card}>
+        <Text style={Styles.totalText}>Total</Text>
+        <View style={Styles.statsContainer}>
+          <View style={Styles.stats}>
+            <Text style={Styles.statLabel}>Gastos</Text>
+            <Text style={Styles.statValue}>- calorias</Text>
           </View>
-          <View style={styles.chart}>
-            <Text style={styles.totalCalories}>- calorias</Text>
+          <View style={Styles.chart}>
+            <Text style={Styles.totalCalories}>- calorias</Text>
           </View>
-          <View style={styles.stats}>
-            <Text style={styles.statLabel}>Consumo</Text>
-            <Text style={styles.statValue}>- gramas</Text>
+          <View style={Styles.stats}>
+            <Text style={Styles.statLabel}>Consumo</Text>
+            <Text style={Styles.statValue}>- gramas</Text>
           </View>
         </View>
       </View>
       <ScrollView>
         {["Café da Manhã", "Almoço", "Jantar", "Lanches"].map((meal, index) => (
-          <View key={index} style={styles.mealItem}>
+          <View key={index} style={Styles.mealItem}>
             <MaterialIcons name={"check-box-outline-blank"} size={24} />
-            <View style={styles.mealInfo}>
-              <Text style={styles.mealName}>{meal}</Text>
-              <Text style={styles.mealDetail}>Sem cardápio cadastrado</Text>
+            <View style={Styles.mealInfo}>
+              <Text style={Styles.mealName}>{meal}</Text>
+              <Text style={Styles.mealDetail}>Sem cardápio cadastrado</Text>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("PesquisaAlimento")}>
               <Ionicons name="add-circle-outline" size={28} color="green" />
@@ -49,7 +49,20 @@ const Home: React.FC<Props> = ({ navigation }) => {
           </View>
         ))}
       </ScrollView>
-      <MenuInferior />
+      <View style={Styles.MenuInferior}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <Image source={TelaInicial} style={Styles.logo} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("SeusExercicios")}>
+          <Image source={Receitas} style={Styles.logo} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image source={Perfil} style={Styles.logo} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image source={Configuração} style={Styles.logo} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
