@@ -49,6 +49,11 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
         kcal: product.nutriments['energy-kcal_100g'] || '-',
         protein: product.nutriments.proteins || '-',
         carbohydrate: product.nutriments.carbohydrates || '-',
+        sodium: product.nutriments['salt_100g'] || '-',
+        sugar: product.nutriments['sugars_100g'] || '-',
+        gordura: product.nutriments['fat_100g'] || '-',
+        gordura_saturada: product.nutriments['saturated-fat_100g'] || '-',
+        fibra: product.nutriments['fiber_100g'] || '-',
       };
     } else {
       console.log("Produto sem informações nutricionais adequadas:", product);
@@ -56,6 +61,11 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
         kcal: '-',
         protein: '-',
         carbohydrate: '-',
+        sodium: '-',
+        sugar:'-',
+        gordura: '-',
+        gordura_saturada: '-',
+        fibra: '-',
       };
     }
   };
@@ -63,7 +73,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
   
 
   // Dados nutricionais
-  const { kcal, protein, carbohydrate } = getNutritionalData();
+  const { kcal, protein, carbohydrate, sodium,sugar,gordura,gordura_saturada,fibra } = getNutritionalData();
 
   // Atualizando o nome do produto
   const productName = product 
@@ -74,11 +84,11 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     ['Kcal', kcal, '-'],
     ['Proteína', protein, '-'],
     ['Carboidrato', carbohydrate, '-'],
-    ['Açúcar', '-', '-'],
-    ['Gordura', '-', '-'],
-    ['Gordura Saturada', '-', '-'],
-    ['Fibra', '-', '-'],
-    ['Sal', '-', '-'],
+    ['Açúcar', sugar, '-'],
+    ['Gordura', gordura, '-'],
+    ['Gordura Saturada', gordura_saturada, '-'],
+    ['Fibra', fibra, '-'],
+    ['Sal', sodium , '-'],
   ];
 
   const UnityOptions = [
