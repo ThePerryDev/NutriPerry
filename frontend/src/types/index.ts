@@ -8,11 +8,12 @@ export interface UsersProps {
   email: string;
   password: string;
   name: string;
+  nickname: string;
   height: number; // em cm
   weight: number; // em kg
   activityLevel: 'sedentario' | 'pouco ativo' | 'ativo' | 'muito ativo';
   gender: 'masculino' | 'feminino';
-  goal: 'perda de peso' | 'manter meu peso atual' | 'ganho de peso';
+  goal: 'perda de peso' | 'manutenção de peso' | 'ganho de massa';
   birthdate: Date; // Data de nascimento
   nutricionista?: string; // Referência a um nutricionista existente
   isLogged: boolean; // Indica se o usuário está logado
@@ -22,8 +23,6 @@ export interface Error {
   error: string;
   props: string;
 }
-
-
 
 // Interface para os dados de consumo calórico
 export interface ConsumoCaloricoProps {
