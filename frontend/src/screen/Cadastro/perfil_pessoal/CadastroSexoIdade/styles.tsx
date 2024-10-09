@@ -23,7 +23,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#00AD71",
     borderRadius: 25,
   },
+
   textgeral: {
+    fontWeight:"semibold",
     marginTop: 55,
     marginBottom: 7,
     fontSize: 20,
@@ -33,6 +35,16 @@ const styles = StyleSheet.create({
   image: {
     height: 270,
     width: 290,
+  },
+
+  pickerContainer: {
+    height: 68,
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF", // Fundo do Picker
+    borderColor: "#00AD71",
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderRadius: 25,
   },
 
   input: {

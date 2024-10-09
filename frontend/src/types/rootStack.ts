@@ -35,7 +35,7 @@ export type RootStackParamList = {
     TelaInformacoesNutri2:undefined;
     TelaTrocaSenhaNutri:undefined;
     SeusExercicios: undefined;
-    FormExercicio: undefined;
+    NewExercicise: undefined;
     MenuInferior: undefined;
 }
 

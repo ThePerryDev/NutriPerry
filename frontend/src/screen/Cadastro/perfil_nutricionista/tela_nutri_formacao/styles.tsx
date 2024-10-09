@@ -4,17 +4,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FBFBFB',
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center'
+        padding:50
     },
-    caixinha: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
 
     cima: {
         flexDirection: 'row',
@@ -32,15 +23,15 @@ const styles = StyleSheet.create({
     textgeral: {
         marginTop: 55,
         marginBottom: 7,
-        marginLeft: -150,
-        fontSize: 20
+        fontSize: 20,
+        fontWeight:"semibold",
+        color: "#2C4B4E",
     },
 
     input: {
         backgroundColor: '#FFFFFF',
         borderRadius: 25,
         height: 68,
-        width: 300,
         borderWidth: 2,
         borderStyle: 'solid',
         borderColor: '#00AD71'

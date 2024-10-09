@@ -39,7 +39,7 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
     <View style={styles.container}>
       <View>
         <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.arrow}>
+          <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("CadastroAlturaPeso")}>
             <Image
               source={setaVolta}
               style={styles.arrow}

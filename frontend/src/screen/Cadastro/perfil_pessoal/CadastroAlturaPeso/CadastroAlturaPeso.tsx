@@ -6,6 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import user from "../../../../services/userService";
+import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -51,32 +52,29 @@ const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.cima}>
-        <TouchableOpacity style={styles.volta}>
+        <TouchableOpacity style={styles.volta} onPress={() => navigation.navigate("CadastroSexoIdade")}>
           <Image source={setaVolta} />
         </TouchableOpacity>
         <Text style={{ fontSize: 20 }}>(4/5)</Text>
       </View>
       <Image source={imagem4} style={styles.image} resizeMode="contain" />
-      <Text style={styles.textgeral}>Insira seu height</Text>
+      <Text style={styles.textgeral}>Insira seu altura</Text>
       <TextInput
         value={height}
         onChangeText={(height) => setHeight(height)}
         style={styles.input}
         keyboardType="numeric"
       />
-      <Text style={styles.textgeral}>Insira sua weight</Text>
+      <Text style={styles.textgeral}>Insira seu peso</Text>
       <TextInput
         value={weight}
         onChangeText={(weight) => setWeight(weight)}
         style={styles.input}
         keyboardType="numeric"
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("TelaPPObjetivo")}
-      >
-        <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
-      </TouchableOpacity>
+      <View style={styles.buttoncontainer}>
+        <ContinueButton onPress={() => navigation.navigate("TelaPPObjetivo")} />
+      </View>
     </View>
   );
 };

@@ -3,34 +3,30 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor:"#FBFBFB"
+    backgroundColor: "#FBFBFB",
+    padding: 50,
   },
   headerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: 300,
     paddingHorizontal: 20,
     marginBottom: 20,
-    marginTop:20
+    marginTop: 20,
   },
-  arrow:{
-    width:30,
-    height:30,
+  arrow: {
+    width: 30,
+    height: 30,
   },
-  headerlabel:{
+  headerlabel: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#2C4B4E",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
   },
   imagecontainer: {
     alignItems: "center",
-    marginTop:10,
+    marginTop: 10,
     marginBottom: 15,
   },
   image: {
@@ -45,7 +41,6 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   pickerContainer: {
-    width: 300,
     height: 68,
     borderStyle: "solid",
     borderWidth: 2,

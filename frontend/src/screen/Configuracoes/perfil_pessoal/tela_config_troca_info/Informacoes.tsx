@@ -45,7 +45,7 @@ const Informacoes: React.FC<Props> = ({ navigation }) => {
                     onChangeText={(altura) => setAltura(altura)}
                     style={styles.input}
                 />
-                <Text style={styles.texto}>Insira sua peso</Text>
+                <Text style={styles.texto}>Insira seu peso</Text>
                 <TextInput
                     value={peso}
                     onChangeText={(peso) => setPeso(peso)}

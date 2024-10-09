@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { imagem3, setaVolta } from "../../../../assets";
-import styles from ".";
+import styles from "./styles";
 import { Picker } from "@react-native-picker/picker";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
+import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -22,7 +23,7 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.cima}>
-        <TouchableOpacity style={styles.volta}>
+        <TouchableOpacity style={styles.volta} onPress={() => navigation.navigate("CadastroEmail")}>
           <Image source={setaVolta} />
         </TouchableOpacity>
         <Text style={{ fontSize: 20 }}>(3/5)</Text>
@@ -42,9 +43,9 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
         style={styles.input}
         keyboardType="numeric"
       />
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CadastroAlturaPeso")}>
-        <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
-      </TouchableOpacity>
+      <View style={styles.buttoncontainer}>
+        <ContinueButton onPress={() => navigation.navigate("CadastroAlturaPeso")} />
+      </View>
     </View>
   );
 };

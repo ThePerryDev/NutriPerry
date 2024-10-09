@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "./AuthContext";
-import TelaLogin from "../../screen/login/Login";
+import TelaLogin from "../../screen/Login/Login";
 
 export default function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useContext(AuthContext);

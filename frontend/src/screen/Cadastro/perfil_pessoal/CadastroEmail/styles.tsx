@@ -23,7 +23,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#00AD71",
     borderRadius: 25,
   },
+
   textgeral: {
+    fontWeight:"semibold",
     marginTop: 55,
     marginBottom: 7,
     fontSize: 20,

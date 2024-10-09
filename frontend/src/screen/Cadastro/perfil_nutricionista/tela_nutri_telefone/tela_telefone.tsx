@@ -25,7 +25,7 @@ const CadastroNutriTelefone: React.FC<Props> = ({ navigation }) => {
                 <TouchableOpacity style={styles.volta}>
                     <Image source={setaVolta} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20 }}>(1/5)</Text>
+                <Text style={{ fontSize: 20 }}>(4/4)</Text>
             </View>
             <Image source={require('../../../../assets/telefone.png')}
                 style={styles.image}

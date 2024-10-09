@@ -16,7 +16,10 @@ const styles = StyleSheet.create({
     fontSize: 45,
     fontWeight: "bold",
     color: "#ffffff",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
+    textShadowColor: "#004700",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 10,
   },
   imagecontainer: {
     alignItems: "center",
