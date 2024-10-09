@@ -108,3 +108,14 @@ export interface AlimentoTaco {
     unit: string;
   };
 }
+
+export interface NutritionalValues {
+  kcal: string;
+  protein: string;
+  carbohydrate: string;
+  sodium: string;
+  sugar: string;
+  gordura: string;
+  gordura_saturada: string;
+  fibra: string;
+}
