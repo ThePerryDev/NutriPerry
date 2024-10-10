@@ -10,7 +10,7 @@
 
 O projeto constitui na construção de uma aplicação mobile que auxilie o monitoramento da dieta de um usuário através da inserção de consumo e gastos calóricos. Com base nessa estruturação a sprint 02 consistiu em horas voltadas para .
 
-[LINK DE APRESENTAÇÃO DA SPRINT 01](https://drive.google.com/file/d/1X_RZB2BagwwqgAaqVM5RqBzSTGLluFpU/view?usp=drive_link)
+[LINK DE APRESENTAÇÃO DA SPRINT 02](https://youtu.be/mZhYl-Wf9Bk)
 
 <span id="objetivos">
 
