@@ -1,7 +1,7 @@
 // src/context/ConsumoCaloricoContext.tsx
 import { createContext, useCallback, useEffect, useState } from 'react';
 import { ConsumoCaloricoService } from '../services'; // Agora importado a partir do index de services
-import { ConsumoCaloricoProps, ConsumoCaloricoContextProps, ProviderProps, ErrorProps } from '../types';
+import { ConsumoCaloricoProps, ConsumoCaloricoContextProps, ProviderProps, ErrorProps, consoleTesteProps } from '../types';
 
 // Criação do contexto
 export const ConsumoCaloricoContext = createContext({} as ConsumoCaloricoContextProps);
@@ -29,6 +29,7 @@ export function ConsumoCaloricoProvider({ children }: ProviderProps) {
 
   // Função para criar um novo consumo calórico
   const create = useCallback(async (consumo: ConsumoCaloricoProps) => {
+    console.log("Dados que estão sendo enviados para o contexto:", consumo); // Adicione esta linha
     const response = await ConsumoCaloricoService.create(consumo);
     if (isErrorProps(response)) {
       setError(response);
@@ -37,6 +38,9 @@ export function ConsumoCaloricoProvider({ children }: ProviderProps) {
       await getAllConsumos(); // Recarrega os consumos após criação
     }
   }, [getAllConsumos]);
+  
+
+
 
   // Função para remover um consumo calórico
   const remove = useCallback(async (id: string) => {
@@ -71,3 +75,4 @@ export function ConsumoCaloricoProvider({ children }: ProviderProps) {
     </ConsumoCaloricoContext.Provider>
   );
 }
+

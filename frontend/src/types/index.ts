@@ -35,6 +35,11 @@ export interface ConsumoCaloricoProps {
   carboidrato: number;
   peso: number;
   acucar: number;
+  
+}
+
+export interface consoleTesteProps{
+  consoleTeste: string;
 }
 
 // Interface para o contexto do consumo calórico
