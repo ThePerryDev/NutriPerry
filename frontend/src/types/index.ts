@@ -35,6 +35,11 @@ export interface ConsumoCaloricoProps {
   carboidrato: number;
   peso: number;
   acucar: number;
+  
+}
+
+export interface consoleTesteProps{
+  consoleTeste: string;
 }
 
 // Interface para o contexto do consumo calórico
@@ -65,6 +70,12 @@ export interface Nutriments {
   proteins?: number;
   carbohydrates?: number;
   sugars?: number;
+  'sodium_100g'?: number;
+  'sugars_100g'?: number;
+  'fat_100g'?:number;
+  'saturated-fat_100g'?: number;
+  'fiber_100g'?: number;
+  
 }
 
 export interface Product {
@@ -73,6 +84,11 @@ export interface Product {
     'energy-kcal_100g'?: number;
     proteins?: number;
     carbohydrates?: number;
+    'salt_100g'?: number;
+    'sugars_100g'?: number;
+    'fat_100g'?:number;
+    'saturated-fat_100g'?: number;
+    'fiber_100g'?: number;
     // Adicione mais nutrientes se necessário
   };
 }
@@ -96,4 +112,15 @@ export interface AlimentoTaco {
     value: number;
     unit: string;
   };
+}
+
+export interface NutritionalValues {
+  kcal: string;
+  protein: string;
+  carbohydrate: string;
+  sodium: string;
+  sugar: string;
+  gordura: string;
+  gordura_saturada: string;
+  fibra: string;
 }
