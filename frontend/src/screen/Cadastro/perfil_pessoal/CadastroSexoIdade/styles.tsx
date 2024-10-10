@@ -4,49 +4,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FBFBFB",
-    padding: 50,
+    padding: 30,
   },
-
-  cima: {
+  headerContainer: {
     flexDirection: "row",
-  },
-
-  volta: {
-    marginRight: 250,
-  },
-
-  button: {
-    height: 68,
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
-    marginTop: 50,
-    backgroundColor: "#00AD71",
-    borderRadius: 25,
+    marginBottom: 20,
+    marginTop: 20,
   },
-
+  arrow: {
+    width: 30,
+    height: 30,
+  },
+  headerlabel: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#2C4B4E",
+  },
+  image: {
+    height: 250,
+    width: "100%",
+    resizeMode: "contain",
+    marginBottom: 15,
+  },
   textgeral: {
-    fontWeight:"semibold",
-    marginTop: 55,
+    marginTop: 5,
     marginBottom: 7,
     fontSize: 20,
     color: "#2C4B4E",
   },
-
-  image: {
-    height: 270,
-    width: 290,
-  },
-
-  pickerContainer: {
-    height: 68,
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF", // Fundo do Picker
-    borderColor: "#00AD71",
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderRadius: 25,
-  },
-
   input: {
     backgroundColor: "#FFFFFF",
     borderRadius: 25,
@@ -54,9 +41,24 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderStyle: "solid",
     borderColor: "#00AD71",
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+  pickerLabel: {
+    marginTop: 5,
+    marginBottom: 7,
+    fontSize: 20,
+    color: "#2C4B4E", // Mesmo estilo do textgeral
+  },
+  picker: {
+    fontSize: 16,
+    height: 68,
+    color: "#2C4B4E",
+    alignItems: "center",
   },
   buttoncontainer: {
     marginTop: 35,
+    alignItems: "center",
   },
 });
 

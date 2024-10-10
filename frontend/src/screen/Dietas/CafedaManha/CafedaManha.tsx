@@ -33,7 +33,9 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     <View style={styles.row}>
       <Text style={styles.alimento}>{item.nome}</Text>
       <Text style={styles.quantidade}>{item.quantidade}</Text>
-      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("CadastrarAlimento")}>
+      <TouchableOpacity 
+        style={styles.botao} 
+        onPress={() => navigation.navigate("AdicionarAlimento", { product: item })}>
         <Image source={Editar} style={styles.icone} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.botao} onPress={() => console.log("Deletar", item.id)}>

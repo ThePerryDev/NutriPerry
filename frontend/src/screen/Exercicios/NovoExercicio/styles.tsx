@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#ffffff",
     justifyContent: "center",
-    marginBottom:25
+    marginBottom:25,
+    paddingLeft:20
   },
   form: {
     marginBottom: 20,
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
     color: "#0f9d58",
+    paddingLeft:20
   },
   buttonContainer: {
     marginBottom: 25,

@@ -22,28 +22,28 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
 
   const goalOptions = [
     { label: "", value: "" },
-    { label: "Perder peso", value: "lose" },
-    { label: "Manter peso", value: "keep" },
-    { label: "Ganhar peso", value: "gain" },
+    { label: "Perder peso", value: "perda de peso" },
+    { label: "Manutenção de peso", value: "manutenção de peso" },
+    { label: "Ganho de massa", value: "ganho de massa" },
   ];
 
   const exerciseTimeOptions = [
     { label: "", value: "" },
-    { label: "15 a 30 minutos", value: "15-30" },
-    { label: "30 a 45 minutos", value: "30-45" },
-    { label: "45 a 60 minutos", value: "45-60" },
-    { label: "Mais de 60 minutos", value: "+60" },
+    { label: "Sedentário", value: "sedentario" },
+    { label: "Pouco ativo", value: "pouco ativo" },
+    { label: "Ativo", value: "ativo" },
+    { label: "Muito ativo", value: "muito ativo" },
   ];
-
+  
   return (
     <View style={styles.container}>
       <View>
         <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("CadastroAlturaPeso")}>
-            <Image
-              source={setaVolta}
-              style={styles.arrow}
-            />
+          <TouchableOpacity
+            style={styles.arrow}
+            onPress={() => navigation.navigate("CadastroAlturaPeso")}
+          >
+            <Image source={setaVolta} style={styles.arrow} />
           </TouchableOpacity>
           <Text style={styles.headerlabel}>(5/5)</Text>
         </View>
@@ -54,6 +54,7 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
             style={styles.image}
           />
         </View>
+
         <CustomPicker
           label="Qual seu objetivo com o App?"
           selectedValue={selectGoal}

@@ -83,11 +83,36 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
 
   const UnityOptions = [
     { label: "", value: "" },
-    { label: "grama (g)", value: "grama" },
-    { label: "kilograma (kg)", value: "kilo" },
-    { label: "mililitro (ml)", value: "ml" },
-    { label: "litro (L)", value: "litro" },
+    { label: "Café da Manhã", value: "cafedamanha" },
+    { label: "Almoço", value: "almoco" },
+    { label: "Jantar", value: "jantar" },
+    { label: "Lanches", value: "lanches" },
   ];
+
+  const handleSave = () => {
+  if (selectUnit) {
+    // Navegar para a página correspondente com base na dieta selecionada
+    switch (selectUnit) {
+      case "cafedamanha":
+        navigation.navigate("CafedaManha", undefined); // Navega para a tela de Café da Manhã
+        break;
+      case "almoco":
+        navigation.navigate("Almoco", undefined); // Navega para a tela de Almoço
+        break;
+      case "jantar":
+        navigation.navigate("Jantar", undefined); // Navega para a tela de Jantar
+        break;
+      case "lanches":
+        navigation.navigate("Lanches", undefined); // Navega para a tela de Lanches
+        break;
+      default:
+        navigation.navigate("Home", undefined); // Navega para a tela inicial ou outra tela padrão
+    }
+  } else {
+    // Caso não tenha uma unidade selecionada, pode mostrar um alerta ou mensagem
+    alert("Por favor, selecione uma dieta antes de salvar.");
+  }
+};
 
   const tableHead = ['Dados Nutricionais', 'Valores por 100g/100ml', 'Valores que foram atribuídos'];
 
@@ -102,7 +127,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
       <Text style={styles.explanation}>Selecione a unidade que vai consumir e insira a quantidade a consumir</Text>
       <View>
         <UnidadePicker
-          label="Unidade:"
+          label="Dietas:"
           selectedValue={selectUnit}
           onValueChange={(itemValue) => setSelectUnit(itemValue)}
           items={UnityOptions}
@@ -125,7 +150,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
         </Table>
       </View>
       <View style={styles.savebuttoncontainer}>
-        <SaveButton onPress={() => navigation.navigate("Home")} /*Alterar para salvar os dados no cliente*/ />
+        <SaveButton onPress={handleSave} /*Alterar para salvar os dados no cliente*/ />
       </View>
       <MenuInferior navigation={navigation} />
     </View>

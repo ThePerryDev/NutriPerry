@@ -35,19 +35,22 @@ const Informacoes: React.FC<Props> = ({ navigation }) => {
                 <Text style={styles.texto}>Insira sua idade</Text>
                 <TextInput
                     value={idade}
+                    placeholder={"Exemplo: 16"}
                     onChangeText={(idade) => setIdade(idade)}
                     style={styles.input}
                     keyboardType="numeric"
                 />
-                <Text style={styles.texto}>Insira sua altura</Text>
+                <Text style={styles.texto}>Insira sua altura (cm)</Text>
                 <TextInput
                     value={altura}
+                    placeholder={"Exemplo: 175"}
                     onChangeText={(altura) => setAltura(altura)}
                     style={styles.input}
                 />
-                <Text style={styles.texto}>Insira seu peso</Text>
+                <Text style={styles.texto}>Insira seu peso (kg)</Text>
                 <TextInput
                     value={peso}
+                    placeholder={"Exemplo: 70"}
                     onChangeText={(peso) => setPeso(peso)}
                     style={styles.input}
                     keyboardType="numeric"

@@ -21,14 +21,14 @@ const CadastroEmail: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cima}>
+      <View style={styles.headerContainer}>
         <TouchableOpacity
-          style={styles.volta}
+          style={styles.arrow}
           onPress={() => navigation.navigate("CadastroNome")}
         >
-          <Image source={setaVolta}></Image>
+          <Image source={setaVolta} style={styles.arrow} />
         </TouchableOpacity>
-        <Text style={{ fontSize: 20 }}>(2/5)</Text>
+        <Text style={styles.headerlabel}>(2/5)</Text>
       </View>
       <Image source={image02} style={styles.image} resizeMode="contain" />
       <Text style={styles.textgeral}>Insira seu email</Text>

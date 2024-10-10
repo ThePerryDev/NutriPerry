@@ -1,4 +1,4 @@
-import AbrindoApp from "./Abrindo/tela_abrindo";
+import AbrindoApp from "./abrindo/tela_abrindo";
 import AdicionarAlimento from "./AddAlimento/AdicionarAlimento/AdicionarAlimento";
 import CadastrarAlimento from "./AddAlimento/CadastrarAlimento/CadastrarAlimento";
 import ErroAlimento from "./AddAlimento/ErroAlimento/ErroAlimento";
@@ -20,7 +20,7 @@ import Lanches from "./Dietas/Lanches/Lanches";
 import MenuDietas from "./Dietas/MenuDietas/MenuDietas";
 import MonitorCalorico from "./Dietas/MonitorCalorico/MonitorCalorico";
 import Home from "./Home/Home";
-import TelaLogin from "./Login/Login";
+import TelaLogin from "./login/Login";
 import Configuracoes from "./Configuracoes/perfil_pessoal/tela_config_principal/Configuracoes";
 import Informacoes from "./Configuracoes/perfil_pessoal/tela_config_troca_info/Informacoes";
 import Senha from "./Configuracoes/perfil_pessoal/tela_config_senha/Senha";

@@ -4,13 +4,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FBFBFB",
-    padding: 50,
+    padding:30,
   },
   headerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 20,
     marginBottom: 20,
     marginTop: 20,
   },
@@ -19,10 +18,10 @@ const styles = StyleSheet.create({
     height: 30,
   },
   headerlabel: {
+    alignItems:"center",
     fontSize: 20,
     fontWeight: "bold",
     color: "#2C4B4E",
-    alignItems: "flex-end",
   },
   imagecontainer: {
     alignItems: "center",
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   image: {
-    width: 300,
+    width: 250,
     height: 250,
     resizeMode: "contain",
   },
@@ -39,6 +38,7 @@ const styles = StyleSheet.create({
     marginTop: 13,
     marginBottom: 13,
     color: "#2C4B4E",
+    textAlign: "center",
   },
   pickerContainer: {
     height: 68,
@@ -48,14 +48,18 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "#ffffff",
     justifyContent: "center",
+    marginBottom: 10,
+    alignItems: "center",
   },
   picker: {
     fontSize: 16,
     height: 68,
     color: "#2C4B4E",
+    alignItems:"center"
   },
   buttoncontainer: {
-    marginTop: 35,
+    marginTop: 25,
+    alignItems: "center",
   },
 });
 

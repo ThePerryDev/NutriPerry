@@ -21,14 +21,14 @@ const CadastroNome: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cima}>
+      <View style={styles.headerContainer}>
         <TouchableOpacity
-          style={styles.volta}
+          style={styles.arrow}
           onPress={() => navigation.navigate("TelaLogin")}
         >
-          <Image source={setaVolta} />
+          <Image source={setaVolta} style={styles.arrow} />
         </TouchableOpacity>
-        <Text style={{ fontSize: 20 }}>(1/5)</Text>
+        <Text style={styles.headerlabel}>(2/5)</Text>
       </View>
       <Image source={image01} style={styles.image} resizeMode="contain" />
       <Text style={styles.textgeral}>Insira o seu primeiro nome</Text>

@@ -18,47 +18,22 @@ type Props = {
 };
 
 const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
-  const auth = useContext(AuthContext);
   const [height, setHeight] = useState<string>("");
   const [weight, setWeight] = useState<string>("");
 
-  const handleRegister = async () => {
-    if (height && weight) {
-      const heightNumber = parseFloat(height); // Convertendo o valor de altura para número
-      const weightNumber = parseFloat(weight); // Convertendo o valor de peso para número
-      const birthdate = new Date(2020, 1, 2);
-
-      if (!isNaN(heightNumber) && !isNaN(weightNumber)) {
-        await user.post({
-          height: heightNumber,
-          weight: weightNumber,
-          email: "",
-          password: "",
-          name: "",
-          activityLevel: "sedentario",
-          gender: "masculino",
-          goal: "perda de peso",
-          birthdate: birthdate,
-          isLogged: false,
-        });
-      } else {
-        alert("Insira valores numéricos válidos");
-      }
-    } else {
-      alert("Preencha todos os campos");
-    }
-  };
-
   return (
     <View style={styles.container}>
-      <View style={styles.cima}>
-        <TouchableOpacity style={styles.volta} onPress={() => navigation.navigate("CadastroSexoIdade")}>
-          <Image source={setaVolta} />
-        </TouchableOpacity>
-        <Text style={{ fontSize: 20 }}>(4/5)</Text>
-      </View>
+      <View style={styles.headerContainer}>
+          <TouchableOpacity
+            style={styles.arrow}
+            onPress={() => navigation.navigate("CadastroSexoIdade")}
+          >
+            <Image source={setaVolta} style={styles.arrow} />
+          </TouchableOpacity>
+          <Text style={styles.headerlabel}>(4/5)</Text>
+        </View>
       <Image source={imagem4} style={styles.image} resizeMode="contain" />
-      <Text style={styles.textgeral}>Insira seu altura</Text>
+      <Text style={styles.textgeral}>Insira sua altura</Text>
       <TextInput
         value={height}
         onChangeText={(height) => setHeight(height)}

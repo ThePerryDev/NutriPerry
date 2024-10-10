@@ -5,11 +5,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FBFBFB',
-    padding: 50,
+    padding: 40,
   },
   headerContainer: {
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 5,
   },
   headerlabel: {
     fontSize: 45,
@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
   },
   imagecontainer: {
     alignItems: "center",
-    marginTop: 40,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 5,
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 200,
+    height: 200,
     resizeMode: "contain",
   },
   inputcontainer: {
