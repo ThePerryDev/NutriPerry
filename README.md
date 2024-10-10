@@ -8,7 +8,7 @@
     <a href="#metricas">Métricas do time</a> &nbsp |&nbsp &nbsp
 </p>
 
-O projeto constitui na construção de uma aplicação mobile que auxilie o monitoramento da dieta de um usuário através da inserção de consumo e gastos calóricos. Com base nessa estruturação a sprint 02 consistiu em horas voltadas para .
+O projeto constitui na construção de uma aplicação mobile que auxilie o monitoramento da dieta de um usuário através da inserção de consumo e gastos calóricos. Com base nessa estruturação a sprint 02 consistiu em horas voltadas para o desenvolvimento de mais telas do aplicativo e criação de mais informações no banco de dados, assim como melhoria no estilo das telas.
 
 [LINK DE APRESENTAÇÃO DA SPRINT 02](https://youtu.be/mZhYl-Wf9Bk)
 
@@ -17,11 +17,14 @@ O projeto constitui na construção de uma aplicação mobile que auxilie o moni
 ## :dart: Objetivos da Sprint
 Os requisitos (funcionais e não funcionais) abrangidos por essa sprint são:
 - RF 01: Cadastro do usuário na plataforma
-- RF 02: Gerenciar as calorias ingeridas informando o alimento consumido
+- RF 03: Cadastro de novos alimentos
+- RF 05: Registrar refeições e adicionar itens nelas
+- RF 07: Registrar atividades físicas
 - RNF 09: Documentação e gerenciamento no GitHub
 - RNF 10: Processo Scrum
 - RNF 11: Back-end: TypeScript e Node.js
 - RNF 12: Front-end: React Native, TypeScript
+- RNF 13: Armazenamento: SGBD MongoDB
 
 
 → [Voltar ao topo](#topo)
@@ -31,33 +34,30 @@ Os requisitos (funcionais e não funcionais) abrangidos por essa sprint são:
         
 ## :heavy_check_mark: Entregas
 
-### Levantamento de requisitos
+### Cadastro de usuário na plataforma
 
-O levantamento de requisitos desse projeto foi realizado através de pesquisas de mercado, onde todos do grupo se juntaram para dar ideias de como contruir nosso produto, a partir disso criou-se o User Stories e classificando-os em requisitos funcionais e não funcionais (tabelas todas se encontram no tópico [**Backlogs**](#backlogs) do readme principal deste repositório). Além da organização dos requisitos em cada sprint, gerando o Sprint Backlog.
-
-
-→ [Voltar ao topo](#topo)
-
-
-### Modelagem do Banco de Dados
-
-A partir do levantamento de requisitos, foi criado uma modelagem do banco de dados para que facilite no momento da implementação do nosso projeto.
-
+Nessa sprint conseguimos realizar o cadastro do usuário no banco de dados utilizando uma extensão do Visual Studio Code, chamada Thunder Client, que permite a realização de testes que conferem se os dados estão sendo salvos no banco de dados. Com esses testes foi possível constar que estava tudo em ordem, faltando apenas integrar com as telas de cadastro.
 
 → [Voltar ao topo](#topo)
 
 
-### Elaboração do wireframe(identidade visual e design do sistema)
+### Cadastro de novos alimentos
 
-Como proposta para solucionar o projeto requisitado de uma aplicação mobile para o monitoramento dos ganhos e gastos calóricos, foi realizado o seguinte wireframe do nosso produto:
-
-<p align="center"><img src="images/Wireframe - NutriPerry.PNG" /><p>
-
+Também entregamos a possibilidade do usuário cadastrar alimentos em seu banco de dados, tanto pela API Open Food Facts, quanto pelo banco de dados chamado TACO. Esse também foi testado pela extensão Thunder Client e está funcionando corretamente.
 
 → [Voltar ao topo](#topo)
 
-### Criação das Tabelas e Base do Front-End
-Com toda a pesquisa inicial desenvolvida, somado ao modelo do banco de dados fornecido pelo cliente e ao wireframe proposto, foram desenvolvidas as tabelas de USERS, com a intenção de gestores registrarem novos usuários no sistema, juntamente com a Base do Front-End, de forma que o cliente possa visualizar, mesmo que de forma bastante simplificada, como o sistema da plataforma da empresa irá funcionar.
+
+### Registrar refeições e adicionar itens nelas
+
+Nessa entrega realizamos a parte visual da tela para registrar as refeições, com botões, locais para inserir os dados e a navegação dessa página com as outras, assim como a integração com o banco de dados.
+
+→ [Voltar ao topo](#topo)
+
+
+### Registrar atividades físicas
+
+Assim como no tópico anterior, nessa entrega realizamos a parte visual da tela de registro de atividades físicas e criamos a tabela no banco de dados que será registrado esses dados, porém ainda não concluimos a integração da parte visual com o banco de dados.
 
 
 Sendo assim, finalizamos os requisitos propostos para esta sprint.
@@ -68,7 +68,7 @@ Sendo assim, finalizamos os requisitos propostos para esta sprint.
  <span id="metricas">
      
 ## :chart_with_upwards_trend: Métricas do time
-Em prol de um melhor aproveitamento do tempo disponível durante a primeira sprint o time se dividiu em atividades como: planejamento, brieffing, estruturação do GitHub, criação do product backlog, sprint backlog, pesquisa e elaboração do design e da Identidade Visual, criação do wireframe e layout do site, assim como estruturação da equipe para gestão das horas com o gráfico burndown.
+Em prol de um melhor aproveitamento do tempo disponível durante a segunda sprint o time se dividiu em atividades como: Cadastro de usuário na plataforma, cadastro de novos alimentos, documentação do GitHub, registro refeições e adicionar itens nelas e registro de atividades físicas, assim como estruturação da equipe para gestão das horas com o gráfico burndown.
     
 <p align="center"><img src="images/burndown_sp1.png" /></p>
     
