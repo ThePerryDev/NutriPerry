@@ -134,6 +134,8 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     { label: "litro (L)", value: "litro" },
   ];
 
+// AVALIAR O METODO CREATE COM PROBLEMA
+
   // Função para cadastrar o consumo
   const cadastrarConsumo = async () => {
     const consumoData = {
