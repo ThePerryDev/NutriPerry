@@ -70,7 +70,7 @@ Sendo assim, finalizamos os requisitos propostos para esta sprint.
 ## :chart_with_upwards_trend: Métricas do time
 Em prol de um melhor aproveitamento do tempo disponível durante a segunda sprint o time se dividiu em atividades como: Cadastro de usuário na plataforma, cadastro de novos alimentos, documentação do GitHub, registro refeições e adicionar itens nelas e registro de atividades físicas, assim como estruturação da equipe para gestão das horas com o gráfico burndown.
     
-<p align="center"><img src="images/burndown_sp1.png" /></p>
+<p align="center"><img src="images/burndown_sp2.png" /></p>
     
 
 
