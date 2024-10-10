@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import { User } from "../../types/User";
+import { UsersProps } from "../../types/index";
 
 export type AuthConextType = {
     // se houver usuário, usa o types do user. Caso contrário não tem tipo
-    user: User | null;
+    user: UsersProps | null;
     signin: (email: string, password: string) => Promise<boolean>;
     signout: () => void;
 }

@@ -7,6 +7,7 @@ export interface UsersProps {
   id: string;
   email: string;
   password: string;
+  activityLevel: 'sedentario' | 'pouco ativo' | 'ativo' | 'muito ativo';
   name: string;
   nickname: string;
   height: number; // em cm

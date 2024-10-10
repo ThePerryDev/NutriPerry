@@ -50,6 +50,10 @@ class UsersService {
     return data;
   }
 
+  async delete(id: string) {
+    return await api.delete(`/user/${id}`);
+  }
+
   // Nova função para registrar um novo usuário
   async register(props: {
     email: string;
