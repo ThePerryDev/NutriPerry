@@ -127,12 +127,14 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     ['Sal', sodium, calculatedValues.sodium],
   ];
 
-  const UnityOptions = [
+  const MealOption = [
     { label: "", value: "" },
-    { label: "grama (g)", value: "grama" },
-    { label: "kilograma (kg)", value: "kilo" },
-    { label: "mililitro (ml)", value: "ml" },
-    { label: "litro (L)", value: "litro" },
+    { label: "refeição 1", value: "refeição 1" },
+    { label: "refeição 2", value: "refeição 2" },
+    { label: "refeição 3", value: "refeição 3" },
+    { label: "refeição 4", value: "refeição 4" },
+    { label: "refeição 4", value: "refeição 5" },
+    { label: "refeição 4", value: "refeição 6" },
   ];
 
 // AVALIAR O METODO CREATE COM PROBLEMA
@@ -142,7 +144,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     const consumoData = {
       user: '67074140dbf77240420381b1', // Coloque aqui o ID do usuário correto
       data: new Date(),
-      tipoRefeicao: 'refeição 1', // Ajuste conforme necessário
+      tipoRefeicao: selectUnit, // Ajuste conforme necessário
       nomeAlimento: productName,
       kcal: Number(calculatedValues.kcal),
       proteina: Number(calculatedValues.protein),
@@ -176,10 +178,10 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
       <Text style={styles.explanation}>Selecione a unidade que vai consumir e insira a quantidade a consumir</Text>
       <View>
         <UnidadePicker
-          label="Unidade:"
+          label="Dieta:"
           selectedValue={selectUnit}
           onValueChange={(itemValue) => setSelectUnit(itemValue)}
-          items={UnityOptions}
+          items={MealOption}
         />
         <View style={styles.quantitycontainer}>
           <Text style={styles.textgeral}>Quantidade:</Text>
