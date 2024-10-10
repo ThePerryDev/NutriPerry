@@ -19,7 +19,7 @@ A partir da apresentação do desafio dado pela empresa FATEC, a solução apres
 
 > _Projeto baseado na metodologia ágil, utilizando o Framework SCRUM, procurando desenvolver a Proatividade, Autonomia, Colaboração e Entrega de Resultados dos envolvidos_
 
-:pushpin: Status do Projeto: [**Em Andamento**](https://github.com/ThePerryDev/NutriPerry/tree/sp1/develop) :on:
+:pushpin: Status do Projeto: [**Em Andamento**](https://github.com/ThePerryDev/NutriPerry/tree/sp2-develop) :on:
 
 ### Entregas de Sprints
 
