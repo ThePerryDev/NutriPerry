@@ -2,11 +2,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
 import {CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, FormExercicio, } from "./src/screen";
+import { ConsumoCaloricoProvider } from "./src/context";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
+    <ConsumoCaloricoProvider>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="AbrindoApp">
         <Stack.Screen
@@ -171,6 +173,7 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </ConsumoCaloricoProvider>
   );
 }
 

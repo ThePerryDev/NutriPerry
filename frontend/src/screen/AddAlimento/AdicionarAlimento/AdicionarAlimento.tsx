@@ -11,7 +11,7 @@ import UnidadePicker from "../../../components/Cadastro/PickerAlimentos/pickeral
 import SaveButton from "../../../components/Cadastro/Salvar/botaosalvar";
 import { AlimentoTaco, NutritionalValues, Product } from "../../../types"; 
 import useConsumoCalorico from '../../../hooks/useConsumoCalorico'; // Importando o hook
-import { ConsumoCaloricoContext } from "../../../context/ConsumoCaloricoContext";
+import { ConsumoCaloricoContext, ConsumoCaloricoProvider } from "../../../context";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<RootStackParamList, "AdicionarAlimento">;
 
@@ -27,10 +27,11 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
   // Obtendo o produto passado pela navegação
   const product = route.params?.product as AlimentoTaco | Product | undefined;
 
-  // Usando o hook do contexto
- // const { create } = useConsumoCalorico();
-
+  //usando context
   const { create } = useContext(ConsumoCaloricoContext);
+
+  //const { create } = useContext(ConsumoCaloricoContext);
+  console.log("Função create do contexto:", create);
 
   const getNutritionalData = () => {
     if (!product) {
@@ -139,7 +140,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
   // Função para cadastrar o consumo
   const cadastrarConsumo = async () => {
     const consumoData = {
-      user: '67071a3cbe2a58549ac679ce', // Coloque aqui o ID do usuário correto
+      user: '67074140dbf77240420381b1', // Coloque aqui o ID do usuário correto
       data: new Date(),
       tipoRefeicao: 'refeição 1', // Ajuste conforme necessário
       nomeAlimento: productName,
@@ -164,6 +165,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
   };
 
   return (
+    
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("PesquisaAlimento")}>
@@ -196,9 +198,11 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
           <Rows data={tableData} style={styles.row} textStyle={styles.text} />
         </Table>
       </View>
+      <ConsumoCaloricoProvider>
       <View style={styles.savebuttoncontainer}>
         <SaveButton onPress={cadastrarConsumo} />
       </View>
+       </ConsumoCaloricoProvider>
       <MenuInferior navigation={navigation} />
     </View>
   );
