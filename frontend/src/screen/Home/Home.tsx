@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import Styles from "./Styles";
-import { Configuração, Perfil, Receitas, TelaInicial } from "../../assets";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/rootStack";
 import MenuInferior from "../../components/MenuInferior/MenuInferior";
+import Checkbox from "expo-checkbox";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -16,7 +16,19 @@ type Props = {
   navigation: ContinuarScreenNavigationProp;
 };
 
+const meals = ["Café da Manhã", "Almoço", "Jantar", "Lanches"];
+
 const Home: React.FC<Props> = ({ navigation }) => {
+  // Estado para rastrear o checkbox de cada refeição
+  const [checkedItems, setCheckedItems] = useState<boolean[]>(Array(meals.length).fill(false));
+
+  // Função para alterar o estado de um checkbox específico
+  const handleCheckboxChange = (index: number) => {
+    const updatedCheckedItems = [...checkedItems];
+    updatedCheckedItems[index] = !updatedCheckedItems[index];
+    setCheckedItems(updatedCheckedItems);
+  };
+
   return (
     <View style={Styles.container}>
       <Text style={Styles.header}>Hoje</Text>
@@ -37,9 +49,14 @@ const Home: React.FC<Props> = ({ navigation }) => {
         </View>
       </View>
       <ScrollView>
-        {["Café da Manhã", "Almoço", "Jantar", "Lanches"].map((meal, index) => (
+        {meals.map((meal, index) => (
           <View key={index} style={Styles.mealItem}>
-            <MaterialIcons name={"check-box-outline-blank"} size={24} />
+            <Checkbox
+              style={Styles.checkbox}
+              value={checkedItems[index]}
+              onValueChange={() => handleCheckboxChange(index)}
+              color={checkedItems[index] ? Styles.checkbox.color : undefined}
+            />
             <View style={Styles.mealInfo}>
               <Text style={Styles.mealName}>{meal}</Text>
               <Text style={Styles.mealDetail}>Sem cardápio cadastrado</Text>
@@ -56,18 +73,3 @@ const Home: React.FC<Props> = ({ navigation }) => {
 };
 
 export default Home;
-
-/*<View style={Styles.MenuInferior}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Image source={TelaInicial} style={Styles.logo} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("SeusExercicios")}>
-          <Image source={Receitas} style={Styles.logo} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={Perfil} style={Styles.logo} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={Configuração} style={Styles.logo} />
-        </TouchableOpacity>
-      </View>*/

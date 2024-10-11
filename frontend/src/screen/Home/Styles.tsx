@@ -93,6 +93,10 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
+  checkbox: {
+    margin: 8,
+    color:"#24B77F",
+  },
 });
 
 export default styles;
