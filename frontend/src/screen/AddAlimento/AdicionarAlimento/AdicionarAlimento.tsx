@@ -12,6 +12,7 @@ import SaveButton from "../../../components/Cadastro/Salvar/botaosalvar";
 import { AlimentoTaco, NutritionalValues, Product } from "../../../types"; 
 import useConsumoCalorico from '../../../hooks/useConsumoCalorico'; // Importando o hook
 import { ConsumoCaloricoContext, ConsumoCaloricoProvider } from "../../../context";
+import moment from "moment";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<RootStackParamList, "AdicionarAlimento">;
 
@@ -155,12 +156,10 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
 
   const MealOption = [
     { label: "", value: "" },
-    { label: "refeição 1", value: "refeição 1" },
-    { label: "refeição 2", value: "refeição 2" },
-    { label: "refeição 3", value: "refeição 3" },
-    { label: "refeição 4", value: "refeição 4" },
-    { label: "refeição 4", value: "refeição 5" },
-    { label: "refeição 4", value: "refeição 6" },
+    { label: "Café da Manhã", value: "cafe_da_manha" },
+    { label: "Almoço", value: "almoco" },
+    { label: "Jantar", value: "jantar" },
+    { label: "Lanches", value: "lanches" },
   ];
 
 // AVALIAR O METODO CREATE COM PROBLEMA
@@ -169,7 +168,8 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
   const cadastrarConsumo = async () => {
     const consumoData = {
       user: '67074140dbf77240420381b1', // Coloque aqui o ID do usuário correto
-      data: new Date(),
+      data: moment.utc().format("YYYY-MM-DD"),
+      //data: Date(),
       tipoRefeicao: selectUnit, // Ajuste conforme necessário
       nomeAlimento: productName,
       kcal: Number(calculatedValues.kcal),

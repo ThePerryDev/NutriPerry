@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import ConsumoCaloricoModel from '../models/ConsumoCaloricoModel';
 import axios from 'axios'; // Adicione axios para fazer chamadas HTTP
+import moment from 'moment';
 
 class ConsumoCaloricoController {
   // Criar um novo consumo calórico
@@ -8,8 +9,11 @@ class ConsumoCaloricoController {
   async create(req: Request, res: Response): Promise<Response> { 
     console.log('Dados recebidos:', req.body); // Adicione esta linha para verificar os dados recebidos
     try {
-      let { user, data, tipoRefeicao, nomeAlimento, kcal, proteina, carboidrato, peso, acucar } = req.body;
-  
+      let { user, tipoRefeicao, nomeAlimento, kcal, proteina, carboidrato, peso, acucar } = req.body;
+      
+      const data = moment.utc().format("YYYY-MM-DD")
+      console.log(data)
+
       kcal = kcal? kcal : 0;
       acucar = acucar? acucar : 0;
       proteina = proteina? proteina : 0;

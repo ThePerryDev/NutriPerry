@@ -27,7 +27,7 @@ export interface Error {
 export interface ConsumoCaloricoProps {
   id?: string; // Opcional caso não tenha durante a criação
   user: string;
-  data: Date;
+  data: string;
   tipoRefeicao: string;
   nomeAlimento: string;
   kcal: number;
