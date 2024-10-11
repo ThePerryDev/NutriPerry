@@ -4,7 +4,9 @@ import ConsultaConsumoController from '../controller/ConsultaConsumoController';
 
 const router = Router();
 
-router.get('/', ConsultaConsumoController.listarConsumos);
+router.get('/listarconsumo', ConsultaConsumoController.listarConsumos);
+router.get('/alimento', ConsultaConsumoController.listAlimentoRefeicao);
+router.get('/totalkcal', ConsultaConsumoController.listTotalKcal);
 //router.delete('/consumos/:id', ConsultaConsumoController.deletarConsumo);
 
 export default router;
