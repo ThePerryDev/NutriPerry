@@ -11,7 +11,7 @@ class ConsumoCaloricoController {
     try {
       let { user, tipoRefeicao, nomeAlimento, kcal, proteina, carboidrato, peso, acucar } = req.body;
       
-      const data = moment.utc().format("YYYY-MM-DD")
+      const data = moment().format("YYYY-MM-DD")
       console.log(data)
 
       kcal = kcal? kcal : 0;

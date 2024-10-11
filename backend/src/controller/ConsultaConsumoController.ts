@@ -10,22 +10,38 @@ class ConsultaConsumoController {
     // Logando os parâmetros recebidos
     console.log('Parâmetros recebidos:', { userId, data, tipoRefeicao });
 
-        const dataFormatada = moment(data).format("YYYY-MM-DD")
+    const dataFormatada = moment(data).format("YYYY-MM-DD");
 
     try {
       const resultados = await ConsumoCaloricoModel.find({
-        user:userId,
-        tipoRefeicao:tipoRefeicao,
-        data: dataFormatada
-      })
-      // Logando o resultado da agregação
+        user: userId,
+        tipoRefeicao: tipoRefeicao,
+        data: dataFormatada,
+      });
+
+      // Logando os resultados encontrados
       console.log('Resultados da agregação:', resultados);
 
       if (resultados.length === 0) {
         return res.status(404).json({ message: 'Nenhum consumo encontrado.' });
       }
 
-      return res.status(200).json(resultados[0]);
+      // Somar os campos desejados
+      const totalKcal = resultados.reduce((acc, curr) => acc + curr.kcal, 0);
+      const totalProteina = resultados.reduce((acc, curr) => acc + curr.proteina, 0);
+      const totalCarboidrato = resultados.reduce((acc, curr) => acc + curr.carboidrato, 0);
+      const totalPeso = resultados.reduce((acc, curr) => acc + curr.peso, 0);
+      const totalAcucar = resultados.reduce((acc, curr) => acc + curr.acucar, 0);
+
+      // Responder com os totais e os alimentos
+      return res.status(200).json({
+        alimentos: resultados.map((consumo) => consumo.nomeAlimento),
+        totalKcal,
+        totalProteina,
+        totalCarboidrato,
+        totalPeso,
+        totalAcucar,
+      });
     } catch (error) {
       console.error('Erro ao listar consumos:', error);
       return res.status(500).json({ message: 'Erro ao listar consumos.', error });
