@@ -5,11 +5,11 @@ import moment from 'moment';
 class ConsultaConsumoController {
   // Método para listar os consumos de calorias
   async listarConsumos(req: Request, res: Response) {
-    const { userId, data, tipoRefeicao } = req.body;
+    const { userId, data, tipoRefeicao } = req.query;
 
     console.log('Parâmetros recebidos:', { userId, data, tipoRefeicao });
 
-    const dataFormatada = moment(data).format("YYYY-MM-DD");
+    const dataFormatada = moment(data as string).format("YYYY-MM-DD");
 
     try {
       const resultados = await ConsumoCaloricoModel.find({
@@ -46,11 +46,11 @@ class ConsultaConsumoController {
 
   // Método para listar o total de calorias
   async listTotalKcal(req: Request, res: Response) {
-    const { userId, data } = req.body;
+    const { userId, data } = req.query;
 
     console.log('Parâmetros recebidos para totalKcal:', { userId, data });
 
-    const dataFormatada = moment(data).format("YYYY-MM-DD");
+    const dataFormatada = moment(data as string).format("YYYY-MM-DD");
 
     try {
       const resultados = await ConsumoCaloricoModel.find({
@@ -73,46 +73,46 @@ class ConsultaConsumoController {
     }
   }
 
-  // Método para listar alimentos por refeição
-  async listAlimentoRefeicao(req: Request, res: Response) {
-    const { userId, data, tipoRefeicao } = req.body;
-  
-    console.log('Parâmetros recebidos para listAlimentoRefeicao:', { userId, data, tipoRefeicao });
-  
-    const dataFormatada = moment(data).format("YYYY-MM-DD");
-  
-    try {
+// Método para listar alimentos por refeição
+async listAlimentoRefeicao(req: Request, res: Response) {
+  const { userId, data, tipoRefeicao } = req.query; // Alterado para pegar da query
+
+  console.log('Parâmetros recebidos para listAlimentoRefeicao:', { userId, data, tipoRefeicao });
+
+  const dataFormatada = moment(data as string).format("YYYY-MM-DD");
+
+  try {
       const resultados = await ConsumoCaloricoModel.find({
-        user: userId,
-        tipoRefeicao: tipoRefeicao,
-        data: dataFormatada,
+          user: userId,
+          tipoRefeicao: tipoRefeicao,
+          data: dataFormatada,
       });
-  
+
       console.log('Resultados para listAlimentoRefeicao:', resultados);
-  
+
       if (resultados.length === 0) {
-        return res.status(404).json({ message: 'Nenhum alimento encontrado para esta refeição.' });
+          return res.status(404).json({ message: 'Nenhum alimento encontrado para esta refeição.' });
       }
-  
-      // Define o tipo do acumulador como um objeto com chaves string e valores number
+
       const alimentos = resultados.reduce<Record<string, number>>((acc, curr) => {
-        const nome = curr.nomeAlimento;
-        const peso = curr.peso;
-  
-        if (!acc[nome]) {
-          acc[nome] = 0;
-        }
-        acc[nome] += peso;
-  
-        return acc;
+          const nome = curr.nomeAlimento;
+          const peso = curr.peso;
+
+          if (!acc[nome]) {
+              acc[nome] = 0;
+          }
+          acc[nome] += peso;
+
+          return acc;
       }, {});
-  
+
       return res.status(200).json(alimentos);
-    } catch (error) {
+  } catch (error) {
       console.error('Erro ao listar alimentos por refeição:', error);
       return res.status(500).json({ message: 'Erro ao listar alimentos por refeição.', error });
-    }
   }
+}
+
   
 
   // Método para deletar um alimento

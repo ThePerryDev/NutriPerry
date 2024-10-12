@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, FlatList, Image } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
@@ -6,6 +6,7 @@ import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import { setaVolta, Editar, Deletar } from "../../../assets";
 import styles from "./styles";
 import AddMealButton from "../../../components/Cadastro/AddAlimento/botaoaddalimento";
+import axios from "axios";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -17,25 +18,64 @@ type Props = {
 };
 
 type Produto = {
-  id: number;
+  id: string;
   nome: string;
-  quantidade: string;
+  quantidade: number;
 };
 
-const produtos: Produto[] = [
-  { id: 1, nome: "Ovos", quantidade: "2" },
-  { id: 2, nome: "Pão Integral", quantidade: "2" },
-  { id: 3, nome: "Café", quantidade: "1" },
-];
-
 const CafedaManha: React.FC<Props> = ({ navigation }) => {
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+  const [totalKcal, setTotalKcal] = useState<number>(0);
+  const [totalProteina, setTotalProteina] = useState<number>(0);
+  const [totalCarboidrato, setTotalCarboidrato] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchAlimentos = async () => {
+      try {
+        // Requisição para listar os alimentos por refeição
+        const responseAlimentos = await axios.get("http://localhost:3000/consumos/alimento", {
+          params: {
+            userId: "67074140dbf77240420381b1", // Substitua pelo ID do usuário
+            data: "2024-10-12", // Data no formato esperado (AAAA-MM-DD)
+            tipoRefeicao: "cafe_da_manha" // Ajuste conforme necessário
+          }
+        });
+
+        const alimentos = Object.entries(responseAlimentos.data).map(([nome, peso]) => ({
+          id: nome, // Utilize o nome como ID temporário
+          nome,
+          quantidade: peso as number,
+        }));
+        setProdutos(alimentos);
+
+        // Requisição para obter os totais de nutrientes
+        const responseTotais = await axios.get("http://localhost:3000/consumos/listarconsumo", {
+          params: {
+            userId: "67074140dbf77240420381b1",
+            data: "2024-10-12",
+            tipoRefeicao: "cafe_da_manha"
+          }
+        });
+
+        setTotalKcal(responseTotais.data.totalKcal);
+        setTotalProteina(responseTotais.data.totalProteina);
+        setTotalCarboidrato(responseTotais.data.totalCarboidrato);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    };
+
+    fetchAlimentos();
+  }, []);
+
   const renderItem = ({ item }: { item: Produto }) => (
     <View style={styles.row}>
       <Text style={styles.alimento}>{item.nome}</Text>
       <Text style={styles.quantidade}>{item.quantidade}</Text>
-      <TouchableOpacity 
-        style={styles.botao} 
-        onPress={() => navigation.navigate("AdicionarAlimento", { product: item })}>
+      <TouchableOpacity
+        style={styles.botao}
+        //onPress={() => navigation.navigate("AdicionarAlimento", { product: item })}
+      >
         <Image source={Editar} style={styles.icone} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.botao} onPress={() => console.log("Deletar", item.id)}>
@@ -71,27 +111,25 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
         <View>
           <Text style={styles.datatext}>Calorias</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>-</Text>
+            <Text style={styles.datainfo}>{totalKcal}</Text>
           </View>
         </View>
         <View>
           <Text style={styles.datatext}>Proteínas</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>-</Text>
+            <Text style={styles.datainfo}>{totalProteina}</Text>
           </View>
         </View>
         <View>
           <Text style={styles.datatext}>Carboidratos</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>-</Text>
+            <Text style={styles.datainfo}>{totalCarboidrato}</Text>
           </View>
         </View>
       </View>
-
       <View style={styles.AddMealButtoncontainer}>
         <AddMealButton onPress={() => navigation.navigate("PesquisaAlimento")} />
       </View>
-
       <MenuInferior navigation={navigation} />
     </View>
   );
