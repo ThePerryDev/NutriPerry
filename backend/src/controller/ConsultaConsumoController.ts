@@ -75,7 +75,7 @@ class ConsultaConsumoController {
 
 // Método para listar alimentos por refeição
 async listAlimentoRefeicao(req: Request, res: Response) {
-  const { userId, data, tipoRefeicao } = req.query; // Alterado para pegar da query
+  const { userId, data, tipoRefeicao } = req.query;
 
   console.log('Parâmetros recebidos para listAlimentoRefeicao:', { userId, data, tipoRefeicao });
 
@@ -94,17 +94,12 @@ async listAlimentoRefeicao(req: Request, res: Response) {
           return res.status(404).json({ message: 'Nenhum alimento encontrado para esta refeição.' });
       }
 
-      const alimentos = resultados.reduce<Record<string, number>>((acc, curr) => {
-          const nome = curr.nomeAlimento;
-          const peso = curr.peso;
-
-          if (!acc[nome]) {
-              acc[nome] = 0;
-          }
-          acc[nome] += peso;
-
-          return acc;
-      }, {});
+      // Ajuste para incluir _id, nomeAlimento e peso no retorno
+      const alimentos = resultados.map((consumo) => ({
+          _id: consumo._id,
+          nome: consumo.nomeAlimento,
+          peso: consumo.peso,
+      }));
 
       return res.status(200).json(alimentos);
   } catch (error) {
@@ -112,6 +107,7 @@ async listAlimentoRefeicao(req: Request, res: Response) {
       return res.status(500).json({ message: 'Erro ao listar alimentos por refeição.', error });
   }
 }
+
 
   
 
