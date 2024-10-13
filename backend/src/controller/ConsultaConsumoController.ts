@@ -113,10 +113,10 @@ async listAlimentoRefeicao(req: Request, res: Response) {
 
   // Método para deletar um alimento
   async deletarConsumo(req: Request, res: Response) {
-    const { id } = req.params;
+    const { _id } = req.query;
 
     try {
-      const resultado = await ConsumoCaloricoModel.findByIdAndDelete(id);
+      const resultado = await ConsumoCaloricoModel.findByIdAndDelete(_id);
 
       if (!resultado) {
         return res.status(404).json({ message: 'Consumo não encontrado.' });
