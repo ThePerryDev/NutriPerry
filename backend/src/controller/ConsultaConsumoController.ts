@@ -75,7 +75,7 @@ class ConsultaConsumoController {
 
 // Método para listar alimentos por refeição
 async listAlimentoRefeicao(req: Request, res: Response) {
-  const { userId, data, tipoRefeicao } = req.query;
+  const { userId, data, tipoRefeicao } = req.query; // Alterado para pegar da query
 
   console.log('Parâmetros recebidos para listAlimentoRefeicao:', { userId, data, tipoRefeicao });
 
@@ -94,12 +94,17 @@ async listAlimentoRefeicao(req: Request, res: Response) {
           return res.status(404).json({ message: 'Nenhum alimento encontrado para esta refeição.' });
       }
 
-      // Ajuste para incluir _id, nomeAlimento e peso no retorno
-      const alimentos = resultados.map((consumo) => ({
-          _id: consumo._id,
-          nome: consumo.nomeAlimento,
-          peso: consumo.peso,
-      }));
+      const alimentos = resultados.reduce<Record<string, number>>((acc, curr) => {
+          const nome = curr.nomeAlimento;
+          const peso = curr.peso;
+
+          if (!acc[nome]) {
+              acc[nome] = 0;
+          }
+          acc[nome] += peso;
+
+          return acc;
+      }, {});
 
       return res.status(200).json(alimentos);
   } catch (error) {
@@ -108,25 +113,25 @@ async listAlimentoRefeicao(req: Request, res: Response) {
   }
 }
 
-// Método para deletar um alimento
-async deletarConsumo(req: Request, res: Response) {
-  const { _id } = req.body;
-  console.log('Tentando deletar o consumo com ID:', _id); // Adicione isto para depuração
+  
 
-  try {
-    const resultado = await ConsumoCaloricoModel.findByIdAndDelete(_id);
-
-    if (!resultado) {
-      return res.status(404).json({ message: 'Consumo não encontrado.' });
+  // Método para deletar um alimento
+  async deletarConsumo(req: Request, res: Response) {
+    const { _id } = req.body;
+    console.log('Tentando deletar o consumo com ID:', _id); // Adicione isto para depuração
+  
+    try {
+      const resultado = await ConsumoCaloricoModel.findByIdAndDelete(_id);
+  
+      if (!resultado) {
+        return res.status(404).json({ message: 'Consumo não encontrado.' });
+      }
+  
+      return res.status(200).json({ message: 'Consumo deletado com sucesso.' });
+    } catch (error) {
+      return res.status(500).json({ message: 'Erro ao deletar consumo.', error });
     }
-
-    return res.status(200).json({ message: 'Consumo deletado com sucesso.' });
-  } catch (error) {
-    return res.status(500).json({ message: 'Erro ao deletar consumo.', error });
   }
-}
-
-
 }
 
 export default new ConsultaConsumoController();
