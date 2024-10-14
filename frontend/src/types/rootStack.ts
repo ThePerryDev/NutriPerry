@@ -37,5 +37,6 @@ export type RootStackParamList = {
     SeusExercicios: undefined;
     NewExercicise: undefined;
     MenuInferior: undefined;
+    ConsumoAgua:undefined;
 }
 

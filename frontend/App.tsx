@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
-import { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, NewExercicise, } from "./src/screen";
+import { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, NewExercicise, ConsumoAgua, } from "./src/screen";
 import { ConsumoCaloricoProvider } from "./src/context";
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -169,6 +169,11 @@ export default function App() {
           <Stack.Screen
             name="TelaTrocaSenhaNutri"
             component={SenhaNutri}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ConsumoAgua"
+            component={ConsumoAgua}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
