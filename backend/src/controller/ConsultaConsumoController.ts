@@ -108,25 +108,25 @@ async listAlimentoRefeicao(req: Request, res: Response) {
   }
 }
 
+// Método para deletar um alimento
+async deletarConsumo(req: Request, res: Response) {
+  const { _id } = req.body;
+  console.log('Tentando deletar o consumo com ID:', _id); // Adicione isto para depuração
 
-  
+  try {
+    const resultado = await ConsumoCaloricoModel.findByIdAndDelete(_id);
 
-  // Método para deletar um alimento
-  async deletarConsumo(req: Request, res: Response) {
-    const { _id } = req.query;
-
-    try {
-      const resultado = await ConsumoCaloricoModel.findByIdAndDelete(_id);
-
-      if (!resultado) {
-        return res.status(404).json({ message: 'Consumo não encontrado.' });
-      }
-
-      return res.status(200).json({ message: 'Consumo deletado com sucesso.' });
-    } catch (error) {
-      return res.status(500).json({ message: 'Erro ao deletar consumo.', error });
+    if (!resultado) {
+      return res.status(404).json({ message: 'Consumo não encontrado.' });
     }
+
+    return res.status(200).json({ message: 'Consumo deletado com sucesso.' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro ao deletar consumo.', error });
   }
+}
+
+
 }
 
 export default new ConsultaConsumoController();
