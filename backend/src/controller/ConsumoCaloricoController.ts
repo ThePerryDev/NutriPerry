@@ -1,92 +1,87 @@
 import { Request, Response } from 'express';
-import ConsumoCalorico from '../models/ConsumoCaloricoModel'; // Ajuste o caminho conforme necessário
-import UserModel from '../models/UserModel';
-import axios from 'axios'; // Biblioteca para fazer requisições HTTP
+import ConsumoCaloricoModel from '../models/ConsumoCaloricoModel';
+import axios from 'axios'; // Adicione axios para fazer chamadas HTTP
 
 class ConsumoCaloricoController {
-
-  // Método para criar um novo registro de consumo calórico
-  public async create(req: Request, res: Response): Promise<Response> {
+  // Criar um novo consumo calórico
+  
+  async create(req: Request, res: Response): Promise<Response> { 
+    console.log('Dados recebidos:', req.body); // Adicione esta linha para verificar os dados recebidos
     try {
-      // Obtém o userID do usuário logado (presumindo que o middleware de autenticação já preenche req.user)
-      const userID = req.user?.id;
-      if (!userID) {
-        return res.status(401).json({ message: 'Usuário não autenticado.' });
+      let { user, data, tipoRefeicao, nomeAlimento, kcal, proteina, carboidrato, peso, acucar } = req.body;
+  
+      kcal = kcal? kcal : 0;
+      acucar = acucar? acucar : 0;
+      proteina = proteina? proteina : 0;
+      carboidrato = carboidrato? carboidrato : 0;
+
+      // Valide se todos os dados necessários foram fornecidos
+      if (!user || !tipoRefeicao || !nomeAlimento || !peso ) {
+        return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
       }
-      
-      const { data, refeicoes } = req.body;
-
-      // Valida se todos os campos obrigatórios estão presentes
-      if (!data || !refeicoes) {
-        return res.status(400).json({ message: 'Campos obrigatórios faltando.' });
-      }
-      
-      // Valida se o usuário existe
-      // No caso de autenticação baseada em JWT, é assumido que o usuário já foi validado e o userID é confiável
-      // Se necessário, você pode fazer uma verificação adicional, embora geralmente não seja necessário aqui
-      // const user = await User.findById(userID);
-      // if (!user) {
-      //   return res.status(404).json({ message: 'Usuário não encontrado.' });
-      // }
-
-      // Função para buscar detalhes do alimento
-      const obterDetalhesAlimento = async (nome: string) => {
-        try {
-          // Substitua pela URL da API externa que fornece as informações nutricionais
-          const response = await axios.get(`https://api.exemplo.com/alimentos/${encodeURIComponent(nome)}`); // VERIFICAR COMO SERÁ A INFORMAÇÃO VINDA DO FOOD FACTS
-          return response.data;
-        } catch (error) {
-          console.error('Erro ao buscar detalhes do alimento:', error);
-          throw new Error('Erro ao buscar detalhes do alimento.');
-        }
-      };
-      
-      // Processa as refeições e alimentos
-      const refeicoesComDetalhes = await Promise.all(
-        refeicoes.map(async (refeicao: any) => {
-          const alimentosComDetalhes = await Promise.all(
-            refeicao.alimentos.map(async (alimento: any) => {
-              if (!alimento.nome || !alimento.peso) {
-                throw new Error('Nome do alimento e peso são obrigatórios.');
-              }
-
-              const detalhes = await obterDetalhesAlimento(alimento.nome);
-
-              return {
-                nome: alimento.nome,
-                kcal: detalhes.kcal,
-                proteina: detalhes.proteina,
-                carboidrato: detalhes.carboidrato,
-                peso: alimento.peso,
-              };
-            })
-          );
-
-          return {
-            tipo: refeicao.tipo,
-            alimentos: alimentosComDetalhes,
-          };
-        })
-      );
-
-      // Cria o novo registro de consumo calórico
-      const novoConsumoCalorico = new ConsumoCalorico({
-        userID,
-        data,
-        refeicoes: refeicoesComDetalhes,
-      });
-      
-      // Salva o registro no banco de dados
-      const resultado = await novoConsumoCalorico.save();
-      
-      // Retorna a resposta com sucesso
-      return res.status(201).json(resultado);
+  
+      const consumo = new ConsumoCaloricoModel({ user, data, tipoRefeicao, nomeAlimento, kcal, proteina, carboidrato, peso, acucar });
+      const novoConsumo = await consumo.save();
+  
+      return res.status(201).json(novoConsumo);
     } catch (error) {
-      // Trata erros e retorna uma resposta de erro
-      console.error('Erro ao criar o consumo calórico:', error);
-      return res.status(500).json({ message: 'Erro ao criar o consumo calórico.', error: error.message });
+      console.error('Erro ao criar consumo calórico:', error);
+      return res.status(500).json({ message: 'Erro ao criar consumo calórico', error });
     }
   }
+  
+    // Listar todos os consumos calóricos
+    async getAll(req: Request, res: Response): Promise<Response> {
+      try {
+        const consumos = await ConsumoCaloricoModel.find().populate('user');
+        return res.status(200).json(consumos);
+      } catch (error) {
+        console.error('Erro ao listar consumos calóricos:', error);
+        return res.status(500).json({ message: 'Erro ao listar consumos calóricos', error });
+      }
+    }
+  
+    // Obter um consumo calórico específico por ID
+    async getById(req: Request, res: Response): Promise<Response> {
+      try {
+        const consumo = await ConsumoCaloricoModel.findById(req.params.id).populate('user');
+        if (!consumo) {
+          return res.status(404).json({ message: 'Consumo calórico não encontrado' });
+        }
+        return res.status(200).json(consumo);
+      } catch (error) {
+        console.error('Erro ao obter consumo calórico:', error);
+        return res.status(500).json({ message: 'Erro ao obter consumo calórico', error });
+      }
+    }
+  
+    // Atualizar um consumo calórico existente
+    async update(req: Request, res: Response): Promise<Response> {
+      try {
+        const consumo = await ConsumoCaloricoModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!consumo) {
+          return res.status(404).json({ message: 'Consumo calórico não encontrado' });
+        }
+        return res.status(200).json(consumo);
+      } catch (error) {
+        console.error('Erro ao atualizar consumo calórico:', error);
+        return res.status(500).json({ message: 'Erro ao atualizar consumo calórico', error });
+      }
+    }
+  
+    // Deletar um consumo calórico
+    async delete(req: Request, res: Response): Promise<Response> {
+      try {
+        const consumo = await ConsumoCaloricoModel.findByIdAndDelete(req.params.id);
+        if (!consumo) {
+          return res.status(404).json({ message: 'Consumo calórico não encontrado' });
+        }
+        return res.status(204).send(); // 204 No Content
+      } catch (error) {
+        console.error('Erro ao deletar consumo calórico:', error);
+        return res.status(500).json({ message: 'Erro ao deletar consumo calórico', error });
+      }
+    }
 }
 
-export default new ConsumoCaloricoController;
+export default new ConsumoCaloricoController();

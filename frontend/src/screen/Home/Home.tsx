@@ -49,7 +49,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
           </View>
         ))}
       </ScrollView>
-      <MenuInferior />
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

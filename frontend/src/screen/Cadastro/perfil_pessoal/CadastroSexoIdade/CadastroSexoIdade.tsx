@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { imagem3, setaVolta } from "../../../../assets";
 import styles from ".";
 import { Picker } from "@react-native-picker/picker";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
+import { useUserContext } from "../../../../context/userContext";
+
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -16,8 +18,20 @@ type Props = {
 };
 
 const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
+  const { setUserData } = useUserContext(); // Obtendo o setUserData do contexto
   const [sexo, setSexo] = useState<string>("");
   const [idade, setIdade] = useState<string>("");
+
+  const handleContinue = () => {
+    // Atualiza os dados do usuário no contexto
+    setUserData((prevData:any) => ({
+      ...prevData,
+      sexo: sexo,
+      idade: idade,
+    }));
+    // Navega para a próxima tela
+    navigation.navigate("CadastroAlturaPeso");
+  };
 
   return (
     <View style={styles.container}>
@@ -30,7 +44,7 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
       <Image source={imagem3} style={styles.image} resizeMode="contain" />
       <Text style={styles.textgeral}>Insira seu sexo</Text>
       <View style={styles.pickerContainer}>
-        <Picker selectedValue={sexo} onValueChange={(sexo) => setSexo(sexo)}>
+        <Picker selectedValue={sexo} onValueChange={(itemValue) => setSexo(itemValue)}>
           <Picker.Item label="Masculino" value="masculino" />
           <Picker.Item label="Feminino" value="feminino" />
         </Picker>
@@ -38,11 +52,11 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
       <Text style={styles.textgeral}>Insira sua idade</Text>
       <TextInput
         value={idade}
-        onChangeText={(idade) => setIdade(idade)}
+        onChangeText={setIdade}
         style={styles.input}
         keyboardType="numeric"
       />
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("CadastroAlturaPeso")}>
+      <TouchableOpacity style={styles.button} onPress={handleContinue}>
         <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
       </TouchableOpacity>
     </View>
