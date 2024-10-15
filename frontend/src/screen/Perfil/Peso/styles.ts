@@ -21,15 +21,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
-  columnHeaderAlimento: {
+  columnHeaderHistorico: {
     width: 169,
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
     color: "#2C4B4E",
   },
-  columnHeaderQuantidade: {
-    width: 46,
+  columnHeaderData: {
+    width: 100,
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#2C4B4E",
   },
-  alimento: {
+  historico: {
     width: 169,
     height: 40,
     fontSize: 14,
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     borderRadius: 10,
   },
-  quantidade: {
-    width: 46,
+  data: {
+    width: 100,
     height: 40,
     fontSize: 14,
     fontWeight: "bold",

@@ -30,8 +30,8 @@ const pesos: Peso[] = [
 const Pesos: React.FC<Props> = ({ navigation }) => {
   const renderItem = ({ item }: { item: Peso }) => (
     <View style={styles.row}>
-      <Text style={styles.alimento}>{item.peso}</Text>
-      <Text style={styles.quantidade}>{item.data}</Text>
+      <Text style={styles.historico}>{item.peso}</Text>
+      <Text style={styles.data}>{item.data}</Text>
       <TouchableOpacity style={styles.botao} onPress={() => console.log("Deletar", item.id)}>
         <Image source={Deletar} style={styles.icone} />
       </TouchableOpacity>
@@ -44,11 +44,11 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
         <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("MenuDietas")}>
           <Image source={setaVolta} style={styles.arrow} />
         </TouchableOpacity>
-        <Text style={styles.header}>Café da Manhã</Text>
+        <Text style={styles.header}>Peso</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.columnHeaderAlimento}>Alimento</Text>
-        <Text style={styles.columnHeaderQuantidade}>Qtd.</Text>
+        <Text style={styles.columnHeaderHistorico}>Histórico (kg)</Text>
+        <Text style={styles.columnHeaderData}>Data</Text>
         <Text style={styles.columnHeaderBotao}>Del.</Text>
       </View>
       <View>
