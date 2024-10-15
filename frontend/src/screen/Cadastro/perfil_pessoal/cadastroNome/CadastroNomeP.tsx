@@ -17,6 +17,8 @@ type Props = {
     navigation: ContinuarScreenNavigationProp;
 };
 
+
+//DANI AINDA VAI ARRUMAR
 const CadastroNome: React.FC<Props> = ({ navigation }) => {
     const { setUserData } = useUserContext(); // Obtendo o setUserData do contexto
     const [nome, setNome] = useState<string>("");
