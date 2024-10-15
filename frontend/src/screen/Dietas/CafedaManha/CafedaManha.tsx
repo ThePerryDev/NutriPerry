@@ -7,6 +7,7 @@ import { setaVolta, Editar, Deletar } from "../../../assets";
 import styles from "./styles";
 import AddMealButton from "../../../components/Cadastro/AddAlimento/botaoaddalimento";
 import axios from "axios";
+import moment from "moment";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -32,57 +33,72 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const fetchAlimentos = async () => {
       try {
-        // Requisição para listar os alimentos por refeição
-        const responseAlimentos = await axios.get("http://localhost:3000/consumos/alimento", {
-          params: {
-            userId: "67074140dbf77240420381b1", // Substitua pelo ID do usuário
-            data: "2024-10-12", // Data no formato esperado (AAAA-MM-DD)
-            tipoRefeicao: "cafe_da_manha" // Ajuste conforme necessário
-          }
-        });
+          const responseAlimentos = await axios.get("http://localhost:3000/consumos/alimento", {
+              params: {
+                  userId: "67074140dbf77240420381b1",
+                  data: moment().format("YYYY-MM-DD"),
+                  tipoRefeicao: "cafe_da_manha"
+              }
+          });
+  
+          // Ajustar para mapear corretamente o ID, nome e quantidade
+          const alimentos = responseAlimentos.data.map((alimento: any) => ({
+              id: alimento.id, // Agora irá receber o `_id` correto
+              nome: alimento.nome,
+              quantidade: alimento.peso
+          }));
 
-        const alimentos = Object.entries(responseAlimentos.data).map(([nome, peso]) => ({
-          id: nome, // Utilize o nome como ID temporário
-          nome,
-          quantidade: peso as number,
-        }));
-        setProdutos(alimentos);
+          
+  
+          setProdutos(alimentos);
 
-        // Requisição para obter os totais de nutrientes
-        const responseTotais = await axios.get("http://localhost:3000/consumos/listarconsumo", {
-          params: {
-            userId: "67074140dbf77240420381b1",
-            data: "2024-10-12",
-            tipoRefeicao: "cafe_da_manha"
-          }
-        });
+          const responseTotais = await axios.get("http://localhost:3000/consumos/listarconsumo", {
+            params: {
+              userId: "67074140dbf77240420381b1",
+              data: moment().format("YYYY-MM-DD"),
+              tipoRefeicao: "cafe_da_manha"
+            }
+          });
+  
+          setTotalKcal(responseTotais.data.totalKcal);
+          setTotalProteina(responseTotais.data.totalProteina);
+          setTotalCarboidrato(responseTotais.data.totalCarboidrato);
+          
 
-        setTotalKcal(responseTotais.data.totalKcal);
-        setTotalProteina(responseTotais.data.totalProteina);
-        setTotalCarboidrato(responseTotais.data.totalCarboidrato);
       } catch (error) {
-        console.error("Erro ao buscar dados:", error);
+          console.error("Erro ao buscar dados:", error);
       }
-    };
+  };
+  
 
     fetchAlimentos();
   }, []);
 
-  const renderItem = ({ item }: { item: Produto }) => (
+  const handleDelete = async (id: string) => {
+    try {
+        await axios.delete(`http://localhost:3000/consumos/delete/${id}`);
+        setProdutos((prevProdutos) => prevProdutos.filter((produto) => produto.id !== id));
+    } catch (error) {
+        console.error("Erro ao deletar o item:", error);
+    }
+};
+
+
+
+
+const renderItem = ({ item }: { item: Produto }) => (
     <View style={styles.row}>
-      <Text style={styles.alimento}>{item.nome}</Text>
-      <Text style={styles.quantidade}>{item.quantidade}</Text>
-      <TouchableOpacity
-        style={styles.botao}
-        //onPress={() => navigation.navigate("AdicionarAlimento", { product: item })}
-      >
-        <Image source={Editar} style={styles.icone} />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => console.log("Deletar", item.id)}>
-        <Image source={Deletar} style={styles.icone} />
-      </TouchableOpacity>
+        <Text style={styles.alimento}>{item.nome}</Text>
+        <Text style={styles.quantidade}>{item.quantidade}</Text>
+        <TouchableOpacity style={styles.botao}>
+            <Image source={Editar} style={styles.icone} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.botao} onPress={() => handleDelete(item.id)}>
+            <Image source={Deletar} style={styles.icone} />
+        </TouchableOpacity>
     </View>
-  );
+);
+
 
   return (
     <View style={styles.container}>
