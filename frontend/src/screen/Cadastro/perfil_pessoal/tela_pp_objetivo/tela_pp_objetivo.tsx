@@ -22,7 +22,7 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
     { label: "", value: "" },
     { label: "Perder peso", value: "perda de peso" },
     { label: "Manutenção de peso", value: "manutenção de peso" },
-    { label: "Ganho de massa", value: "ganho de massa" },
+    { label: "Ganho de peso", value: "ganho de peso" },
   ];
 
   const exerciseTimeOptions = [

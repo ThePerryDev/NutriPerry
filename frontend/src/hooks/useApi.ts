@@ -70,7 +70,7 @@ export const useApi = () => ({
     weight: number;
     activityLevel: "sedentario" | "pouco ativo" | "ativo" | "muito ativo";
     gender: "masculino" | "feminino";
-    goal: "perda de peso" | "manutenção de peso" | "ganho de massa";
+    goal: "perda de peso" | "manutenção de peso" | "ganho de peso";
     birthdate: Date;
     nutricionista?: string;
     isLogged: boolean;
@@ -105,7 +105,6 @@ async function getUserPosition(email: string) {
 
   let s_number = new Search<number>();
 
-  console.log(users);
   return s_number.sequential_ws(email, mailList);
 }
 

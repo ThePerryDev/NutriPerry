@@ -88,7 +88,7 @@ const UserSchema: Schema<IUser> = new Schema({
   goal: {
     type: String,
     required: true,
-    enum: ['perda de peso', 'manutenção de peso', 'ganho de massa']
+    enum: ['perda de peso', 'manutenção de peso', 'ganho de peso']
   },
   birthdate: {
     type: Date,

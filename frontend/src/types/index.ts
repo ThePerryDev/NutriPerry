@@ -13,7 +13,7 @@ export interface UsersProps {
   height: number; // em cm
   weight: number; // em kg
   gender: 'masculino' | 'feminino';
-  goal: 'perda de peso' | 'manutenção de peso' | 'ganho de massa';
+  goal: 'perda de peso' | 'manutenção de peso' | 'ganho de peso';
   birthdate: Date; // Data de nascimento
   nutricionista?: string; // Referência a um nutricionista existente
   isLogged: boolean; // Indica se o usuário está logado

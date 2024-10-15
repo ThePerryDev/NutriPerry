@@ -75,6 +75,7 @@ class UsersController {
   }
 
   public async update(req: Request, res: Response): Promise<void> {
+    console.log("put")
     const {
       id,
       email,

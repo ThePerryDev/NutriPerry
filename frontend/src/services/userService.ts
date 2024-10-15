@@ -16,7 +16,7 @@ class UsersService {
     weight: number;
     activityLevel: "sedentario" | "pouco ativo" | "ativo" | "muito ativo";
     gender: "masculino" | "feminino";
-    goal: "perda de peso" | "manutenção de peso" | "ganho de massa";
+    goal: "perda de peso" | "manutenção de peso" | "ganho de peso";
     birthdate: Date;
     nutricionista?: string;
     isLogged: boolean;
@@ -36,7 +36,7 @@ class UsersService {
     weight: number;
     activityLevel: "sedentario" | "pouco ativo" | "ativo" | "muito ativo";
     gender: "masculino" | "feminino";
-    goal: "perda de peso" | "manutenção de peso" | "ganho de massa";
+    goal: "perda de peso" | "manutenção de peso" | "ganho de peso";
     birthdate: Date;
     nutricionista?: string;
     isLogged: boolean;
@@ -50,9 +50,10 @@ class UsersService {
     return data;
   }
 
-  async delete(id: string) {
-    return await api.delete(`/user/${id}`);
-  }
+  async delete(id: string): Promise<any> {
+    const { data } = await api.delete("/user", { data: { id } });
+    return data;
+  }  
 
   // Nova função para registrar um novo usuário
   async register(props: {

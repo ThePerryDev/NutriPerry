@@ -55,7 +55,7 @@ const Configuracoes: React.FC<Props> = ({ navigation }) => {
           style={styles.buttonOutros}
           onPress={() => {
             if (auth.user?.id) {
-              handleDelete(auth.user.id);
+              handleDelete(auth.user?.id);
             } else {
               console.error("ID do usuário não encontrado");
             }
@@ -76,7 +76,7 @@ const Configuracoes: React.FC<Props> = ({ navigation }) => {
           </Text>
         </Pressable>
       </View>
-      <MenuInferior></MenuInferior>
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

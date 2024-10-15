@@ -22,14 +22,16 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    // verifica se email e senha estão preeenchidos e manda para o contexto email e senha
+    // verifica se email e senha estão preenchidos e manda para o contexto email e senha
     if (email && password) {
       const isLogged = await auth.signin(email, password);
       if (isLogged) {
-        navigation.navigate("CadastroNome");
+        navigation.navigate("Home");
       } else {
         alert("Falha ao logar");
       }
+    } else {
+      console.log("Os campos de email e senha são obrigatórios");
     }
   };
 
