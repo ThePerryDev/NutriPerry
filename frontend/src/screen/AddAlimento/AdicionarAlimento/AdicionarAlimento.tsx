@@ -29,6 +29,8 @@ import {
 import moment from "moment";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
+import MealPricker from "../../../components/Cadastro/MealPricker/MealPicker";
+import MealPicker from "../../../components/Cadastro/MealPricker/MealPicker";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -211,6 +213,8 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     }
   };
 
+  
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -224,7 +228,8 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
       </View>
       <Text style={styles.explanation}></Text>
       <View>
-        <UnidadePicker
+        
+        <MealPicker
           label="Dietas:"
           selectedValue={selectUnit}
           onValueChange={(itemValue) => setSelectUnit(itemValue)}
@@ -242,7 +247,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
             onSubmitEditing={() => Keyboard.dismiss()}
           />
         </View>
-        
+
         <View style={styles.quantitycontainer}>
           <Text style={styles.textgeral}>Date</Text>
           
