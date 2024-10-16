@@ -3,7 +3,6 @@ import AdicionarAlimento from "./AddAlimento/AdicionarAlimento/AdicionarAlimento
 import CadastrarAlimento from "./AddAlimento/CadastrarAlimento/CadastrarAlimento";
 import ErroAlimento from "./AddAlimento/ErroAlimento/ErroAlimento";
 import PesquisaAlimento from "./AddAlimento/PesquisaAlimento/PesquisaAlimento";
-import TelaFinalizado from "./Cadastro/finalizado/tela_finalizado";
 import CadastroNutriEmail from "./Cadastro/perfil_nutricionista/CadastroEmail/cadastroEmailNutri";
 import CadastroNutriNome from "./Cadastro/perfil_nutricionista/CadastroNome/CadastroNomeNutri";
 import CadastroNutriFormacao from "./Cadastro/perfil_nutricionista/tela_nutri_formacao/cadastroFormacaoN";

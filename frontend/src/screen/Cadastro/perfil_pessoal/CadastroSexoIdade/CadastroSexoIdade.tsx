@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { imagem3, setaVolta } from "../../../../assets";
 import styles from "./styles";
 import { Picker } from "@react-native-picker/picker";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
-import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
-import CustomPicker from "../../../../components/Cadastro/Picker/picker";
+import { useUserContext } from "../../../../context/userContext";
+
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -18,14 +18,20 @@ type Props = {
 };
 
 const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
+  const { setUserData } = useUserContext(); // Obtendo o setUserData do contexto
   const [sexo, setSexo] = useState<string>("");
   const [idade, setIdade] = useState<string>("");
 
-  const genderOptions = [
-    { label: "", value: "" },
-    { label: "Masculino", value: "masculino" },
-    { label: "Feminino", value: "feminino" },
-  ];
+  const handleContinue = () => {
+    // Atualiza os dados do usuário no contexto
+    setUserData((prevData:any) => ({
+      ...prevData,
+      sexo: sexo,
+      idade: idade,
+    }));
+    // Navega para a próxima tela
+    navigation.navigate("CadastroAlturaPeso");
+  };
 
   return (
     <View style={styles.container}>
@@ -39,22 +45,23 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
         <Text style={styles.headerlabel}>(3/5)</Text>
       </View>
       <Image source={imagem3} style={styles.image} resizeMode="contain" />
-      <CustomPicker
-        label="Insira seu sexo"
-        selectedValue={sexo}
-        onValueChange={(itemValue) => setSexo(itemValue)}
-        items={genderOptions}
-      />
+      <Text style={styles.textgeral}>Insira seu sexo</Text>
+      <View style={styles.pickerContainer}>
+        <Picker selectedValue={sexo} onValueChange={(itemValue) => setSexo(itemValue)}>
+          <Picker.Item label="Masculino" value="masculino" />
+          <Picker.Item label="Feminino" value="feminino" />
+        </Picker>
+      </View>
       <Text style={styles.textgeral}>Insira sua idade</Text>
       <TextInput
         value={idade}
-        onChangeText={(idade) => setIdade(idade)}
+        onChangeText={setIdade}
         style={styles.input}
         keyboardType="numeric"
       />
-      <View style={styles.buttoncontainer}>
-        <ContinueButton onPress={() => navigation.navigate("CadastroAlturaPeso")} />
-      </View>
+      <TouchableOpacity style={styles.button} onPress={handleContinue}>
+        <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
+      </TouchableOpacity>
     </View>
   );
 };

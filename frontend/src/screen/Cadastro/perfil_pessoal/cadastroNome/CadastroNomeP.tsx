@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import styles from "./styles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
 import { image01, setaVolta } from "../../../../assets";
-import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
+import { useUserContext } from "../../../../context/userContext";
+import { UsersProps } from "../../../../types";
+
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -15,39 +17,50 @@ type Props = {
   navigation: ContinuarScreenNavigationProp;
 };
 
-const CadastroNome: React.FC<Props> = ({ navigation }) => {
-  const [nome, setNome] = useState<string>("");
-  const [sobrenome, setSobrenome] = useState<string>("");
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity
-          style={styles.arrow}
-          onPress={() => navigation.navigate("TelaLogin")}
-        >
-          <Image source={setaVolta} style={styles.arrow} />
-        </TouchableOpacity>
-        <Text style={styles.headerlabel}>(2/5)</Text>
-      </View>
-      <Image source={image01} style={styles.image} resizeMode="contain" />
-      <Text style={styles.textgeral}>Insira o seu primeiro nome</Text>
-      <TextInput
-        value={nome}
-        onChangeText={(nome) => setNome(nome)}
-        style={styles.input}
-      />
-      <Text style={styles.textgeral}>Insira o seu sobrenome</Text>
-      <TextInput
-        value={sobrenome}
-        onChangeText={(sobrenome) => setSobrenome(sobrenome)}
-        style={styles.input}
-      />
-      <View style={styles.buttoncontainer}>
-        <ContinueButton onPress={() => navigation.navigate("CadastroEmail")}/>
-      </View>
-    </View>
-  );
-};
+//DANI AINDA VAI ARRUMAR
+const CadastroNome: React.FC<Props> = ({ navigation }) => {
+    const { setUserData } = useUserContext(); // Obtendo o setUserData do contexto
+    const [nome, setNome] = useState<string>("");
+    const [sobrenome, setSobrenome] = useState<string>("");
+
+    const handleContinue = () => {
+        // Atualiza os dados do usuário no contexto
+        setUserData((prevData:any) => ({
+            ...prevData,
+            name: nome,
+            nickname: sobrenome,
+        }));
+        // Navega para a próxima tela
+        navigation.navigate("CadastroEmail");
+    };
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.cima}>
+                <TouchableOpacity style={styles.volta}>
+                    <Image source={setaVolta} />
+                </TouchableOpacity>
+                <Text style={{ fontSize: 20 }}>(1/5)</Text>
+            </View>
+            <Image source={image01} style={styles.image} resizeMode='contain' />
+            <Text style={styles.textgeral}>Insira o seu primeiro nome</Text>
+            <TextInput
+                value={nome}
+                onChangeText={setNome}
+                style={styles.input}
+            />
+            <Text style={styles.textgeral}>Insira o seu sobrenome</Text>
+            <TextInput
+                value={sobrenome}
+                onChangeText={setSobrenome}
+                style={styles.input}
+            />
+            <TouchableOpacity style={styles.button} onPress={handleContinue}>
+                <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
+            </TouchableOpacity>
+        </View>
+    );
+}
 
 export default CadastroNome;

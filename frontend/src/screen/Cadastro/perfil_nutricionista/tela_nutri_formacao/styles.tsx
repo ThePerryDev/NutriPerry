@@ -6,6 +6,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#FBFBFB',
         padding:50
     },
+    caixinha: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
 
     cima: {
         flexDirection: 'row',

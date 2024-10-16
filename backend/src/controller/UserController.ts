@@ -5,10 +5,12 @@ import UserModel from "../models/UserModel";
 class UsersController {
     
     public async create(req: Request, res: Response): Promise<void> {
+      console.log(req.body);
         const {
           email,
           password,
-          username,
+          name,
+          nickname,
           height,
           weight,
           activityLevel,
@@ -16,7 +18,8 @@ class UsersController {
           goal,
           birthdate,
           nutricionista,
-          isLogged
+         
+
         } = req.body;
     
         try {
@@ -24,7 +27,8 @@ class UsersController {
           const newUser = new UserModel({
             email,
             password,
-            username,
+            name,
+            nickname,
             height,
             weight,
             activityLevel,
@@ -32,13 +36,15 @@ class UsersController {
             goal,
             birthdate,
             nutricionista,  // Pode ser undefined, pois é opcional
-            isLogged
+         
+
           });
     
           // Salva o usuário no banco de dados
           const response = await newUser.save();
           res.status(201).send(response);
         } catch (e: any) {
+          console.error(e);
           if (e.code === 11000) {
             // Captura erro de duplicidade (email ou username já existentes)
             res.status(400).send({ message: `O email ou nome de usuário já estão em uso.` });
@@ -69,6 +75,7 @@ class UsersController {
   }
 
   public async update(req: Request, res: Response): Promise<void> {
+    console.log("put")
     const {
       id,
       email,
