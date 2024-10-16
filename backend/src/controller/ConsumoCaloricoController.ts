@@ -9,10 +9,10 @@ class ConsumoCaloricoController {
   async create(req: Request, res: Response): Promise<Response> { 
     console.log('Dados recebidos:', req.body); // Adicione esta linha para verificar os dados recebidos
     try {
-      let { user, tipoRefeicao, nomeAlimento, kcal, proteina, carboidrato, peso, acucar } = req.body;
+      let { user, tipoRefeicao, nomeAlimento, kcal, proteina, carboidrato, peso, acucar,data } = req.body;
       
-      const data = moment().format("YYYY-MM-DD")
-      console.log(data)
+      //const data = moment().format("YYYY-MM-DD")
+      //console.log(data)
 
       kcal = kcal? kcal : 0;
       acucar = acucar? acucar : 0;
@@ -20,7 +20,7 @@ class ConsumoCaloricoController {
       carboidrato = carboidrato? carboidrato : 0;
 
       // Valide se todos os dados necessários foram fornecidos
-      if (!user || !tipoRefeicao || !nomeAlimento || !peso ) {
+      if (!user || !tipoRefeicao || !nomeAlimento || !peso || !data) {
         return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
       }
   

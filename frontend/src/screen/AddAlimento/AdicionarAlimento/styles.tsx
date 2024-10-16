@@ -88,6 +88,43 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
   },
+  datePickerButton: {
+    width: 185,
+    height: 35,
+    borderWidth: 2,
+    borderColor: "#00AD71",
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+  },
+  dateText: {
+    width: 185,
+    height: 35,
+    borderWidth: 2,
+    borderColor: "#00AD71",
+    borderRadius: 15,
+    backgroundColor: "#ffffff",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 16,
+    color: "#2C4B4E",
+    textAlign: "center",
+    paddingTop: 6, // Centraliza verticalmente
+  },
+  inputGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:"center",
+    marginBottom: 15,
+  },
+  label: {
+    fontSize: 14,
+    color: "#2C4B4E",
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+
 });
 
 export default styles;

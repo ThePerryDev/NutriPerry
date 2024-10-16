@@ -41,9 +41,9 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
       
-      //192.168.1.5
+      //192.168.1.4
       //const responseAlimentos = await axios.get("http://localhost:3000/consumos/alimento", {
-        const responseAlimentos = await axios.get("http://192.168.1.5:3000/consumos/alimento", {
+        const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
         params: {
           userId: "67074140dbf77240420381b1",
           data: formattedDate,
@@ -59,9 +59,9 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      //192.168.1.5
+      //192.168.1.4
       //const responseTotais = await axios.get("http://localhost:3000/consumos/listarconsumo", {
-        const responseTotais = await axios.get("http://192.168.1.5:3000/consumos/listarconsumo", {
+        const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
         params: {
           userId: "67074140dbf77240420381b1",
           data: formattedDate,
