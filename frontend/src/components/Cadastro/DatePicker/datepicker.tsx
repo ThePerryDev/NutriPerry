@@ -25,7 +25,7 @@ const DatePickerComponent: React.FC<DatePickerComponentProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.dateContainer}>
-        <Text style={styles.dateLabel}>Data:</Text>
+        <Text style={styles.dateLabel}>Data:     </Text>
 
         <TouchableOpacity
           style={styles.dateBox}
