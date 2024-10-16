@@ -1,10 +1,16 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent:"center",
+    marginBottom: 15,
+  },
   dateContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:"center",
+    justifyContent: "center",
     marginBottom: 15,
   },
   textgeral: {
@@ -20,7 +26,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "#ffffff",
   },
-  
+
   dateBox: {
     width: 185,
     height: 35,
@@ -38,6 +44,12 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
     fontWeight: "bold",
     marginRight: 60,
+  },
+  datePickerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 15,
   },
 });
 
