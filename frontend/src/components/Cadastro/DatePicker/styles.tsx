@@ -1,20 +1,27 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
+  dateContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent:"center",
-
     marginBottom: 15,
   },
-  pickerLabel: {
+  textgeral: {
     fontSize: 18,
     color: "#2C4B4E",
     fontWeight: "bold",
-    marginRight: 60,
+    marginBottom: 5,
   },
-  pickerBox: {
+  dateText: {
+    fontSize: 16,
+    color: "#2C4B4E",
+    padding: 10,
+    textAlign: "center",
+    backgroundColor: "#ffffff",
+  },
+  
+  dateBox: {
     width: 185,
     height: 35,
     borderStyle: "solid",
@@ -25,29 +32,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  pickerText: {
-    fontSize: 16,
+
+  dateLabel: {
+    fontSize: 18,
     color: "#2C4B4E",
-    
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  modalContent: {
-    backgroundColor: "white",
-    margin: 20,
-    padding: 20,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  modalItem: {
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  modalItemText: {
-    fontSize: 16,
+    fontWeight: "bold",
+    marginRight: 60,
   },
 });
 

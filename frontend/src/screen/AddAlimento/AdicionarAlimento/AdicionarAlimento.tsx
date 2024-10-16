@@ -31,6 +31,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import MealPricker from "../../../components/Cadastro/MealPricker/MealPicker";
 import MealPicker from "../../../components/Cadastro/MealPricker/MealPicker";
+import DatePickerComponent from "../../../components/Cadastro/DatePicker/datepicker";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -213,8 +214,6 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     }
   };
 
-  
-
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -228,14 +227,13 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
       </View>
       <Text style={styles.explanation}></Text>
       <View>
-        
         <MealPicker
           label="Dietas:"
           selectedValue={selectUnit}
           onValueChange={(itemValue) => setSelectUnit(itemValue)}
           items={MealOption}
         />
-        
+
         <View style={styles.quantitycontainer}>
           <Text style={styles.textgeral}>Quantidade:</Text>
           <TextInput
@@ -248,23 +246,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
           />
         </View>
 
-        <View style={styles.quantitycontainer}>
-          <Text style={styles.textgeral}>Date</Text>
-          
-          <TouchableOpacity onPress={showDatepicker}>
-            <Text style={styles.dateText}>
-              {moment(date).format("DD/MM/YYYY")}
-            </Text>
-          </TouchableOpacity>
-          {showDatePicker && (
-            <DateTimePicker
-              value={date}
-              mode="date"
-              display="default"
-              onChange={onDateChange}
-            />
-          )}
-        </View>
+        <DatePickerComponent selectedDate={date} onDateChange={setDate} />
         
       </View>
       <View style={styles.infocontainer}>
