@@ -12,9 +12,9 @@ const ProdutoBusca = () => {
 
   const buscarAlimentoTaco = async (termo: string) => {
 
-    //192.168.1.4
+    //10.68.55.228
     //const response = await axios.get(`http://localhost:3000/alimentos`, {
-      const response = await axios.get(`http://192.168.1.4:3000/alimentos`, {
+      const response = await axios.get(`http://10.68.55.228:3000/alimentos`, {
       params: {
         description: termo,
       },

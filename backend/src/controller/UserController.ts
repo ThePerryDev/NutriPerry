@@ -8,7 +8,7 @@ class UsersController {
         const {
           email,
           password,
-          username,
+          name,
           height,
           weight,
           activityLevel,
@@ -16,6 +16,7 @@ class UsersController {
           goal,
           birthdate,
           nutricionista,
+          nickname,
           isLogged
         } = req.body;
     
@@ -24,7 +25,8 @@ class UsersController {
           const newUser = new UserModel({
             email,
             password,
-            username,
+            name,
+            nickname,
             height,
             weight,
             activityLevel,
@@ -40,7 +42,7 @@ class UsersController {
           res.status(201).send(response);
         } catch (e: any) {
           if (e.code === 11000) {
-            // Captura erro de duplicidade (email ou username já existentes)
+            // Captura erro de duplicidade (email ou name já existentes)
             res.status(400).send({ message: `O email ou nome de usuário já estão em uso.` });
           } else if (e.errors) {
             // Captura erros de validação específicos (por exemplo, email inválido)
@@ -74,6 +76,7 @@ class UsersController {
       email,
       password,
       name,
+      nickname,
       isLogged,
       height,
       weight,
@@ -90,6 +93,7 @@ class UsersController {
           email,
           password,
           name,
+          nickname,
           isLogged,
           height,
           weight,

@@ -10,10 +10,11 @@ interface IUser extends Document {
   weight: number; // em kg
   activityLevel: 'sedentario' | 'pouco ativo' | 'ativo' | 'muito ativo';
   gender: 'masculino' | 'feminino';
-  goal: 'perda de peso' | 'manter meu peso atual' | 'ganho de peso';
+  goal: 'perda de peso' | 'manutenção de peso' | 'ganho de peso';
   birthdate: Date; // Data de nascimento
   nutricionista?: Types.ObjectId; // Referência a um nutricionista existente
   isLogged: boolean; // Indica se o usuário está logado
+  nickname: string
 }
 
 // Validação da senha
@@ -63,7 +64,12 @@ const UserSchema: Schema<IUser> = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true  // Garante que não haverá duplicatas de username
+   
+  },
+  nickname: {
+    type: String,
+    required: true,
+    
   },
   height: {
     type: Number,
@@ -88,7 +94,7 @@ const UserSchema: Schema<IUser> = new Schema({
   goal: {
     type: String,
     required: true,
-    enum: ['perda de peso', 'manutenção de peso', 'emagrecimento']
+    enum: ['perda de peso', 'manutenção de peso', 'ganho de peso']
   },
   birthdate: {
     type: Date,
