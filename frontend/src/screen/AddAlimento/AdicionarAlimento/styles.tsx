@@ -124,7 +124,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 5,
   },
-  
+  quantitytext:{
+    fontSize: 18,
+    color: "#2C4B4E",
+    fontWeight: "bold",
+    marginRight: 20,
+  }
 
 });
 

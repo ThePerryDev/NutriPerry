@@ -235,7 +235,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
         />
 
         <View style={styles.quantitycontainer}>
-          <Text style={styles.textgeral}>Quantidade:</Text>
+          <Text style={styles.quantitytext}>Quantidade:</Text>
           <TextInput
             value={quantidade}
             onChangeText={(text) => setQuantidade(text)}
@@ -247,7 +247,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
         </View>
 
         <DatePickerComponent selectedDate={date} onDateChange={setDate} />
-        
+
       </View>
       <View style={styles.infocontainer}>
         <Text style={styles.infotitle}>{productName}</Text>
