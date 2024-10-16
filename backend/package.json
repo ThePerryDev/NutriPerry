@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@react-native-community/datetimepicker": "^8.2.0",
     "@types/axios": "^0.9.36",
     "@types/co": "^4.6.6",
     "@types/mongoose": "^5.11.96",
