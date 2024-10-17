@@ -59,7 +59,7 @@ const UserSchema: Schema<IUser> = new Schema({
   password: {
     type: String,
     required: [true, 'A senha é obrigatória'],
-    validate: passwordValidator
+    
   },
   name: {
     type: String,
@@ -84,7 +84,7 @@ const UserSchema: Schema<IUser> = new Schema({
   activityLevel: {
     type: String,
     required: true,
-    enum: ['sedentario', 'pouco ativo', 'ativo', 'muito ativo']
+   
   },
   gender: {
     type: String,
@@ -94,7 +94,7 @@ const UserSchema: Schema<IUser> = new Schema({
   goal: {
     type: String,
     required: true,
-    enum: ['perda de peso', 'manutenção de peso', 'ganho de peso']
+    
   },
   birthdate: {
     type: Date,

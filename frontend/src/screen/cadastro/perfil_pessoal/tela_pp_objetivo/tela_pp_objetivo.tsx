@@ -8,7 +8,6 @@ import styles from "./styles";
 import { setaVolta } from "../../../../assets";
 import { useUserCadastro } from "../../../../context/UserCadastroContext";
 
-
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "TelaPPObjetivo"
@@ -40,7 +39,6 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
 
   const { userData } = useUserCadastro();
 
-
   const handleContinue = async () => {
     // Logar os dados que estão sendo enviados
     console.log("Dados enviados:", {
@@ -64,13 +62,12 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
   
     try {
       // Chama a função para criar o usuário no banco de dados
-      await createUser(); 
+      await createUser(userDataToSend); // Passa os dados para a função
       navigation.navigate("TelaFinalizado");
     } catch (error) {
       console.error("Erro ao criar usuário:", error);
     }
   };
-  
 
   return (
     <View style={styles.container}>
