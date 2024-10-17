@@ -18,7 +18,7 @@ type Props = {
 };
 
 const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
-  const { updateUserData, createUser } = useUserCadastro(); // Obter createUser do contexto
+  const { updateUserData, createUser } = useUserCadastro(); 
   const [selectGoal, setSelectGoal] = useState<string>("");
   const [selectExerciseTime, setSelectExerciseTime] = useState<string>("");
 
@@ -45,21 +45,22 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
       goal: selectGoal,
       activityLevel: selectExerciseTime,
     });
-  
+
     // Atualiza os dados do usuário
     updateUserData({ 
       goal: selectGoal, 
       activityLevel: selectExerciseTime 
     });
-  
-    // Logar o userData que será enviado para o backend
+
+    // Espera a atualização do contexto ser aplicada
     const userDataToSend = { 
-      ...userData, // Supondo que você tenha acessado userData do contexto
+      ...userData, 
       goal: selectGoal,
       activityLevel: selectExerciseTime,
     };
+
     console.log("userData enviado para o backend:", userDataToSend);
-  
+
     try {
       // Chama a função para criar o usuário no banco de dados
       await createUser(userDataToSend); // Passa os dados para a função
