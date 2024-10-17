@@ -41,16 +41,20 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
 
   const handleContinue = async () => {
     // Logar os dados que estão sendo enviados
-    console.log("Dados enviados:", {
-      goal: selectGoal,
-      activityLevel: selectExerciseTime,
-    });
-
-    // Atualiza os dados do usuário
     updateUserData({ 
       goal: selectGoal, 
       activityLevel: selectExerciseTime 
     });
+    console.log("Dados enviados:", updateUserData(userData));
+
+/*
+  const handleContinue = () => {
+    updateUserData({ height: Number(height), weight: Number(weight) });
+    navigation.navigate("TelaPPObjetivo");
+    console.log(updateUserData);
+  };
+*/
+
 
     // Espera a atualização do contexto ser aplicada
     const userDataToSend = { 
