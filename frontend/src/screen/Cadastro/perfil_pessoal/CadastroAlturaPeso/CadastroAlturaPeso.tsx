@@ -5,8 +5,8 @@ import styles from "./Styles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
 import { AuthContext } from "../../../../context/auth/AuthContext";
-import user from "../../../../services/userService";
 import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
+import { useUserCadastro } from "../../../../context/UserCadastroContext";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -18,8 +18,15 @@ type Props = {
 };
 
 const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
+  const { updateUserData } = useUserCadastro();
   const [height, setHeight] = useState<string>("");
   const [weight, setWeight] = useState<string>("");
+
+  const handleContinue = () => {
+    updateUserData({ height: Number(height), weight: Number(weight) });
+    navigation.navigate("TelaPPObjetivo");
+    console.log(updateUserData);
+  };
 
   return (
     <View style={styles.container}>
@@ -48,7 +55,7 @@ const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
         keyboardType="numeric"
       />
       <View style={styles.buttoncontainer}>
-        <ContinueButton onPress={() => navigation.navigate("TelaPPObjetivo")} />
+        <ContinueButton onPress={handleContinue} />
       </View>
     </View>
   );

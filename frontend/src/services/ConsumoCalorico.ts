@@ -6,7 +6,7 @@ const API_URL = 'http://10.68.55.228:3000/consumocalorico';
 
 interface ConsumoCaloricoData {
   user: string;
-  data: Date;
+  data: string;
   tipoRefeicao: string;
   nomeAlimento: string;
   kcal: number;

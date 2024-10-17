@@ -5,6 +5,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
 import { image02, setaVolta } from "../../../../assets";
 import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
+import { useUserCadastro } from "../../../../context/UserCadastroContext";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -16,8 +17,15 @@ type Props = {
 };
 
 const CadastroEmail: React.FC<Props> = ({ navigation }) => {
+  const { updateUserData } = useUserCadastro();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const handleContinue = () => {
+    updateUserData({ email, password });
+    navigation.navigate("CadastroSexoIdade");
+    console.log(updateUserData);
+  };
 
   return (
     <View style={styles.container}>
@@ -45,7 +53,7 @@ const CadastroEmail: React.FC<Props> = ({ navigation }) => {
         style={styles.input}
       />
       <View style={styles.buttoncontainer}>
-        <ContinueButton onPress={() => navigation.navigate("CadastroSexoIdade")} />
+        <ContinueButton onPress={handleContinue} />
       </View>
     </View>
   );

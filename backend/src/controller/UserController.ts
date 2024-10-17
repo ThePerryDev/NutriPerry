@@ -20,6 +20,7 @@ class UsersController {
           isLogged
         } = req.body;
     
+        console.log("Dados recebidos para criação de usuário:", req.body);
         try {
           // Cria um novo usuário com os dados recebidos
           const newUser = new UserModel({
