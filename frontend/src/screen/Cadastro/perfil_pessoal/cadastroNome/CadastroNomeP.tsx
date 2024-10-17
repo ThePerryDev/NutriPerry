@@ -28,7 +28,7 @@ const CadastroNome: React.FC<Props> = ({ navigation }) => {
         >
           <Image source={setaVolta} style={styles.arrow} />
         </TouchableOpacity>
-        <Text style={styles.headerlabel}>(2/5)</Text>
+        <Text style={styles.headerlabel}>(1/5)</Text>
       </View>
       <Image source={image01} style={styles.image} resizeMode="contain" />
       <Text style={styles.textgeral}>Insira o seu primeiro nome</Text>

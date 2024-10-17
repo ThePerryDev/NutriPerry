@@ -6,6 +6,7 @@ import { Configuração, Perfil, Receitas, TelaInicial } from "../../assets";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/rootStack";
 import MenuInferior from "../../components/MenuInferior/MenuInferior";
+import Speedometer from "../../components/Speedometer";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -28,7 +29,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
             <Text style={Styles.statValue}>- calorias</Text>
           </View>
           <View style={Styles.chart}>
-            <Text style={Styles.totalCalories}>- calorias</Text>
+            <Speedometer />
           </View>
           <View style={Styles.stats}>
             <Text style={Styles.statLabel}>Consumo</Text>
@@ -44,7 +45,9 @@ const Home: React.FC<Props> = ({ navigation }) => {
               <Text style={Styles.mealName}>{meal}</Text>
               <Text style={Styles.mealDetail}>Sem cardápio cadastrado</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("PesquisaAlimento")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("PesquisaAlimento")}
+            >
               <Ionicons name="add-circle-outline" size={28} color="green" />
             </TouchableOpacity>
           </View>
