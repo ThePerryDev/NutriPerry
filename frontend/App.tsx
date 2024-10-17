@@ -10,7 +10,7 @@ export default function App() {
   return (
     <ConsumoCaloricoProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="AbrindoApp">
+        <Stack.Navigator initialRouteName="ConsumoAgua">
           <Stack.Screen
             name="AbrindoApp"
             component={AbrindoApp}

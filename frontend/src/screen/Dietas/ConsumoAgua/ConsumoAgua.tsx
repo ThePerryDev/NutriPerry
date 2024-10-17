@@ -13,7 +13,7 @@ import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import { setaVolta, Deletar } from "../../../assets";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-import axios from "axios"; // Para fazer chamadas HTTP
+import axios from "axios";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -36,12 +36,12 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
   const [quantidade, setQuantidade] = useState<string>("");
 
   useEffect(() => {
-    // Função para buscar o consumo de água agregado por dia do backend
     const fetchConsumoAgua = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/consumo-agua/670c7a910cad595a34ab9edf");
-        const consumosData = response.data;
-        setConsumos(consumosData);
+        const response = await axios.get(
+          "http://192.168.56.1:3000/consumo-agua/670c7a910cad595a34ab9edf"
+        );
+        setConsumos(response.data);
       } catch (error) {
         console.error("Erro ao buscar o consumo de água:", error);
       }
@@ -50,7 +50,6 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
     fetchConsumoAgua();
   }, []);
 
-  // Função para enviar os dados de consumo ao backend
   const handleAddConsumo = async () => {
     if (!historico || !data || !quantidade) {
       alert("Por favor, preencha todos os campos.");
@@ -58,15 +57,18 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/consumo-agua", {
-        user: "USER_ID", // Substitua "USER_ID" pelo ID real do usuário
-        quantidade: parseInt(quantidade),
-        data: new Date(data).toISOString(), // Formato ISO para a data
-        vezes: parseInt(historico),
+      const response = await axios.post("http://192.168.56.1:3000/consumo-agua", {
+        user: "670c7a910cad595a34ab9edf",
+        quantidade: parseInt(historico),
+        data: new Date(data).toISOString(),
+        vezes: parseInt(quantidade),
       });
 
-      // Atualize a lista de consumos após a adição
-      setConsumos((prev) => [...prev, response.data]);
+      // Atualizar lista corretamente
+      const novoConsumo = response.data;
+
+      setConsumos((prev) => [...prev, novoConsumo]);
+
       // Limpa os inputs
       setHistorico("");
       setData("");
@@ -79,7 +81,9 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
   const renderItem = ({ item }: { item: ConsumoAgregado }) => (
     <View style={styles.row}>
       <Text style={styles.historico}>{item.totalQuantidade} ml</Text>
-      <Text style={styles.data}>{item._id}</Text>
+      <Text style={styles.data}>
+        {new Date(item._id).toLocaleDateString()} {/* Exibir a data corretamente */}
+      </Text>
       <TouchableOpacity style={styles.botao}>
         <Image source={Deletar} style={styles.icone} />
       </TouchableOpacity>
