@@ -1,4 +1,10 @@
-import { NavigationContainer } from "@react-navigation/native";
+import Speedometer from "./src/components/Speedometer";
+
+export default function App() {
+  return <Speedometer />;
+}
+
+/*import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "./src/types/rootStack";
 import { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, CadastroNutriNome, CadastroNutriEmail, Home, TelaFinalizado, TelaPPObjetivo, CadastroNutriFormacao, CadastroNutriTelefone, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, NewExercicise, } from "./src/screen";
@@ -178,3 +184,4 @@ export default function App() {
 }
 
 
+*/

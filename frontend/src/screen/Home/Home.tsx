@@ -28,9 +28,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
             <Text style={Styles.statLabel}>Gastos</Text>
             <Text style={Styles.statValue}>- calorias</Text>
           </View>
-          <View style={Styles.chart}>
-            <Speedometer />
-          </View>
+          <Speedometer />
           <View style={Styles.stats}>
             <Text style={Styles.statLabel}>Consumo</Text>
             <Text style={Styles.statValue}>- gramas</Text>
