@@ -30,6 +30,7 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
     { label: "Feminino", value: "feminino" },
   ];
 
+  
   const handleContinue = () => {
     if (dataNascimento) {
       updateUserData({ gender: sexo, birthdate: dataNascimento }); // Passa 'sexo' corretamente

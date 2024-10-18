@@ -25,7 +25,7 @@ const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
   const handleContinue = () => {
     updateUserData({ height: Number(height), weight: Number(weight) });
     navigation.navigate("TelaPPObjetivo");
-    console.log(updateUserData);
+    console.log("dados a serem enviados", updateUserData);
   };
 
   return (

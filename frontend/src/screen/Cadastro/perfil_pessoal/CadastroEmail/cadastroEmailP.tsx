@@ -16,6 +16,7 @@ type Props = {
   navigation: ContinuarScreenNavigationProp;
 };
 
+
 const CadastroEmail: React.FC<Props> = ({ navigation }) => {
   const { updateUserData } = useUserCadastro();
   const [email, setEmail] = useState<string>("");

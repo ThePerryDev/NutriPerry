@@ -18,6 +18,8 @@ const CadastroNome: React.FC<Props> = ({ navigation }) => {
   const [nome, setNome] = useState<string>("");
   const [sobrenome, setSobrenome] = useState<string>("");
 
+
+  
   const handleContinue = () => {
     updateUserData({ name: nome, nickname: sobrenome });
     navigation.navigate("CadastroEmail");
