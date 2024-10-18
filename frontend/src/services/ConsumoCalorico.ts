@@ -1,10 +1,12 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/consumocalorico';
+//const API_URL = 'http://localhost:3000/consumocalorico';
+const API_URL = 'http://10.68.55.228:3000/consumocalorico';
+//'http://10.68.55.228:3000/consumocalorico';
 
 interface ConsumoCaloricoData {
   user: string;
-  data: Date;
+  data: string;
   tipoRefeicao: string;
   nomeAlimento: string;
   kcal: number;

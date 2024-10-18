@@ -10,7 +10,6 @@ class UsersController {
           email,
           password,
           name,
-          nickname,
           height,
           weight,
           activityLevel,
@@ -18,10 +17,11 @@ class UsersController {
           goal,
           birthdate,
           nutricionista,
-         
-
+          nickname,
+          isLogged
         } = req.body;
     
+        console.log("Dados recebidos para criação de usuário:", req.body);
         try {
           // Cria um novo usuário com os dados recebidos
           const newUser = new UserModel({
@@ -36,17 +36,15 @@ class UsersController {
             goal,
             birthdate,
             nutricionista,  // Pode ser undefined, pois é opcional
-         
-
+            isLogged
           });
     
           // Salva o usuário no banco de dados
           const response = await newUser.save();
           res.status(201).send(response);
         } catch (e: any) {
-          console.error(e);
           if (e.code === 11000) {
-            // Captura erro de duplicidade (email ou username já existentes)
+            // Captura erro de duplicidade (email ou name já existentes)
             res.status(400).send({ message: `O email ou nome de usuário já estão em uso.` });
           } else if (e.errors) {
             // Captura erros de validação específicos (por exemplo, email inválido)
@@ -75,12 +73,12 @@ class UsersController {
   }
 
   public async update(req: Request, res: Response): Promise<void> {
-    console.log("put")
     const {
       id,
       email,
       password,
       name,
+      nickname,
       isLogged,
       height,
       weight,
@@ -97,6 +95,7 @@ class UsersController {
           email,
           password,
           name,
+          nickname,
           isLogged,
           height,
           weight,

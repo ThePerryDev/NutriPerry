@@ -90,7 +90,7 @@ const Jantar: React.FC<Props> = ({ navigation }) => {
         <AddMealButton onPress={() => navigation.navigate("PesquisaAlimento")} />
       </View>
 
-      <MenuInferior />
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

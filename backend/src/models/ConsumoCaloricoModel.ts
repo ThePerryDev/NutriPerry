@@ -8,10 +8,10 @@ import user from '../routes/user';
 interface IConsumoCalorico extends Document {
   user: mongoose.Schema.Types.ObjectId; // Referência ao usuário
   data: Date; // Data do consumo
-  tipoRefeicao: 'refeição 1' | 'refeição 2' | 'refeição 3' | 'refeição 4' | 'refeição 5' | 'refeição 6';
+  tipoRefeicao: 'cafe_da_manha'| 'almoco'| 'jantar'| 'lanches';
   nomeAlimento: string; // Nome do alimento
   kcal: number; // Calorias
-  proteina: string; // Proteínas em gramas
+  proteina: number; // Proteínas em gramas
   carboidrato: number; // Carboidratos em gramas
   peso: number; // Peso do alimento em gramas
   acucar: number; // Açúcares em gramas
@@ -34,12 +34,12 @@ const ConsumoCaloricoSchema: Schema<IConsumoCalorico> = new Schema({
   data: {
     type: Date,
     //required: true,
-    default: Date.now, // Define a data atual como padrão
+   // Define a data atual como padrão
   },
   tipoRefeicao: {
     type: String,
     //required: true,
-    enum: ['refeição 1', 'refeição 2', 'refeição 3', 'refeição 4', 'refeição 5', 'refeição 6'],
+    enum: ['cafe_da_manha', 'almoco', 'jantar', 'lanches'],
   },
   nomeAlimento: {
     type: String,
@@ -50,7 +50,7 @@ const ConsumoCaloricoSchema: Schema<IConsumoCalorico> = new Schema({
     //required: true,
   },
   proteina: {
-    type: String,
+    type: Number,
     //required: true,
   },
   carboidrato: {

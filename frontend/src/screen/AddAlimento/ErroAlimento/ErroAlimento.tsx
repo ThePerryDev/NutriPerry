@@ -47,7 +47,7 @@ const PesquisaAlimento: React.FC<Props> = ({ navigation }) => {
       <View style={styles.buttoncontainer}>
         <AddButton onPress={() => navigation.navigate("CadastrarAlimento")} />
       </View>
-      <MenuInferior />
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

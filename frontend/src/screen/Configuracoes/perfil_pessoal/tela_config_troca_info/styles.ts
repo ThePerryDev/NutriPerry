@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
     subtitulo: {
         color: "#2C4B4E",
-        fontSize: 20,
+        fontSize: 16,
         marginTop: 20,
         marginHorizontal: 55,
         textAlign: 'center'
@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderStyle: "solid",
         borderColor: "#00AD71",
-        marginTop: 10
+        marginTop: 10,
+        paddingLeft:20
       },
 });
 

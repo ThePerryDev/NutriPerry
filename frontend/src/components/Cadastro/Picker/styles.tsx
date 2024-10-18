@@ -1,7 +1,12 @@
 import { StyleSheet } from "react-native";
-import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
+  textgeral: {
+    marginTop: 5,
+    marginBottom: 7,
+    fontSize: 20, // Tamanho da fonte igual ao do textgeral
+    color: "#2C4B4E", // Cor igual ao do textgeral
+  },
   pickerLabel: {
     fontSize: 16,
     marginTop: 13,
@@ -9,7 +14,7 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   pickerContainer: {
-    width: 300,
+    width: "100%", // Usar 100% para se adaptar ao container pai
     height: 68,
     borderStyle: "solid",
     borderWidth: 2,
@@ -17,12 +22,13 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "#ffffff",
     justifyContent: "center",
+    marginBottom:10
   },
   picker: {
     fontSize: 16,
     height: 68,
     color: "#2C4B4E",
-  }
+  },
 });
 
 export default styles;

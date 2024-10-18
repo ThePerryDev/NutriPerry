@@ -10,11 +10,11 @@ interface IUser extends Document {
   weight: number; // em kg
   activityLevel: 'sedentario' | 'pouco ativo' | 'ativo' | 'muito ativo';
   gender: 'masculino' | 'feminino';
-  goal: 'perda de peso' | 'manter meu peso atual' | 'ganho de peso';
+  goal: 'perda de peso' | 'manutenção de peso' | 'ganho de peso';
   birthdate: Date; // Data de nascimento
   nutricionista?: Types.ObjectId; // Referência a um nutricionista existente
   isLogged: boolean; // Indica se o usuário está logado
-  nickname?: string; // Campo opcional para nome de usuário
+  nickname: string
 }
 
 // Validação da senha
@@ -64,6 +64,12 @@ const UserSchema: Schema<IUser> = new Schema({
   name: {
     type: String,
     required: true,
+   
+  },
+  nickname: {
+    type: String,
+    required: true,
+    
   },
   height: {
     type: Number,
@@ -78,7 +84,7 @@ const UserSchema: Schema<IUser> = new Schema({
   activityLevel: {
     type: String,
     required: true,
-    enum: ['sedentario', 'pouco ativo', 'ativo', 'muito ativo']
+   
   },
   gender: {
     type: String,
@@ -88,7 +94,7 @@ const UserSchema: Schema<IUser> = new Schema({
   goal: {
     type: String,
     required: true,
-    enum: ['perda de peso', 'manutenção de peso', 'ganho de peso']
+    
   },
   birthdate: {
     type: Date,
@@ -107,12 +113,6 @@ const UserSchema: Schema<IUser> = new Schema({
     type: Boolean,
     trim: true,
     required: false
-  },
-  nickname: {
-    type: String,
-    required: [false, "O nome de usuário não é obrigatório"],
-    trim: true,
-    maxlength: [30, "O nome de usuário deve ter no máximo 30 caracteres"]
   }
 }, {
   toJSON: {

@@ -19,6 +19,7 @@ export interface UsersProps {
   isLogged: boolean; // Indica se o usuário está logado
 }
 
+
 export interface Error {
   error: string;
   props: string;
@@ -28,7 +29,7 @@ export interface Error {
 export interface ConsumoCaloricoProps {
   id?: string; // Opcional caso não tenha durante a criação
   user: string;
-  data: Date;
+  data: string;
   tipoRefeicao: string;
   nomeAlimento: string;
   kcal: number;
@@ -36,6 +37,11 @@ export interface ConsumoCaloricoProps {
   carboidrato: number;
   peso: number;
   acucar: number;
+  
+}
+
+export interface consoleTesteProps{
+  consoleTeste: string;
 }
 
 // Interface para o contexto do consumo calórico
@@ -66,11 +72,27 @@ export interface Nutriments {
   proteins?: number;
   carbohydrates?: number;
   sugars?: number;
+  'sodium_100g'?: number;
+  'sugars_100g'?: number;
+  'fat_100g'?:number;
+  'saturated-fat_100g'?: number;
+  'fiber_100g'?: number;
+  
 }
 
 export interface Product {
   product_name?: string;
-  nutriments?: Nutriments;
+  nutriments?: {
+    'energy-kcal_100g'?: number;
+    proteins?: number;
+    carbohydrates?: number;
+    'salt_100g'?: number;
+    'sugars_100g'?: number;
+    'fat_100g'?:number;
+    'saturated-fat_100g'?: number;
+    'fiber_100g'?: number;
+    // Adicione mais nutrientes se necessário
+  };
 }
 
 // Interface para o AlimentoTacoModel
@@ -92,4 +114,15 @@ export interface AlimentoTaco {
     value: number;
     unit: string;
   };
+}
+
+export interface NutritionalValues {
+  kcal: string;
+  protein: string;
+  carbohydrate: string;
+  sodium: string;
+  sugar: string;
+  gordura: string;
+  gordura_saturada: string;
+  fibra: string;
 }

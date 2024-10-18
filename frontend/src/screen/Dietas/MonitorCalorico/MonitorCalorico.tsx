@@ -29,14 +29,14 @@ const MonitorCalorico: React.FC<Props> = ({ navigation }) => {
         <TouchableOpacity style={styles.dietbutton} onPress={() => navigation.navigate("MenuDietas")}>
           <Text style={styles.diettext}>Dietas</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.dietbutton} onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity style={styles.dietbutton} onPress={() => navigation.navigate("SeusExercicios")}>
           <Text style={styles.diettext}>Exercícios</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.imagecontainer}>
         <Image source={monitorcalorico} style={styles.image} />
       </View>
-      <MenuInferior />
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

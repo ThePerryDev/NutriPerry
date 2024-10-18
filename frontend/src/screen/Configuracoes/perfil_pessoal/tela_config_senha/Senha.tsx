@@ -42,7 +42,7 @@ const Senha: React.FC<Props> = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-            <MenuInferior></MenuInferior>
+            <MenuInferior navigation={navigation} />
         </View>
     );
 }

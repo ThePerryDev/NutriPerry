@@ -39,6 +39,13 @@ const styles = StyleSheet.create({
         marginTop: 50,
         backgroundColor: '#00AD71',
         borderRadius: 25
+    },
+    buttontext:{
+      justifyContent: "center",
+      alignItems: "center",
+      fontSize:16,
+      fontWeight:"bold",
+      color:"#00AD71",
     }
   });
 

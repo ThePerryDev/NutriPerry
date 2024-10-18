@@ -44,7 +44,7 @@ const ConfiguracoesNutri: React.FC<Props> = ({ navigation }) => {
                     <Text style={{ color: "#FFFFFF", fontSize: 20, fontWeight: 900, }}>LOGOUT</Text>
                 </TouchableOpacity>
             </View>
-            <MenuInferior></MenuInferior>
+            <MenuInferior navigation={navigation} />
         </View>
     );
 }

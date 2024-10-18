@@ -6,13 +6,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent:"center",
     marginTop:25,
-    marginBottom: 25,
+    marginBottom: 15,
   },
   pickerLabel: {
     fontSize: 18,
     color: "#2C4B4E",
     fontWeight: "bold",
-    marginRight: 30,
+    marginRight: 60,
   },
   pickerContainer: {
     width: 185,
