@@ -24,7 +24,7 @@ const buscarAlimentoTaco = async (termo: string): Promise<AlimentoTaco[]> => {
   try {
     
     //const response = await axios.get(`http://localhost:3000/alimentotaco`, 
-    const response = await axios.get(`http://10.68.55.228:3000/alimentotaco`,
+    const response = await axios.get(`http://10.68.55.162:3000/alimentotaco`,
     {
       params: {
         description: termo,

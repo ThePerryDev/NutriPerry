@@ -41,9 +41,9 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
       
-      //10.68.55.228
+      //10.68.55.162
       //const responseAlimentos = await axios.get("http://localhost:3000/consumos/alimento", {
-        const responseAlimentos = await axios.get("http://10.68.55.228:3000/consumos/alimento", {
+        const responseAlimentos = await axios.get("http://10.68.55.162:3000/consumos/alimento", {
         params: {
           userId: "67074140dbf77240420381b1",
           data: formattedDate,
@@ -59,9 +59,9 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      //10.68.55.228
+      //10.68.55.162
       //const responseTotais = await axios.get("http://localhost:3000/consumos/listarconsumo", {
-        const responseTotais = await axios.get("http://10.68.55.228:3000/consumos/listarconsumo", {
+        const responseTotais = await axios.get("http://10.68.55.162:3000/consumos/listarconsumo", {
         params: {
           userId: "67074140dbf77240420381b1",
           data: formattedDate,
@@ -79,7 +79,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://10.68.55.228:3000/consumos/delete/${id}`);
+      await axios.delete(`http://10.68.55.162:3000/consumos/delete/${id}`);
       //await axios.delete(`http://localhost:3000/consumos/delete/${id}`);
       setProdutos((prevProdutos) => prevProdutos.filter((produto) => produto.id !== id));
     } catch (error) {

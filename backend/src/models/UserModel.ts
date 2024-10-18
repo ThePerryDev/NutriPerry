@@ -59,7 +59,7 @@ const UserSchema: Schema<IUser> = new Schema({
   password: {
     type: String,
     required: [true, 'A senha é obrigatória'],
-    validate: passwordValidator
+    //validate: passwordValidator
   },
   name: {
     type: String,

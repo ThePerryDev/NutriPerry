@@ -10,9 +10,9 @@ router.get("/", UserController.list);
 router.post("/", UserController.create);
 
 // Rota para atualizar um usuário específico
-router.put("/:id", UserController.update);
+router.put("/", UserController.update);
 
 // Rota para deletar um usuário específico
-router.delete("/:id", UserController.delete);
+router.delete("/", UserController.delete);
 
 export default router;
