@@ -18,7 +18,7 @@ export type RootStackParamList = {
     AdicionarAlimento: {
     product: AlimentoTaco | Product | null; // Agora aceita ambos os tipos
     };
-    //AdicionarAlimento:undefined;
+    
     CadastrarAlimento:undefined;
     ErroAlimento:undefined;
     MonitorCalorico:undefined;
