@@ -37,31 +37,16 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
     { label: "Muito ativo", value: "muito ativo" },
   ];
 
-  const { userData } = useUserCadastro();
-
   const handleContinue = async () => {
-    try {
-      // Atualiza o contexto e aguarda a finalização
-      await updateUserData({ 
-        goal: selectGoal, 
-        activityLevel: selectExerciseTime 
-      });
+    // Atualiza o contexto antes de continuar
+    await updateUserData({ 
+      goal: selectGoal, 
+      activityLevel: selectExerciseTime 
+    });
+    
 
-      // Prepara os dados para envio
-      const userDataToSend = { 
-        ...userData, 
-        goal: selectGoal,
-        activityLevel: selectExerciseTime,
-      };
-
-      console.log("userData enviado para o backend:", userDataToSend);
-
-      // Chama a função para criar o usuário no banco de dados
-      await createUser(userDataToSend);
-      navigation.navigate("TelaFinalizado");
-    } catch (error) {
-      console.error("Erro ao criar usuário:", error);
-    }
+    // Navega para a próxima etapa após atualizar o contexto
+    navigation.navigate("TelaFinalizado");
   };
 
   return (

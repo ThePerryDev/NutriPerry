@@ -9,8 +9,8 @@ export interface UserProps {
   height: number; // em cm
   weight: number; // em kg
   activityLevel: string;
-  gender: string;
-  goal: string;
+  gender: string | undefined;
+  goal: string | undefined;
   birthdate: Date; // Data de nascimento
   nutricionista?: string; // Opcional
   isLogged: boolean; // Indica se o usuário está logado
