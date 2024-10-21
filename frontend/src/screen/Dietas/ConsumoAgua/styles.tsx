@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   datacontainer: {
-    flex:1,
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignContent: "center",
     justifyContent: "center",
-    paddingLeft:20,
+    paddingLeft: 20,
     marginBottom: 25,
   },
   inputdata: {
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignContent: "center",
     justifyContent: "center",
-    paddingLeft:20,
+    paddingLeft: 20,
     marginBottom: 25,
   },
   inputquantidade: {
@@ -142,10 +142,10 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignContent: "center",
     justifyContent: "center",
-    paddingLeft:15,
+    paddingLeft: 15,
     marginBottom: 25,
   },
-    arrow: {
+  arrow: {
     width: 30,
     height: 30,
   },
@@ -157,6 +157,71 @@ const styles = StyleSheet.create({
   },
   spacer: {
     flex: 1,
+  },
+  continuebutton: {
+    height: 60,
+    borderRadius: 25,
+    backgroundColor: "#00AD71",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom:80,
+    marginTop:25,
+  },
+  buttonText: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#ffffff",
+    alignItems: "center",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    width: "80%",
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#2C4B4E",
+  },
+  input: {
+    width: "100%",
+    height: 50,
+    borderWidth: 2,
+    borderColor: "#00AD71",
+    borderRadius: 15,
+    paddingLeft: 10,
+    marginBottom: 15,
+  },
+  modalButton: {
+    width: "100%",
+    backgroundColor: "#00AD71",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  modalButtonText: {
+    color: "#fff",
+    fontSize: 18,
+    textAlign: "center",
+  },
+  modalCloseButton: {
+    width: "100%",
+    backgroundColor: "#FF725E",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 10,
   },
 });
 

@@ -8,7 +8,7 @@ class UsersController {
         const {
           email,
           password,
-          username,
+          name,
           height,
           weight,
           activityLevel,
@@ -24,7 +24,7 @@ class UsersController {
           const newUser = new UserModel({
             email,
             password,
-            username,
+            name,
             height,
             weight,
             activityLevel,
