@@ -35,15 +35,6 @@ const TelaFinalizado: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity
-          style={styles.arrowContainer}
-          onPress={() => navigation.navigate("TelaPPObjetivo")}
-        >
-          <Image source={setaVolta} style={styles.arrow} />
-        </TouchableOpacity>
-        <Text style={styles.headerlabel}>(5/5)</Text>
-      </View>
       <View>
         <View style={styles.headerContainer}>
           <Text style={styles.headerlabel}>Cadastro finalizado</Text>
@@ -57,7 +48,7 @@ const TelaFinalizado: React.FC<Props> = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.buttoncontainer}>
-        <ContinueButtonV2 onPress={() => navigation.navigate("Home")} />
+        <ContinueButtonV2 onPress={() => navigation.navigate("TelaLogin")} />
       </View>
     </View>
   );
