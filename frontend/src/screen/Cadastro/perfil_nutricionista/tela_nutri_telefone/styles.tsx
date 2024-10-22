@@ -4,10 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FBFBFB',
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center'
+        padding:50
     },
  
     cima: {
@@ -20,7 +17,6 @@ const styles = StyleSheet.create({
  
     button: {
         height: 68,
-        width: 300,
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 50,
@@ -31,8 +27,9 @@ const styles = StyleSheet.create({
     textgeral: {
         marginTop: 55,
         marginBottom: 7,
-        marginLeft: -130,
-        fontSize: 20
+        fontSize: 20,
+        fontWeight:"semibold",
+        color: "#2C4B4E",
     },
  
     image: {
@@ -41,10 +38,10 @@ const styles = StyleSheet.create({
     },
  
     input: {
+        width:"100%",
         backgroundColor: '#FFFFFF',
         borderRadius: 25,
         height: 68,
-        width: 300,
         borderWidth: 2,
         borderStyle: 'solid',
         borderColor: '#00AD71'

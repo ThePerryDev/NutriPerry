@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types } from 'mongoose';
-import User from './UserModel'; // Importação do modelo de usuário
+import UserModel from './UserModel'; // Importação do modelo de usuário
 
 // Esquema para Gasto Calórico
 const GastoCaloricoSchema: Schema = new Schema({
@@ -7,6 +7,13 @@ const GastoCaloricoSchema: Schema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Referência ao modelo de usuário
     required: true,
+    validate: {
+      validator: async function (id: string) {
+        const usuário = await UserModel.findById(id); // verifica se id existe na coleção 
+        return !!usuário; // true se o usuário existir
+      },
+      message: 'O usuário não existe!',
+    },
   },
   data: {
     type: Date,
@@ -25,21 +32,6 @@ const GastoCaloricoSchema: Schema = new Schema({
     required: true,
     min: 0, // Gasto calórico não pode ser negativo
   },
-});
-
-// Middleware para validar o usuário antes de salvar o documento
-GastoCaloricoSchema.pre('save', async function (next) {
-  const gastoCalorico = this;
-
-  // Verifica se o usuário existe no banco de dados
-  const userExists = await User.findById(gastoCalorico.userID);
-  if (!userExists) {
-    const err = new Error('Usuário não encontrado');
-    return next(err);
-  }
-
-  // Se o usuário existir, prosseguir com o salvamento
-  next();
 });
 
 // Criando o modelo

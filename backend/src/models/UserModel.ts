@@ -1,20 +1,20 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
-import { isEmail } from 'validator';
 import NutricionistaModel from './NutricionistaModel';
 
 // Interface que representa a estrutura do usuário
 interface IUser extends Document {
   email: string;
   password: string;
-  username: string;
+  name: string;
   height: number; // em cm
   weight: number; // em kg
-  activityLevel: number; // de 1 a 7 horas por semana
+  activityLevel: 'sedentario' | 'pouco ativo' | 'ativo' | 'muito ativo';
   gender: 'masculino' | 'feminino';
-  goal: 'perda de peso' | 'manutenção de peso' | 'emagrecimento';
+  goal: 'perda de peso' | 'manter meu peso atual' | 'ganho de peso';
   birthdate: Date; // Data de nascimento
   nutricionista?: Types.ObjectId; // Referência a um nutricionista existente
   isLogged: boolean; // Indica se o usuário está logado
+  nickname?: string; // Campo opcional para nome de usuário
 }
 
 // Validação da senha
@@ -37,23 +37,33 @@ const passwordValidator = [
   },
 ];
 
+// Para o validator do email
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 // Definindo o esquema
 const UserSchema: Schema<IUser> = new Schema({
   email: {
     type: String,
-    required: true,
-    unique: true,  // Garante que não haverá duplicatas de email
-    validate: [isEmail, 'Email inválido']
-  },
+    trim: true,
+    lowercase: true,
+    unique: true,
+    required: [true, "O e-mail é obrigatório"],
+    maxlength: [50, "O e-mail deve ter no máximo 50 caracteres"],
+    validate: {
+        validator: function (value: string) {
+            return emailRegex.test(value);
+        },
+        message: "O e-mail informado não é válido"
+    }
+},
   password: {
     type: String,
-    required: true,
+    required: [true, 'A senha é obrigatória'],
     validate: passwordValidator
   },
-  username: {
+  name: {
     type: String,
     required: true,
-    unique: true  // Garante que não haverá duplicatas de username
   },
   height: {
     type: Number,
@@ -66,10 +76,9 @@ const UserSchema: Schema<IUser> = new Schema({
     min: 0
   },
   activityLevel: {
-    type: Number,
+    type: String,
     required: true,
-    min: 1,
-    max: 7
+    enum: ['sedentario', 'pouco ativo', 'ativo', 'muito ativo']
   },
   gender: {
     type: String,
@@ -79,7 +88,7 @@ const UserSchema: Schema<IUser> = new Schema({
   goal: {
     type: String,
     required: true,
-    enum: ['perda de peso', 'manutenção de peso', 'emagrecimento']
+    enum: ['perda de peso', 'manutenção de peso', 'ganho de peso']
   },
   birthdate: {
     type: Date,
@@ -90,14 +99,20 @@ const UserSchema: Schema<IUser> = new Schema({
     }
   },
   nutricionista: {
-    type: Types.ObjectId, // Usando Types.ObjectId corretamente
-    ref: 'Nutricionista', // Referência ao modelo de Nutricionista
-    required: false, // Campo opcional
+    type: Types.ObjectId,
+    ref: 'Nutricionista',
+    required: false,
   },
   isLogged: {
     type: Boolean,
     trim: true,
-    required: true
+    required: false
+  },
+  nickname: {
+    type: String,
+    required: [false, "O nome de usuário não é obrigatório"],
+    trim: true,
+    maxlength: [30, "O nome de usuário deve ter no máximo 30 caracteres"]
   }
 }, {
   toJSON: {

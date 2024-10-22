@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 25,
+    marginBottom: 15,
   },
   textgeral: {
     fontSize: 18,
     color: "#2C4B4E",
     fontWeight: "bold",
-    marginRight: 10,
+    marginRight: 20,
   },
   input: {
     width: 185,
@@ -51,27 +51,27 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#ffffff",
     justifyContent: "center",
+    paddingLeft: 20,
   },
   infocontainer: {
-    height: 280,
+    height: 305,
     backgroundColor: "#f5f5f5",
     borderRadius: 15,
     padding: 10,
   },
-  infotitle:{
-    fontSize: 16,
+  infotitle: {
+    fontSize: 14,
     color: "#2C4B4E",
     fontWeight: "bold",
-    marginLeft:10,
-    marginBottom:10
+    marginLeft: 10,
+    marginBottom: 10,
   },
-  head: {
-  },
+  head: {},
   textHead: {
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     fontSize: 10,
-    padding:5,
+    padding: 5,
     color: "#2C4B4E",
   },
   row: {
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   text: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontWeight: "bold",
     fontSize: 10,
     color: "#2C4B4E",
   },

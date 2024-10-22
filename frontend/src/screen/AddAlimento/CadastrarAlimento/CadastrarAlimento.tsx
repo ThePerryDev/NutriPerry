@@ -87,7 +87,7 @@ const CadastrarAlimento: React.FC<Props> = ({ navigation }) => {
           />
         </View>
       </View>
-      <MenuInferior />
+      <MenuInferior navigation={navigation} />
     </View>
   );
 };

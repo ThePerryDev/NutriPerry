@@ -23,7 +23,7 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
 }) => {
   return (
     <View>
-      <Text style={styles.pickerLabel}>{label}</Text>
+      <Text style={styles.textgeral}>{label}</Text>
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={selectedValue}
