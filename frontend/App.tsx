@@ -19,8 +19,8 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <AuthProvider>
-    <UserCadastroProvider>
-      
+      <UserCadastroProvider>
+
         <ConsumoCaloricoProvider>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="AbrindoApp">
@@ -172,9 +172,9 @@ export default function App() {
             </Stack.Navigator>
           </NavigationContainer>
         </ConsumoCaloricoProvider>
-        </UserCadastroProvider>
-      </AuthProvider>
-    
+      </UserCadastroProvider>
+    </AuthProvider>
+
   );
 }
 
