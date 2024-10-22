@@ -10,6 +10,7 @@ import axios from "axios";
 import moment from "moment";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AuthContext } from "../../../context";
+import { useFocusEffect } from "@react-navigation/native"; // Importar useFocusEffect
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -35,17 +36,18 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    fetchAlimentos();
-  }, [selectedDate]);
+  // Usando useFocusEffect para chamar fetchAlimentos quando a tela estiver ativa
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchAlimentos();
+    }, [selectedDate]) // Dependência pode incluir selectedDate se necessário
+  );
 
   const fetchAlimentos = async () => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
-      
-      //192.168.1.4
-      //const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
-        const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
+
+      const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -61,11 +63,8 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      //192.168.1.4
-      //const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
-        const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
         params: {
-          //userId: "67074140dbf77240420381b1",
           userId: user?.id,
           data: formattedDate,
           tipoRefeicao: "cafe_da_manha"
@@ -83,13 +82,24 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
   const handleDelete = async (id: string) => {
     try {
       await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
-      // Após a exclusão, buscarmos os alimentos atualizados
-      fetchAlimentos();
+      
+      setProdutos((prevProdutos) => {
+        const updatedProdutos = prevProdutos.filter((produto) => produto.id !== id);
+        
+        if (updatedProdutos.length === 0) {
+          setTotalKcal(0);
+          setTotalProteina(0);
+          setTotalCarboidrato(0);
+        }
+
+        return updatedProdutos;
+      });
+
+      fetchAlimentos(); 
     } catch (error) {
       console.error("Erro ao deletar o item:", error);
     }
   };
-  
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
     setShowDatePicker(false);

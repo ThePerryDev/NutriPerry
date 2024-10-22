@@ -121,13 +121,19 @@ const Home: React.FC<Props> = ({ navigation }) => {
         <View style={Styles.card}>
           <Text style={Styles.totalText}>Calorias</Text>
           <View style={Styles.progressContainer}>
-            <ProgressRing progress={totalCalorias > 0 ? (totalCalorias / objetivoCalorias) * 100 : 0} radius={50} strokeWidth={10} color="#00cc99" />
+            <ProgressRing 
+              progress={totalCalorias > 0 ? (totalCalorias / objetivoCalorias) * 100 : 0} 
+              radius={50} 
+              strokeWidth={10} 
+              color="#00cc99" 
+            />
             <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoCalorias} Kcal`}</Text>
-              <Text style={Styles.detailText}>{`Consumido: ${totalCalorias > 0 ? totalCalorias : 0} Kcal`}</Text>
+              <Text style={Styles.detailText}>{`Objetivo: ${objetivoCalorias.toFixed(2)} Kcal`}</Text>
+              <Text style={Styles.detailText}>{`Consumido: ${totalCalorias > 0 ? totalCalorias.toFixed(2) : 0} Kcal`}</Text>
             </View>
           </View>
         </View>
+
 
         {/* Carboidratos */}
         <View style={Styles.card}>
@@ -135,8 +141,8 @@ const Home: React.FC<Props> = ({ navigation }) => {
           <View style={Styles.progressContainer}>
             <ProgressRing progress={totalCarboidratos > 0 ? (totalCarboidratos / objetivoCarboidratos) * 100 : 0} radius={50} strokeWidth={10} color="#ffcc00" />
             <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoCarboidratos}g`}</Text>
-              <Text style={Styles.detailText}>{`Consumido: ${totalCarboidratos > 0 ? totalCarboidratos : 0}g`}</Text>
+              <Text style={Styles.detailText}>{`Objetivo: ${objetivoCarboidratos.toFixed(2)}g`}</Text>
+              <Text style={Styles.detailText}>{`Consumido: ${totalCarboidratos > 0 ? totalCarboidratos.toFixed(2) : 0}g`}</Text>
             </View>
           </View>
         </View>
@@ -147,8 +153,8 @@ const Home: React.FC<Props> = ({ navigation }) => {
           <View style={Styles.progressContainer}>
             <ProgressRing progress={totalProteinas > 0 ? (totalProteinas / objetivoProteinas) * 100 : 0} radius={50} strokeWidth={10} color="#337ab7" />
             <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoProteinas}g`}</Text>
-              <Text style={Styles.detailText}>{`Consumido: ${totalProteinas > 0 ? totalProteinas : 0}g`}</Text>
+              <Text style={Styles.detailText}>{`Objetivo: ${objetivoProteinas.toFixed(2)}g`}</Text>
+              <Text style={Styles.detailText}>{`Consumido: ${totalProteinas > 0 ? totalProteinas.toFixed(2) : 0}g`}</Text>
             </View>
           </View>
         </View>
@@ -159,8 +165,8 @@ const Home: React.FC<Props> = ({ navigation }) => {
           <View style={Styles.progressContainer}>
             <ProgressRing progress={totalAcucar > 0 ? (totalAcucar / objetivoAcucar) * 100 : 0} radius={50} strokeWidth={10} color="#9c27b0" />
             <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoAcucar}g`}</Text>
-              <Text style={Styles.detailText}>{`Consumido: ${totalAcucar > 0 ? totalAcucar : 0}g`}</Text>
+              <Text style={Styles.detailText}>{`Objetivo: ${objetivoAcucar.toFixed(2)}g`}</Text>
+              <Text style={Styles.detailText}>{`Consumido: ${totalAcucar > 0 ? totalAcucar.toFixed(2) : 0}g`}</Text>
             </View>
           </View>
         </View>

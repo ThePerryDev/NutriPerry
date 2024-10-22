@@ -12,37 +12,49 @@ class ConsultaConsumoController {
     const dataFormatada = moment(data as string).format("YYYY-MM-DD");
 
     try {
-      const resultados = await ConsumoCaloricoModel.find({
-        user: userId,
-        tipoRefeicao: tipoRefeicao,
-        data: dataFormatada,
-      });
+        const resultados = await ConsumoCaloricoModel.find({
+            user: userId,
+            tipoRefeicao: tipoRefeicao,
+            data: dataFormatada,
+        });
 
-      console.log('Resultados da agregação:', resultados);
+        console.log('Resultados da agregação:', resultados);
 
-      if (resultados.length === 0) {
-        return res.status(404).json({ message: 'Nenhum consumo encontrado.' });
-      }
+        // Verifica se não há resultados
+        if (resultados.length === 0) {
+            // Retorna zero para todos os totais, em vez de 404
+            return res.status(200).json({
+                alimentos: [],
+                totalKcal: 0,
+                totalProteina: 0,
+                totalCarboidrato: 0,
+                totalPeso: 0,
+                totalAcucar: 0,
+            });
+        }
 
-      const totalKcal = resultados.reduce((acc, curr) => acc + curr.kcal, 0);
-      const totalProteina = resultados.reduce((acc, curr) => acc + curr.proteina, 0);
-      const totalCarboidrato = resultados.reduce((acc, curr) => acc + curr.carboidrato, 0);
-      const totalPeso = resultados.reduce((acc, curr) => acc + curr.peso, 0);
-      const totalAcucar = resultados.reduce((acc, curr) => acc + curr.acucar, 0);
+        // Se houver resultados, calcula os totais
+        const totalKcal = resultados.reduce((acc, curr) => acc + curr.kcal, 0);
+        const totalProteina = resultados.reduce((acc, curr) => acc + curr.proteina, 0);
+        const totalCarboidrato = resultados.reduce((acc, curr) => acc + curr.carboidrato, 0);
+        const totalPeso = resultados.reduce((acc, curr) => acc + curr.peso, 0);
+        const totalAcucar = resultados.reduce((acc, curr) => acc + curr.acucar, 0);
 
-      return res.status(200).json({
-        alimentos: resultados.map((consumo) => consumo.nomeAlimento),
-        totalKcal,
-        totalProteina,
-        totalCarboidrato,
-        totalPeso,
-        totalAcucar,
-      });
+        // Retorna os totais calculados
+        return res.status(200).json({
+            alimentos: resultados.map((consumo) => consumo.nomeAlimento),
+            totalKcal,
+            totalProteina,
+            totalCarboidrato,
+            totalPeso,
+            totalAcucar,
+        });
     } catch (error) {
-      console.error('Erro ao listar consumos:', error);
-      return res.status(500).json({ message: 'Erro ao listar consumos.', error });
+        console.error('Erro ao listar consumos:', error);
+        return res.status(500).json({ message: 'Erro ao listar consumos.', error });
     }
-  }
+}
+
 
   // Método para listar o total de calorias
   async listTotalKcal(req: Request, res: Response) {
