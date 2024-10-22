@@ -7,6 +7,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 
+  pageContainer: {
+    flex: 1,
+  },
+
+  scrollContent: {
+    flexGrow: 1,
+  },
+
   header: {
     fontSize: 32,
     fontWeight: "bold",
@@ -24,105 +32,25 @@ const styles = StyleSheet.create({
   totalText: {
     color: "#fff",
     fontSize: 18,
+    fontWeight: "bold",
     textAlign: "center",
     marginBottom: 10,
-    fontWeight: "bold",
   },
 
-  statsContainer: {
+  progressContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
-  stats: {
-    alignItems: "center",
+  progressInfo: {
+    marginLeft: 15,
   },
 
-  statLabel: {
+  detailText: {
     color: "#fff",
     fontSize: 16,
-  },
-
-  statValue: {
-    color: "#fff",
-    fontSize: 14,
-  },
-
-  chart: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-  },
-
-  totalCalories: {
-    color: "#24B77F",
-    fontWeight: "bold",
-  },
-
-  mealItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#f9f9f9",
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 10,
-  },
-
-  mealInfo: {
-    flex: 1,
-    marginLeft: 10,
-    color: "#2C4B4E",
-  },
-
-  mealName: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#2C4B4E",
-  },
-
-  mealDetail: {
-    fontSize: 14,
-    color: "#2C4B4E",
-  },
-
-  logo: {
-    width: 50,
-    height: 50,
-  },
-
-  // Estilos para o modal
-  modalBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Fundo semitransparente
-  },
-
-  modalContent: {
-    width: "80%",
-    backgroundColor: "#fff",
-    padding: 20,
-    borderRadius: 12,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-
-  closeButton: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    padding: 5,
-    backgroundColor: "#ccc",
-    borderRadius: 20,
+    marginBottom: 5,
   },
 });
 

@@ -53,25 +53,46 @@ class ConsultaConsumoController {
     const dataFormatada = moment(data as string).format("YYYY-MM-DD");
 
     try {
-      const resultados = await ConsumoCaloricoModel.find({
-        user: userId,
-        data: dataFormatada,
-      });
+        const resultados = await ConsumoCaloricoModel.find({
+            user: userId,
+            data: dataFormatada,
+        });
 
-      console.log('Resultados para totalKcal:', resultados);
+        console.log('Resultados para totalKcal:', resultados);
 
-      if (resultados.length === 0) {
-        return res.status(404).json({ message: 'Nenhum consumo encontrado.' });
-      }
+        // Se não houver resultados, retornar 0 para todos os campos
+        if (resultados.length === 0) {
+            return res.status(200).json({
+                totalKcal: 0,
+                totalProteina: 0,
+                totalCarboidrato: 0,
+                totalPeso: 0,
+                totalAcucar: 0,
+            });
+        }
 
-      const totalKcal = resultados.reduce((acc, curr) => acc + curr.kcal, 0);
+        // Cálculo dos totais, com fallback para 0 se algum campo estiver null ou undefined
+        const totalKcal = resultados.reduce((acc, curr) => acc + (curr.kcal || 0), 0);
+        const totalProteina = resultados.reduce((acc, curr) => acc + (curr.proteina || 0), 0);
+        const totalCarboidrato = resultados.reduce((acc, curr) => acc + (curr.carboidrato || 0), 0);
+        const totalPeso = resultados.reduce((acc, curr) => acc + (curr.peso || 0), 0);
+        const totalAcucar = resultados.reduce((acc, curr) => acc + (curr.acucar || 0), 0);
 
-      return res.status(200).json({ totalKcal });
+        // Retornando todos os totais
+        return res.status(200).json({
+            totalKcal,
+            totalProteina,
+            totalCarboidrato,
+            totalPeso,
+            totalAcucar,
+        });
     } catch (error) {
-      console.error('Erro ao listar totalKcal:', error);
-      return res.status(500).json({ message: 'Erro ao listar totalKcal.', error });
+        console.error('Erro ao listar totalKcal:', error);
+        return res.status(500).json({ message: 'Erro ao listar totalKcal.', error });
     }
-  }
+}
+
+
 
 // Método para listar alimentos por refeição
 async listAlimentoRefeicao(req: Request, res: Response) {
