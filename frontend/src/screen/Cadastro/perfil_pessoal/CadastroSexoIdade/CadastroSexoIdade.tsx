@@ -33,7 +33,7 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
   
   const handleContinue = () => {
     if (dataNascimento) {
-      updateUserData({ gender: sexo, birthdate: dataNascimento }); // Passa 'sexo' corretamente
+      updateUserData({ gender: sexo, birthdate: moment(dataNascimento).format("YYYY-MM-DD") }); // Passa 'sexo' corretamente
       navigation.navigate("CadastroAlturaPeso");
       console.log(updateUserData);
     }

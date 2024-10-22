@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Image, Keyboard } from "react-native";
 import { imagem4, setaVolta } from "../../../../assets";
 import styles from "./Styles";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -46,6 +46,8 @@ const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
         onChangeText={(height) => setHeight(height)}
         style={styles.input}
         keyboardType="numeric"
+        returnKeyType="done"
+        onSubmitEditing={() => Keyboard.dismiss()}
       />
       <Text style={styles.textgeral}>Insira seu peso</Text>
       <TextInput
@@ -53,6 +55,8 @@ const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
         onChangeText={(weight) => setWeight(weight)}
         style={styles.input}
         keyboardType="numeric"
+        returnKeyType="done"
+        onSubmitEditing={() => Keyboard.dismiss()}
       />
       <View style={styles.buttoncontainer}>
         <ContinueButton onPress={handleContinue} />
