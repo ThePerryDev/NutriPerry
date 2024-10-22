@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 //const API_URL = 'http://10.68.55.162:3000/gastocalorico';
-const API_URL = 'http://10.68.55.124:3000/gastocalorico';
+const API_URL = 'http://10.68.55.203:3000/gastocalorico';
 
 interface GastoCaloricoData {
   userID: string;

@@ -6,7 +6,6 @@ import {
   FlatList,
   Image,
   TextInput,
-  ScrollView,
   KeyboardAvoidingView,
   Platform,
   Modal,
@@ -17,6 +16,7 @@ import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import { setaVolta, Deletar } from "../../../assets";
 import styles from "./styles";
 import axios from "axios";
+import moment from "moment";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -28,11 +28,11 @@ type Props = {
 };
 
 type ConsumoAgregado = {
-  _id: string; // A data do consumo
-  date: string; // Data formatada
-  totalQuantidade: number; // A quantidade total consumida nesse dia
-  userId: string; // ID do usuário
-  documentoId: string; // ID do documento
+  _id: string;
+  date: string;
+  totalQuantidade: number;
+  userId: string;
+  documentoId: string;
 };
 
 const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
@@ -41,67 +41,56 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
   const [data, setData] = useState<string>("");
   const [quantidade, setQuantidade] = useState<string>("");
   const [isKeyboardVisible, setKeyboardVisible] = useState<boolean>(false);
-  const [isModalVisible, setModalVisible] = useState<boolean>(false); // Modal state
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
 
-  const userId = "6716f8c9bc779d5cf46b5871"; // ID fixo
+  const userId = "67181fa58c9c26206b523e3a"; // ID fixo
+
+  const fetchConsumoAgua = async () => {
+    try {
+      const response = await axios.get(
+        `http://10.68.55.203:3000/consumo-agua/${userId}`
+      );
+      const consumosFormatados = response.data.map((consumo: any) => ({
+        _id: consumo.documentoId,
+        date: consumo.date,
+        totalQuantidade: consumo.totalQuantidade,
+        userId: consumo.userId,
+      }));
+      setConsumos(consumosFormatados);
+    } catch (error) {
+      console.error("Erro ao buscar o consumo de água:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchConsumoAgua = async () => {
-      try {
-        const response = await axios.get(
-          `http://10.68.55.124:3000/consumo-agua/${userId}`
-        );
-        // Formata a resposta
-        const consumosFormatados = response.data.map((consumo: any) => ({
-          _id: consumo.documentoId, // Usar documentoId como _id
-          date: consumo.date,
-          totalQuantidade: consumo.totalQuantidade,
-          userId: consumo.userId,
-        }));
-        setConsumos(consumosFormatados);
-      } catch (error) {
-        console.error("Erro ao buscar o consumo de água:", error);
-      }
-    };
-
     fetchConsumoAgua();
-  }, []);
+  }, [consumos]); // Agora, o useEffect será chamado sempre que o estado consumos mudar
+
   const handleAddConsumo = async () => {
     if (!historico || !data || !quantidade) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
-  
-    const regexData = /^\d{4}-\d{2}-\d{2}$/;
-    if (!regexData.test(data)) {
+
+    const dataMoment = moment(data, "YYYY-MM-DD", true);
+    if (!dataMoment.isValid()) {
       alert("Por favor, insira a data no formato AAAA-MM-DD.");
       return;
     }
-  
-    const dataObj = new Date(data);
-    if (isNaN(dataObj.getTime())) {
-      alert("Data inválida. Por favor, insira uma data válida.");
-      return;
-    }
-  
+
+    const dataFormatada = dataMoment.toISOString();
+
     try {
-      const response = await axios.post("http://10.68.55.124:3000/consumo-agua", {
-        user: "6716f8c9bc779d5cf46b5871",
+      await axios.post("http://10.68.55.203:3000/consumo-agua", {
+        user: userId,
         quantidade: parseInt(historico),
-        data: dataObj.toISOString(),
+        data: dataFormatada,
         vezes: parseInt(quantidade),
       });
-  
-      // Ajuste a estrutura do novo consumo recebido
-      const novoConsumo = {
-        _id: response.data.documentoId, // Certifique-se de que documentoId está sendo retornado
-        date: response.data.date, // Verifique se a data está sendo retornada corretamente
-        totalQuantidade: response.data.totalQuantidade, // Certifique-se de que este campo está presente
-        userId: response.data.userId, // Verifique se o userId está sendo retornado
-      };
-  
-      setConsumos((prev) => [...prev, novoConsumo]);
-  
+
+      // Recarregar os dados da API após adicionar um novo consumo
+      fetchConsumoAgua();
+
       setHistorico("");
       setData("");
       setQuantidade("");
@@ -110,13 +99,12 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
       console.error("Erro ao adicionar o consumo de água:", error);
     }
   };
-  
 
-  const handleDeleteConsumo = async (id: string) => {
+  const handleDeleteConsumo = async (date: string) => {
     try {
-      console.log(`Deletando consumo com ID: ${id}`);
-      await axios.delete(`http://10.68.55.124:3000/consumo-agua/${id}`); // Usando o ID fixo
-      setConsumos(consumos.filter((consumo) => consumo._id !== id)); // Atualiza a lista após exclusão
+      await axios.delete(`http://10.68.55.203:3000/consumo-agua/${userId}/${date}`);
+      // Recarregar os dados da API após deletar um consumo
+      fetchConsumoAgua();
     } catch (error) {
       console.error("Erro ao deletar o consumo de água:", error);
     }
@@ -126,11 +114,11 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
     <View style={styles.row}>
       <Text style={styles.historico}>{item.totalQuantidade} ml</Text>
       <Text style={styles.data}>
-        {new Date(item.date).toLocaleDateString()} {/* Usar item.date */}
+        {moment(item.date).format("DD/MM/YYYY")}
       </Text>
       <TouchableOpacity
         style={styles.botao}
-        onPress={() => handleDeleteConsumo(item._id)}
+        onPress={() => handleDeleteConsumo(item.date)} // Passa a data para o delete
       >
         <Image source={Deletar} style={styles.icone} />
       </TouchableOpacity>
@@ -142,7 +130,7 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             style={styles.arrow}
@@ -161,17 +149,20 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
 
         <FlatList
           data={consumos}
-          keyExtractor={(item) => item._id} // Use _id como key
+          keyExtractor={(item, index) => item._id || index.toString()} // Adicionei index como fallback
           renderItem={renderItem}
           contentContainerStyle={styles.listContent}
+          style={{ flex: 1 }}
+          extraData={consumos} // Força o FlatList a re-renderizar quando o estado mudar
         />
+
         <TouchableOpacity
           style={styles.continuebutton}
-          onPress={() => setModalVisible(true)} // Abre o modal
+          onPress={() => setModalVisible(true)}
         >
           <Text style={styles.buttonText}>Novo Consumo</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
 
       <Modal
         animationType="slide"
