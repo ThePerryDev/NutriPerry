@@ -89,9 +89,40 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#2C4B4E",
   },
+
   logo: {
     width: 50,
     height: 50,
+  },
+
+  // Estilos para o modal
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Fundo semitransparente
+  },
+
+  modalContent: {
+    width: "80%",
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 12,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+  closeButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    padding: 5,
+    backgroundColor: "#ccc",
+    borderRadius: 20,
   },
 });
 
