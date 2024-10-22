@@ -27,6 +27,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     marginBottom: 20,
+    marginHorizontal: 10, // Adicione margens nas laterais
+    // width: '90%', // Ou defina uma largura fixa se preferir
   },
 
   totalText: {
@@ -34,13 +36,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 10,
+    
   },
 
   progressContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
+    
   },
 
   progressInfo: {
