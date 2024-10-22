@@ -90,12 +90,15 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   inputInfos: {
+    marginBottom: 100,
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   inputPeso: {
     width: 150,
     height: 40,
-    borderColor: "#2C4B4E",
+    borderColor: "#00AD71",
     borderWidth: 2,
     borderRadius: 10,
     textAlign: "center",
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
   inputData: {
     width: 100,
     height: 40,
-    borderColor: "#2C4B4E",
+    borderColor: "#00AD71",
     borderWidth: 2,
     borderRadius: 10,
     textAlign: "center",
@@ -115,7 +118,7 @@ const styles = StyleSheet.create({
   addButton: {
     width: 40,
     height: 40,
-    backgroundColor: "#2C4B4E",
+    backgroundColor: "#00AD71",
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",

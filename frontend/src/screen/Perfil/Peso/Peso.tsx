@@ -84,12 +84,17 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
         renderItem={renderItem}
         contentContainerStyle={styles.listContent}
       />
+      <View style={styles.row}>
+        <Text style={styles.columnHeaderHistorico}>Histórico (kg)</Text>
+        <Text style={styles.columnHeaderData}>Data</Text>
+        <Text style={styles.columnHeaderBotao}></Text>
+      </View>
 
       {/* Inputs para adicionar peso e data */}
       <View style={styles.inputInfos}>
         <TextInput
           style={styles.inputPeso}
-          placeholder="Histórico (kg)"
+          placeholder="00"
           keyboardType="numeric"
           value={newPeso}
           onChangeText={setNewPeso}
