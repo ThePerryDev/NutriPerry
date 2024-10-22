@@ -23,6 +23,7 @@ import SaveButton from "../../../components/Cadastro/Salvar/botaosalvar";
 import { AlimentoTaco, NutritionalValues, Product } from "../../../types";
 import useConsumoCalorico from "../../../hooks/useConsumoCalorico"; // Importando o hook
 import {
+  AuthContext,
   ConsumoCaloricoContext,
   ConsumoCaloricoProvider,
 } from "../../../context";
@@ -55,6 +56,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     { label: "Jantar", value: "jantar" },
     { label: "Lanches", value: "lanches" },
   ];
+  const { user } = useContext(AuthContext);
 
   const product = route.params?.product as AlimentoTaco | Product | undefined;
 
@@ -191,7 +193,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
   // Função para cadastrar o consumo
   const cadastrarConsumo = async () => {
     const consumoData = {
-      user: "67074140dbf77240420381b1", // Coloque aqui o ID do usuário correto
+      user: user?.id, // Coloque aqui o ID do usuário correto
       data: moment(date).format("YYYY-MM-DD"),
       //data: Date(),
       tipoRefeicao: selectUnit, // Ajuste conforme necessário

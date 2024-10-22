@@ -13,7 +13,7 @@ const app = express(); // cria o servidor e coloca na variável app
 
 app.use(cors({
     origin: 'http://192.168.1.4:8081', // Permitir requisições do frontend
-    //origin: 'http://localhost:8081', // Permitir requisições do frontend
+    //origin: 'http://192.168.1.4:8081', // Permitir requisições do frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
     credentials: true // Permitir envio de cookies e headers de autenticação

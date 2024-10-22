@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, FlatList, Image, Button } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
@@ -9,6 +9,7 @@ import AddMealButton from "../../../components/Cadastro/AddAlimento/botaoaddalim
 import axios from "axios";
 import moment from "moment";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { AuthContext } from "../../../context";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -32,6 +33,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
   const [totalCarboidrato, setTotalCarboidrato] = useState<number>(0);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     fetchAlimentos();
@@ -41,11 +43,11 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
       
-      //10.68.55.124
-      //const responseAlimentos = await axios.get("http://localhost:3000/consumos/alimento", {
-        const responseAlimentos = await axios.get("http://10.68.55.124:3000/consumos/alimento", {
+      //192.168.1.4
+      //const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
+        const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
         params: {
-          userId: "67074140dbf77240420381b1",
+          userId: user?.id,
           data: formattedDate,
           tipoRefeicao: "cafe_da_manha"
         }
@@ -59,9 +61,9 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      //10.68.55.124
-      //const responseTotais = await axios.get("http://localhost:3000/consumos/listarconsumo", {
-        const responseTotais = await axios.get("http://10.68.55.124:3000/consumos/listarconsumo", {
+      //192.168.1.4
+      //const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
+        const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
         params: {
           userId: "67074140dbf77240420381b1",
           data: formattedDate,
@@ -79,8 +81,8 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://10.68.55.124:3000/consumos/delete/${id}`);
-      //await axios.delete(`http://localhost:3000/consumos/delete/${id}`);
+      await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
+      //await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
       setProdutos((prevProdutos) => prevProdutos.filter((produto) => produto.id !== id));
     } catch (error) {
       console.error("Erro ao deletar o item:", error);
