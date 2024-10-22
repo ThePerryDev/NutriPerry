@@ -83,12 +83,13 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
   const handleDelete = async (id: string) => {
     try {
       await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
-      //await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
-      setProdutos((prevProdutos) => prevProdutos.filter((produto) => produto.id !== id));
+      // Após a exclusão, buscarmos os alimentos atualizados
+      fetchAlimentos();
     } catch (error) {
       console.error("Erro ao deletar o item:", error);
     }
   };
+  
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
     setShowDatePicker(false);
