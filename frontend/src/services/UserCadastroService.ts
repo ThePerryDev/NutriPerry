@@ -11,7 +11,7 @@ export interface UserProps {
   activityLevel: string;
   gender: string | undefined;
   goal: string | undefined;
-  birthdate: Date ; // Data de nascimento
+  birthdate: Date | any ; // Data de nascimento
   nutricionista?: string; // Opcional
   isLogged: boolean; // Indica se o usuário está logado
   nickname: string; // Nome de usuário
