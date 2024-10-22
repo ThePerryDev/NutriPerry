@@ -47,31 +47,40 @@ class ConsultaConsumoController {
   // Método para listar o total de calorias
   async listTotalKcal(req: Request, res: Response) {
     const { userId, data } = req.query;
-
+  
+    // Logando os parâmetros recebidos
     console.log('Parâmetros recebidos para totalKcal:', { userId, data });
-
+  
+    // Verificando se os parâmetros foram recebidos corretamente
+    if (!userId || !data) {
+      console.error('userId ou data não fornecidos.');
+      return res.status(400).json({ message: 'userId e data são obrigatórios.' });
+    }
+  
     const dataFormatada = moment(data as string).format("YYYY-MM-DD");
-
+    console.log('Data formatada:', dataFormatada); // Logando a data formatada
+  
     try {
       const resultados = await ConsumoCaloricoModel.find({
         user: userId,
         data: dataFormatada,
       });
-
-      console.log('Resultados para totalKcal:', resultados);
-
+  
+      console.log('Resultados para totalKcal:', resultados); // Logando os resultados da busca
+  
       if (resultados.length === 0) {
         return res.status(404).json({ message: 'Nenhum consumo encontrado.' });
       }
-
+  
       const totalKcal = resultados.reduce((acc, curr) => acc + curr.kcal, 0);
-
+  
       return res.status(200).json({ totalKcal });
     } catch (error) {
-      console.error('Erro ao listar totalKcal:', error);
+      console.error('Erro ao listar totalKcal:', error); // Logando erro
       return res.status(500).json({ message: 'Erro ao listar totalKcal.', error });
     }
   }
+  
 
 // Método para listar alimentos por refeição
 async listAlimentoRefeicao(req: Request, res: Response) {
