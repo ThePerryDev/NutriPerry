@@ -29,7 +29,10 @@ type Props = {
 
 type ConsumoAgregado = {
   _id: string; // A data do consumo
+  date: string; // Data formatada
   totalQuantidade: number; // A quantidade total consumida nesse dia
+  userId: string; // ID do usuário
+  documentoId: string; // ID do documento
 };
 
 const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
@@ -40,15 +43,22 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
   const [isKeyboardVisible, setKeyboardVisible] = useState<boolean>(false);
   const [isModalVisible, setModalVisible] = useState<boolean>(false); // Modal state
 
-  const userId = "67144a9f8012077179c3e518"; // ID fixo
+  const userId = "6716f8c9bc779d5cf46b5871"; // ID fixo
 
   useEffect(() => {
     const fetchConsumoAgua = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.18.46:3000/consumo-agua/${userId}`
+          `http://10.68.55.124:3000/consumo-agua/${userId}`
         );
-        setConsumos(response.data);
+        // Formata a resposta
+        const consumosFormatados = response.data.map((consumo: any) => ({
+          _id: consumo.documentoId, // Usar documentoId como _id
+          date: consumo.date,
+          totalQuantidade: consumo.totalQuantidade,
+          userId: consumo.userId,
+        }));
+        setConsumos(consumosFormatados);
       } catch (error) {
         console.error("Erro ao buscar o consumo de água:", error);
       }
@@ -56,50 +66,56 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
 
     fetchConsumoAgua();
   }, []);
-
   const handleAddConsumo = async () => {
     if (!historico || !data || !quantidade) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
-
-    // Verificação do formato da data
+  
     const regexData = /^\d{4}-\d{2}-\d{2}$/;
     if (!regexData.test(data)) {
       alert("Por favor, insira a data no formato AAAA-MM-DD.");
       return;
     }
-
+  
     const dataObj = new Date(data);
     if (isNaN(dataObj.getTime())) {
       alert("Data inválida. Por favor, insira uma data válida.");
       return;
     }
-
+  
     try {
-      const response = await axios.post("http://192.168.18.46:3000/consumo-agua", {
-        user: userId,
+      const response = await axios.post("http://10.68.55.124:3000/consumo-agua", {
+        user: "6716f8c9bc779d5cf46b5871",
         quantidade: parseInt(historico),
         data: dataObj.toISOString(),
         vezes: parseInt(quantidade),
       });
-
-      const novoConsumo = response.data;
+  
+      // Ajuste a estrutura do novo consumo recebido
+      const novoConsumo = {
+        _id: response.data.documentoId, // Certifique-se de que documentoId está sendo retornado
+        date: response.data.date, // Verifique se a data está sendo retornada corretamente
+        totalQuantidade: response.data.totalQuantidade, // Certifique-se de que este campo está presente
+        userId: response.data.userId, // Verifique se o userId está sendo retornado
+      };
+  
       setConsumos((prev) => [...prev, novoConsumo]);
-
+  
       setHistorico("");
       setData("");
       setQuantidade("");
-      setModalVisible(false); // Close modal after adding
+      setModalVisible(false);
     } catch (error) {
       console.error("Erro ao adicionar o consumo de água:", error);
     }
   };
+  
 
   const handleDeleteConsumo = async (id: string) => {
     try {
-      console.log(`Deletando consumo com ID: ${userId}`);
-      await axios.delete(`http://192.168.18.46:3000/consumo-agua/${userId}`); // Usando o ID fixo
+      console.log(`Deletando consumo com ID: ${id}`);
+      await axios.delete(`http://10.68.55.124:3000/consumo-agua/${id}`); // Usando o ID fixo
       setConsumos(consumos.filter((consumo) => consumo._id !== id)); // Atualiza a lista após exclusão
     } catch (error) {
       console.error("Erro ao deletar o consumo de água:", error);
@@ -110,9 +126,12 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
     <View style={styles.row}>
       <Text style={styles.historico}>{item.totalQuantidade} ml</Text>
       <Text style={styles.data}>
-        {new Date(item._id).toLocaleDateString()}
+        {new Date(item.date).toLocaleDateString()} {/* Usar item.date */}
       </Text>
-      <TouchableOpacity style={styles.botao} onPress={() => handleDeleteConsumo(item._id)}>
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={() => handleDeleteConsumo(item._id)}
+      >
         <Image source={Deletar} style={styles.icone} />
       </TouchableOpacity>
     </View>
@@ -148,7 +167,7 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
         />
         <TouchableOpacity
           style={styles.continuebutton}
-          onPress={() => setModalVisible(true)} // Open modal
+          onPress={() => setModalVisible(true)} // Abre o modal
         >
           <Text style={styles.buttonText}>Novo Consumo</Text>
         </TouchableOpacity>

@@ -19,10 +19,10 @@ class ConsumoAguaController {
 
   public async list(req: Request, res: Response): Promise<void> {
     const { user } = req.params;
-
+  
     try {
       const userId = new mongoose.Types.ObjectId(user); // Converte o ID para ObjectId
-
+  
       const consumos = await ConsumoAgua.aggregate([
         { $match: { user: userId } }, // Filtra pelo usuário como ObjectId
         {
@@ -30,11 +30,12 @@ class ConsumoAguaController {
             _id: { $dateToString: { format: "%Y-%m-%d", date: "$data" } }, // Agrupa pela data formatada (YYYY-MM-DD)
             totalQuantidade: { $sum: { $multiply: ["$quantidade", "$vezes"] } }, // Calcula o total por dia
             userId: { $first: "$user" }, // Inclui o ID do usuário no resultado
+            documentoId: { $first: "$_id" }, // Inclui o _id do documento no resultado
           },
         },
         { $sort: { _id: 1 } }, // Ordena as datas (opcional)
       ]);
-
+  
       if (consumos.length === 0) {
         res
           .status(404)
@@ -45,6 +46,7 @@ class ConsumoAguaController {
             date: consumo._id,
             totalQuantidade: consumo.totalQuantidade,
             userId: consumo.userId,
+            documentoId: consumo.documentoId, // Inclui o _id do documento no resultado
           }))
         );
       }
@@ -54,6 +56,7 @@ class ConsumoAguaController {
         .json({ message: error.message || "Erro ao listar consumos de água" });
     }
   }
+  
 
   public async delete(req: Request, res: Response): Promise<void> {
     const { user, date } = req.params; // Espera que 'user' e 'date' sejam passados como parâmetros

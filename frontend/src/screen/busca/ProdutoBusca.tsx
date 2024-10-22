@@ -11,7 +11,7 @@ const ProdutoBusca = () => {
   const [loading, setLoading] = useState(false);
 
   const buscarAlimentoTaco = async (termo: string) => {
-    const response = await axios.get(`http://localhost:3000/alimentos`, {
+    const response = await axios.get(`http://10.68.55.124:3000/alimentos`, {
       params: {
         description: termo,
       },
