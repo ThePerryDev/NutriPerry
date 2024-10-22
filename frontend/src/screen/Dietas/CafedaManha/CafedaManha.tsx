@@ -65,7 +65,8 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
       //const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
         const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
         params: {
-          userId: "67074140dbf77240420381b1",
+          //userId: "67074140dbf77240420381b1",
+          userId: user?.id,
           data: formattedDate,
           tipoRefeicao: "cafe_da_manha"
         }
