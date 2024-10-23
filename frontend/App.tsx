@@ -4,15 +4,7 @@ import { RootStackParamList } from "./src/types/rootStack";
 import AuthProvider from "./src/context/auth/AuthProvider";
 import { ConsumoCaloricoProvider } from "./src/context";
 import { UserCadastroProvider } from "./src/context/UserCadastroContext";
-import { AbrindoApp, TelaLogin, Home, PesquisaAlimento, AdicionarAlimento, CadastrarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, ConfiguracoesNutri, InformacoesNutri1, InformacoesNutri2, SenhaNutri, TelaFinalizado } from "./src/screen";
-import CadastroNutriTelefone from "./src/screen/Cadastro/perfil_nutricionista/tela_nutri_telefone/tela_telefone";
-import CadastroAlturaPeso from "./src/screen/Cadastro/perfil_pessoal/CadastroAlturaPeso/CadastroAlturaPeso";
-import CadastroEmail from "./src/screen/Cadastro/perfil_pessoal/CadastroEmail/cadastroEmailP";
-import CadastroNome from "./src/screen/Cadastro/perfil_pessoal/cadastroNome/CadastroNomeP";
-import CadastroSexoIdade from "./src/screen/Cadastro/perfil_pessoal/CadastroSexoIdade/CadastroSexoIdade";
-import TelaPPObjetivo from "./src/screen/Cadastro/perfil_pessoal/tela_pp_objetivo/tela_pp_objetivo";
-import NewExercicise from "./src/screen/Exercicios/NovoExercicio/NovoExercicio";
-import SeusExercicios from "./src/screen/Exercicios/SeusExercicios/SeusExercicios";
+import { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaFinalizado, TelaPPObjetivo, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, NewExercicise, ConsumoAgua, } from "./src/screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -20,7 +12,6 @@ export default function App() {
   return (
     <AuthProvider>
       <UserCadastroProvider>
-
         <ConsumoCaloricoProvider>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="AbrindoApp">
@@ -77,11 +68,6 @@ export default function App() {
               <Stack.Screen
                 name="TelaFinalizado"
                 component={TelaFinalizado}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="CadastroNutriTelefone"
-                component={CadastroNutriTelefone}
                 options={{ headerShown: false }}
               />
               <Stack.Screen
@@ -167,6 +153,11 @@ export default function App() {
               <Stack.Screen
                 name="TelaTrocaSenhaNutri"
                 component={SenhaNutri}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="ConsumoAgua"
+                component={ConsumoAgua}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>

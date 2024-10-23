@@ -33,6 +33,11 @@ const MonitorCalorico: React.FC<Props> = ({ navigation }) => {
           <Text style={styles.diettext}>Exercícios</Text>
         </TouchableOpacity>
       </View>
+      <View>
+        <TouchableOpacity style={styles.dietwaterbutton} onPress={() => navigation.navigate("ConsumoAgua")}>
+          <Text style={styles.diettext}>Consumo de Água</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.imagecontainer}>
         <Image source={monitorcalorico} style={styles.image} />
       </View>

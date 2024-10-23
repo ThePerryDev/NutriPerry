@@ -94,7 +94,6 @@ const UserSchema: Schema<IUser> = new Schema({
   goal: {
     type: String,
     required: true,
-    
   },
   birthdate: {
     type: Date,

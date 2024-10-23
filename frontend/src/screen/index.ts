@@ -3,7 +3,6 @@ import AdicionarAlimento from "./AddAlimento/AdicionarAlimento/AdicionarAlimento
 import CadastrarAlimento from "./AddAlimento/CadastrarAlimento/CadastrarAlimento";
 import ErroAlimento from "./AddAlimento/ErroAlimento/ErroAlimento";
 import PesquisaAlimento from "./AddAlimento/PesquisaAlimento/PesquisaAlimento";
-import CadastroNutriTelefone from "./Cadastro/perfil_nutricionista/tela_nutri_telefone/tela_telefone";
 import CadastroAlturaPeso from "./Cadastro/perfil_pessoal/CadastroAlturaPeso/CadastroAlturaPeso";
 import CadastroEmail from "./Cadastro/perfil_pessoal/CadastroEmail/cadastroEmailP";
 import CadastroNome from "./Cadastro/perfil_pessoal/cadastroNome/CadastroNomeP";
@@ -26,7 +25,8 @@ import InformacoesNutri2 from "./Configuracoes/perfil_nutricionista/tela_config_
 import SenhaNutri from "./Configuracoes/perfil_nutricionista/tela_config_senha_nutri/SenhaNutri"
 import SeusExercicios from "./Exercicios/SeusExercicios/SeusExercicios";
 import NewExercicise from "./Exercicios/NovoExercicio/NovoExercicio";
+import ConsumoAgua from "./Dietas/ConsumoAgua/ConsumoAgua";
 import TelaFinalizado from "./Cadastro/finalizado/tela_finalizado";
 
-export { TelaFinalizado, CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, CadastroNutriTelefone, TelaLogin, AbrindoApp, AdicionarAlimento, PesquisaAlimento, CadastrarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, ConfiguracoesNutri, InformacoesNutri1, InformacoesNutri2, SenhaNutri, SeusExercicios, NewExercicise, };
+export { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, TelaFinalizado, TelaLogin, AbrindoApp, AdicionarAlimento, PesquisaAlimento, CadastrarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, ConfiguracoesNutri, InformacoesNutri1, InformacoesNutri2, SenhaNutri, SeusExercicios, NewExercicise, ConsumoAgua };
 

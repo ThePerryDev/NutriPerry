@@ -17,6 +17,8 @@ type Props = {
   navigation: ContinuarScreenNavigationProp;
 };
 
+const meals = ["Café da Manhã", "Almoço", "Jantar", "Lanches"];
+
 const Home: React.FC<Props> = ({ navigation }) => {
   const screenWidth = Dimensions.get("window").width;
   
@@ -152,9 +154,14 @@ const Home: React.FC<Props> = ({ navigation }) => {
       </View>
 
       <ScrollView>
-        {["Café da Manhã", "Almoço", "Jantar", "Lanches"].map((meal, index) => (
+        {meals.map((meal, index) => (
           <View key={index} style={Styles.mealItem}>
-            <MaterialIcons name={"check-box-outline-blank"} size={24} />
+            <Checkbox
+              style={Styles.checkbox}
+              value={checkedItems[index]}
+              onValueChange={() => handleCheckboxChange(index)}
+              color={checkedItems[index] ? Styles.checkbox.color : undefined}
+            />
             <View style={Styles.mealInfo}>
               <Text style={Styles.mealName}>{meal}</Text>
               <Text style={Styles.mealDetail}>Sem cardápio cadastrado</Text>
