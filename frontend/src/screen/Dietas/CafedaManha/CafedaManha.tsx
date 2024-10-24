@@ -44,7 +44,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
 
-      const responseAlimentos = await axios.get("http://192.168.18.46:3000/consumos/alimento", {
+      const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -60,7 +60,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      const responseTotais = await axios.get("http://192.168.18.46:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -78,7 +78,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://192.168.1.466:3000/consumos/delete/${id}`);
+      await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
       
       setProdutos((prevProdutos) => {
         const updatedProdutos = prevProdutos.filter((produto) => produto.id !== id);
@@ -160,19 +160,19 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
         <View>
           <Text style={styles.datatext}>Calorias</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>{totalKcal}</Text>
+            <Text style={styles.datainfo}>{totalKcal.toFixed(2)}</Text>
           </View>
         </View>
         <View>
           <Text style={styles.datatext}>Proteínas</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>{totalProteina}</Text>
+            <Text style={styles.datainfo}>{totalProteina.toFixed(2)}</Text>
           </View>
         </View>
         <View>
           <Text style={styles.datatext}>Carboidratos</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>{totalCarboidrato}</Text>
+            <Text style={styles.datainfo}>{totalCarboidrato.toFixed(2)}</Text>
           </View>
         </View>
       </View>
