@@ -6,8 +6,9 @@ import { RootStackParamList } from "../../../types/rootStack";
 import { setaVolta } from "../../../assets";
 import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import axios from 'axios';
+import moment from "moment";
 
-const API_URL = 'http://10.68.55.228:3000/gastocalorico';
+const API_URL = 'http://192.168.0.138:3000/gastocalorico';
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "NewExercicise"
@@ -24,13 +25,17 @@ const NewExercicise: React.FC<Props> = ({ navigation }) => {
 
   const handleAdicionar = async () => {
     try {
+      const formattedDate = moment().format("YYYY-MM-DD");
+
       const gastoCalorico = {
         userID: '67074140dbf77240420381b1', // substitua por um ID válido
         atividadeFisica: nomeExercicio,
         gastoCalorico: parseInt(calorias), // converte a string para um número
-        data: new Date(), // cria uma data atual
+        data:formattedDate, // cria uma data atual
         tempo: parseInt(tempo), // converte a string para um número
       };
+
+      console.log("Dados enviados para o backend:", gastoCalorico)
       await axios.post(API_URL, gastoCalorico);
       alert("Exercício adicionado com sucesso!");
     } catch (error) {
