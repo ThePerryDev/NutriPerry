@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 5,
-    marginRight: 110,
+    marginRight: 60,
     marginBottom: 15,
     marginTop: 30,
   },
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   datacontainer: {
-    flex:1,
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   AddMealButtoncontainer: {
-    flex:1,
+    flex: 1,
     justifyContent: "space-evenly",
     marginBottom: 65,
   },
@@ -124,6 +124,19 @@ const styles = StyleSheet.create({
   },
   spacer: {
     flex: 1,
+  },
+  // Novo estilo para o contêiner do DatePicker
+  datePickerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: 15,
+    paddingHorizontal: 10,
+  },
+  selectedDateText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#2C4B4E",
   },
 });
 

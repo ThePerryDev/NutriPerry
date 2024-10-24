@@ -33,6 +33,7 @@ import { Picker } from "@react-native-picker/picker";
 import MealPricker from "../../../components/Cadastro/MealPricker/MealPicker";
 import MealPicker from "../../../components/Cadastro/MealPricker/MealPicker";
 import DatePickerComponent from "../../../components/Cadastro/DatePicker/datepicker";
+import { useNavigation } from "@react-navigation/native";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -61,6 +62,8 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
   const product = route.params?.product as AlimentoTaco | Product | undefined;
 
   const { create } = useContext(ConsumoCaloricoContext);
+
+ 
 
   const onDateChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
@@ -209,7 +212,12 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
 
     try {
       await create(consumoData);
-      Alert.alert("Sucesso", "Consumo cadastrado com sucesso!");
+      Alert.alert("Sucesso", "Consumo cadastrado com sucesso!", [
+        {
+          text: "OK",
+          onPress: () => navigation.navigate("PesquisaAlimento"), // Navegar para PesquisaAlimento
+        },
+      ]);
     } catch (error) {
       console.error("Erro ao cadastrar consumo:", error);
       Alert.alert("Erro", "Não foi possível cadastrar o consumo.");
