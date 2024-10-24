@@ -63,7 +63,7 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
 
   const { create } = useContext(ConsumoCaloricoContext);
 
- 
+
 
   const onDateChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
@@ -165,15 +165,15 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     parsedQuantidade > 0
       ? calculateValues(parsedQuantidade)
       : {
-          kcal: "-",
-          protein: "-",
-          carbohydrate: "-",
-          sodium: "-",
-          sugar: "-",
-          gordura: "-",
-          gordura_saturada: "-",
-          fibra: "-",
-        };
+        kcal: "-",
+        protein: "-",
+        carbohydrate: "-",
+        sodium: "-",
+        sugar: "-",
+        gordura: "-",
+        gordura_saturada: "-",
+        fibra: "-",
+      };
 
   const tableHead = [
     "Dados Nutricionais",

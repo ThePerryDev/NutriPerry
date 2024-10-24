@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 
   scrollContent: {
     flexGrow: 1,
+    marginBottom: 80,
   },
 
   header: {
