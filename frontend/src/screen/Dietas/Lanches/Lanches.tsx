@@ -14,7 +14,7 @@ import { useFocusEffect } from "@react-navigation/native"; // Importar useFocusE
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "Jantar"
+  "Lanches"
 >;
 
 type Props = {
@@ -51,7 +51,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
         params: {
           userId: user?.id,
           data: formattedDate,
-          tipoRefeicao: "jantar"
+          tipoRefeicao: "lanches"
         }
       });
 
@@ -67,7 +67,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
         params: {
           userId: user?.id,
           data: formattedDate,
-          tipoRefeicao: "jantar"
+          tipoRefeicao: "lanches"
         }
       });
 
@@ -131,17 +131,14 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
       </View>
       
       <View style={styles.datePickerContainer}>
-        <Button title="Selecionar Data" onPress={() => setShowDatePicker(true)} />
+        <TouchableOpacity  style={styles.datePickerbutton} onPress={() => setShowDatePicker(true)}> 
+          <Text style={styles.datapickertext}>SELECIONAR DATA</Text>
+        </TouchableOpacity>
         <Text style={styles.selectedDateText}>
           {moment(selectedDate).format("DD/MM/YYYY")}
         </Text>
         {showDatePicker && (
-          <DateTimePicker
-            value={selectedDate}
-            mode="date"
-            display="default"
-            onChange={handleDateChange}
-          />
+          <DateTimePicker value={selectedDate} mode="date" display="default" onChange={handleDateChange} />
         )}
       </View>
       
