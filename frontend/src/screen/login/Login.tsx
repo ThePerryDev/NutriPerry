@@ -1,15 +1,25 @@
-import { View, Text, Image, Pressable, TextInput } from "react-native";
+import React, { useContext, useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
+} from "react-native";
 import icone_perfil from "../../assets/perfil.png";
 import icone_senha from "../../assets/senha.png";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/rootStack";
 import styles from "./styles";
-import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth/AuthContext";
+import InputWithIcons from "../../components/Login/InputWithIcons/InputWithIcons";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "TelaLogin" // Garantindo que o tipo é específico para "TelaLogin"
+  "TelaLogin"
 >;
 
 type Props = {
@@ -20,6 +30,7 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
   const auth = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showLogo, setShowLogo] = useState(true); // Novo estado para controlar a visibilidade da imagem
 
   const handleLogin = async () => {
     if (email && password) {
@@ -39,37 +50,63 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.input_login}>
-        <Image source={icone_perfil} style={styles.icon} />
-        <TextInput
-          placeholder="Insira seu email..."
-          style={styles.input}
-          value={email}
-          onChangeText={setEmail}
-        />
-      </View>
-      <View style={styles.input_login}>
-        <Image source={icone_senha} style={styles.icon} />
-        <TextInput
-          placeholder="Insira sua senha..."
-          style={styles.input}
-          value={password}
-          onChangeText={setPassword}
-        />
-      </View>
-
-      <Pressable style={styles.button} onPress={handleLogin}>
-        <Text style={{ color: "#FFFFFF", fontSize: 30 }}>ENTRAR</Text>
-      </Pressable>
-
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("CadastroNome")}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
+    >
+      <TouchableWithoutFeedback 
+        onPress={() => {
+          Keyboard.dismiss();
+          setShowLogo(true); // Mostrar logo ao clicar fora
+        }}
       >
-        <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CADASTRE-SE</Text>
-      </Pressable>
-    </View>
+        <View style={styles.innerContainer}>
+          {showLogo && (
+            <View style={styles.imagecontainer}>
+              <Image
+                source={require("../../assets/logonutriperry.png")}
+                style={styles.image}
+              />
+            </View>
+          )}
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerlabel}>NUTRIPERRY</Text>
+          </View>
+
+          <View style={styles.inputcontainer}>
+            <InputWithIcons
+              iconSource={icone_perfil}
+              placeholder="Insira seu email..."
+              value={email}
+              onChangeText={(email) => setEmail(email)}
+              onFocus={() => {
+                setShowLogo(false); // Ocultar logo ao focar no input
+              }}
+            />
+            <InputWithIcons
+              iconSource={icone_senha}
+              placeholder="Insira sua senha..."
+              value={password}
+              onChangeText={(password) => setPassword(password)}
+              secureTextEntry={true}
+              onFocus={() => {
+                setShowLogo(false); // Ocultar logo ao focar no input
+              }}
+            />
+          </View>
+          <TouchableOpacity style={styles.loginbutton} onPress={handleLogin}>
+            <Text style={styles.loginbuttonText}>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("CadastroNome")}
+          >
+            <Text style={styles.buttontext}>CADASTRE-SE</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

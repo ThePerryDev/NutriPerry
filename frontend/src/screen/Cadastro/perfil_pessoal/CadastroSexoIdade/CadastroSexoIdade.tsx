@@ -7,8 +7,8 @@ import { RootStackParamList } from "../../../../types/rootStack";
 import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
 import CustomPicker from "../../../../components/Cadastro/Picker/picker";
 import { useUserCadastro } from "../../../../context/UserCadastroContext";
-import DatePickerComponent from "../../../../components/Cadastro/DatePicker/datepicker";
 import moment from "moment";
+import DatePickerRegisterComponent from "../../../../components/Cadastro/DatePickerCadastro/datepicker";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -58,7 +58,7 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
         items={genderOptions}
       />
       <Text style={styles.textgeral}>Insira sua data de nascimento</Text>
-      <DatePickerComponent
+      <DatePickerRegisterComponent
         selectedDate={dataNascimento} // Agora é garantido que não será undefined
         onDateChange={setDataNascimento}
       />

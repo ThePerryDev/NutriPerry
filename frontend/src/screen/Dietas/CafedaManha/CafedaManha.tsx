@@ -78,7 +78,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
+      await axios.delete(`http://192.168.1.466:3000/consumos/delete/${id}`);
       
       setProdutos((prevProdutos) => {
         const updatedProdutos = prevProdutos.filter((produto) => produto.id !== id);

@@ -47,7 +47,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
 
-      const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
+      const responseAlimentos = await axios.get("http://192.168.1.46:3000/consumos/alimento", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -63,7 +63,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.1.466:3000/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -81,7 +81,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
+      await axios.delete(`http://192.168.1.466:3000/consumos/delete/${id}`);
       
       setProdutos((prevProdutos) => {
         const updatedProdutos = prevProdutos.filter((produto) => produto.id !== id);
@@ -127,7 +127,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
         <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("MenuDietas")}>
           <Image source={setaVolta} style={styles.arrow} />
         </TouchableOpacity>
-        <Text style={styles.header}>Café da Manhã</Text>
+        <Text style={styles.header}>Almoço</Text>
       </View>
       
       <View style={styles.datePickerContainer}>
