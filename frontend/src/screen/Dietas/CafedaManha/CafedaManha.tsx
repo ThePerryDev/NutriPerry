@@ -11,10 +11,7 @@ import moment from "moment";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AuthContext } from "../../../context";
 
-type ContinuarScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "CafedaManha"
->;
+type ContinuarScreenNavigationProp = StackNavigationProp<RootStackParamList, "CafedaManha">;
 
 type Props = {
   navigation: ContinuarScreenNavigationProp;
@@ -42,34 +39,29 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
   const fetchAlimentos = async () => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
-      
-      //192.168.1.4
-      //const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
-        const responseAlimentos = await axios.get("http://192.168.1.4:3000/consumos/alimento", {
+
+      const responseAlimentos = await axios.get("http://192.168.18.46:3000/consumos/alimento", {
         params: {
           userId: user?.id,
           data: formattedDate,
-          tipoRefeicao: "cafe_da_manha"
-        }
+          tipoRefeicao: "cafe_da_manha",
+        },
       });
 
       const alimentos = responseAlimentos.data.map((alimento: any) => ({
         id: alimento.id,
         nome: alimento.nome,
-        quantidade: alimento.peso
+        quantidade: alimento.peso,
       }));
 
       setProdutos(alimentos);
 
-      //192.168.1.4
-      //const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
-        const responseTotais = await axios.get("http://192.168.1.4:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.18.46:3000/consumos/listarconsumo", {
         params: {
-          //userId: "67074140dbf77240420381b1",
           userId: user?.id,
           data: formattedDate,
-          tipoRefeicao: "cafe_da_manha"
-        }
+          tipoRefeicao: "cafe_da_manha",
+        },
       });
 
       setTotalKcal(responseTotais.data.totalKcal);
@@ -82,8 +74,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
-      //await axios.delete(`http://192.168.1.4:3000/consumos/delete/${id}`);
+      await axios.delete(`http://192.168.18.46:3000/consumos/delete/${id}`);
       setProdutos((prevProdutos) => prevProdutos.filter((produto) => produto.id !== id));
     } catch (error) {
       console.error("Erro ao deletar o item:", error);
@@ -118,37 +109,36 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.header}>Café da Manhã</Text>
       </View>
-      
+
       <View style={styles.datePickerContainer}>
-        <Button title="Selecionar Data" onPress={() => setShowDatePicker(true)} />
+        <TouchableOpacity  style={styles.datePickerbutton} onPress={() => setShowDatePicker(true)}> 
+          <Text style={styles.datapickertext}>SELECIONAR DATA</Text>
+        </TouchableOpacity>
         <Text style={styles.selectedDateText}>
           {moment(selectedDate).format("DD/MM/YYYY")}
         </Text>
         {showDatePicker && (
-          <DateTimePicker
-            value={selectedDate}
-            mode="date"
-            display="default"
-            onChange={handleDateChange}
-          />
+          <DateTimePicker value={selectedDate} mode="date" display="default" onChange={handleDateChange} />
         )}
       </View>
-      
+
+      {/* Cabeçalhos da tabela */}
       <View style={styles.row}>
         <Text style={styles.columnHeaderAlimento}>Alimento</Text>
         <Text style={styles.columnHeaderQuantidade}>Qtd.</Text>
         <Text style={styles.columnHeaderBotao}>Edit.</Text>
         <Text style={styles.columnHeaderBotao}>Del.</Text>
       </View>
-      
-      <FlatList
-        data={produtos}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-        contentContainerStyle={styles.listContent}
-      />
-      
-      <View style={styles.spacer} />
+
+      <View style={styles.flatListContainer}>
+        <FlatList
+          data={produtos}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          contentContainerStyle={styles.listContent}
+        />
+      </View>
+
       <View style={styles.datacontainer}>
         <View>
           <Text style={styles.datatext}>Calorias</Text>
@@ -169,10 +159,11 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
           </View>
         </View>
       </View>
-      
+
       <View style={styles.AddMealButtoncontainer}>
         <AddMealButton onPress={() => navigation.navigate("PesquisaAlimento")} />
       </View>
+
       <MenuInferior navigation={navigation} />
     </View>
   );

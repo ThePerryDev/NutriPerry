@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   Platform,
   Modal,
 } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
 import MenuInferior from "../../../components/MenuInferior/MenuInferior";
@@ -17,6 +18,7 @@ import { setaVolta, Deletar } from "../../../assets";
 import styles from "./styles";
 import axios from "axios";
 import moment from "moment";
+import { AuthContext } from "../../../context/auth/AuthContext";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -38,17 +40,19 @@ type ConsumoAgregado = {
 const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
   const [consumos, setConsumos] = useState<ConsumoAgregado[]>([]);
   const [historico, setHistorico] = useState<string>("");
-  const [data, setData] = useState<string>("");
+  const [data, setData] = useState<Date | undefined>(undefined);
   const [quantidade, setQuantidade] = useState<string>("");
   const [isKeyboardVisible, setKeyboardVisible] = useState<boolean>(false);
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
+  const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
 
-  const userId = "67181fa58c9c26206b523e3a"; // ID fixo
+  const { user } = useContext(AuthContext);
+  const userId = user?.id;
 
   const fetchConsumoAgua = async () => {
     try {
       const response = await axios.get(
-        `http://10.68.55.203:3000/consumo-agua/${userId}`
+        `http://192.168.18.46:3000/consumo-agua/${userId}`
       );
       const consumosFormatados = response.data.map((consumo: any) => ({
         _id: consumo.documentoId,
@@ -63,36 +67,30 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fetchConsumoAgua();
-  }, [consumos]); // Agora, o useEffect será chamado sempre que o estado consumos mudar
+    if (userId) {
+      fetchConsumoAgua();
+    }
+  }, [userId]);
 
   const handleAddConsumo = async () => {
-    if (!historico || !data || !quantidade) {
+    if (!quantidade || !data || !historico) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
 
-    const dataMoment = moment(data, "YYYY-MM-DD", true);
-    if (!dataMoment.isValid()) {
-      alert("Por favor, insira a data no formato AAAA-MM-DD.");
-      return;
-    }
-
-    const dataFormatada = dataMoment.toISOString();
+    const dataFormatada = moment(data).format("YYYY-MM-DD");
 
     try {
-      await axios.post("http://10.68.55.203:3000/consumo-agua", {
+      await axios.post("http://192.168.18.46:3000/consumo-agua", {
         user: userId,
-        quantidade: parseInt(historico),
+        quantidade: parseInt(quantidade),
         data: dataFormatada,
-        vezes: parseInt(quantidade),
+        vezes: parseInt(historico),
       });
 
-      // Recarregar os dados da API após adicionar um novo consumo
       fetchConsumoAgua();
-
       setHistorico("");
-      setData("");
+      setData(undefined);
       setQuantidade("");
       setModalVisible(false);
     } catch (error) {
@@ -101,24 +99,29 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const handleDeleteConsumo = async (date: string) => {
+    const formattedDate = moment(date).format("YYYY-MM-DD");
+
     try {
-      await axios.delete(`http://10.68.55.203:3000/consumo-agua/${userId}/${date}`);
-      // Recarregar os dados da API após deletar um consumo
-      fetchConsumoAgua();
+      await axios.delete(
+        `http://192.168.18.46:3000/consumo-agua/${userId}/${formattedDate}`
+      );
+
+      setConsumos((prevConsumos) =>
+        prevConsumos.filter((consumo) => consumo.date !== formattedDate)
+      );
     } catch (error) {
       console.error("Erro ao deletar o consumo de água:", error);
+      alert("Erro ao deletar consumo de água.");
     }
   };
 
   const renderItem = ({ item }: { item: ConsumoAgregado }) => (
     <View style={styles.row}>
       <Text style={styles.historico}>{item.totalQuantidade} ml</Text>
-      <Text style={styles.data}>
-        {moment(item.date).format("DD/MM/YYYY")}
-      </Text>
+      <Text style={styles.data}>{moment(item.date).format("DD/MM/YYYY")}</Text>
       <TouchableOpacity
         style={styles.botao}
-        onPress={() => handleDeleteConsumo(item.date)} // Passa a data para o delete
+        onPress={() => handleDeleteConsumo(item.date)}
       >
         <Image source={Deletar} style={styles.icone} />
       </TouchableOpacity>
@@ -149,11 +152,11 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
 
         <FlatList
           data={consumos}
-          keyExtractor={(item, index) => item._id || index.toString()} // Adicionei index como fallback
+          keyExtractor={(item, index) => item._id || index.toString()}
           renderItem={renderItem}
           contentContainerStyle={styles.listContent}
           style={{ flex: 1 }}
-          extraData={consumos} // Força o FlatList a re-renderizar quando o estado mudar
+          extraData={consumos}
         />
 
         <TouchableOpacity
@@ -180,12 +183,25 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
               placeholder="Quantidade em ml"
               keyboardType="numeric"
             />
-            <TextInput
-              value={data}
-              onChangeText={setData}
-              style={styles.input}
-              placeholder="Data (AAAA-MM-DD)"
-            />
+            <TouchableOpacity
+              style={styles.datePickerButton}
+              onPress={() => setShowDatePicker(true)}
+            >
+              <Text style={styles.datePickerText}>
+                {data ? moment(data).format("DD/MM/YYYY") : "Selecionar Data"}
+              </Text>
+            </TouchableOpacity>
+            {showDatePicker && (
+              <DateTimePicker
+                value={data || new Date()}
+                mode="date"
+                display="default"
+                onChange={(event, selectedDate) => {
+                  setShowDatePicker(false);
+                  setData(selectedDate || data);
+                }}
+              />
+            )}
             <TextInput
               value={quantidade}
               onChangeText={setQuantidade}

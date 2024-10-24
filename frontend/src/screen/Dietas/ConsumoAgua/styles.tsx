@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingLeft: 10,
     marginBottom: 15,
+    textAlign:"center"
   },
   modalButton: {
     width: "100%",
@@ -222,6 +223,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 10,
     marginTop: 10,
+  },
+  datePickerButton: {
+    width: "100%",
+    height: 50, // Altere conforme necessário
+    borderWidth: 2,
+    borderColor: "#00AD71",
+    borderRadius: 15,
+    justifyContent: "center", // Para centralizar verticalmente
+    alignItems: "center", // Para centralizar horizontalmente
+    marginBottom: 15,
+  },
+  
+  datePickerText: {
+    textAlign: "center",
+    fontSize: 16, // Ajuste o tamanho conforme necessário
+    color: "#2C4B4E", // Altere a cor se necessário
   },
 });
 

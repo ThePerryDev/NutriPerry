@@ -59,35 +59,33 @@ class ConsumoAguaController {
   
 
   public async delete(req: Request, res: Response): Promise<void> {
-    const { user, date } = req.params; // Espera que 'user' e 'date' sejam passados como parâmetros
+    const { user, date } = req.params;
+    console.log("Deleting consumos for user:", user, "on date:", date);
+  
     try {
-      const userId = new mongoose.Types.ObjectId(user); // Converte o ID para ObjectId
-
-      // Deletar todos os registros de consumo do usuário em um dia específico
+      const userId = new mongoose.Types.ObjectId(user);
+      const startDate = new Date(date);
+      const endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + 1);
+  
       const response = await ConsumoAgua.deleteMany({
         user: userId,
         data: {
-          $gte: new Date(date),
-          $lt: new Date(new Date(date).setDate(new Date(date).getDate() + 1)), // Para pegar todos os registros do dia
+          $gte: startDate,
+          $lt: endDate,
         },
       });
-
+  
+      console.log("Delete response:", response);
+  
       if (response.deletedCount > 0) {
         res.json({ message: "Consumos excluídos com sucesso." });
       } else {
-        res
-          .status(404)
-          .json({
-            message:
-              "Nenhum consumo encontrado para este usuário na data especificada.",
-          });
+        res.status(404).json({ message: "Nenhum consumo encontrado para este usuário na data especificada." });
       }
     } catch (error: any) {
-      res
-        .status(500)
-        .json({
-          message: error.message || "Erro ao deletar os consumos de água",
-        });
+      console.error("Erro ao deletar consumos:", error);
+      res.status(500).json({ message: error.message || "Erro ao deletar os consumos de água" });
     }
   }
 }

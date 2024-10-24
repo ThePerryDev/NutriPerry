@@ -5,13 +5,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent:"center",
-    marginBottom: 15,
   },
   dateContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 15,
   },
   textgeral: {
     fontSize: 18,
@@ -22,9 +20,9 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 16,
     color: "#2C4B4E",
-    padding: 10,
     textAlign: "center",
     backgroundColor: "#ffffff",
+    textAlignVertical:"center",
   },
 
   dateBox: {
