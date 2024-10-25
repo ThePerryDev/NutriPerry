@@ -36,26 +36,27 @@ class ConsumoAguaController {
         { $sort: { _id: 1 } }, // Ordena as datas (opcional)
       ]);
   
-      if (consumos.length === 0) {
-        res
-          .status(404)
-          .json({ message: "Nenhum consumo encontrado para este usuário." });
-      } else {
-        res.json(
-          consumos.map((consumo) => ({
-            date: consumo._id,
-            totalQuantidade: consumo.totalQuantidade,
-            userId: consumo.userId,
-            documentoId: consumo.documentoId, // Inclui o _id do documento no resultado
-          }))
-        );
+      // Verifica se consumos é nulo ou vazio e retorna um array vazio
+      if (!consumos || consumos.length === 0) {
+        res.status(200).json([]); // Retorna um array vazio
+        return; // Termina a execução do método
       }
+  
+      res.json(
+        consumos.map((consumo) => ({
+          date: consumo._id,
+          totalQuantidade: consumo.totalQuantidade,
+          userId: consumo.userId,
+          documentoId: consumo.documentoId, // Inclui o _id do documento no resultado
+        }))
+      );
     } catch (error: any) {
       res
         .status(500)
         .json({ message: error.message || "Erro ao listar consumos de água" });
     }
   }
+  
   
 
   public async delete(req: Request, res: Response): Promise<void> {

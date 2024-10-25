@@ -27,6 +27,8 @@ type Props = {
 const MenuDietas: React.FC<Props> = ({ navigation }) => {
   const [namediet, setNameDiet] = useState<string>("");
 
+  
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -78,13 +80,15 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
           </View>
         ))}
       </ScrollView>
+      {/* 
       <View style={styles.dietbuttoncontainer}>
         <NewDietButton
           onPress={() =>
             navigation.navigate("Home")
-          } /*Alterar para salvar os dados no cliente*/
+          }
         />
       </View>
+      */}
       <MenuInferior navigation={navigation} />
     </View>
   );

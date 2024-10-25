@@ -32,11 +32,11 @@ const Configuracoes: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cima}>
-        <Pressable style={styles.volta}>
-          <Image source={setaVolta} />
-        </Pressable>
-        <Text style={styles.titulo}>Configurações</Text>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("Home")}>
+          <Image source={setaVolta} style={styles.arrow} />
+        </TouchableOpacity>
+        <Text style={styles.header}>Configurações</Text>
       </View>
       <View style={styles.conteudo}>
         <Pressable

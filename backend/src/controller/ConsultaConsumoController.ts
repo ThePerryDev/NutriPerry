@@ -149,31 +149,30 @@ class ConsultaConsumoController {
       data,
       tipoRefeicao,
     });
-
+  
     const dataFormatada = moment(data as string).format("YYYY-MM-DD");
-
+  
     try {
       const resultados = await ConsumoCaloricoModel.find({
         user: userId,
         tipoRefeicao: tipoRefeicao,
         data: dataFormatada,
       });
-
+  
       console.log("Resultados para listAlimentoRefeicao:", resultados);
-
-      if (resultados.length === 0) {
-        return res
-          .status(404)
-          .json({ message: "Nenhum alimento encontrado para esta refeição." });
+  
+      // Alterado: Retorna resposta vazia se resultados forem nulos ou não tiverem itens
+      if (!resultados || resultados.length === 0) {
+        return res.status(200).json([]); // Retorna um array vazio
       }
-
+  
       // Incluindo o `_id` junto com os outros dados
       const alimentos = resultados.map((consumo) => ({
         id: consumo._id, // Incluindo o ID para referência no frontend
         nome: consumo.nomeAlimento,
         peso: consumo.peso,
       }));
-
+  
       return res.status(200).json(alimentos);
     } catch (error) {
       console.error("Erro ao listar alimentos por refeição:", error);
@@ -182,6 +181,7 @@ class ConsultaConsumoController {
         .json({ message: "Erro ao listar alimentos por refeição.", error });
     }
   }
+  
 
   // Método para deletar um alimento
   async deletarConsumo(req: Request, res: Response) {

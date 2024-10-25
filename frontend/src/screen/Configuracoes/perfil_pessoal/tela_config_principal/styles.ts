@@ -4,11 +4,9 @@ import Constants from 'expo-constants';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FBFBFB',
-        width: '100%',
-        height: '100%',
-        paddingTop: Constants.statusBarHeight
-    },
+        padding: 20,
+        backgroundColor: "#fff",
+      },
 
     cima: {
         width: '100%',
@@ -67,7 +65,29 @@ const styles = StyleSheet.create({
     textoButton: {
         color: "#2C4B4E",
         fontSize: 20,
-    }
+    },
+
+    arrow: {
+        width: 30,
+        height: 30,
+    },
+
+    header: {
+        fontSize: 26,
+        fontWeight: "bold",
+        textAlign: "center",
+        color: "#2C4B4E",
+    },
+
+    headerContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginLeft: 5,
+        marginRight: 60,
+        marginBottom: 15,
+        marginTop: 30,
+      },
 });
 
 export default styles;
