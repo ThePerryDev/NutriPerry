@@ -29,16 +29,17 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const [totalCalorias, setTotalCalorias] = useState<number>(0); 
   const [refreshing, setRefreshing] = useState(false); 
   const { user } = useContext(AuthContext);
+  const [kcalObjetivo, setkcalObjetivo] = useState<number>(0); 
+  const [carboidratoObjetivo,  setCarboidratoObjetivo] = useState<number>(0); 
+  const [proteinaObjetivo,  setProteinaObjetivo] = useState<number>(0); 
+  const [acucarObjetivo,  setAcucarObjetivo] = useState<number>(0); 
 
-  const objetivoCalorias = 2000;
-  const objetivoCarboidratos = 250;
-  const objetivoProteinas = 100;
-  const objetivoAcucar = 50;
 
   const fetchCaloriasConsumidas = async () => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
+      console.log("ID do usuário:", user?.id); 
       const response = await axios.get(`http://192.168.1.4:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
@@ -57,17 +58,43 @@ const Home: React.FC<Props> = ({ navigation }) => {
     }
   };
 
+  const fetchObjetivo = async() =>{
+    try{
+      console.log("ID do usuário:", user?.id); 
+      const response = await axios.get(`http://192.168.1.4:3000/user/objetivo`,{
+        params: {userId: user?.id}
+      });
+
+      const{kcalObjetivo, carboidratoObjetivo, proteinaObjetivo, acucarObjetivo} = response.data;
+      console.log("Resposta com objetivos do servidor: ",response.data);
+
+      setkcalObjetivo(kcalObjetivo ?? 0);
+      setCarboidratoObjetivo(carboidratoObjetivo ??0);
+      setProteinaObjetivo(proteinaObjetivo ?? 0);
+      setAcucarObjetivo(acucarObjetivo ?? 0);
+    }catch(error){
+      console.error("Erro ao buscar dados", error);
+    }
+
+  };
+
   const onRefresh = () => {
     setRefreshing(true);
     fetchCaloriasConsumidas().then(() => setRefreshing(false));
+    fetchObjetivo().then(() => setRefreshing(false));
   };
 
   // Chama a função toda vez que a tela for focada
   useFocusEffect(
     useCallback(() => {
       fetchCaloriasConsumidas();
+      fetchObjetivo();
     }, [])
   );
+
+  
+
+  
 
   const ProgressRing: React.FC<{ progress: number; radius: number; strokeWidth: number; color: string }> = ({ progress, radius, strokeWidth, color }) => {
     const normalizedRadius = radius - strokeWidth;
@@ -124,13 +151,13 @@ const Home: React.FC<Props> = ({ navigation }) => {
           <Text style={Styles.totalText}>Calorias</Text>
           <View style={Styles.progressContainer}>
             <ProgressRing 
-              progress={totalCalorias > 0 ? (totalCalorias / objetivoCalorias) * 100 : 0} 
+              progress={totalCalorias > 0 ? (totalCalorias / kcalObjetivo) * 100 : 0} 
               radius={50} 
               strokeWidth={10} 
               color="#00cc99" 
             />
             <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoCalorias.toFixed(2)} Kcal`}</Text>
+              <Text style={Styles.detailText}>{`Objetivo: ${kcalObjetivo.toFixed(2)} Kcal`}</Text>
               <Text style={Styles.detailText}>{`Consumido: ${totalCalorias > 0 ? totalCalorias.toFixed(2) : 0} Kcal`}</Text>
             </View>
           </View>
@@ -141,9 +168,9 @@ const Home: React.FC<Props> = ({ navigation }) => {
         <View style={Styles.card}>
           <Text style={Styles.totalText}>Carboidratos</Text>
           <View style={Styles.progressContainer}>
-            <ProgressRing progress={totalCarboidratos > 0 ? (totalCarboidratos / objetivoCarboidratos) * 100 : 0} radius={50} strokeWidth={10} color="#ffcc00" />
+            <ProgressRing progress={totalCarboidratos > 0 ? (totalCarboidratos / carboidratoObjetivo) * 100 : 0} radius={50} strokeWidth={10} color="#ffcc00" />
             <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoCarboidratos.toFixed(2)}g`}</Text>
+              <Text style={Styles.detailText}>{`Objetivo: ${carboidratoObjetivo.toFixed(2)}g`}</Text>
               <Text style={Styles.detailText}>{`Consumido: ${totalCarboidratos > 0 ? totalCarboidratos.toFixed(2) : 0}g`}</Text>
             </View>
           </View>
@@ -153,9 +180,9 @@ const Home: React.FC<Props> = ({ navigation }) => {
         <View style={Styles.card}>
           <Text style={Styles.totalText}>Proteínas</Text>
           <View style={Styles.progressContainer}>
-            <ProgressRing progress={totalProteinas > 0 ? (totalProteinas / objetivoProteinas) * 100 : 0} radius={50} strokeWidth={10} color="#337ab7" />
+            <ProgressRing progress={totalProteinas > 0 ? (totalProteinas / proteinaObjetivo) * 100 : 0} radius={50} strokeWidth={10} color="#337ab7" />
             <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoProteinas.toFixed(2)}g`}</Text>
+              <Text style={Styles.detailText}>{`Objetivo: ${proteinaObjetivo.toFixed(2)}g`}</Text>
               <Text style={Styles.detailText}>{`Consumido: ${totalProteinas > 0 ? totalProteinas.toFixed(2) : 0}g`}</Text>
             </View>
           </View>
@@ -165,9 +192,9 @@ const Home: React.FC<Props> = ({ navigation }) => {
         <View style={Styles.card}>
           <Text style={Styles.totalText}>Açúcar</Text>
           <View style={Styles.progressContainer}>
-            <ProgressRing progress={totalAcucar > 0 ? (totalAcucar / objetivoAcucar) * 100 : 0} radius={50} strokeWidth={10} color="#9c27b0" />
+            <ProgressRing progress={totalAcucar > 0 ? (totalAcucar / acucarObjetivo) * 100 : 0} radius={50} strokeWidth={10} color="#9c27b0" />
             <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoAcucar.toFixed(2)}g`}</Text>
+              <Text style={Styles.detailText}>{`Objetivo: ${acucarObjetivo.toFixed(2)}g`}</Text>
               <Text style={Styles.detailText}>{`Consumido: ${totalAcucar > 0 ? totalAcucar.toFixed(2) : 0}g`}</Text>
             </View>
           </View>

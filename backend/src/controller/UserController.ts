@@ -127,9 +127,36 @@ private getIdade(birthdate: string): number {
 }
 
 
-  public async list(_: Request, res: Response): Promise<void> {
-    res.send(await User.find());
+public async getUserDataById(req: Request, res: Response): Promise<Response> {
+  const { userId } = req.query;
+
+  // Verifica se o userId foi fornecido
+  if (!userId || typeof userId !== 'string') {
+    return res.status(400).json({ message: 'O ID do usuário é necessário.' });
   }
+
+  console.log("Parâmetro recebido:", { userId });
+
+  try {
+    // Busca o usuário pelo ID
+    const userData = await UserModel.findById(userId).select('height weight activityLevel gender goal birthdate kcalObjetivo taxaBasal proteinaObjetivo acucarObjetivo carboidratoObjetivo');
+
+    // Verifica se o usuário foi encontrado
+    if (!userData) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' });
+    }
+
+    // Retorna os dados do usuário encontrado
+    return res.status(200).json(userData);
+  } catch (error:any) {
+    console.error("Erro ao buscar dados do usuário:", error);
+    return res.status(500).json({ message: 'Erro ao buscar dados do usuário.', error: error.message });
+  }
+}
+
+public async list(_: Request, res: Response): Promise<void> {
+  res.send(await User.find());
+}
 
   public async delete(req: Request, res: Response): Promise<void> {
     const { id } = req.body;
