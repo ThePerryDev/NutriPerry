@@ -8,13 +8,19 @@ interface IUser extends Document {
   name: string;
   height: number; // em cm
   weight: number; // em kg
-  activityLevel: 'sedentario' | 'pouco ativo' | 'ativo' | 'muito ativo';
+  activityLevel: 'sedentario' | 'levemente_ativo' | 'moderadamente_ativo' | 'altamente_ativo' | 'extremamente_ativo';
   gender: 'masculino' | 'feminino';
-  goal: 'perda de peso' | 'manutenção de peso' | 'ganho de peso';
+  goal: 'perder_peso' | 'manter_peso' | 'ganhar_peso';
   birthdate: Date; // Data de nascimento
   nutricionista?: Types.ObjectId; // Referência a um nutricionista existente
   isLogged: boolean; // Indica se o usuário está logado
-  nickname: string
+  nickname: string;
+  kcalObjetivo: number;
+  proteinaObjetivo: number;
+  acucarObjetivo: number;
+  carboidratoObjetivo: number;
+  taxaBasal: number;
+  
 }
 
 // Validação da senha
@@ -102,6 +108,21 @@ const UserSchema: Schema<IUser> = new Schema({
       validator: (v: Date) => v < new Date(),
       message: 'A data de nascimento deve ser uma data no passado.'
     }
+  },
+  kcalObjetivo:{
+    type: Number
+  },
+  acucarObjetivo:{
+    type: Number
+  },
+  proteinaObjetivo:{
+    type: Number
+  },
+  carboidratoObjetivo:{
+    type: Number
+  },
+  taxaBasal:{
+    type: Number
   },
   nutricionista: {
     type: Types.ObjectId,
