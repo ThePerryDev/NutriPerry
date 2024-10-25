@@ -10,6 +10,7 @@ interface GastoCaloricoData {
   atividadeFisica: string;
   gastoCalorico: number;
   data: Date;
+  tempo: number;
 }
 
 class GastoCaloricoService {
