@@ -80,63 +80,63 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
   const onRefresh = () => {
     setRefreshing(true);
-    fetchCaloriasConsumidas().then(() => setRefreshing(false));
     fetchObjetivo().then(() => setRefreshing(false));
+    fetchCaloriasConsumidas().then(() => setRefreshing(false));
+    
   };
 
   // Chama a função toda vez que a tela for focada
   useFocusEffect(
     useCallback(() => {
-      fetchCaloriasConsumidas();
       fetchObjetivo();
+      fetchCaloriasConsumidas();
+      
     }, [])
   );
 
   
-
-  
-
   const ProgressRing: React.FC<{ progress: number; radius: number; strokeWidth: number; color: string }> = ({ progress, radius, strokeWidth, color }) => {
     const normalizedRadius = radius - strokeWidth;
     const circumference = normalizedRadius * 2 * Math.PI;
-    const strokeDashoffset = circumference - (progress / 100) * circumference;
+    const validProgress = Math.max(progress, 0); // Garante que progress não seja negativo
+    const strokeDashoffset = circumference - (validProgress / 100) * circumference;
 
     return (
-      <Svg height={radius * 2} width={radius * 2} viewBox={`0 0 ${radius * 2} ${radius * 2}`}>
-        <Circle
-          stroke="#d3d3d3"
-          fill="none"
-          strokeWidth={strokeWidth}
-          r={normalizedRadius}
-          cx={radius}
-          cy={radius}
-        />
-        <Circle
-          stroke={color}
-          fill="none"
-          strokeWidth={strokeWidth}
-          r={normalizedRadius}
-          cx={radius}
-          cy={radius}
-          strokeDasharray={`${circumference} ${circumference}`}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          transform={`rotate(-90 ${radius} ${radius})`}
-        />
-        <SvgText
-          x={radius}
-          y={radius}
-          fill="black"
-          fontSize="16"
-          fontWeight="bold"
-          textAnchor="middle"
-          dy=".3em"
-        >
-          {progress > 0 ? `${Math.round(progress)}%` : "0%"}
-        </SvgText>
-      </Svg>
+        <Svg height={radius * 2} width={radius * 2} viewBox={`0 0 ${radius * 2} ${radius * 2}`}>
+            <Circle
+                stroke="#d3d3d3"
+                fill="none"
+                strokeWidth={strokeWidth}
+                r={normalizedRadius}
+                cx={radius}
+                cy={radius}
+            />
+            <Circle
+                stroke={color}
+                fill="none"
+                strokeWidth={strokeWidth}
+                r={normalizedRadius}
+                cx={radius}
+                cy={radius}
+                strokeDasharray={`${circumference} ${circumference}`}
+                strokeDashoffset={strokeDashoffset}
+                strokeLinecap="round"
+                transform={`rotate(-90 ${radius} ${radius})`}
+            />
+            <SvgText
+                x={radius}
+                y={radius}
+                fill="black"
+                fontSize="16"
+                fontWeight="bold"
+                textAnchor="middle"
+                dy=".3em"
+            >
+                {validProgress > 0 ? `${Math.round(validProgress)}%` : "0%"}
+            </SvgText>
+        </Svg>
     );
-  };
+};
 
   return (
     <View style={Styles.pageContainer}>
@@ -151,10 +151,10 @@ const Home: React.FC<Props> = ({ navigation }) => {
           <Text style={Styles.totalText}>Calorias</Text>
           <View style={Styles.progressContainer}>
             <ProgressRing 
-              progress={totalCalorias > 0 ? (totalCalorias / kcalObjetivo) * 100 : 0} 
-              radius={50} 
-              strokeWidth={10} 
-              color="#00cc99" 
+                progress={totalCalorias > 0 && kcalObjetivo > 0 ? (totalCalorias / kcalObjetivo) * 100 : 0} 
+                radius={50} 
+                strokeWidth={10} 
+                color="#00cc99" 
             />
             <View style={Styles.progressInfo}>
               <Text style={Styles.detailText}>{`Objetivo: ${kcalObjetivo.toFixed(2)} Kcal`}</Text>

@@ -62,7 +62,7 @@ class UsersController {
         console.log("kcalObjetivo", kcalObjetivo)
 
         // Calcular proteinaObjetivo
-        const proteinaObjetivo = (activityLevel === 'altamente_ativo' || activityLevel === 'extremamente_ativo') ? 1.8 * weight : 1 * weight;
+        const proteinaObjetivo = (activityLevel === 'altamente_ativo' || activityLevel === 'extremamente_ativo') ? 1.8 * weight : 1.2 * weight;
         console.log("proteinaObjetivo", proteinaObjetivo)
 
         // Calcular carboidratoObjetivo
