@@ -4,7 +4,7 @@ import { RootStackParamList } from "./src/types/rootStack";
 import AuthProvider from "./src/context/auth/AuthProvider";
 import { ConsumoCaloricoProvider } from "./src/context";
 import { UserCadastroProvider } from "./src/context/UserCadastroContext";
-import { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaFinalizado, TelaPPObjetivo, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, NewExercicise, ConsumoAgua, } from "./src/screen";
+import { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaFinalizado, TelaPPObjetivo, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, NewExercicise, ConsumoAgua, GraficoConsumoAgua, } from "./src/screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -14,7 +14,7 @@ export default function App() {
       <UserCadastroProvider>
         <ConsumoCaloricoProvider>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="AbrindoApp">
+            <Stack.Navigator initialRouteName="GraficoConsumoAgua">
               <Stack.Screen
                 name="AbrindoApp"
                 component={AbrindoApp}
@@ -158,6 +158,11 @@ export default function App() {
               <Stack.Screen
                 name="ConsumoAgua"
                 component={ConsumoAgua}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="GraficoConsumoAgua"
+                component={GraficoConsumoAgua}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>
