@@ -34,32 +34,77 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#2C4B4E",
   },
-  buttoncontainer:{
-    flexDirection:"row",
-    justifyContent:"space-between"
+  explanation: {
+    fontSize: 20,
+    fontWeight:"bold",
+    textAlign: "center",
+    color: "#2C4B4E",
+    marginBottom:25
   },
-  dietbutton:{
+  buttonsplit:{
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:"space-evenly",
+    marginBottom: 25,
+  },
+  infocontainer:{
+    backgroundColor:"#f5f5f5",
+    marginBottom:25,
+    borderRadius:15
+  },
+  infotitle: {
+    fontSize: 18,
+    fontWeight:"bold",
+    textAlign: "center",
+    color: "#2C4B4E",
+    marginTop:15,
+    marginBottom:15
+  },
+  infosplit:{
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:"space-evenly",
+    marginBottom: 25,
+  },
+  infosubtitle: {
+    fontSize: 16,
+    fontWeight:"bold",
+    textAlign: "center",
+    color: "#2C4B4E",
+    marginBottom:10
+  },
+  infodata: {
+    fontSize: 16,
+    fontWeight:"bold",
+    textAlign: "center",
+    color: "#2C4B4E",
+  },
+  chartContainer:{
+    paddingRight:10,
+    paddingLeft:10,
+    paddingBottom:15,
+    backgroundColor:"#f5f5f5",
+    borderRadius:15,
     justifyContent:"center",
     alignItems:"center",
-    width:150,
-    height:50,
-    backgroundColor:"#00AD71",
-    borderRadius: 15,
-    marginTop:30
+    alignContent:"center",
   },
-  dietwaterbutton:{
-    justifyContent:"center",
-    alignItems:"center",
-    height:50,
-    backgroundColor:"#00AD71",
-    borderRadius: 15,
-    marginTop:30
-  },
-  diettext:{
-    color:"#ffffff",
+  charttitle:{
+    color:"#2C4B4E",
     fontSize:20,
-    fontWeight:"bold"
-  }
+    fontWeight:"bold",
+    paddingTop:15,
+    paddingBottom:25
+  },
+  selectButtonText: {
+    fontSize:16,
+    fontWeight:"bold",
+    color:"#2C4B4E",
+  },
+  activeText: {
+    color: "#00AD71", // Cor para o texto ativo
+  },
+  
 });
 
 export default styles;

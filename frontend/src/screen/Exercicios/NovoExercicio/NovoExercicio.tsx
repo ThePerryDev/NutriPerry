@@ -8,7 +8,7 @@ import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import axios from 'axios';
 import moment from "moment";
 
-const API_URL = 'http://192.168.0.138:3000/gastocalorico';
+const API_URL = 'http://10.68.55.203:3000/gastocalorico';
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "NewExercicise"
