@@ -79,6 +79,19 @@ const GraficoConsumoAgua: React.FC<Props> = ({ navigation }) => {
   const [selectedRange, setSelectedRange] = useState("Mensal");
   const lineData = selectedRange === "Semanal" ? WeeklineData : selectedRange === "Mensal" ? MonthlineData : YearlineData;
 
+  const getSubtitle = () => {
+    switch (selectedRange) {
+      case "Semanal":
+        return "Última Semana";
+      case "Mensal":
+        return "Último Mês";
+      case "Anual":
+        return "Último Ano";
+      default:
+        return "Última Semana"; // valor padrão
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -111,7 +124,7 @@ const GraficoConsumoAgua: React.FC<Props> = ({ navigation }) => {
         <Text style={styles.infotitle}>Média do Consumo de Água</Text>
         <View style={styles.infosplit}>
           <View>
-            <Text style={styles.infosubtitle}>Ultima Semana</Text>
+            <Text style={styles.infosubtitle}>{getSubtitle()}</Text>
             <Text style={styles.infodata}>0000</Text>
           </View>
           <View>

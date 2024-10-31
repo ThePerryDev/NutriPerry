@@ -14,7 +14,7 @@ export default function App() {
       <UserCadastroProvider>
         <ConsumoCaloricoProvider>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="GraficoConsumoAgua">
+            <Stack.Navigator initialRouteName="AbrindoApp">
               <Stack.Screen
                 name="AbrindoApp"
                 component={AbrindoApp}
