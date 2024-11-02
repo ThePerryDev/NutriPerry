@@ -2,8 +2,8 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://192.168.0.128:3000/gastocalorico';
-//const API_URL = 'http://192.168.0.128:3000/gastocalorico';
+const API_URL = 'http://192.168.18.72:3000/gastocalorico';
+//const API_URL = 'http://192.168.18.72:3000/gastocalorico';
 
 interface GastoCaloricoData {
   userID: string;
@@ -13,7 +13,21 @@ interface GastoCaloricoData {
   tempo: number;
 }
 
-class GastoCaloricoService {
+// GastoCaloricoService.ts
+interface GastoCaloricoService {
+  search(searchText: string): Promise<GastoCaloricoData[]>;
+}
+
+class GastoCaloricoService {// GastoCaloricoService.ts
+  async search(searchText: string): Promise<GastoCaloricoData[]> {
+    try {
+      const response = await axios.get(`https://api.example.com/exercicios?search=${searchText}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
   async getAll(): Promise<GastoCaloricoData[]> {
     try {
       const response = await axios.get(API_URL);
