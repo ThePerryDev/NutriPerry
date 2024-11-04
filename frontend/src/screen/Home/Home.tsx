@@ -39,7 +39,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
-      const response = await axios.get(`http://10.68.55.203:3000/consumos/totalkcal`, {
+      const response = await axios.get(`http://192.168.18.46:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
