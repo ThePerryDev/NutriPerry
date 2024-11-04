@@ -182,6 +182,7 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
               style={styles.input}
               placeholder="Quantidade em ml"
               keyboardType="numeric"
+              returnKeyType="done"
             />
             <TouchableOpacity
               style={styles.datePickerButton}
@@ -208,6 +209,7 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
               style={styles.input}
               placeholder="Quantidade de vezes"
               keyboardType="numeric"
+              returnKeyType="done"
             />
             <TouchableOpacity
               style={styles.modalButton}
