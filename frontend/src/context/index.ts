@@ -1,4 +1,7 @@
 
+import { AuthContext } from './auth/AuthContext';
+import AuthProvider from './auth/AuthProvider';
+import RequireAuth from './auth/RequireAuth';
 import { ConsumoCaloricoProvider, ConsumoCaloricoContext } from './ConsumoCaloricoContext';
 
 
@@ -6,5 +9,8 @@ import { ConsumoCaloricoProvider, ConsumoCaloricoContext } from './ConsumoCalori
 
 export{
     ConsumoCaloricoProvider,
-    ConsumoCaloricoContext
+    ConsumoCaloricoContext,
+    AuthProvider,
+    AuthContext,
+    RequireAuth
 }

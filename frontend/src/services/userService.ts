@@ -11,11 +11,12 @@ class UsersService {
     email: string;
     password: string;
     name: string;
+    nickname: string;
     height: number;
     weight: number;
     activityLevel: "sedentario" | "pouco ativo" | "ativo" | "muito ativo";
     gender: "masculino" | "feminino";
-    goal: "perda de peso" | "manter meu peso atual" | "ganho de peso";
+    goal: "perda de peso" | "manutenção de peso" | "ganho de peso";
     birthdate: Date;
     nutricionista?: string;
     isLogged: boolean;
@@ -30,11 +31,12 @@ class UsersService {
     email: string;
     password: string;
     name: string;
+    nickname: string;
     height: number;
     weight: number;
     activityLevel: "sedentario" | "pouco ativo" | "ativo" | "muito ativo";
     gender: "masculino" | "feminino";
-    goal: "perda de peso" | "manter meu peso atual" | "ganho de peso";
+    goal: "perda de peso" | "manutenção de peso" | "ganho de peso";
     birthdate: Date;
     nutricionista?: string;
     isLogged: boolean;
@@ -47,6 +49,12 @@ class UsersService {
     const { data } = await api.get(`/user/${id}`);
     return data;
   }
+
+  async delete(id: string): Promise<any> {
+    const { data } = await api.delete("/user", { data: { id } });
+    return data;
+  }  
+
 }
 
 const service = new UsersService();
