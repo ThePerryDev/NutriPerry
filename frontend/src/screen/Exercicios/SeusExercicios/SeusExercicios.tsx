@@ -5,7 +5,7 @@ import styles from "./styles"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
 import MenuInferior from "../../../components/MenuInferior/MenuInferior";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import axios from "axios";
 import { AuthContext } from "../../../context";
 
@@ -32,20 +32,24 @@ type Exercicios = {
 
 const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rastrear o checkbox de cada refeição
   const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
-  const [exercicios, setExercicios] = useState<{ atividadeFisica: string, gastoCalorico: number }[]>([]); // Estado para armazenar os produtos
+  const [exercicios, setExercicios] = useState<{ tempo: number, data: string, atividadeFisica: string, gastoCalorico: number }[]>([]); // Estado para armazenar os produtos
   const { user } = useContext(AuthContext);
   const [selectedExercise, setSelectedExercise] = useState<Exercicios | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchExercicios = async () => {
     try {
-      const formattedDate = moment().format("YYYY-MM-DD");
+      const date: Moment = moment(); // Substitua por sua data real
+      const formattedDate: string = date.format("DD/MM/YYYY");
+      console.log(formattedDate); // Saída: "04/11/2024"
 
       const responseExercicios = await axios.get(API_URL, {
         params: {
           userID: user?.id,
           data: formattedDate,
           atividadeFisica: "atividadeFisica",
+          gastoCalorico: "gastoCalorico",
+          tempo: "tempo",
         },
       });
 
@@ -76,17 +80,17 @@ const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rast
       const responseExercicios = await axios.get(API_URL, {
         params: {
           userID: user?.id,
-          data: moment().format("YYYY-MM-DD"),
+          data: Date.now(),
           atividadeFisica: text,
         },
       });
 
       const exercicios = responseExercicios.data.map((exercicio: any) => ({
         //id: exercicio.id,
-        //data: exercicio.data,
+        data: exercicio.data,
         atividadeFisica: exercicio.atividadeFisica,
         gastoCalorico: exercicio.gastoCalorico,
-        //tempo: exercicio.tempo,
+        tempo: exercicio.tempo,
         //userID: exercicio.userID,
       }));
 
@@ -134,8 +138,10 @@ const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rast
                 onPress={() => handleExerciseClick(exercicio)}
               ></TouchableOpacity>
               <View style={styles.mealInfo}>
-                <Text style={styles.mealName}>{exercicio.atividadeFisica}</Text>
-                <Text style={styles.mealDetail}>{exercicio.gastoCalorico} kcal</Text>
+                  <Text style={styles.mealName}>{exercicio.atividadeFisica}</Text>
+                  <Text style={styles.mealDetail}>{moment(exercicio.data).format("DD/MM/YYYY")}</Text>
+                  <Text style={styles.mealDetail}>{exercicio.gastoCalorico} kcal</Text>
+                  <Text style={styles.mealDetail}>{exercicio.tempo} min</Text>
               </View>
             </View>
           )
