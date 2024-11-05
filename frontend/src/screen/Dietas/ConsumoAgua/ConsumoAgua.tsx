@@ -52,7 +52,7 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
   const fetchConsumoAgua = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.1.4:3000/consumo-agua/${userId}`
+        `http://192.168.1.76:3000/consumo-agua/${userId}`
       );
       const consumosFormatados = response.data.map((consumo: any) => ({
         _id: consumo.documentoId,
@@ -81,7 +81,7 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
     const dataFormatada = moment(data).format("YYYY-MM-DD");
 
     try {
-      await axios.post("http://192.168.1.4:3000/consumo-agua", {
+      await axios.post("http://192.168.1.76:3000/consumo-agua", {
         user: userId,
         quantidade: parseInt(quantidade),
         data: dataFormatada,
@@ -103,7 +103,7 @@ const ConsumoAguaScreen: React.FC<Props> = ({ navigation }) => {
 
     try {
       await axios.delete(
-        `http://192.168.1.4:3000/consumo-agua/${userId}/${formattedDate}`
+        `http://192.168.1.76:3000/consumo-agua/${userId}/${formattedDate}`
       );
 
       setConsumos((prevConsumos) =>
