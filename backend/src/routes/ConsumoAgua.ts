@@ -6,5 +6,6 @@ const router = Router();
 router.post("/", controller.create); // Criar um novo consumo de água
 router.get("/:user", controller.list); // Listar consumos de água por usuário
 router.delete("/:user/:date", controller.delete); // Deletar consumos de água por usuário e data
+router.get("/totalagua/:user/:dia", controller.listTotal); // Listar consumos de água por usuário
 
 export default router;

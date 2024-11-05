@@ -89,6 +89,48 @@ class ConsumoAguaController {
       res.status(500).json({ message: error.message || "Erro ao deletar os consumos de água" });
     }
   }
+
+  public async listTotal(req: Request, res: Response): Promise<void> {
+    const { user, dia } = req.params; // Recebe o userId e a data (dia) como parâmetros
+  
+    try {
+        const userId = new mongoose.Types.ObjectId(user); // Converte o ID para ObjectId
+
+        // Converte a data recebida para um objeto Date
+        const dataConsultada = new Date(dia);
+
+        const consumos = await ConsumoAgua.aggregate([
+            { 
+                $match: { 
+                    user: userId, // Filtra pelo usuário como ObjectId
+                    data: { $eq: dataConsultada } // Filtra pela data exatamente igual à data consultada
+                } 
+            },
+            {
+                $group: {
+                    _id: null, // Agrupa todos os resultados em um único documento
+                    totalQuantidade: { $sum: { $multiply: ["$quantidade", "$vezes"] } }, // Soma a quantidade
+                },
+            },
+        ]);
+
+        // Verifica se consumos é nulo ou vazio
+        if (!consumos || consumos.length === 0) {
+            res.status(200).json({ message: "Total de água consumido: 0" }); // Retorna total como 0 se não houver registros
+            return; // Termina a execução do método
+        }
+
+        res.json({
+            message: `Total de água consumido: ${consumos[0].totalQuantidade || 0}`, // Retorna a mensagem com o total, ou 0 se não houver
+        });
+    } catch (error: any) {
+        res.status(500).json({ message: error.message || "Erro ao listar consumos" });
+    }
+}
+
+  
+
+
 }
 
 export default new ConsumoAguaController();

@@ -73,8 +73,37 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderColor: "#00AD71",
         marginTop: 10,
-        paddingLeft:20
+        paddingLeft:20,
+        paddingTop:5,
+        fontSize: 20,
+        textAlignVertical: "center",
+        
+     
       },
+      scrollView: {
+        flex: 1,
+        width: "100%",
+    },
+    scrollContent: {
+        paddingBottom: 80, // Para evitar sobreposição com o MenuInferior
+    },
+    menuInferior: {
+        position: "absolute",
+        bottom: 0,
+        width: "100%",
+    },
+    valorTexto: {
+        backgroundColor: "#FFFFFF",
+        borderRadius: 15,
+        height: 40,
+        width: 320,
+        borderWidth: 2,
+        borderStyle: "solid",
+        borderColor: "#00AD71",
+        marginTop: 10,
+        paddingLeft:20
+    },
+    
 });
 
 export default styles;
