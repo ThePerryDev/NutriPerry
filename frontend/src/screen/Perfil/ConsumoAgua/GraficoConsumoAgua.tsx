@@ -7,6 +7,7 @@ import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import { setaVolta } from "../../../assets";
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../../context/auth/AuthContext";
+import moment from "moment";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<RootStackParamList, "GraficoConsumoAgua">;
 
@@ -104,6 +105,24 @@ const GraficoConsumoAgua: React.FC<Props> = ({ navigation }) => {
     Anual: "Último Ano",
   })[selectedRange];
 
+  // Função para obter o período de exibição no título do gráfico
+  const getDisplayPeriod = () => {
+    if (selectedRange === "Semanal") {
+      const startOfWeek = moment().startOf("week").add(1, 'days'); // Segunda-feira
+      const endOfWeek = moment().endOf("week").add(1, 'days'); // Domingo
+      return `${startOfWeek.format("DD/MM/YYYY")} a ${endOfWeek.format("DD/MM/YYYY")}`;
+    } else if (selectedRange === "Mensal") {
+      const startOfMonth = moment().startOf("month");
+      const endOfMonth = moment().endOf("month");
+      return `${startOfMonth.format("DD/MM/YYYY")} a ${endOfMonth.format("DD/MM/YYYY")}`;
+    } else if (selectedRange === "Anual") {
+      const startOfYear = moment().startOf("year");
+      const endOfYear = moment().endOf("year");
+      return `${startOfYear.format("DD/MM/YYYY")} a ${endOfYear.format("DD/MM/YYYY")}`;
+    }
+    return "";
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -147,7 +166,7 @@ const GraficoConsumoAgua: React.FC<Props> = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.chartContainer}>
-        <Text style={styles.charttitle}>Consumo de Água</Text>
+        <Text style={styles.charttitle}>{getDisplayPeriod()}</Text>
         <LineChart
           initialSpacing={20}
           data={

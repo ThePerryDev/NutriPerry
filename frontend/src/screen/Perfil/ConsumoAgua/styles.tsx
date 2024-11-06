@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   charttitle:{
     color:"#2C4B4E",
-    fontSize:20,
+    fontSize:18,
     fontWeight:"bold",
     paddingTop:15,
     paddingBottom:25
