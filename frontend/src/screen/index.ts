@@ -30,18 +30,9 @@ import InformacoesNutri2 from "./Configuracoes/perfil_nutricionista/tela_config_
 import SenhaNutri from "./Configuracoes/perfil_nutricionista/tela_config_senha_nutri/SenhaNutri"
 import SeusExercicios from "./Exercicios/SeusExercicios/SeusExercicios";
 import NewExercicise from "./Exercicios/NovoExercicio/NovoExercicio";
-<<<<<<< Updated upstream
-import Pesos from "./Perfil/Peso/Peso";
-
-export { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, TelaFinalizado, CadastroNutriNome, CadastroNutriEmail, CadastroNutriFormacao, CadastroNutriTelefone, TelaLogin, AbrindoApp, AdicionarAlimento, PesquisaAlimento, CadastrarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, ConfiguracoesNutri, InformacoesNutri1, InformacoesNutri2, SenhaNutri, SeusExercicios, NewExercicise, Pesos};
-=======
 import ConsumoAgua from "./Dietas/ConsumoAgua/ConsumoAgua";
-import TelaFinalizado from "./Cadastro/finalizado/tela_finalizado";
-import Jantar from "./Dietas/Jantar/Jantar";
-import Lanches from "./Dietas/Lanches/Lanches";
 import Pesos from "./Perfil/Peso/Peso";
 import Perfil from "./Perfil/PerfilUsuario/Perfil";
 
 export { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaPPObjetivo, TelaFinalizado, TelaLogin, AbrindoApp, AdicionarAlimento, PesquisaAlimento, CadastrarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, ConfiguracoesNutri, InformacoesNutri1, InformacoesNutri2, SenhaNutri, SeusExercicios, NewExercicise, ConsumoAgua, Pesos, Perfil };
->>>>>>> Stashed changes
 

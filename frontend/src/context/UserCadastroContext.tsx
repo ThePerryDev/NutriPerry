@@ -1,65 +1,65 @@
-import axios from 'axios';
+import React, { createContext, useContext, useState } from 'react';
+import UserCadastroService from '../services/UserCadastroService';
+import { UserProps } from '../services/UserCadastroService'; // Certifique-se de que o caminho está correto
 
-const BASE_URL = 'http://192.168.0.128:3000/user'; // Substitua pela URL correta
-
-export interface UserProps {
-  email: string;
-  password: string;
-  name: string;
-  height: number; // em cm
-  weight: number; // em kg
-  activityLevel: string;
-  gender: string | undefined;
-  goal: string | undefined;
-  birthdate: Date | any ; // Data de nascimento
-  nutricionista?: string; // Opcional
-  isLogged: boolean; // Indica se o usuário está logado
-  nickname: string; // Nome de usuário
+interface UserCadastroContextType {
+  users: UserProps[];
+  userData: Partial<UserProps>; // Usando Partial para dados que não estão completos ainda
+  createUser: () => Promise<void>;
+  updateUserData: (data: Partial<UserProps>) => void;
+  listUsers: () => Promise<void>;
+  deleteUser: (id: string) => Promise<void>;
 }
 
-class UserCadastroService {
-  // Método para criar um novo usuário
-  public static async createUser(userData: UserProps): Promise<UserProps> {
-    try {
-      const response = await axios.post(BASE_URL, userData);
-      return response.data;
-    } catch (error: any) {
-      console.error("Erro ao criar o usuário:", error);
-      throw error.response?.data || 'Erro ao criar o usuário';
-    }
-  }
+const UserCadastroContext = createContext<UserCadastroContextType | undefined>(undefined);
 
-  // Método para listar todos os usuários
-  public static async listUsers(): Promise<UserProps[]> {
+export const UserCadastroProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [users, setUsers] = useState<UserProps[]>([]);
+  const [userData, setUserData] = useState<Partial<UserProps>>({});
+
+  const createUser = async () => {
     try {
-      const response = await axios.get(BASE_URL);
-      return response.data;
-    } catch (error: any) {
+      await UserCadastroService.createUser(userData as UserProps);
+      await listUsers(); // Atualiza a lista após criar um usuário
+    } catch (error) {
+      console.error("Erro ao criar usuário:", error);
+      // Aqui você pode adicionar um estado para exibir uma mensagem de erro, se desejar
+    }
+  };
+
+  const updateUserData = (data: Partial<UserProps>) => {
+    setUserData((prevData) => ({ ...prevData, ...data }));
+  };
+
+  const listUsers = async () => {
+    try {
+      const userList = await UserCadastroService.listUsers();
+      setUsers(userList);
+    } catch (error) {
       console.error("Erro ao listar usuários:", error);
-      throw error.response?.data || 'Erro ao listar usuários';
     }
-  }
+  };
 
-  // Método para atualizar um usuário
-  public static async updateUser(id: string, userData: UserProps): Promise<UserProps> {
+  const deleteUser = async (id: string) => {
     try {
-      const response = await axios.put(`${BASE_URL}/${id}`, userData);
-      return response.data;
-    } catch (error: any) {
-      console.error("Erro ao atualizar o usuário:", error);
-      throw error.response?.data || 'Erro ao atualizar o usuário';
+      await UserCadastroService.deleteUser(id);
+      await listUsers(); // Atualiza a lista após deletar um usuário
+    } catch (error) {
+      console.error("Erro ao deletar usuário:", error);
     }
-  }
+  };
 
-  // Método para deletar um usuário
-  public static async deleteUser(id: string): Promise<void> {
-    try {
-      await axios.delete(`${BASE_URL}/${id}`);
-    } catch (error: any) {
-      console.error("Erro ao deletar o usuário:", error);
-      throw error.response?.data || 'Erro ao deletar o usuário';
-    }
-  }
-}
+  return (
+    <UserCadastroContext.Provider value={{ users, userData, createUser, updateUserData, listUsers, deleteUser }}>
+      {children}
+    </UserCadastroContext.Provider>
+  );
+};
 
-export default UserCadastroService;
+export const useUserCadastro = () => {
+  const context = useContext(UserCadastroContext);
+  if (!context) {
+    throw new Error('useUserCadastro must be used within a UserCadastroProvider');
+  }
+  return context;
+};

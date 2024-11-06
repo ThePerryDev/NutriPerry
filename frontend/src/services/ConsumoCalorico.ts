@@ -1,13 +1,7 @@
 import axios from 'axios';
-
-<<<<<<< Updated upstream
-const API_URL = 'http://localhost:3000/consumocalorico';
-//'http://localhost:3000/consumocalorico';
-=======
 //const API_URL = 'http://192.168.0.20:3000/consumocalorico';
 const API_URL = 'http://192.168.0.20:3000/consumocalorico';
 //'http://192.168.0.20:3000/consumocalorico';
->>>>>>> Stashed changes
 
 interface ConsumoCaloricoData {
   user: string;

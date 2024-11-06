@@ -1,14 +1,8 @@
 // frontend/src/services/GastoCalorico.ts
 
 import axios from 'axios';
-
-<<<<<<< Updated upstream
-//const API_URL = 'http://10.68.55.162:3000/gastocalorico';
-const API_URL = 'http://localhost:3000/gastocalorico';
-=======
 const API_URL = 'http://192.168.0.20:3000/gastocalorico';
 //const API_URL = 'http://192.168.0.20:3000/gastocalorico';
->>>>>>> Stashed changes
 
 interface GastoCaloricoData {
   userID: string;
