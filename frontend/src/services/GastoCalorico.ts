@@ -1,14 +1,16 @@
 // frontend/src/services/GastoCalorico.ts
 
 import axios from 'axios';
-const API_URL = 'http://192.168.0.20:3000/gastocalorico';
-//const API_URL = 'http://192.168.0.20:3000/gastocalorico';
+
+const API_URL = 'http://192.168.1.76:3000/gastocalorico';
+//const API_URL = 'http://192.168.1.76:3000/gastocalorico';
 
 interface GastoCaloricoData {
   userID: string;
   atividadeFisica: string;
   gastoCalorico: number;
   data: Date;
+  tempo: number;
 }
 
 class GastoCaloricoService {

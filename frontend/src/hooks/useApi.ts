@@ -3,14 +3,6 @@ import { UsersProps } from "../types";
 import Search from "../utils/Search";
 
 export const useApi = () => ({
-  // VALIDAÇÃO DE TOKEN DESATIVADA PORQUE USA-SE O MONGO
-  /*
-    validateToken: async (token: string) => {
-        const response = await api.post('/validate', {token});
-        return response.data;
-    },
-    */
-
   validateUser: async (name: string) => {
     const user = await getUser(name);
     let response;
@@ -25,23 +17,14 @@ export const useApi = () => ({
   signin: async (email: string, password: string) => {
     let user = await getUser(email);
     if (user && user.password === password) {
-      const id = user.id;
-      const name = user.name;
-      const email = user.email;
-      const password = user.password;
-      const height = user.height;
-      const weight = user.weight;
-      const activityLevel = user.activityLevel;
-      const gender = user.gender;
-      const goal = user.goal;
-      const birthdate = user.birthdate;
-      const nutricionista = user.nutricionista;
+      const { id, name, nickname, height, weight, activityLevel, gender, goal, birthdate, nutricionista } = user;
       const isLogged = true;
       return await service.put({
         id,
         email,
         password,
         name,
+        nickname,
         isLogged,
         height,
         weight,
@@ -58,23 +41,14 @@ export const useApi = () => ({
   logout: async (email: string) => {
     let user = await getUser(email);
     if (user) {
-      const id = user.id;
-      const name = user.name;
-      const email = user.email;
-      const password = user.password;
-      const height = user.height;
-      const weight = user.weight;
-      const activityLevel = user.activityLevel;
-      const gender = user.gender;
-      const goal = user.goal;
-      const birthdate = user.birthdate;
-      const nutricionista = user.nutricionista;
-      const isLogged = true;
+      const { id, name, nickname, password, height, weight, activityLevel, gender, goal, birthdate, nutricionista } = user;
+      const isLogged = false; // Set isLogged to false on logout
       await service.put({
         id,
         email,
         password,
         name,
+        nickname,
         isLogged,
         height,
         weight,
@@ -84,6 +58,28 @@ export const useApi = () => ({
         birthdate,
         nutricionista,
       });
+    }
+  },
+
+  register: async (props: {
+    email: string;
+    password: string;
+    name: string;
+    nickname:string;
+    height: number;
+    weight: number;
+    activityLevel: "sedentario" | "pouco ativo" | "ativo" | "muito ativo";
+    gender: "masculino" | "feminino";
+    goal: "perda de peso" | "manutenção de peso" | "ganho de peso";
+    birthdate: Date;
+    nutricionista?: string;
+    isLogged: boolean;
+  }) => {
+    const user = await getUser(props.email);
+    if (!user) {
+      return await service.post(props); // Cadastro de novo usuário
+    } else {
+      throw new Error("Usuário já cadastrado");
     }
   },
 });
@@ -101,24 +97,20 @@ async function getUsers() {
 
 async function getUserPosition(email: string) {
   await getUsers();
-  /* Cria lista de emails dos usuários*/
   let mailList: string[] = [];
 
-  /* Se usuários existem, popula a lista de email dos usuários */
   if (users.length > 0) {
-    users?.map((user) => mailList.push(user.email));
+    users.map((user) => mailList.push(user.email));
   }
 
   let s_number = new Search<number>();
 
-  console.log(users);
   return s_number.sequential_ws(email, mailList);
 }
 
 async function getUser(email: string) {
   let position = await getUserPosition(email);
 
-  /* Se o nome ainda não estiver no banco de dados, ele então é cadastrado */
   if (position === -1) {
     console.log("Usuário não cadastrado!");
     return null;
