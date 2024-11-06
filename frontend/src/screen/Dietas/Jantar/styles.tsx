@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 5,
-    marginRight: 110,
+    marginRight: 60,
     marginBottom: 15,
     marginTop: 30,
   },
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   datacontainer: {
-    flex:1,
+    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   AddMealButtoncontainer: {
-    flex:1,
+    flex: 1,
     justifyContent: "space-evenly",
     marginBottom: 65,
   },
@@ -124,6 +124,42 @@ const styles = StyleSheet.create({
   },
   spacer: {
     flex: 1,
+  },
+  // Novo estilo para o contêiner do DatePicker
+  datePickerContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 25,
+  },
+  datePickerbutton: {
+    width: 180,
+    height: 30,
+    backgroundColor: "#00AD71",
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight:15
+  },
+  datapickertext: {
+    fontSize: 16,
+    fontWeight: "bold",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#ffffff",
+  },
+  selectedDateText: {
+    height: 30,
+    borderWidth: 2,
+    borderColor: "#00AD71",
+    borderRadius: 10,
+    fontSize: 16,
+    fontWeight: "bold",
+    paddingLeft:20,
+    paddingRight:20,
+    textAlignVertical: "center",
+    textAlign: "center",
   },
 });
 

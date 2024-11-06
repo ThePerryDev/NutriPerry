@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,10 @@ import { camera, setaVolta } from "../../../assets";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import NewDietButton from "../../../components/Cadastro/NovaDieta/novadieta";
+import moment from "moment";
+import { AuthContext } from "../../../context";
+import axios from "axios";
+import { useFocusEffect } from "@react-navigation/native";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -26,8 +30,6 @@ type Props = {
 
 const MenuDietas: React.FC<Props> = ({ navigation }) => {
   const [namediet, setNameDiet] = useState<string>("");
-<<<<<<< Updated upstream
-=======
   const [totalKcalCafe, setTotalKcalCafe] = useState(0);
   const [totalKcalAlmoco, setTotalKcalAlmoco] = useState(0);
   const [totalKcalJantar, setTotalKcalJantar] = useState(0);
@@ -37,7 +39,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 
   const fetchCafedaManha = async () => {
     try {
-      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.1.76:3000/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: moment().format("YYYY-MM-DD"),
@@ -53,7 +55,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 
   const fetchAlmoco = async () => {
     try {
-      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.1.76:3000/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: moment().format("YYYY-MM-DD"),
@@ -70,7 +72,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 
   const fetchJantar = async () => {
     try {
-      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.1.76:3000/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: moment().format("YYYY-MM-DD"),
@@ -87,7 +89,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 
   const fetchLanche = async () => {
     try {
-      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.1.76:3000/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: moment().format("YYYY-MM-DD"),
@@ -122,7 +124,6 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
     }, [])
   );
   
->>>>>>> Stashed changes
 
   return (
     <View style={styles.container}>
@@ -144,11 +145,32 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
         />
       </View>
       <ScrollView>
-        {["Café da Manhã", "Almoço", "Jantar", "Lanches"].map((meal, index) => (
+  {["Café da Manhã", "Almoço", "Jantar", "Lanches"].map((meal, index) => {
+    let totalKcal = 0;
+
+    // Associando o total de calorias correto para cada refeição
+    switch (meal) {
+      case "Café da Manhã":
+        totalKcal = totalKcalCafe;
+        break;
+      case "Almoço":
+        totalKcal = totalKcalAlmoco;
+        break;
+      case "Jantar":
+        totalKcal = totalKcalJantar;
+        break;
+      case "Lanches":
+        totalKcal = totalKcalLanche;
+        break;
+      default:
+        totalKcal = 0;
+    }
+
+        return (
           <View key={index} style={styles.mealItem}>
             <View style={styles.mealInfo}>
               <Text style={styles.mealName}>{meal}</Text>
-              <Text style={styles.mealDetail}>Sem cardápio cadastrado</Text>
+              <Text style={styles.mealDetail}>{totalKcal} kcal</Text>
             </View>
             <TouchableOpacity
               onPress={() => {
@@ -173,18 +195,25 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
               <Ionicons name="add-circle-outline" size={28} color="green" />
             </TouchableOpacity>
           </View>
-        ))}
-      </ScrollView>
+        );
+      })}
+    </ScrollView>
+
+      {/* 
       <View style={styles.dietbuttoncontainer}>
         <NewDietButton
           onPress={() =>
             navigation.navigate("Home")
-          } /*Alterar para salvar os dados no cliente*/
+          }
         />
       </View>
+      */}
       <MenuInferior navigation={navigation} />
     </View>
   );
 };
 
 export default MenuDietas;
+function setRefreshing(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}

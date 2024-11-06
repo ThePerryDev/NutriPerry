@@ -42,6 +42,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#2C4B4E",
   },
+  flatListContainer: {
+    height: 250, // Limitar a altura do FlatList
+  },
+  listContent: {
+    paddingVertical: 10,
+  },
   alimento: {
     width: 169,
     height: 40,
@@ -73,16 +79,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   icone: {
-    width: 25,
-    height: 25,
-  },
-  listContent: {
-    paddingVertical: 10,
+    width: 20,
+    height: 20,
   },
   datacontainer: {
-    flex:1,
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 20, // Certificar que o layout fique organizado
   },
   datatext: {
     fontSize: 14,
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignContent: "center",
     justifyContent: "center",
-    marginBottom: 25,
+    marginBottom: 15,
   },
   datainfo: {
     fontSize: 14,
@@ -108,9 +111,42 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   AddMealButtoncontainer: {
-    flex:1,
-    justifyContent: "space-evenly",
-    marginBottom: 65,
+    marginTop: 10,
+  },
+  datePickerContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 25,
+  },
+  datePickerbutton: {
+    width: 180,
+    height: 30,
+    backgroundColor: "#00AD71",
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight:15
+  },
+  datapickertext: {
+    fontSize: 16,
+    fontWeight: "bold",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#ffffff",
+  },
+  selectedDateText: {
+    height: 30,
+    borderWidth: 2,
+    borderColor: "#00AD71",
+    borderRadius: 10,
+    fontSize: 16,
+    fontWeight: "bold",
+    paddingLeft:20,
+    paddingRight:20,
+    textAlignVertical: "center",
+    textAlign: "center",
   },
   arrow: {
     width: 30,
@@ -121,9 +157,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     color: "#2C4B4E",
-  },
-  spacer: {
-    flex: 1,
   },
 });
 

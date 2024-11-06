@@ -1,11 +1,16 @@
-import React from "react";
-import { View, Text, TouchableOpacity, FlatList, Image } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, FlatList, Image, Button } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
 import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import { setaVolta, Editar, Deletar } from "../../../assets";
 import styles from "./styles";
 import AddMealButton from "../../../components/Cadastro/AddAlimento/botaoaddalimento";
+import axios from "axios";
+import moment from "moment";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { AuthContext } from "../../../context";
+import { useFocusEffect } from "@react-navigation/native"; // Importar useFocusEffect
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -17,18 +22,11 @@ type Props = {
 };
 
 type Produto = {
-  id: number;
+  id: string;
   nome: string;
-  quantidade: string;
+  quantidade: number;
 };
 
-<<<<<<< Updated upstream
-const produtos: Produto[] = [
-  { id: 1, nome: "Ovos", quantidade: "2" },
-  { id: 2, nome: "Pão Integral", quantidade: "2" },
-  { id: 3, nome: "Café", quantidade: "1" },
-];
-=======
 const CafedaManha: React.FC<Props> = ({ navigation }) => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [totalKcal, setTotalKcal] = useState<number>(0);
@@ -49,7 +47,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
 
-      const responseAlimentos = await axios.get("http://192.168.0.20:3000/consumos/alimento", {
+      const responseAlimentos = await axios.get("http://192.168.1.76:3000/consumos/alimento", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -65,7 +63,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.1.76:3000/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -83,7 +81,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://192.168.0.20:3000/consumos/delete/${id}`);
+      await axios.delete(`http://192.168.1.76:3000/consumos/delete/${id}`);
       
       setProdutos((prevProdutos) => {
         const updatedProdutos = prevProdutos.filter((produto) => produto.id !== id);
@@ -109,17 +107,15 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
       setSelectedDate(selectedDate);
     }
   };
->>>>>>> Stashed changes
 
-const Lanches: React.FC<Props> = ({ navigation }) => {
   const renderItem = ({ item }: { item: Produto }) => (
     <View style={styles.row}>
       <Text style={styles.alimento}>{item.nome}</Text>
       <Text style={styles.quantidade}>{item.quantidade}</Text>
-      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("CadastrarAlimento")}>
+      <TouchableOpacity style={styles.botao}>
         <Image source={Editar} style={styles.icone} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => console.log("Deletar", item.id)}>
+      <TouchableOpacity style={styles.botao} onPress={() => handleDelete(item.id)}>
         <Image source={Deletar} style={styles.icone} />
       </TouchableOpacity>
     </View>
@@ -133,49 +129,61 @@ const Lanches: React.FC<Props> = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.header}>Lanches</Text>
       </View>
+      
+      <View style={styles.datePickerContainer}>
+        <TouchableOpacity  style={styles.datePickerbutton} onPress={() => setShowDatePicker(true)}> 
+          <Text style={styles.datapickertext}>SELECIONAR DATA</Text>
+        </TouchableOpacity>
+        <Text style={styles.selectedDateText}>
+          {moment(selectedDate).format("DD/MM/YYYY")}
+        </Text>
+        {showDatePicker && (
+          <DateTimePicker value={selectedDate} mode="date" display="default" onChange={handleDateChange} />
+        )}
+      </View>
+      
       <View style={styles.row}>
         <Text style={styles.columnHeaderAlimento}>Alimento</Text>
         <Text style={styles.columnHeaderQuantidade}>Qtd.</Text>
         <Text style={styles.columnHeaderBotao}>Edit.</Text>
         <Text style={styles.columnHeaderBotao}>Del.</Text>
       </View>
-      <View>
-        <FlatList
-          data={produtos}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderItem}
-          contentContainerStyle={styles.listContent}
-        />
-      </View>
+      
+      <FlatList
+        data={produtos}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+        contentContainerStyle={styles.listContent}
+      />
+      
       <View style={styles.spacer} />
       <View style={styles.datacontainer}>
         <View>
           <Text style={styles.datatext}>Calorias</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>-</Text>
+            <Text style={styles.datainfo}>{totalKcal.toFixed(2)}</Text>
           </View>
         </View>
         <View>
           <Text style={styles.datatext}>Proteínas</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>-</Text>
+            <Text style={styles.datainfo}>{totalProteina.toFixed(2)}</Text>
           </View>
         </View>
         <View>
           <Text style={styles.datatext}>Carboidratos</Text>
           <View style={styles.datashow}>
-            <Text style={styles.datainfo}>-</Text>
+            <Text style={styles.datainfo}>{totalCarboidrato.toFixed(2)}</Text>
           </View>
         </View>
       </View>
-
+      
       <View style={styles.AddMealButtoncontainer}>
         <AddMealButton onPress={() => navigation.navigate("PesquisaAlimento")} />
       </View>
-
       <MenuInferior navigation={navigation} />
     </View>
   );
 };
 
-export default Lanches;
+export default CafedaManha;
