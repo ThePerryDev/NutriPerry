@@ -22,7 +22,7 @@ type Props = {
 };
 
 const Home: React.FC<Props> = ({ navigation }) => {
-  const [currentProgress, setCurrentProgress] = useState<number>(0);
+  const [progress, setCurrentProgress] = useState<number>(0);
   const [totalCalorias, setTotalCalorias] = useState<number>(0);
   const [refreshing, setRefreshing] = useState(false);
   const { user } = useContext(AuthContext);
@@ -40,7 +40,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.1.4:3000/consumos/totalkcal`, {
+      const response = await axios.get(`http://10.68.55.162:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
@@ -61,7 +61,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const fetchObjetivo = async () => {
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.1.4:3000/user/objetivo`, {
+      const response = await axios.get(`http://10.68.55.162:3000/user/objetivo`, {
         params: { userId: user?.id }
       });
 
@@ -77,18 +77,43 @@ const Home: React.FC<Props> = ({ navigation }) => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const dataAtual = moment().format("YYYY-MM-DD");
+
+      // Buscando o total de calorias consumidas (exemplo com axios)
+      const caloriasResponse = await axios.get("http://10.68.55.162:3000/consumos/totalkcal", {
+        params: { userId: user?.id, data: dataAtual },
+      });
+      setTotalCalorias(caloriasResponse.data.totalKcal ?? 0);
+
+      // Buscando o objetivo de calorias
+      const objetivoResponse = await axios.get("http://10.68.55.162:3000/user/objetivo", {
+        params: { userId: user?.id },
+      });
+      setkcalObjetivo(objetivoResponse.data.kcalObjetivo ?? 0);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
+
+  // useFocusEffect para fazer o fetch e calcular o progresso quando a tela é focada
   useFocusEffect(
-    React.useCallback(() => {
-      console.log("totalCalorias:", totalCalorias);
-      console.log("kcalObjetivo:", kcalObjetivo);
-    
-      // Atualiza o valor de progress sempre que totalCalorias ou kcalObjetivo mudar
-      if (kcalObjetivo > 0) {
-        const progress = (totalCalorias / kcalObjetivo) * 100;
-        setCurrentProgress(progress);
-        console.log("Novo valor de currentProgress Frontend:", progress);
-      }
-    }, [totalCalorias, kcalObjetivo])  // O array de dependências dentro de useCallback
+    useCallback(() => {
+      // Realiza o fetch de dados
+      fetchData().then(() => {
+        // Log de valores recebidos
+        console.log("totalCalorias:", totalCalorias);
+        console.log("kcalObjetivo:", kcalObjetivo);
+
+        // Calcular o valor de progress depois de pegar os dados
+        if (kcalObjetivo > 0) {
+          const progress = (totalCalorias / kcalObjetivo) * 100;
+          setCurrentProgress(progress);
+          console.log("Novo valor de currentProgress:", progress);
+        }
+      });
+    }, [totalCalorias, kcalObjetivo]) // Quando totalCalorias ou kcalObjetivo mudarem, refaz a lógica
   );
   
   // Função onRefresh, que também atualizará o progress após o refresh
@@ -96,13 +121,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
     setRefreshing(true); // Inicia o processo de refresh
     await fetchCaloriasConsumidas();
     await fetchObjetivo();
-    
-    // Atualizando o progresso após o refresh
-    if (kcalObjetivo > 0) {
-      const progress = (totalCalorias / kcalObjetivo) * 100;
-      setCurrentProgress(progress);
-      console.log("Novo valor de currentProgress após o refresh:", progress);
-    }
+    await fetchData();
   
     setRefreshing(false); // Após completar, define refreshing como false
   };
@@ -112,6 +131,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
     useCallback(() => {
       fetchCaloriasConsumidas();
       fetchObjetivo();
+      fetchData();
     }, [])
   );
 
@@ -129,7 +149,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
           </View>
           <View style={Styles.stats}>
             <Text style={Styles.totalText}>Total</Text>
-            <Speedometer progress={currentProgress} />
+            <Speedometer key = {progress} progress={progress} />
 
           </View>
           <View style={Styles.stats}>

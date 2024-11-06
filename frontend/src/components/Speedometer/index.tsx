@@ -10,9 +10,10 @@ import Animated, {
   useDerivedValue,
 } from "react-native-reanimated";
 import { useEffect } from "react";
+import { Float } from "react-native/Libraries/Types/CodegenTypes";
 
 interface SpeedometerProps {
-  progress: number;
+  progress: Float;
 }
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
@@ -36,16 +37,20 @@ const y2 = cy - r * sin(endAngle);
 const d = `M ${x1} ${y1} A ${r} ${r} 0 1 0 ${x2} ${y2}`;
 
 const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
+  
   // Ajuste para compartilhar o valor do progresso
   const sharedProgress = useSharedValue(progress);
 
+  
   // Atualize o sharedProgress sempre que o valor de progress mudar
   useEffect(() => {
-    
+   
     sharedProgress.value = withTiming(progress, {
       duration: 1000,
       easing: Easing.inOut(Easing.ease),
     });
+
+    
   }, [progress]); // Atualiza quando progress muda
 
   const circumference = r * A;
@@ -55,7 +60,7 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
   // Usando useDerivedValue para garantir que o valor seja reativo
   const animatedProgress = useDerivedValue(() => {
     // Log para verificar o valor animado
-    console.log("Valor animado compartilhado: ", sharedProgress.value);
+    //console.log("Valor animado compartilhado: ", sharedProgress.value);
     return sharedProgress.value; // Valor reativo para o progresso
   });
 
@@ -64,6 +69,8 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
   const animatedProps = useAnimatedProps(() => {
     "worklet";
     const alpha = ((100 - progress) / 100) * circumference;
+    
+    //console.log("Valor de ANIMATED atualizado:", progress); 
     return {
       strokeDashoffset: alpha, // Atualiza a animação da barra com o progresso
     };
@@ -74,10 +81,16 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
     
     "worklet";
     const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
+    console.log("Valor de POINTER PROGRESS atualizado:", sharedProgress.value)
+    console.log("Valor de POINTER ROTATION atualizado:", rotation)
     return {
       transform: `rotate(${rotation} ${cx} ${cy})`, // A rotação é feita no ponto central (cx, cy)
+      
     };
+    
   });
+
+  console.log("Valor de POINTER PROPS atualizado:", pointerProps);
 
   return (
     <View style={Styles.container}>
