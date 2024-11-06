@@ -139,7 +139,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={Styles.container}>
-      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+      
       <Text style={Styles.header}>Hoje</Text>
       <View style={Styles.card}>
         <View style={Styles.statsContainer}>
@@ -155,10 +155,11 @@ const Home: React.FC<Props> = ({ navigation }) => {
           <View style={Styles.stats}>
             <Text style={Styles.statLabel}>Consumo</Text>
             <Text style={Styles.statValue}>{`${totalCalorias > 0 ? totalCalorias.toFixed(0) : 0} Kcal`}</Text>
+            
           </View>
         </View>
       </View>
-      
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {["Café da Manhã", "Almoço", "Jantar", "Lanches"].map((meal, index) => (
           <View key={index} style={Styles.mealItem}>
             <MaterialIcons name={"check-box-outline-blank"} size={24} />
