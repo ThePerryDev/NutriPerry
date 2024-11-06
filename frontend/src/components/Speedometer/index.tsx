@@ -60,7 +60,7 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
   // Usando useDerivedValue para garantir que o valor seja reativo
   const animatedProgress = useDerivedValue(() => {
     // Log para verificar o valor animado
-    //console.log("Valor animado compartilhado: ", sharedProgress.value);
+  
     return sharedProgress.value; // Valor reativo para o progresso
   });
 
@@ -81,8 +81,7 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
     
     "worklet";
     const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
-    console.log("Valor de POINTER PROGRESS atualizado:", sharedProgress.value)
-    console.log("Valor de POINTER ROTATION atualizado:", rotation)
+
     return {
       transform: `rotate(${rotation} ${cx} ${cy})`, // A rotação é feita no ponto central (cx, cy)
       
@@ -90,7 +89,7 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
     
   });
 
-  console.log("Valor de POINTER PROPS atualizado:", pointerProps);
+  
 
   return (
     <View style={Styles.container}>
