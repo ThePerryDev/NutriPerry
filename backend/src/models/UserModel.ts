@@ -8,12 +8,19 @@ interface IUser extends Document {
   name: string;
   height: number; // em cm
   weight: number; // em kg
-  activityLevel: 'sedentario' | 'pouco ativo' | 'ativo' | 'muito ativo';
+  activityLevel: 'sedentario' | 'levemente_ativo' | 'moderadamente_ativo' | 'altamente_ativo' | 'extremamente_ativo';
   gender: 'masculino' | 'feminino';
-  goal: 'perda de peso' | 'manter meu peso atual' | 'ganho de peso';
+  goal: 'perder_peso' | 'manter_peso' | 'ganhar_peso';
   birthdate: Date; // Data de nascimento
   nutricionista?: Types.ObjectId; // Referência a um nutricionista existente
   isLogged: boolean; // Indica se o usuário está logado
+  nickname: string;
+  kcalObjetivo: number;
+  proteinaObjetivo: number;
+  acucarObjetivo: number;
+  carboidratoObjetivo: number;
+  taxaBasal: number;
+  
 }
 
 // Validação da senha
@@ -49,21 +56,26 @@ const UserSchema: Schema<IUser> = new Schema({
     required: [true, "O e-mail é obrigatório"],
     maxlength: [50, "O e-mail deve ter no máximo 50 caracteres"],
     validate: {
-        validator: function (value: string) {
-            return emailRegex.test(value);
-        },
-        message: "O e-mail informado não é válido"
+      validator: function (value: string) {
+        return emailRegex.test(value);
+      },
+      message: "O e-mail informado não é válido"
     }
-},
+  },
   password: {
     type: String,
     required: [true, 'A senha é obrigatória'],
-    validate: passwordValidator
+    //validate: passwordValidator
   },
   name: {
     type: String,
     required: true,
-    unique: true  // Garante que não haverá duplicatas de username
+   
+  },
+  nickname: {
+    type: String,
+    required: true,
+    
   },
   height: {
     type: Number,
@@ -78,7 +90,7 @@ const UserSchema: Schema<IUser> = new Schema({
   activityLevel: {
     type: String,
     required: true,
-    enum: ['sedentario', 'pouco ativo', 'ativo', 'muito ativo']
+   
   },
   gender: {
     type: String,
@@ -88,7 +100,6 @@ const UserSchema: Schema<IUser> = new Schema({
   goal: {
     type: String,
     required: true,
-    enum: ['perda de peso', 'manutenção de peso', 'emagrecimento']
   },
   birthdate: {
     type: Date,
@@ -98,10 +109,25 @@ const UserSchema: Schema<IUser> = new Schema({
       message: 'A data de nascimento deve ser uma data no passado.'
     }
   },
+  kcalObjetivo:{
+    type: Number
+  },
+  acucarObjetivo:{
+    type: Number
+  },
+  proteinaObjetivo:{
+    type: Number
+  },
+  carboidratoObjetivo:{
+    type: Number
+  },
+  taxaBasal:{
+    type: Number
+  },
   nutricionista: {
-    type: Types.ObjectId, // Usando Types.ObjectId corretamente
-    ref: 'Nutricionista', // Referência ao modelo de Nutricionista
-    required: false, // Campo opcional
+    type: Types.ObjectId,
+    ref: 'Nutricionista',
+    required: false,
   },
   isLogged: {
     type: Boolean,
