@@ -24,8 +24,8 @@ const cy = size / 2;
 const strokeWidth = 12;
 const { PI, cos, sin } = Math;
 const r = (size - strokeWidth) / 2;
-const startAngle = PI + PI * 0;
-const endAngle = 2 * PI - PI * 0;
+const startAngle = PI;
+const endAngle = 2 * PI;
 const A = endAngle - startAngle;
 
 const x1 = cx - r * cos(startAngle);
@@ -51,6 +51,8 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
   }, [progress]);
 
   const circumference = r * A;
+  console.log("circunference: ",  circumference);
+
 
   const animatedProps = useAnimatedProps(() => {
     "worklet";
@@ -64,9 +66,10 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
     "worklet";
     const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
     return {
-      transform: `rotate(${rotation} ${cx} ${cy})`, // Rotaciona o ponteiro conforme o progresso
+      transform: `rotate(${rotation} ${cx} ${cy})`,
     };
   });
+  
 
   // Usando useDerivedValue para garantir que o valor seja reativo
 
