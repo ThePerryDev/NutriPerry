@@ -23,8 +23,13 @@ type Props = {
 const buscarAlimentoTaco = async (termo: string): Promise<AlimentoTaco[]> => {
   try {
     
+<<<<<<< Updated upstream
     const response = await axios.get(`http://localhost:3000/alimentotaco`, 
     //const response = await axios.get(`http://10.68.55.162:3000/alimentotaco`,
+=======
+    //const response = await axios.get(`http://192.168.0.20:3000/alimentotaco`, 
+    const response = await axios.get(`http://192.168.0.20:3000/alimentotaco`,
+>>>>>>> Stashed changes
     {
       params: {
         description: termo,

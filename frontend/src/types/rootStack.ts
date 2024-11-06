@@ -37,6 +37,7 @@ export type RootStackParamList = {
     SeusExercicios: undefined;
     NewExercicise: undefined;
     MenuInferior: undefined;
+    ConsumoAgua:undefined;
     TelaPeso: undefined;
     TelaPerfil: undefined;
 }

@@ -26,6 +26,103 @@ type Props = {
 
 const MenuDietas: React.FC<Props> = ({ navigation }) => {
   const [namediet, setNameDiet] = useState<string>("");
+<<<<<<< Updated upstream
+=======
+  const [totalKcalCafe, setTotalKcalCafe] = useState(0);
+  const [totalKcalAlmoco, setTotalKcalAlmoco] = useState(0);
+  const [totalKcalJantar, setTotalKcalJantar] = useState(0);
+  const [totalKcalLanche, setTotalKcalLanche] = useState(0);
+  const { user } = useContext(AuthContext);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const fetchCafedaManha = async () => {
+    try {
+      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+        params: {
+          userId: user?.id,
+          data: moment().format("YYYY-MM-DD"),
+          tipoRefeicao: "cafe_da_manha",
+        },
+      });
+
+      setTotalKcalCafe(responseTotais.data.totalKcal);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
+
+  const fetchAlmoco = async () => {
+    try {
+      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+        params: {
+          userId: user?.id,
+          data: moment().format("YYYY-MM-DD"),
+          tipoRefeicao: "almoco",
+        },
+      });
+
+      setTotalKcalAlmoco(responseTotais.data.totalKcal);
+
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
+
+  const fetchJantar = async () => {
+    try {
+      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+        params: {
+          userId: user?.id,
+          data: moment().format("YYYY-MM-DD"),
+          tipoRefeicao: "jantar",
+        },
+      });
+
+      setTotalKcalJantar(responseTotais.data.totalKcal);
+
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
+
+  const fetchLanche = async () => {
+    try {
+      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+        params: {
+          userId: user?.id,
+          data: moment().format("YYYY-MM-DD"),
+          tipoRefeicao: "lanches",
+        },
+      });
+      
+
+      setTotalKcalLanche(responseTotais.data.totalKcal);
+
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    fetchCafedaManha().then(() => setRefreshing(false));
+    fetchAlmoco().then(() => setRefreshing(false));
+    fetchJantar().then(() => setRefreshing(false));
+    fetchLanche().then(() => setRefreshing(false));
+  };
+
+  // Chama a função toda vez que a tela for focada
+  useFocusEffect(
+    useCallback(() => {
+      fetchCafedaManha();
+      fetchAlmoco();
+      fetchJantar();
+      fetchLanche();      
+      
+    }, [])
+  );
+  
+>>>>>>> Stashed changes
 
   return (
     <View style={styles.container}>
