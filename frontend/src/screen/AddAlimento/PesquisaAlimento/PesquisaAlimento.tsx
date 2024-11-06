@@ -32,7 +32,7 @@ const buscarAlimentoTaco = async (termo: string): Promise<AlimentoTaco[]> => {
     });
 
     // Verifique a estrutura da resposta
-    console.log("Response do AlimentoTaco:", response.data); // Log para verificar a resposta
+    //console.log("Response do AlimentoTaco:", response.data); // Log para verificar a resposta
 
     // Verifica se response.data é um array
     if (Array.isArray(response.data)) {

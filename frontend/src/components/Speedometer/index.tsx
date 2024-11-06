@@ -41,18 +41,16 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
 
   // Atualize o sharedProgress sempre que o valor de progress mudar
   useEffect(() => {
-    // Log para verificar o valor recebido
-    console.log("Valor recebido no componente: ", progress);
-
-    // Animação para o valor de sharedProgress com transição suave
+    
     sharedProgress.value = withTiming(progress, {
       duration: 1000,
       easing: Easing.inOut(Easing.ease),
     });
-  }, [progress]); // Atualiza quando progress mudar
+  }, [progress]); // Atualiza quando progress muda
 
   const circumference = r * A;
-  console.log("circunference: ", circumference);
+  
+
 
   // Usando useDerivedValue para garantir que o valor seja reativo
   const animatedProgress = useDerivedValue(() => {
@@ -61,10 +59,11 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
     return sharedProgress.value; // Valor reativo para o progresso
   });
 
+
   // Propriedades animadas para o caminho (barra de progresso)
   const animatedProps = useAnimatedProps(() => {
     "worklet";
-    const alpha = ((100 - sharedProgress.value) / 100) * circumference;
+    const alpha = ((100 - progress) / 100) * circumference;
     return {
       strokeDashoffset: alpha, // Atualiza a animação da barra com o progresso
     };
@@ -72,7 +71,7 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
 
   // Propriedades animadas para o ponteiro
   const pointerProps = useAnimatedProps(() => {
-    console.log("pointer value: ", sharedProgress)
+    
     "worklet";
     const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
     return {

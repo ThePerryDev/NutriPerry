@@ -39,14 +39,14 @@ const Home: React.FC<Props> = ({ navigation }) => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
-      console.log("ID do usuário:", user?.id);
+      //console.log("ID do usuário:", user?.id);
       const response = await axios.get(`http://192.168.1.4:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
       const { totalKcal, totalCarboidrato, totalPeso, totalProteina, totalAcucar } = response.data;
 
-      console.log("Resposta do servidor:", response.data);
+      //console.log("Resposta do servidor:", response.data);
 
       setTotalCalorias(totalKcal ?? 0);
       setTotalCarboidratos(totalCarboidrato ?? 0);
@@ -60,13 +60,13 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
   const fetchObjetivo = async () => {
     try {
-      console.log("ID do usuário:", user?.id);
+      //console.log("ID do usuário:", user?.id);
       const response = await axios.get(`http://192.168.1.4:3000/user/objetivo`, {
         params: { userId: user?.id }
       });
 
       const { kcalObjetivo, carboidratoObjetivo, proteinaObjetivo, acucarObjetivo } = response.data;
-      console.log("Resposta com objetivos do servidor: ", response.data);
+      //console.log("Resposta com objetivos do servidor: ", response.data);
 
       setkcalObjetivo(kcalObjetivo ?? 0);
       setCarboidratoObjetivo(carboidratoObjetivo ?? 0);
