@@ -1,4 +1,3 @@
-// No arquivo do Speedometer
 import { View } from "react-native";
 import Styles from "./Styles";
 import { Defs, Line, LinearGradient, Path, Stop, Svg } from "react-native-svg";
@@ -8,6 +7,7 @@ import Animated, {
   useSharedValue,
   withTiming,
   Easing,
+  useDerivedValue,
 } from "react-native-reanimated";
 import { useEffect } from "react";
 
@@ -36,14 +36,24 @@ const y2 = cy - r * sin(endAngle);
 const d = `M ${x1} ${y1} A ${r} ${r} 0 1 0 ${x2} ${y2}`;
 
 const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
+  // Ajuste para compartilhar o valor do progresso
   const sharedProgress = useSharedValue(progress);
+
+  // Atualize o sharedProgress sempre que o valor de progress mudar
+  useEffect(() => {
+    sharedProgress.value = withTiming(progress, {
+      duration: 1000,
+      easing: Easing.inOut(Easing.ease),
+    });
+  }, [progress]);
+
   const circumference = r * A;
 
   const animatedProps = useAnimatedProps(() => {
     "worklet";
     const alpha = ((100 - sharedProgress.value) / 100) * circumference;
     return {
-      strokeDashoffset: alpha,
+      strokeDashoffset: alpha, // Atualiza a animação da barra com o progresso
     };
   });
 
@@ -51,16 +61,17 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
     "worklet";
     const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
     return {
-      transform: `rotate(${rotation} ${cx} ${cy})`,
+      transform: `rotate(${rotation} ${cx} ${cy})`, // Rotaciona o ponteiro conforme o progresso
     };
   });
 
-  useEffect(() => {
-    sharedProgress.value = withTiming(progress, {
-      duration: 1000,
-      easing: Easing.inOut(Easing.ease),
-    });
-  }, [progress]);
+  // Usando useDerivedValue para garantir que o valor seja reativo
+  const animatedProgress = useDerivedValue(() => {
+    console.log("Valor animado compartilhado: ", sharedProgress.value);
+    return sharedProgress.value; // Pode ser usado como um valor reativo
+  });
+
+  
 
   return (
     <View style={Styles.container}>
@@ -91,11 +102,11 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
           x1={cx}
           y1={cy}
           x2={cx}
-          y2={cy - r + 10}
+          y2={cy - r + 10} // Ajuste para a linha iniciar no centro
           stroke={"black"}
           strokeWidth={4}
           strokeLinecap="round"
-          animatedProps={pointerProps}
+          animatedProps={pointerProps} // Aplique a animação com a rotação
         />
       </Svg>
     </View>
