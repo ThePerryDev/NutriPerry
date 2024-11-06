@@ -41,19 +41,27 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
 
   // Atualize o sharedProgress sempre que o valor de progress mudar
   useEffect(() => {
+    // Log para verificar o valor recebido
+    console.log("Valor recebido no componente: ", progress);
 
-    console.log("Valor recebido no componente: ",  progress);
-
+    // Animação para o valor de sharedProgress com transição suave
     sharedProgress.value = withTiming(progress, {
       duration: 1000,
       easing: Easing.inOut(Easing.ease),
     });
-  }, [progress]);
+  }, [progress]); // Atualiza quando progress mudar
 
   const circumference = r * A;
-  console.log("circunference: ",  circumference);
+  console.log("circunference: ", circumference);
 
+  // Usando useDerivedValue para garantir que o valor seja reativo
+  const animatedProgress = useDerivedValue(() => {
+    // Log para verificar o valor animado
+    console.log("Valor animado compartilhado: ", sharedProgress.value);
+    return sharedProgress.value; // Valor reativo para o progresso
+  });
 
+  // Propriedades animadas para o caminho (barra de progresso)
   const animatedProps = useAnimatedProps(() => {
     "worklet";
     const alpha = ((100 - sharedProgress.value) / 100) * circumference;
@@ -62,20 +70,14 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
     };
   });
 
+  // Propriedades animadas para o ponteiro
   const pointerProps = useAnimatedProps(() => {
+    console.log("pointer value: ", sharedProgress)
     "worklet";
     const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
     return {
-      transform: `rotate(${rotation} ${cx} ${cy})`,
+      transform: `rotate(${rotation} ${cx} ${cy})`, // A rotação é feita no ponto central (cx, cy)
     };
-  });
-  
-
-  // Usando useDerivedValue para garantir que o valor seja reativo
-
-  const animatedProgress = useDerivedValue(() => {
-    console.log("Valor animado compartilhado: ", sharedProgress.value);
-    return sharedProgress.value; // Pode ser usado como um valor reativo
   });
 
   return (
@@ -101,7 +103,7 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
           strokeWidth={strokeWidth}
           d={d}
           strokeDasharray={circumference}
-          animatedProps={animatedProps}
+          animatedProps={animatedProps} // A animação do progresso
         />
         <AnimatedLine
           x1={cx}
