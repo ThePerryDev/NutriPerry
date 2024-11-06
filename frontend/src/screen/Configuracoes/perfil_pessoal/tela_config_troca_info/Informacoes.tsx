@@ -19,6 +19,53 @@ const Informacoes: React.FC<Props> = ({ navigation }) => {
     const [idade, setIdade] = useState<string>("");
     const [altura, setAltura] = useState<string>("");
     const [peso, setPeso] = useState<string>("");
+<<<<<<< Updated upstream
+=======
+    const [nivelAtividade, setNivelAtividade] = useState<string>("");
+    const [objetivo, setObjetivo] = useState<string>("");
+    const [dataNascimento, setDataNascimento] = useState<string>("");
+    const [metabolismoBasal, setMetabolismoBasal] = useState<string>("");
+    const [objetivoCalorico, setObjetivoCalorico] = useState<string>("");
+    const [refreshing, setRefreshing] = useState(false);
+
+    useEffect(() => {
+        // Função para buscar os dados do usuário
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch(`http://192.168.0.20:3000/user/objetivo?userId=${user?.id}`);
+                if (!response.ok) {
+                    throw new Error("Erro ao buscar dados do usuário");
+                }
+
+                const data = await response.json();
+
+                // Preenche os campos com os dados recebidos
+                setAltura(data.height?.toString() || "");
+                setPeso(data.weight?.toString() || "");
+                setNivelAtividade(data.activityLevel || "");
+                setObjetivo(data.goal || "");
+                setDataNascimento(moment(data.birthdate).format("DD-MM-YYYY") || "");
+                setMetabolismoBasal(data.taxaBasal?.toString() || "");
+                setObjetivoCalorico(data.kcalObjetivo?.toString() || "");
+            } catch (error) {
+                console.error("Erro ao buscar dados do usuário:", error);
+            }
+        };
+
+        fetchUserData();
+    }, [user?.id]);
+
+
+    const capitalizeWords = (text: string) => {
+        return text
+            .toLowerCase()
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
+    
+
+>>>>>>> Stashed changes
     return (
         <View style={styles.container}>
             <View style={styles.cima}>
