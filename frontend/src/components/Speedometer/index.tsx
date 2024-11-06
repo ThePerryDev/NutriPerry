@@ -41,6 +41,9 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
 
   // Atualize o sharedProgress sempre que o valor de progress mudar
   useEffect(() => {
+
+    console.log("Valor recebido no componente: ",  progress);
+
     sharedProgress.value = withTiming(progress, {
       duration: 1000,
       easing: Easing.inOut(Easing.ease),
@@ -66,12 +69,11 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
   });
 
   // Usando useDerivedValue para garantir que o valor seja reativo
+
   const animatedProgress = useDerivedValue(() => {
     console.log("Valor animado compartilhado: ", sharedProgress.value);
     return sharedProgress.value; // Pode ser usado como um valor reativo
   });
-
-  
 
   return (
     <View style={Styles.container}>
