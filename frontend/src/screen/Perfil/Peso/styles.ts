@@ -132,6 +132,87 @@ const styles = StyleSheet.create({
   spacer: {
     flex: 1,
   },
+  continuebutton: {
+    height: 60,
+    borderRadius: 25,
+    backgroundColor: "#00AD71",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom:80,
+    marginTop:25,
+  },
+  buttonText: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#ffffff",
+    alignItems: "center",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    width: "80%",
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#2C4B4E",
+  },
+  input: {
+    width: "100%",
+    height: 50,
+    borderWidth: 2,
+    borderColor: "#00AD71",
+    borderRadius: 15,
+    paddingLeft: 10,
+    marginBottom: 15,
+    textAlign:"center"
+  },
+  modalButtonText: {
+    color: "#fff",
+    fontSize: 18,
+    textAlign: "center",
+  },
+  modalButton: {
+    width: "100%",
+    backgroundColor: "#00AD71",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  modalCloseButton: {
+    width: "100%",
+    backgroundColor: "#FF725E",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  datePickerButton: {
+    width: "100%",
+    height: 50, // Altere conforme necessário
+    borderWidth: 2,
+    borderColor: "#00AD71",
+    borderRadius: 15,
+    justifyContent: "center", // Para centralizar verticalmente
+    alignItems: "center", // Para centralizar horizontalmente
+    marginBottom: 15,
+  },
+  datePickerText: {
+    textAlign: "center",
+    fontSize: 16, // Ajuste o tamanho conforme necessário
+    color: "#2C4B4E", // Altere a cor se necessário
+  },
 });
 
 export default styles;
