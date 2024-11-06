@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; 
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import CustomPicker from "../../../../components/Cadastro/Picker/picker";
 import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
@@ -6,6 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
 import styles from "./styles";
 import { setaVolta } from "../../../../assets";
+import { useUserCadastro } from "../../../../context/UserCadastroContext";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -17,14 +18,15 @@ type Props = {
 };
 
 const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
-  const [selectGoal, setSelectGoal] = useState("");
-  const [selectExerciseTime, setSelectExerciseTime] = useState("");
+  const { updateUserData, createUser } = useUserCadastro(); 
+  const [selectGoal, setSelectGoal] = useState<string>("");
+  const [selectExerciseTime, setSelectExerciseTime] = useState<string>("");
 
   const goalOptions = [
     { label: "", value: "" },
     { label: "Perder peso", value: "perda de peso" },
     { label: "Manutenção de peso", value: "manutenção de peso" },
-    { label: "Ganho de massa", value: "ganho de massa" },
+    { label: "Ganho de peso", value: "ganho de peso" },
   ];
 
   const exerciseTimeOptions = [
@@ -34,7 +36,19 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
     { label: "Ativo", value: "ativo" },
     { label: "Muito ativo", value: "muito ativo" },
   ];
-  
+
+  const handleContinue = async () => {
+    // Atualiza o contexto antes de continuar
+    await updateUserData({ 
+      goal: selectGoal, 
+      activityLevel: selectExerciseTime 
+    });
+    
+
+    // Navega para a próxima etapa após atualizar o contexto
+    navigation.navigate("TelaFinalizado");
+  };
+
   return (
     <View style={styles.container}>
       <View>
@@ -70,7 +84,7 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
       </View>
 
       <View style={styles.buttoncontainer}>
-        <ContinueButton onPress={() => navigation.navigate("TelaFinalizado")} />
+        <ContinueButton onPress={handleContinue} />
       </View>
     </View>
   );

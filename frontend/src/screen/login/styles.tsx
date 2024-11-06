@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FBFBFB',
     padding: 40,
+  },
+  innerContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
   headerContainer: {
     alignItems: "center",
@@ -33,7 +37,7 @@ const styles = StyleSheet.create({
   inputcontainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom:25
+    marginBottom: 25,
   },
   button: {
     justifyContent: "center",
@@ -41,12 +45,22 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 5,
   },
-  buttontext:{
+  buttontext: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#00AD71",
+  },
+  loginbutton: {
+    height: 68,
+    borderRadius: 25,
+    backgroundColor: "#00AD71",
     justifyContent: "center",
     alignItems: "center",
-    fontSize:16,
-    fontWeight:"bold",
-    color:"#00AD71",
+  },
+  loginbuttonText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#ffffff",
   },
 });
 

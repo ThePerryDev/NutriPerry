@@ -23,8 +23,8 @@ type Props = {
 const buscarAlimentoTaco = async (termo: string): Promise<AlimentoTaco[]> => {
   try {
     
-    //const response = await axios.get(`http://192.168.0.20:3000/alimentotaco`, 
-    const response = await axios.get(`http://192.168.0.20:3000/alimentotaco`,
+    //const response = await axios.get(`http://192.168.0.20/alimentotaco`, 
+    const response = await axios.get(`http://192.168.0.20/alimentotaco`,
     {
       params: {
         description: termo,
@@ -180,9 +180,11 @@ const PesquisaAlimento: React.FC<Props> = ({ navigation }) => {
           onChangeText={setNomeProduct}
           style={styles.input}
         />
+        {/*
         <TouchableOpacity style={styles.camera} disabled={true}>
           <Image source={camera} />
         </TouchableOpacity>
+         */}
       </View>
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />

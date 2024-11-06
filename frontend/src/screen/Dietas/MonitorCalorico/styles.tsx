@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   imagecontainer: {
     alignItems: "center",
-    marginTop:80,
+    marginTop:50,
   },
   image: {
     width:330,
@@ -42,6 +42,14 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     alignItems:"center",
     width:150,
+    height:50,
+    backgroundColor:"#00AD71",
+    borderRadius: 15,
+    marginTop:30
+  },
+  dietwaterbutton:{
+    justifyContent:"center",
+    alignItems:"center",
     height:50,
     backgroundColor:"#00AD71",
     borderRadius: 15,

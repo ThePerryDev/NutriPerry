@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 60,
     fontWeight: "bold",
   },
 
@@ -92,10 +92,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 50,
     height: 50,
-  },
-  checkbox: {
-    margin: 8,
-    color:"#24B77F",
   },
 });
 
