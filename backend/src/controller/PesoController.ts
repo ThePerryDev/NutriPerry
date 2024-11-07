@@ -59,21 +59,21 @@ class PesoController {
   
 
   public async delete(req: Request, res: Response): Promise<void> {
-    const { user, date } = req.params;
-    console.log("Deleting pesos for user:", user, "on date:", date);
+    const { user } = req.params;
+    console.log("Deleting pesos for user:", user);
   
     try {
       const userId = new mongoose.Types.ObjectId(user);
-      const startDate = new Date(date);
-      const endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + 1);
+      //const startDate = new Date(date);
+      //const endDate = new Date(startDate);
+      //endDate.setDate(startDate.getDate() + 1);
   
       const response = await Peso.deleteMany({
         user: userId,
-        data: {
-          $gte: startDate,
-          $lt: endDate,
-        },
+       // data: {
+          //$gte: startDate,
+          //$lt: endDate,
+       // },
       });
   
       console.log("Delete response:", response);
