@@ -221,6 +221,96 @@ public async list(_: Request, res: Response): Promise<void> {
       }
     }
   }
+
+
+  public updatePeso = async (req: Request, res: Response): Promise<void> => {
+    const { height, weight, activityLevel, gender, goal, birthdate } = req.body;
+    const userId = req.params.id;  // Mantendo o uso do parâmetro na URL
+  
+    console.log("Dados recebidos do frontend:", req.body);
+    
+    try {
+      // Busca o usuário no banco de dados usando o userId da URL
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        res.status(404).send({ message: "Usuário não encontrado" });
+        return;
+      }
+  
+      // Atualiza os campos básicos do usuário
+      user.height = height || user.height;
+      user.weight = weight || user.weight;
+      user.activityLevel = activityLevel || user.activityLevel;
+      user.gender = gender || user.gender;
+      user.goal = goal || user.goal;
+      user.birthdate = birthdate || user.birthdate;
+  
+      // Calcular a idade com base no campo `birthdate` atualizado
+      const idade = this.getIdadeUpdate(user.birthdate);
+  
+      // Calcular a Taxa Metabólica Basal (TMB) com base no gênero
+      let taxaBasal: number;
+      if (user.gender === 'masculino') {
+        taxaBasal = 88.36 + (13.4 * user.weight) + (4.8 * user.height) - (5.7 * idade);
+      } else {
+        taxaBasal = 447.6 + (9.25 * user.weight) + (3.1 * user.height) - (4.3 * idade);
+      }
+  
+      // Calcular o fator de atividade para definir as calorias totais
+      let fatorAtividade: number;
+      switch (user.activityLevel) {
+        case 'sedentario':
+          fatorAtividade = 1.2;
+          break;
+        case 'levemente_ativo':
+          fatorAtividade = 1.375;
+          break;
+        case 'moderadamente_ativo':
+          fatorAtividade = 1.55;
+          break;
+        case 'altamente_ativo':
+          fatorAtividade = 1.725;
+          break;
+        case 'extremamente_ativo':
+          fatorAtividade = 1.9;
+          break;
+        default:
+          fatorAtividade = 1.2;
+      }
+  
+      // Calcular kcalObjetivo
+      const kcalObjetivo = taxaBasal * fatorAtividade;
+  
+      // Atualizar e salvar o usuário
+      user.taxaBasal = taxaBasal; // Salvar a taxa basal no usuário
+      user.kcalObjetivo = kcalObjetivo; // Salvar o objetivo calórico no usuário
+  
+      // Salvar no banco
+      await user.save();
+  
+      res.status(200).send(user);
+    } catch (error) {
+      console.error("Erro ao atualizar dados:", error);
+      res.status(500).send({ message: "Erro ao atualizar os dados" });
+    }
+  };
+  
+  
+
+private getIdadeUpdate(birthdate: Date | string): number {
+  const hoje = new Date();
+  const nascimento = typeof birthdate === 'string' ? new Date(birthdate) : birthdate;
+  let idade = hoje.getFullYear() - nascimento.getFullYear();
+  const mes = hoje.getMonth() - nascimento.getMonth();
+
+  if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+      idade--;
+  }
+
+  return idade;
+}
+
+
 }
 
 export default new UsersController();

@@ -17,4 +17,6 @@ router.put("/", UserController.update);
 // Rota para deletar um usuário específico
 router.delete("/", UserController.delete);
 
+router.put("/atualizarpeso/:id", UserController.updatePeso);
+
 export default router;

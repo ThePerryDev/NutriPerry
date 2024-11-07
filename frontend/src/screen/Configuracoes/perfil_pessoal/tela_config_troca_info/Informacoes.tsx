@@ -33,7 +33,7 @@ const Informacoes: React.FC<Props> = ({ navigation }) => {
         // Função para buscar os dados do usuário
         const fetchUserData = async () => {
             try {
-                const response = await fetch(`http://10.68.55.153:3000/user/objetivo?userId=${user?.id}`);
+                const response = await fetch(`http://192.168.1.4:3000/user/objetivo?userId=${user?.id}`);
                 if (!response.ok) {
                     throw new Error("Erro ao buscar dados do usuário");
                 }
@@ -46,8 +46,8 @@ const Informacoes: React.FC<Props> = ({ navigation }) => {
                 setNivelAtividade(data.activityLevel || "");
                 setObjetivo(data.goal || "");
                 setDataNascimento(moment(data.birthdate).format("DD-MM-YYYY") || "");
-                setMetabolismoBasal(data.taxaBasal?.toString() || "");
-                setObjetivoCalorico(data.kcalObjetivo?.toString() || "");
+                setMetabolismoBasal(data.taxaBasal.toFixed(2) ?? 0);
+                setObjetivoCalorico(data.kcalObjetivo.toFixed(2) ?? 0);
             } catch (error) {
                 console.error("Erro ao buscar dados do usuário:", error);
             }
@@ -105,7 +105,7 @@ const Informacoes: React.FC<Props> = ({ navigation }) => {
     
                     {/* Metabolismo Basal */}
                     <Text style={styles.texto}>Metabolismo Basal</Text>
-                    <Text style={styles.input}>{metabolismoBasal || "Exemplo: 1500 kcal"}</Text>
+                    <Text style={styles.input}>{metabolismoBasal}</Text>
     
                     {/* Objetivo Calórico */}
                     <Text style={styles.texto}>Objetivo Calórico</Text>
