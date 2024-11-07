@@ -63,6 +63,8 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
 
   const { create } = useContext(ConsumoCaloricoContext);
 
+  const formatValue = (value: any) => (value === null || value === 0 ? "-" : value);
+
 
 
   const onDateChange = (event: any, selectedDate?: Date) => {
@@ -146,18 +148,20 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
       : product.product_name || "Nome do Produto"
     : "Nome do Produto";
 
-  const calculateValues = (value: number): NutritionalValues => {
-    return {
-      kcal: ((Number(kcal) * value) / 100).toFixed(2),
-      protein: ((Number(protein) * value) / 100).toFixed(2),
-      carbohydrate: ((Number(carbohydrate) * value) / 100).toFixed(2),
-      sodium: ((Number(sodium) * value) / 100).toFixed(2),
-      sugar: ((Number(sugar) * value) / 100).toFixed(2),
-      gordura: ((Number(gordura) * value) / 100).toFixed(2),
-      gordura_saturada: ((Number(gordura_saturada) * value) / 100).toFixed(2),
-      fibra: ((Number(fibra) * value) / 100).toFixed(2),
+    const calculateValues = (value: number): NutritionalValues => {
+      const safeParse = (num: any) => (isNaN(num) || num === "-" ? 0 : Number(num));
+    
+      return {
+        kcal: formatValue((safeParse(kcal) * value / 100).toFixed(2)),
+        protein: formatValue((safeParse(protein) * value / 100).toFixed(2)),
+        carbohydrate: formatValue((safeParse(carbohydrate) * value / 100).toFixed(2)),
+        sodium: formatValue((safeParse(sodium) * value / 100).toFixed(2)),
+        sugar: formatValue((safeParse(sugar) * value / 100).toFixed(2)),
+        gordura: formatValue((safeParse(gordura) * value / 100).toFixed(2)),
+        gordura_saturada: formatValue((safeParse(gordura_saturada) * value / 100).toFixed(2)),
+        fibra: formatValue((safeParse(fibra) * value / 100).toFixed(2)),
+      };
     };
-  };
 
   const parsedQuantidade = Number(quantidade);
 
@@ -180,16 +184,20 @@ const AdicionarAlimento: React.FC<Props> = ({ navigation, route }) => {
     "Valores por 100g/100ml",
     "Valores que foram atribuídos",
   ];
+
+
   const tableData = [
-    ["Kcal", kcal, calculatedValues.kcal],
-    ["Proteína", protein, calculatedValues.protein],
-    ["Carboidrato", carbohydrate, calculatedValues.carbohydrate],
-    ["Açúcar", sugar, calculatedValues.sugar],
-    ["Gordura", gordura, calculatedValues.gordura],
-    ["Gordura Saturada", gordura_saturada, calculatedValues.gordura_saturada],
-    ["Fibra", fibra, calculatedValues.fibra],
-    ["Sal", sodium, calculatedValues.sodium],
+    ["Kcal", formatValue(kcal), formatValue(calculatedValues.kcal)],
+    ["Proteína", formatValue(protein), formatValue(calculatedValues.protein)],
+    ["Carboidrato", formatValue(carbohydrate), formatValue(calculatedValues.carbohydrate)],
+    ["Açúcar", formatValue(sugar), formatValue(calculatedValues.sugar)],
+    ["Gordura", formatValue(gordura), formatValue(calculatedValues.gordura)],
+    ["Gordura Saturada", formatValue(gordura_saturada), formatValue(calculatedValues.gordura_saturada)],
+    ["Fibra", formatValue(fibra), formatValue(calculatedValues.fibra)],
+    ["Sal", formatValue(sodium), formatValue(calculatedValues.sodium)],
   ];
+
+  console.log("info da table data ",tableData)
 
   // AVALIAR O METODO CREATE COM PROBLEMA
 

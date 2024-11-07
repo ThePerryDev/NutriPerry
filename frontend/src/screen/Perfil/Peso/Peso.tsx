@@ -37,7 +37,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
     if (!userId) return;
 
     try {
-      const response = await axios.get(`http://10.68.55.153:3000/peso/${userId}`);
+      const response = await axios.get(`http://192.168.1.4:3000/peso/${userId}`);
       const pesosFormatados = response.data.map((peso: any) => ({
         _id: peso.documentoId,
         date: peso.date,
@@ -65,7 +65,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
     const dataFormatada = moment(data).format("YYYY-MM-DD");
 
     try {
-      await axios.post("http://10.68.55.153:3000/peso", {
+      await axios.post("http://192.168.1.4:3000/peso", {
         user: userId,
         peso: parseFloat(peso),
         data: dataFormatada,
@@ -82,7 +82,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
 
   const handleDeletePeso = async (id: string) => {
     try {
-      await axios.delete(`http://10.68.55.153:3000/peso/${userId}/${id}`);
+      await axios.delete(`http://192.168.1.4:3000/peso/${userId}/${id}`);
       setPesos((prevPesos) => prevPesos.filter((peso) => peso._id !== id));
     } catch (error) {
       console.error("Erro ao deletar o peso:", error);
