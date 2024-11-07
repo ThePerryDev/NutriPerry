@@ -40,5 +40,6 @@ export type RootStackParamList = {
     ConsumoAgua:undefined;
     TelaPeso: undefined;
     TelaPerfil: undefined;
+    GraficoConsumoAgua:undefined;
 }
 
