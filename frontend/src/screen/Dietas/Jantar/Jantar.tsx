@@ -47,7 +47,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
 
-      const responseAlimentos = await axios.get("http://192.168.0.20/consumos/alimento", {
+      const responseAlimentos = await axios.get("http://10.68.55.153/consumos/alimento", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -63,7 +63,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      const responseTotais = await axios.get("http://192.168.0.20/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://10.68.55.153/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -81,7 +81,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://192.168.0.20/consumos/delete/${id}`);
+      await axios.delete(`http://10.68.55.153/consumos/delete/${id}`);
       
       setProdutos((prevProdutos) => {
         const updatedProdutos = prevProdutos.filter((produto) => produto.id !== id);

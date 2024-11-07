@@ -4,8 +4,6 @@ import UserController from "../controller/UserController";
 const router = Router();
 
 // Rota para listar todos os usuários ou um específico, usando query params, por exemplo ?id=ID
-router.get("/objetivo", UserController.getUserDataById);
-
 router.get("/", UserController.list);
 
 // Rota para criar um novo usuário

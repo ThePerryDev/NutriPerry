@@ -21,31 +21,32 @@ class PesoController {
     const { user } = req.params;
   
     try {
-      const userId = new mongoose.Types.ObjectId(user); // Converte o ID para ObjectId
+      const userId = new mongoose.Types.ObjectId(user);
   
       const pesos = await Peso.aggregate([
-        { $match: { user: userId } }, // Filtra pelo usuário como ObjectId
+        { $match: { user: userId } },
         {
-          $group: {
-            _id: { $dateToString: { format: "%Y-%m-%d", date: "$data" } }, // Agrupa pela data formatada (YYYY-MM-DD)
-            userId: { $first: "$user" }, // Inclui o ID do usuário no resultado
-            documentoId: { $first: "$_id" }, // Inclui o _id do documento no resultado
+          $project: {
+            date: { $dateToString: { format: "%Y-%m-%d", date: "$data" } },
+            userId: "$user",
+            documentoId: "$_id",
+            peso: "$peso",  // Inclui o campo peso na projeção
           },
         },
-        { $sort: { _id: 1 } }, // Ordena as datas (opcional)
+        { $sort: { date: 1 } },
       ]);
   
-      // Verifica se consumos é nulo ou vazio e retorna um array vazio
       if (!pesos || pesos.length === 0) {
-        res.status(200).json([]); // Retorna um array vazio
-        return; // Termina a execução do método
+        res.status(200).json([]);
+        return;
       }
   
       res.json(
         pesos.map((peso) => ({
-          date: peso._id,
+          date: peso.date,
           userId: peso.userId,
-          documentoId: peso.documentoId, // Inclui o _id do documento no resultado
+          documentoId: peso.documentoId,
+          peso: peso.peso,  // Garante que o campo peso seja incluído na resposta
         }))
       );
     } catch (error: any) {

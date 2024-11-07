@@ -39,7 +39,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 
   const fetchCafedaManha = async () => {
     try {
-      const responseTotais = await axios.get("http://192.168.0.20/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://10.68.55.153/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: moment().format("YYYY-MM-DD"),
@@ -55,7 +55,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 
   const fetchAlmoco = async () => {
     try {
-      const responseTotais = await axios.get("http://192.168.0.20/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://10.68.55.153/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: moment().format("YYYY-MM-DD"),
@@ -72,7 +72,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 
   const fetchJantar = async () => {
     try {
-      const responseTotais = await axios.get("http://192.168.0.20/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://10.68.55.153/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: moment().format("YYYY-MM-DD"),
@@ -89,7 +89,7 @@ const MenuDietas: React.FC<Props> = ({ navigation }) => {
 
   const fetchLanche = async () => {
     try {
-      const responseTotais = await axios.get("http://192.168.0.20/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://10.68.55.153/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: moment().format("YYYY-MM-DD"),

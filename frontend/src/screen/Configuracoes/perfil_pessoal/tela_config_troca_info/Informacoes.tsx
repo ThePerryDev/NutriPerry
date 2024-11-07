@@ -33,7 +33,7 @@ const Informacoes: React.FC<Props> = ({ navigation }) => {
         // Função para buscar os dados do usuário
         const fetchUserData = async () => {
             try {
-                const response = await fetch(`http://192.168.0.20/user/objetivo?userId=${user?.id}`);
+                const response = await fetch(`http://10.68.55.153/user/objetivo?userId=${user?.id}`);
                 if (!response.ok) {
                     throw new Error("Erro ao buscar dados do usuário");
                 }

@@ -15,7 +15,7 @@ export default function App() {
       <UserCadastroProvider>
         <ConsumoCaloricoProvider>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="AbrindoApp">
+            <Stack.Navigator initialRouteName="TelaPeso">
               <Stack.Screen
                 name="AbrindoApp"
                 component={AbrindoApp}
