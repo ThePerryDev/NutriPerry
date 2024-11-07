@@ -3,7 +3,12 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Styles from "./Styles";
 import { StackNavigationProp } from "@react-navigation/stack";
+import axios from "axios";
+import moment from "moment";
+import Svg, { Circle, Text as SvgText } from "react-native-svg";
+import { useFocusEffect } from '@react-navigation/native';
 import { RootStackParamList } from "../../types/rootStack";
+import { AuthContext } from "../../context/auth/AuthContext";
 import MenuInferior from "../../components/MenuInferior/MenuInferior";
 import Speedometer from "../../components/Speedometer";
 import { AuthContext } from "../../context";
@@ -12,10 +17,8 @@ import moment from "moment";
 import { useFocusEffect } from "@react-navigation/native";
 import { RefreshControl } from "react-native";
 
-type ContinuarScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "Home"
->;
+
+type ContinuarScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
 type Props = {
   navigation: ContinuarScreenNavigationProp;
@@ -167,12 +170,35 @@ const Home: React.FC<Props> = ({ navigation }) => {
               <Text style={Styles.mealName}>{meal}</Text>
               <Text style={Styles.mealDetail}>Sem cardápio cadastrado</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("PesquisaAlimento")}>
-              <Ionicons name="add-circle-outline" size={28} color="green" />
-            </TouchableOpacity>
           </View>
-        ))}
+        </View>
+
+        {/* Proteínas */}
+        <View style={Styles.card}>
+          <Text style={Styles.totalText}>Proteínas</Text>
+          <View style={Styles.progressContainer}>
+            <ProgressRing progress={totalProteinas > 0 ? (totalProteinas / objetivoProteinas) * 100 : 0} radius={50} strokeWidth={10} color="#337ab7" />
+            <View style={Styles.progressInfo}>
+              <Text style={Styles.detailText}>{`Objetivo: ${objetivoProteinas.toFixed(2)}g`}</Text>
+              <Text style={Styles.detailText}>{`Consumido: ${totalProteinas > 0 ? totalProteinas.toFixed(2) : 0}g`}</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Açúcar */}
+        <View style={Styles.card}>
+          <Text style={Styles.totalText}>Açúcar</Text>
+          <View style={Styles.progressContainer}>
+            <ProgressRing progress={totalAcucar > 0 ? (totalAcucar / objetivoAcucar) * 100 : 0} radius={50} strokeWidth={10} color="#9c27b0" />
+            <View style={Styles.progressInfo}>
+              <Text style={Styles.detailText}>{`Objetivo: ${objetivoAcucar.toFixed(2)}g`}</Text>
+              <Text style={Styles.detailText}>{`Consumido: ${totalAcucar > 0 ? totalAcucar.toFixed(2) : 0}g`}</Text>
+            </View>
+          </View>
+        </View>
       </ScrollView>
+
+      {/* Menu Inferior fixo */}
       <MenuInferior navigation={navigation} />
     </View>
   );

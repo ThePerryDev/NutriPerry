@@ -4,7 +4,9 @@ import { RootStackParamList } from "./src/types/rootStack";
 import AuthProvider from "./src/context/auth/AuthProvider";
 import { ConsumoCaloricoProvider } from "./src/context";
 import { UserCadastroProvider } from "./src/context/UserCadastroContext";
-import { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaFinalizado, TelaPPObjetivo, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, NewExercicise, ConsumoAgua, } from "./src/screen";
+import { CadastroAlturaPeso, CadastroEmail, CadastroNome, CadastroSexoIdade, Home, TelaFinalizado, TelaPPObjetivo, AbrindoApp, TelaLogin, CadastrarAlimento, PesquisaAlimento, AdicionarAlimento, ErroAlimento, MonitorCalorico, MenuDietas, CafedaManha, Almoco, Jantar, Lanches, Configuracoes, Informacoes, Senha, InformacoesNutri1, InformacoesNutri2, ConfiguracoesNutri, SenhaNutri, SeusExercicios, NewExercicise, ConsumoAgua, Perfil, Pesos} from "./src/screen";
+import React from "react";
+
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -160,12 +162,21 @@ export default function App() {
                 component={ConsumoAgua}
                 options={{ headerShown: false }}
               />
+              <Stack.Screen
+                name="TelaPerfil"
+                component={Perfil}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="TelaPeso"
+                component={Pesos}
+                options={{ headerShown: false }}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </ConsumoCaloricoProvider>
       </UserCadastroProvider>
     </AuthProvider>
-
   );
 }
 
