@@ -110,7 +110,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
     >
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("MenuDietas")}>
+          <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("TelaPerfil")}>
             <Image source={setaVolta} style={styles.arrow} />
           </TouchableOpacity>
           <Text style={styles.header}>Peso</Text>

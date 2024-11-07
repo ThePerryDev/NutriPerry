@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 5,
-    marginRight: 60,
+    marginRight: 120,
     marginBottom: 15,
     marginTop: 30,
   },
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   botao: {
-    width: 40,
     height: 40,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5f5f5",
     borderRadius: 5,
+    marginBottom:10
   },
   icone: {
     width: 25,

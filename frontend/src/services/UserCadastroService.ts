@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://10.68.55.162:3000/user'; // Substitua pela URL correta
+const BASE_URL = 'http://10.68.55.153:3000/user'; // Substitua pela URL correta
 
 export interface UserProps {
   email: string;

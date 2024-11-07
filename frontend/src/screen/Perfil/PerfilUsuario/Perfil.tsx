@@ -21,14 +21,17 @@ const Perfil: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("TelaPeso")}>
+        <TouchableOpacity style={styles.arrow} onPress={() => navigation.navigate("Home")}>
           <Image source={setaVolta} style={styles.arrow} />
         </TouchableOpacity>
         <Text style={styles.header}>Perfil</Text>
       </View>
-      <View style={styles.row}>
-        <Text style={styles.columnHeaderHistorico}>Histórico (kg)</Text>
-      </View>
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("TelaPeso")}>
+        <Text>Peso</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("GraficoConsumoAgua")}>
+        <Text>Grafico Agua</Text>
+      </TouchableOpacity>
       <View style={styles.spacer} />
 
       <MenuInferior navigation={navigation} />
