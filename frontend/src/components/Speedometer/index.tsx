@@ -1,4 +1,3 @@
-// No arquivo do Speedometer
 import { View } from "react-native";
 import Styles from "./Styles";
 import { Defs, Line, LinearGradient, Path, Stop, Svg } from "react-native-svg";
@@ -8,11 +7,13 @@ import Animated, {
   useSharedValue,
   withTiming,
   Easing,
+  useDerivedValue,
 } from "react-native-reanimated";
 import { useEffect } from "react";
+import { Float } from "react-native/Libraries/Types/CodegenTypes";
 
 interface SpeedometerProps {
-  progress: number;
+  progress: Float;
 }
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
@@ -24,8 +25,8 @@ const cy = size / 2;
 const strokeWidth = 12;
 const { PI, cos, sin } = Math;
 const r = (size - strokeWidth) / 2;
-const startAngle = PI + PI * 0;
-const endAngle = 2 * PI - PI * 0;
+const startAngle = PI;
+const endAngle = 2 * PI;
 const A = endAngle - startAngle;
 
 const x1 = cx - r * cos(startAngle);
@@ -36,31 +37,59 @@ const y2 = cy - r * sin(endAngle);
 const d = `M ${x1} ${y1} A ${r} ${r} 0 1 0 ${x2} ${y2}`;
 
 const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
+  
+  // Ajuste para compartilhar o valor do progresso
   const sharedProgress = useSharedValue(progress);
-  const circumference = r * A;
 
-  const animatedProps = useAnimatedProps(() => {
-    "worklet";
-    const alpha = ((100 - sharedProgress.value) / 100) * circumference;
-    return {
-      strokeDashoffset: alpha,
-    };
-  });
-
-  const pointerProps = useAnimatedProps(() => {
-    "worklet";
-    const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
-    return {
-      transform: `rotate(${rotation} ${cx} ${cy})`,
-    };
-  });
-
+  
+  // Atualize o sharedProgress sempre que o valor de progress mudar
   useEffect(() => {
+   
     sharedProgress.value = withTiming(progress, {
       duration: 1000,
       easing: Easing.inOut(Easing.ease),
     });
-  }, [progress]);
+
+    
+  }, [progress]); // Atualiza quando progress muda
+
+  const circumference = r * A;
+  
+
+
+  // Usando useDerivedValue para garantir que o valor seja reativo
+  const animatedProgress = useDerivedValue(() => {
+    // Log para verificar o valor animado
+  
+    return sharedProgress.value; // Valor reativo para o progresso
+  });
+
+
+  // Propriedades animadas para o caminho (barra de progresso)
+  const animatedProps = useAnimatedProps(() => {
+    "worklet";
+    const alpha = ((100 - progress) / 100) * circumference;
+    
+    //console.log("Valor de ANIMATED atualizado:", progress); 
+    return {
+      strokeDashoffset: alpha, // Atualiza a animação da barra com o progresso
+    };
+  });
+
+  // Propriedades animadas para o ponteiro
+  const pointerProps = useAnimatedProps(() => {
+    
+    "worklet";
+    const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
+
+    return {
+      transform: `rotate(${rotation} ${cx} ${cy})`, // A rotação é feita no ponto central (cx, cy)
+      
+    };
+    
+  });
+
+  
 
   return (
     <View style={Styles.container}>
@@ -85,17 +114,17 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
           strokeWidth={strokeWidth}
           d={d}
           strokeDasharray={circumference}
-          animatedProps={animatedProps}
+          animatedProps={animatedProps} // A animação do progresso
         />
         <AnimatedLine
           x1={cx}
           y1={cy}
           x2={cx}
-          y2={cy - r + 10}
+          y2={cy - r + 10} // Ajuste para a linha iniciar no centro
           stroke={"black"}
           strokeWidth={4}
           strokeLinecap="round"
-          animatedProps={pointerProps}
+          animatedProps={pointerProps} // Aplique a animação com a rotação
         />
       </Svg>
     </View>
