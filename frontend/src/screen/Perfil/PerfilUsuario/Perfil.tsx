@@ -86,7 +86,6 @@ const calculateAge = (birthdate: Date | string): number => {
   return age;
 };
 
-// Função auxiliar para formatar a altura em metros
 const formatHeight = (height: number): string => {
   return (height / 100).toFixed(2); // Divide por 100 e mantém 2 casas decimais
 };
