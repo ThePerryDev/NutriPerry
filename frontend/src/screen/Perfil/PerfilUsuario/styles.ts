@@ -11,73 +11,40 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 5,
-    marginRight: 120,
+    marginRight: 40,
     marginBottom: 15,
     marginTop: 30,
   },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  botaoContainer: {
     alignItems: "center",
-    marginBottom: 20,
-  },
-  columnHeaderHistorico: {
-    width: 169,
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#2C4B4E",
-  },
-  columnHeaderData: {
-    width: 100,
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#2C4B4E",
-  },
-  columnHeaderBotao: {
-    width: 40,
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#2C4B4E",
-  },
-  historico: {
-    width: 169,
-    height: 40,
-    fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "center",
-    lineHeight: 40,
-    color: "#2C4B4E",
-    backgroundColor: "#f5f5f5",
-    borderRadius: 10,
-  },
-  data: {
-    width: 100,
-    height: 40,
-    fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "center",
-    lineHeight: 40,
-    color: "#2C4B4E",
-    backgroundColor: "#f5f5f5",
-    borderRadius: 10,
+    justifyContent: "center",
+    marginTop: 20
   },
   botao: {
-    height: 40,
-    justifyContent: "center",
+    width: 250,
+    height: 60,
+    backgroundColor: "#00AD71", // Verde
+    paddingVertical: 12,
+    borderRadius: 15, // Bordas arredondadas
     alignItems: "center",
-    backgroundColor: "#F5f5f5",
-    borderRadius: 5,
-    marginBottom:10
+    justifyContent: "center",
+    marginVertical: 40,
   },
-  icone: {
-    width: 25,
-    height: 25,
+  botaoTexto: {
+    color: "#FFFFFF",
+    fontSize: 20,
+    fontWeight: "bold",
   },
-  listContent: {
-    paddingVertical: 10,
+  infoContainer: {
+    width: "100%",
+    marginTop: 20,
+    alignItems: "center",
+  },
+  info: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#2C4B4E",
+    marginBottom: 20, // Espaçamento entre as linhas de texto
   },
   arrow: {
     width: 30,

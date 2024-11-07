@@ -48,7 +48,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
       if (!userId) return;
 
       try {
-        const response = await axios.get(`http://192.168.1.4:3000/peso/${userId}`);
+        const response = await axios.get(`http://192.168.0.20:3000/peso/${userId}`);
         const pesosFormatados = response.data.map((peso: any) => ({
           _id: peso.documentoId,
           date: peso.date,
@@ -63,7 +63,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
 
     const fetchUserData = async () => {
       try {
-          const response = await fetch(`http://192.168.1.4:3000/user/objetivo?userId=${user?.id}`);
+          const response = await fetch(`http://192.168.0.20:3000/user/objetivo?userId=${user?.id}`);
           if (!response.ok) {
               throw new Error("Erro ao buscar dados do usuário");
           }
@@ -116,7 +116,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
   console.log("dados enviados para update: ", dataAtualizada);
 
   try {
-  const response = await axios.put(`http://192.168.1.4:3000/user/atualizarpeso/${user?.id}`, dataAtualizada);
+  const response = await axios.put(`http://192.168.0.20:3000/user/atualizarpeso/${user?.id}`, dataAtualizada);
 
 
   if (response.status === 200) {
@@ -150,7 +150,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
     const dataFormatada = moment(data).format("YYYY-MM-DD");
 
     try {
-      await axios.post("http://192.168.1.4:3000/peso", {
+      await axios.post("http://192.168.0.20:3000/peso", {
         user: userId,
         peso: parseFloat(peso),
         data: dataFormatada,
@@ -174,7 +174,7 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
   const handleDeletePeso = async (id: string) => {
     try {
       const formattedDate = moment().format("YYYY-MM-DD");
-      await axios.delete(`http://192.168.1.4:3000/peso/${userId}/${formattedDate}`);
+      await axios.delete(`http://192.168.0.20:3000/peso/${userId}/${formattedDate}`);
       setPesos((prevPesos) => prevPesos.filter((peso) => peso._id !== id));
     } catch (error) {
       console.error("Erro ao deletar o peso:", error);
