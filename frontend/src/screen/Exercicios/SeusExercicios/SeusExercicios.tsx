@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, TextInput, TouchableOpacity, View, Text, Image, } from "react-native";
-import { lupa, setaVolta } from "../../../assets";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { ScrollView, TextInput, TouchableOpacity, View, Text, Image, Alert, } from "react-native";
+import { Deletar, lupa, setaVolta } from "../../../assets";
 import styles from "./styles"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
@@ -8,8 +8,9 @@ import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import moment, { Moment } from "moment";
 import axios from "axios";
 import { AuthContext } from "../../../context";
+import { useFocusEffect } from "@react-navigation/native";
 
-const API_URL = "http://192.168.18.72:3000/gastocalorico";
+const API_URL = "http://192.168.0.138:3000/gastocalorico";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -21,54 +22,58 @@ type Props = {
 };
 
 type Exercicios = {
-  //id: number;
-  //data: string;
+  id: string;
+  data: string;
   atividadeFisica: string;
   gastoCalorico: number;
-  //tempo: number;
+  tempo: number;
   //userID: string;
 }
 
 
+
+
 const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rastrear o checkbox de cada refeição
   const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
-  const [exercicios, setExercicios] = useState<{ tempo: number, data: string, atividadeFisica: string, gastoCalorico: number }[]>([]); // Estado para armazenar os produtos
+  const [exercicios, setExercicios] = useState<{ id: string, tempo: number, data: string, atividadeFisica: string, gastoCalorico: number }[]>([]); // Estado para armazenar os produtos
   const { user } = useContext(AuthContext);
   const [selectedExercise, setSelectedExercise] = useState<Exercicios | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchExercicios = async () => {
     try {
-      const date: Moment = moment(); // Substitua por sua data real
-      const formattedDate: string = date.format("DD/MM/YYYY");
-      console.log(formattedDate); // Saída: "04/11/2024"
-
-      const responseExercicios = await axios.get(API_URL, {
-        params: {
-          userID: user?.id,
-          data: formattedDate,
-          atividadeFisica: "atividadeFisica",
-          gastoCalorico: "gastoCalorico",
-          tempo: "tempo",
-        },
-      });
-
+      // Garantir que o userID esteja presente
+      if (!user?.id) {
+        console.error("User ID não encontrado!");
+        return;
+      }
+  
+      // Construir a URL corretamente com o userID
+      const responseExercicios = await axios.get(`http://192.168.0.138:3000/gastocalorico/gastos/${user.id}`);
+  
+      // A resposta já deve vir com todos os exercícios relacionados ao userID
       const exercicios = responseExercicios.data.map((exercicio: any) => ({
-        id: exercicio.id,
+        id: exercicio._id, // O ID real do documento
         data: exercicio.data,
         atividadeFisica: exercicio.atividadeFisica,
         gastoCalorico: exercicio.gastoCalorico,
         tempo: exercicio.tempo,
         userID: exercicio.userID,
       }));
-
+  
+      // Ordenar os exercícios pela data mais recente
+      exercicios.sort((a: Exercicios, b: Exercicios) => {
+        return new Date(b.data).getTime() - new Date(a.data).getTime();
+      });
+      
+  
       setExercicios(exercicios); // Atualiza o estado com os dados recebidos
-
-      setCheckedItems(Array(exercicios.length).fill(false)); // Agora você pode acessar a propriedade length
+      setCheckedItems(Array(exercicios.length).fill(false)); // Inicializa o estado para o checkbox
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchExercicios();
@@ -76,30 +81,71 @@ const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rast
 
   const handleSearch = async (text: string) => {
     setSearchTerm(text);
+  
     try {
-      const responseExercicios = await axios.get(API_URL, {
+      // Garantir que o userID esteja presente
+      if (!user?.id) {
+        console.error("User ID não encontrado!");
+        return;
+      }
+  
+      // Chamada para o backend, passando o termo de pesquisa para o campo 'atividadeFisica'
+      const responseExercicios = await axios.get(`http://192.168.0.138:3000/gastocalorico/gastos/${user.id}`, {
         params: {
-          userID: user?.id,
-          data: Date.now(),
-          atividadeFisica: text,
+          atividadeFisica: text, // Envia o termo de pesquisa
         },
       });
-
+  
       const exercicios = responseExercicios.data.map((exercicio: any) => ({
-        //id: exercicio.id,
+        id: exercicio._id,  // O ID real do documento
         data: exercicio.data,
         atividadeFisica: exercicio.atividadeFisica,
         gastoCalorico: exercicio.gastoCalorico,
         tempo: exercicio.tempo,
-        //userID: exercicio.userID,
       }));
-
-      setExercicios(exercicios);
-      setSelectedExercise(exercicios[0]);
+  
+      setExercicios(exercicios);  // Atualiza o estado com os exercícios filtrados
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
     }
   };
+  
+
+  
+  const handleDelete = async (id: string) => {
+    Alert.alert(
+      'Excluir Exercício',
+      'Tem certeza que deseja excluir este exercício?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        { 
+          text: 'Deletar',
+          onPress: async () => {
+            try {
+              // URL agora usa '/delete/:id', que é o parâmetro correto
+              const response = await axios.delete(`http://192.168.0.138:3000/gastocalorico/delete/${id}`);
+              console.log(response);
+  
+              // Atualiza o estado removendo o exercício deletado
+              setExercicios((prevExercicios) => prevExercicios.filter(exercicio => exercicio.id !== id));
+              Alert.alert('Sucesso', 'Exercício deletado com sucesso');
+            } catch (error) {
+              console.error("Erro ao deletar exercício:", error);
+              Alert.alert('Erro', 'Não foi possível deletar o exercício');
+            }
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchExercicios();
+    }, [])
+  );
+  
 
   const handleExerciseClick = (exercise: Exercicios) => {
     setSelectedExercise(exercise);
@@ -139,10 +185,13 @@ const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rast
               ></TouchableOpacity>
               <View style={styles.mealInfo}>
                   <Text style={styles.mealName}>{exercicio.atividadeFisica}</Text>
-                  <Text style={styles.mealDetail}>{moment(exercicio.data).format("DD/MM/YYYY")}</Text>
+                  <Text style={styles.mealDetail}>{moment.utc(exercicio.data).format("DD-MM-YYYY")}</Text>
                   <Text style={styles.mealDetail}>{exercicio.gastoCalorico} kcal</Text>
                   <Text style={styles.mealDetail}>{exercicio.tempo} min</Text>
-              </View>
+                </View>
+                <TouchableOpacity style={styles.botao} onPress={() => handleDelete(exercicio.id)}>
+                <Image source={Deletar} style={styles.icone} />
+                </TouchableOpacity>
             </View>
           )
         ))}

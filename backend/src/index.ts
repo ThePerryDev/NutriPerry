@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 const app = express(); // cria o servidor e coloca na variável app
 
 app.use(cors({
-    origin: 'http://192.168.18.72:8081', // Permitir requisições do frontend
+    origin: 'http://192.168.0.138:8081', // Permitir requisições do frontend
     //origin: 'http://192.168.0.20:8081', // Permitir requisições do frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos

@@ -29,6 +29,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const [totalCalorias, setTotalCalorias] = useState<number>(0); 
   const [refreshing, setRefreshing] = useState(false); 
   const { user } = useContext(AuthContext);
+  const [totalGastoCalorico, setTotalGastoCalorico] = useState<number>(0);
 
   const objetivoCalorias = 2000;
   const objetivoCarboidratos = 250;
@@ -39,7 +40,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
-      const response = await axios.get(`http://192.168.18.72:3000/consumos/totalkcal`, {
+      const response = await axios.get(`http://192.168.0.138:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
@@ -57,15 +58,37 @@ const Home: React.FC<Props> = ({ navigation }) => {
     }
   };
 
+
+  const fetchGastoCalorico = async () => {
+    const dataAtual = moment().format("YYYY-MM-DD");
+
+    try {
+      const response = await axios.get(`http://192.168.0.138:3000/gastocalorico/total/${user?.id}`, {
+        params: { data: dataAtual }
+      });
+
+      const { totalGastoCalorico } = response.data;
+
+      console.log("Resposta do gasto calórico:", response.data);
+
+      setTotalGastoCalorico(totalGastoCalorico ?? 0);
+    } catch (error) {
+      console.error("Erro ao buscar o gasto calórico", error);
+    }
+  };
+  
+
   const onRefresh = () => {
     setRefreshing(true);
     fetchCaloriasConsumidas().then(() => setRefreshing(false));
+    fetchGastoCalorico().then(() => setRefreshing(false));
   };
 
   // Chama a função toda vez que a tela for focada
   useFocusEffect(
     useCallback(() => {
       fetchCaloriasConsumidas();
+      fetchGastoCalorico();
     }, [])
   );
 
@@ -124,7 +147,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
           <Text style={Styles.totalText}>Calorias</Text>
           <View style={Styles.progressContainer}>
             <ProgressRing 
-              progress={totalCalorias > 0 ? (totalCalorias / objetivoCalorias) * 100 : 0} 
+              progress={totalCalorias > 0 ? ((totalCalorias-totalGastoCalorico) / objetivoCalorias) * 100 : 0} 
               radius={50} 
               strokeWidth={10} 
               color="#00cc99" 
@@ -132,6 +155,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
             <View style={Styles.progressInfo}>
               <Text style={Styles.detailText}>{`Objetivo: ${objetivoCalorias.toFixed(2)} Kcal`}</Text>
               <Text style={Styles.detailText}>{`Consumido: ${totalCalorias > 0 ? totalCalorias.toFixed(2) : 0} Kcal`}</Text>
+              <Text style={Styles.detailText}>{`Gasto: ${totalGastoCalorico > 0 ? totalGastoCalorico.toFixed(2) : 0} Kcal`}</Text>
             </View>
           </View>
         </View>
