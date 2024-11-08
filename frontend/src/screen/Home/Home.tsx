@@ -40,7 +40,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.0.20:3000/consumos/totalkcal`, {
+      const response = await axios.get(`http://10.68.55.153:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
@@ -61,7 +61,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const fetchObjetivo = async () => {
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.0.20:3000/user/objetivo`, {
+      const response = await axios.get(`http://10.68.55.153:3000/user/objetivo`, {
         params: { userId: user?.id }
       });
 
@@ -82,13 +82,13 @@ const Home: React.FC<Props> = ({ navigation }) => {
       const dataAtual = moment().format("YYYY-MM-DD");
 
       // Buscando o total de calorias consumidas (exemplo com axios)
-      const caloriasResponse = await axios.get("http://192.168.0.20:3000/consumos/totalkcal", {
+      const caloriasResponse = await axios.get("http://10.68.55.153:3000/consumos/totalkcal", {
         params: { userId: user?.id, data: dataAtual },
       });
       setTotalCalorias(caloriasResponse.data.totalKcal ?? 0);
 
       // Buscando o objetivo de calorias
-      const objetivoResponse = await axios.get("http://192.168.0.20:3000/user/objetivo", {
+      const objetivoResponse = await axios.get("http://10.68.55.153:3000/user/objetivo", {
         params: { userId: user?.id },
       });
       setkcalObjetivo(objetivoResponse.data.kcalObjetivo ?? 0);

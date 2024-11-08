@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 5,
-    marginRight: 40,
+    marginRight: 120,
     marginBottom: 15,
     marginTop: 30,
   },
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderRadius: 15, // Bordas arredondadas
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 40,
+    marginVertical: 20,
   },
   botaoTexto: {
     color: "#FFFFFF",

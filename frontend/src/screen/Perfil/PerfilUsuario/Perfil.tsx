@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
@@ -7,6 +7,7 @@ import { setaVolta } from "../../../assets";
 import styles from "./styles";
 import { AuthContext } from "../../../context/";
 import UserCadastroService, { UserProps } from "../../../services/UserCadastroService";
+import { useFocusEffect } from "@react-navigation/native";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -18,27 +19,28 @@ type Props = {
 };
 
 const Perfil: React.FC<Props> = ({ navigation }) => {
-  const { user } = useContext(AuthContext); // Obtemos o email do usuário logado
+  const { user } = useContext(AuthContext); 
   const [userData, setUserData] = useState<UserProps | null>(null);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (user?.email) {
-        try {
-          // Busca os dados detalhados do usuário
-          const users = await UserCadastroService.listUsers();
-          const loggedInUser = users.find(u => u.email === user.email);
-          if (loggedInUser) {
-            setUserData(loggedInUser);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchUserData = async () => {
+        if (user?.email) {
+          try {
+            const users = await UserCadastroService.listUsers();
+            const loggedInUser = users.find(u => u.email === user.email);
+            if (loggedInUser) {
+              setUserData(loggedInUser);
+            }
+          } catch (error) {
+            console.error("Erro ao buscar os dados do usuário:", error);
           }
-        } catch (error) {
-          console.error("Erro ao buscar os dados do usuário:", error);
         }
-      }
-    };
+      };
 
-    fetchUserData();
-  }, [user]);
+      fetchUserData();
+    }, [user])
+  );
 
   return (
     <View style={styles.container}>
