@@ -1,10 +1,13 @@
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
+import { Row } from "react-native-table-component";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
     backgroundColor: "#fff",
+    alignContent: "center",
   },
 
   header: {
@@ -19,10 +22,28 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     marginBottom: 20,
+    justifyContent: "center",
+  },
+
+  cardStats: {
+    backgroundColor: "#f5f5f5",
+    color: "#24B77F",
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 20,
+    width: "48%",
   },
 
   totalText: {
-    color: "#fff",
+    color: "#FFF",
+    fontSize: 18,
+    textAlign: "center",
+    marginBottom: 60,
+    fontWeight: "bold",
+  },
+
+  totalText2: {
+    color: "#2F4858",
     fontSize: 18,
     textAlign: "center",
     marginBottom: 60,
@@ -99,6 +120,43 @@ const styles = StyleSheet.create({
   logo: {
     width: 50,
     height: 50,
+  },
+
+  pageContainer: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+  },
+
+  scrollContent: {
+    flexGrow: 1,
+    marginBottom: 80,
+  },
+
+  progressContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  progressInfo: {
+    marginLeft: 15,
+  },
+
+  detailText: {
+    color: "#2F4858",
+    fontSize: 16,
+    marginBottom: 5,
+  },
+
+  checkbox: {
+    margin: 8,
+    color: "#24B77F",
+  },
+
+  doubleCard: {
+    justifyContent: "space-between",
+    display: "flex",
+    flexDirection: "row",
   },
 });
 

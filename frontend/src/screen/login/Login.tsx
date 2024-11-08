@@ -1,3 +1,4 @@
+// TelaLogin.tsx
 import React, { useContext, useState } from "react";
 import {
   View,
@@ -15,7 +16,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/rootStack";
 import styles from "./styles";
 import { AuthContext } from "../../context/auth/AuthContext";
-import InputWithIcons from "../../components/Login/InputWithIcons/InputWithIcons";
+import InputWithIcon from "../../components/Login/InputWithIcons/InputWithIcons";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -30,7 +31,8 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
   const auth = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showLogo, setShowLogo] = useState(true); // Novo estado para controlar a visibilidade da imagem
+  const [showLogo, setShowLogo] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const handleLogin = async () => {
     if (email && password) {
@@ -38,11 +40,10 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
       const isLogged = await auth.signin(email, password);
 
       if (isLogged) {
-        console.log("Navegando para Home");
+        setIsError(false);
         navigation.navigate("Home");
       } else {
-        console.error("Falha ao logar");
-        alert("Falha ao logar");
+        setIsError(true);
       }
     } else {
       console.log("Os campos de email e senha são obrigatórios");
@@ -53,12 +54,12 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior="padding"
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
     >
-      <TouchableWithoutFeedback 
+      <TouchableWithoutFeedback
         onPress={() => {
           Keyboard.dismiss();
-          setShowLogo(true); // Mostrar logo ao clicar fora
+          setShowLogo(true);
         }}
       >
         <View style={styles.innerContainer}>
@@ -75,25 +76,26 @@ const TelaLogin: React.FC<Props> = ({ navigation }) => {
           </View>
 
           <View style={styles.inputcontainer}>
-            <InputWithIcons
+            <InputWithIcon
               iconSource={icone_perfil}
               placeholder="Insira seu email..."
               value={email}
-              onChangeText={(email) => setEmail(email)}
-              onFocus={() => {
-                setShowLogo(false); // Ocultar logo ao focar no input
-              }}
+              onChangeText={(text) => setEmail(text)}
+              onFocus={() => setShowLogo(false)}
+              style={isError ? styles.inputError : undefined}
             />
-            <InputWithIcons
+            <InputWithIcon
               iconSource={icone_senha}
               placeholder="Insira sua senha..."
               value={password}
-              onChangeText={(password) => setPassword(password)}
+              onChangeText={(text) => setPassword(text)}
               secureTextEntry={true}
-              onFocus={() => {
-                setShowLogo(false); // Ocultar logo ao focar no input
-              }}
+              onFocus={() => setShowLogo(false)}
+              style={isError ? styles.inputError : undefined}
             />
+            {isError && (
+              <Text style={styles.errorText}>Usuário ou senha incorretos</Text>
+            )}
           </View>
           <TouchableOpacity style={styles.loginbutton} onPress={handleLogin}>
             <Text style={styles.loginbuttonText}>LOGIN</Text>
