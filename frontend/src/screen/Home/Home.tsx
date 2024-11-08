@@ -83,7 +83,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.1.4:3000/consumos/totalkcal`, {
+      const response = await axios.get(`http://192.168.0.107:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
@@ -110,7 +110,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const fetchObjetivo = async () => {
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.1.4:3000/user/objetivo`, {
+      const response = await axios.get(`http://192.168.0.107:3000/user/objetivo`, {
         params: { userId: user?.id }
       });
 
@@ -137,13 +137,13 @@ const Home: React.FC<Props> = ({ navigation }) => {
       try {
         const dataAtual = moment().format("YYYY-MM-DD");
 
-        const caloriasResponse = await axios.get("http://192.168.1.4:3000/consumos/totalkcal", {
+        const caloriasResponse = await axios.get("http://192.168.0.107:3000/consumos/totalkcal", {
           params: { userId: user?.id, data: dataAtual },
         });
-        const objetivoResponse = await axios.get("http://192.168.1.4:3000/user/objetivo", {
+        const objetivoResponse = await axios.get("http://192.168.0.107:3000/user/objetivo", {
           params: { userId: user?.id },
         });
-        const gastoCaloricoResponse = await axios.get(`http://192.168.1.4:3000/gastocalorico/total/${user?.id}`, {
+        const gastoCaloricoResponse = await axios.get(`http://192.168.0.107:3000/gastocalorico/total/${user?.id}`, {
           params: { data: dataAtual },
         });
 
@@ -167,7 +167,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
-      const response = await axios.get(`http://192.168.1.4:3000/gastocalorico/total/${user?.id}`, {
+      const response = await axios.get(`http://192.168.0.107:3000/gastocalorico/total/${user?.id}`, {
         params: { data: dataAtual }
       });
 
