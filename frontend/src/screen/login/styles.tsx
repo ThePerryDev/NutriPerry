@@ -4,12 +4,12 @@ import Constants from "expo-constants";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FBFBFB',
+    backgroundColor: "#FBFBFB",
     padding: 40,
   },
   innerContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   headerContainer: {
     alignItems: "center",
@@ -61,6 +61,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: "#ffffff",
+  },
+  inputError: {
+    borderColor: "red",
+  },
+  errorText: {
+    color: "#FF725E",
+    marginTop: 5,
+    textAlign: "center",
   },
 });
 
