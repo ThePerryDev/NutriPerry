@@ -16,7 +16,7 @@ import MonitorCalorico from "./Dietas/MonitorCalorico/MonitorCalorico";
 import Home from "./Home/Home";
 import TelaLogin from "./login/Login";
 import Configuracoes from "./Configuracoes/perfil_pessoal/tela_config_principal/Configuracoes";
-import Informacoes from "./Configuracoes/perfil_pessoal/tela_config_troca_info/Informacoes";
+import Informacoes from "./Configuracoes/perfil_pessoal/tela_config_show_info/Informacoes";
 import Senha from "./Configuracoes/perfil_pessoal/tela_config_senha/Senha";
 import ConfiguracoesNutri from "./Configuracoes/perfil_nutricionista/tela_config_principal_nutri/ConfiguracoesNutri"
 import InformacoesNutri1 from "./Configuracoes/perfil_nutricionista/tela_config_troca_info_nutri1/Informacoes_nutri1";

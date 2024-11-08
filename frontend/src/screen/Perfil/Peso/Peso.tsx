@@ -168,19 +168,19 @@ const Pesos: React.FC<Props> = ({ navigation }) => {
 
   const handleBothActions = () => {
     handleAddPeso();  // Chama o primeiro handler
-    handleUpdate(); // Chama o segundo handler
+   // handleUpdate(); // Chama o segundo handler
   };
 
   const handleDeletePeso = async (id: string) => {
     try {
-      const formattedDate = moment().format("YYYY-MM-DD");
-      await axios.delete(`http://192.168.18.46:3000/peso/${userId}/${formattedDate}`);
+      await axios.delete(`http://192.168.18.46:3000/peso/${userId}/${id}`);
       setPesos((prevPesos) => prevPesos.filter((peso) => peso._id !== id));
     } catch (error) {
       console.error("Erro ao deletar o peso:", error);
       alert("Erro ao deletar peso.");
     }
   };
+  
 
   const renderItem = ({ item }: { item: PesoAgregado }) => (
     <View style={styles.row}>

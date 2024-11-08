@@ -11,9 +11,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 5,
-    marginRight: 40,
-    marginBottom: 15,
+    marginRight: 120,
     marginTop: 30,
+  },
+  header: {
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#2C4B4E",
   },
   botaoContainer: {
     alignItems: "center",
@@ -28,33 +33,52 @@ const styles = StyleSheet.create({
     borderRadius: 15, // Bordas arredondadas
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 40,
+    marginVertical: 25,
   },
   botaoTexto: {
     color: "#FFFFFF",
     fontSize: 20,
     fontWeight: "bold",
   },
-  infoContainer: {
-    width: "100%",
+  infoHeaderContainer: {
     marginTop: 20,
     alignItems: "center",
   },
-  info: {
-    fontSize: 20,
-    fontWeight: "600",
+  infoContainer: {
+    marginTop: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginRight:20,
+    marginLeft:20
+  },
+  infotitle: {
+    fontSize: 16,
+    fontWeight: "bold",
     color: "#2C4B4E",
-    marginBottom: 20, // Espaçamento entre as linhas de texto
+  },
+  info: {
+    fontSize: 16,
+    color: "#2C4B4E",
+  },
+  infocarregando: {
+    fontSize: 20,
+    color: "#2C4B4E",
+    fontWeight: "bold",
+    marginTop:120,
+    marginBottom:100,
+    textAlign:"center"
   },
   arrow: {
     width: 30,
     height: 30,
   },
-  header: {
+  username: {
     fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
     color: "#2C4B4E",
+    marginBottom:20,
   },
   spacer: {
     flex: 1,

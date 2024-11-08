@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
@@ -7,6 +7,8 @@ import { setaVolta } from "../../../assets";
 import styles from "./styles";
 import { AuthContext } from "../../../context/";
 import UserCadastroService, { UserProps } from "../../../services/UserCadastroService";
+import { useFocusEffect } from "@react-navigation/native";
+import moment from "moment";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -18,27 +20,58 @@ type Props = {
 };
 
 const Perfil: React.FC<Props> = ({ navigation }) => {
-  const { user } = useContext(AuthContext); // Obtemos o email do usuário logado
+  const { user } = useContext(AuthContext); 
   const [userData, setUserData] = useState<UserProps | null>(null);
+  const [nivelAtividade, setNivelAtividade] = useState<string>("");
+  const [objetivo, setObjetivo] = useState<string>("");
+  const [dataNascimento, setDataNascimento] = useState<string>("");
+  const [metabolismoBasal, setMetabolismoBasal] = useState<string>("");
+  const [objetivoCalorico, setObjetivoCalorico] = useState<string>("");
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchUserData = async () => {
+        if (user?.email) {
+          try {
+            const users = await UserCadastroService.listUsers();
+            const loggedInUser = users.find(u => u.email === user.email);
+            if (loggedInUser) {
+              setUserData(loggedInUser);
+            }
+          } catch (error) {
+            console.error("Erro ao buscar os dados do usuário:", error);
+          }
+        }
+      };
+
+      fetchUserData();
+    }, [user])
+  );
 
   useEffect(() => {
+    // Função para buscar os dados do usuário
     const fetchUserData = async () => {
-      if (user?.email) {
         try {
-          // Busca os dados detalhados do usuário
-          const users = await UserCadastroService.listUsers();
-          const loggedInUser = users.find(u => u.email === user.email);
-          if (loggedInUser) {
-            setUserData(loggedInUser);
-          }
+            const response = await fetch(`http://192.168.18.46:3000/user/objetivo?userId=${user?.id}`);
+            if (!response.ok) {
+                throw new Error("Erro ao buscar dados do usuário");
+            }
+
+            const data = await response.json();
+
+            // Preenche os campos com os dados recebidos
+            setNivelAtividade(data.activityLevel || "");
+            setObjetivo(data.goal || "");
+            setDataNascimento(moment.utc(data.birthdate).format("DD-MM-YYYY") || "");
+            setMetabolismoBasal(data.taxaBasal.toFixed(2) ?? 0);
+            setObjetivoCalorico(data.kcalObjetivo.toFixed(2) ?? 0);
         } catch (error) {
-          console.error("Erro ao buscar os dados do usuário:", error);
+            console.error("Erro ao buscar dados do usuário:", error);
         }
-      }
     };
 
     fetchUserData();
-  }, [user]);
+  }, [user?.id]);
 
   return (
     <View style={styles.container}>
@@ -50,15 +83,45 @@ const Perfil: React.FC<Props> = ({ navigation }) => {
       </View>
       {/* Exibição das informações do usuário */}
       {userData ? (
-        <View style={styles.infoContainer}>
-          <Text style={[styles.header, { marginBottom: 30 }]}>{`${userData.name} ${userData.nickname || ""}`}</Text>
-          <Text style={[styles.info, { marginTop: 30 }]}>Sexo:         {userData.gender}</Text>
-          <Text style={styles.info}>Idade:         {userData.birthdate ? calculateAge(userData.birthdate) : "N/A"} anos</Text>
-          <Text style={styles.info}>Altura:          {formatHeight(userData.height)} m</Text>
-          <Text style={styles.info}>Peso:              {userData.weight} kg</Text>
+        <View>
+          <View style={styles.infoHeaderContainer}>
+            <Text style={styles.username}>{`${userData.name} ${userData.nickname || ""}`}</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.infotitle}>Sexo:</Text>
+            <Text style={styles.info}>{userData.gender}</Text>
+            <Text style={styles.infotitle}>Idade:</Text>
+            <Text style={styles.info}>{userData.birthdate ? calculateAge(userData.birthdate) : "N/A"} anos</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.infotitle}>Altura:</Text>
+            <Text style={styles.info}>{formatHeight(userData.height)} m</Text>
+            <Text style={styles.infotitle}>Peso:</Text>
+            <Text style={styles.info}>{userData.weight} kg</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.infotitle}>Data de Nascimento:</Text>
+            <Text style={styles.info}>{dataNascimento}</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.infotitle}>Nível de Atividade:</Text>
+            <Text style={styles.info}>{nivelAtividade}</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.infotitle}>Objetivo: </Text>
+            <Text style={styles.info}>{objetivo}</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.infotitle}>Metabolismo Basal:</Text>
+            <Text style={styles.info}>{metabolismoBasal}</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.infotitle}>Objetivo Calórico:</Text>
+            <Text style={styles.info}>{objetivoCalorico} kcal</Text>
+          </View>
         </View>
       ) : (
-        <Text style={styles.info}>Carregando informações...</Text>
+        <Text style={styles.infocarregando}>Carregando informações...</Text>
       )}
       <View style={styles.botaoContainer}>
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("TelaPeso")}>

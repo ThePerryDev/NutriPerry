@@ -59,33 +59,23 @@ class PesoController {
   
 
   public async delete(req: Request, res: Response): Promise<void> {
-    const { user } = req.params;
-    console.log("Deleting pesos for user:", user);
+    const { user, documentoId } = req.params;
   
     try {
       const userId = new mongoose.Types.ObjectId(user);
-      //const startDate = new Date(date);
-      //const endDate = new Date(startDate);
-      //endDate.setDate(startDate.getDate() + 1);
-  
-      const response = await Peso.deleteMany({
+      const response = await Peso.deleteOne({
         user: userId,
-       // data: {
-          //$gte: startDate,
-          //$lt: endDate,
-       // },
+        _id: new mongoose.Types.ObjectId(documentoId), // Filtra pelo documentoId específico
       });
   
-      console.log("Delete response:", response);
-  
       if (response.deletedCount > 0) {
-        res.json({ message: "Pesos excluídos com sucesso." });
+        res.json({ message: "Peso excluído com sucesso." });
       } else {
-        res.status(404).json({ message: "Nenhum peso encontrado para este usuário na data especificada." });
+        res.status(404).json({ message: "Peso não encontrado." });
       }
     } catch (error: any) {
-      console.error("Erro ao deletar pesos:", error);
-      res.status(500).json({ message: error.message || "Erro ao deletar os pesos" });
+      console.error("Erro ao deletar peso:", error);
+      res.status(500).json({ message: error.message || "Erro ao deletar o peso" });
     }
   }
 }
