@@ -34,7 +34,7 @@ const GraficoConsumoAgua: React.FC<Props> = ({ navigation }) => {
   
   const fetchWeeklyData = async () => {
     try {
-      const response = await fetch(`http://192.168.18.46:3000/consumo-agua/weekly/${userId}`);
+      const response = await fetch(`http://192.168.1.4:3000/consumo-agua/weekly/${userId}`);
       const data = await response.json();
       setAverageLastWeek(data.averageLastWeek);
       setAverageCurrentWeek(data.averageCurrentWeek);
@@ -53,7 +53,7 @@ const GraficoConsumoAgua: React.FC<Props> = ({ navigation }) => {
 
   const fetchMonthlyData = async () => {
     try {
-      const response = await fetch(`http://192.168.18.46:3000/consumo-agua/monthly/${userId}`);
+      const response = await fetch(`http://192.168.1.4:3000/consumo-agua/monthly/${userId}`);
       const data = await response.json();
       setAverageLastMonth(data.averageLastMonth);
       setAverageCurrentMonth(data.averageCurrentMonth);
@@ -72,7 +72,7 @@ const GraficoConsumoAgua: React.FC<Props> = ({ navigation }) => {
 
   const fetchYearlyData = async () => {
     try {
-      const response = await fetch(`http://192.168.18.46:3000/consumo-agua/yearly/${userId}`);
+      const response = await fetch(`http://192.168.1.4:3000/consumo-agua/yearly/${userId}`);
       const data = await response.json();
       setAverageLastYear(data.averageLastYear);
       setAverageCurrentYear(data.averageCurrentYear);

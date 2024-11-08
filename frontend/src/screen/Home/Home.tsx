@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import Styles from "./Styles";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -21,6 +21,45 @@ type Props = {
   navigation: ContinuarScreenNavigationProp;
 };
 
+const ProgressRing: React.FC<{
+  progress: number;
+  radius: number;
+  strokeWidth: number;
+  color: string;
+}> = ({ progress, radius, strokeWidth, color }) => {
+  const normalizedRadius = radius - strokeWidth;
+  const circumference = normalizedRadius * 2 * Math.PI;
+  const strokeDashoffset = circumference - (progress / 100) * circumference;
+
+  return (
+    <Svg height={radius * 2} width={radius * 2} viewBox={`0 0 ${radius * 2} ${radius * 2}`}>
+      <Circle
+        stroke="#d3d3d3"
+        fill="none"
+        strokeWidth={strokeWidth}
+        r={normalizedRadius}
+        cx={radius}
+        cy={radius}
+      />
+      <Circle
+        stroke={color}
+        fill="none"
+        strokeWidth={strokeWidth}
+        r={normalizedRadius}
+        cx={radius}
+        cy={radius}
+        strokeDasharray={`${circumference} ${circumference}`}
+        strokeDashoffset={strokeDashoffset}
+        strokeLinecap="round"
+        transform={`rotate(-90 ${radius} ${radius})`}
+      />
+      <SvgText x={radius} y={radius} fill="black" fontSize="16" fontWeight="bold" textAnchor="middle" dy=".3em">
+        {progress > 0 ? `${Math.round(progress)}%` : "0%"}
+      </SvgText>
+    </Svg>
+  );
+};
+
 const Home: React.FC<Props> = ({ navigation }) => {
   const [progress, setCurrentProgress] = useState<number>(0);
   const [totalCalorias, setTotalCalorias] = useState<number>(0);
@@ -35,15 +74,16 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const [proteinaObjetivo, setProteinaObjetivo] = useState<number>(0);
   const [acucarObjetivo, setAcucarObjetivo] = useState<number>(0);
   const [totalGastoCalorico, setTotalGastoCalorico] = useState<number>(0);
+  const [loading, setLoading] = useState(true); // Para verificar o carregamento
 
-  const objetivoCalorias = 2000;
+  
 
   const fetchCaloriasConsumidas = async () => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.18.46:3000/consumos/totalkcal`, {
+      const response = await axios.get(`http://192.168.1.4:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
@@ -70,7 +110,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const fetchObjetivo = async () => {
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.18.46:3000/user/objetivo`, {
+      const response = await axios.get(`http://192.168.1.4:3000/user/objetivo`, {
         params: { userId: user?.id }
       });
 
@@ -91,31 +131,43 @@ const Home: React.FC<Props> = ({ navigation }) => {
     }
   };
 
-  const fetchData = async () => {
-    try {
-      const dataAtual = moment().format("YYYY-MM-DD");
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const dataAtual = moment().format("YYYY-MM-DD");
 
-      // Buscando o total de calorias consumidas (exemplo com axios)
-      const caloriasResponse = await axios.get("http://192.168.18.46:3000/consumos/totalkcal", {
-        params: { userId: user?.id, data: dataAtual },
-      });
-      setTotalCalorias(caloriasResponse.data.totalKcal ?? 0);
+        const caloriasResponse = await axios.get("http://192.168.1.4:3000/consumos/totalkcal", {
+          params: { userId: user?.id, data: dataAtual },
+        });
+        const objetivoResponse = await axios.get("http://192.168.1.4:3000/user/objetivo", {
+          params: { userId: user?.id },
+        });
+        const gastoCaloricoResponse = await axios.get(`http://192.168.1.4:3000/gastocalorico/total/${user?.id}`, {
+          params: { data: dataAtual },
+        });
 
-      // Buscando o objetivo de calorias
-      const objetivoResponse = await axios.get("http://192.168.18.46:3000/user/objetivo", {
-        params: { userId: user?.id },
-      });
-      setkcalObjetivo(objetivoResponse.data.kcalObjetivo ?? 0);
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
-    }
-  };
+        setTotalCalorias(caloriasResponse.data.totalKcal ?? 0);
+        setkcalObjetivo(objetivoResponse.data.kcalObjetivo ?? 0);
+        setTotalGastoCalorico(gastoCaloricoResponse.data.totalGastoCalorico ?? 0);
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [user]);
+
+  
 
   const fetchGastoCalorico = async () => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
-      const response = await axios.get(`http://192.168.18.46:3000/gastocalorico/total/${user?.id}`, {
+      const response = await axios.get(`http://192.168.1.4:3000/gastocalorico/total/${user?.id}`, {
         params: { data: dataAtual }
       });
 
@@ -130,30 +182,14 @@ const Home: React.FC<Props> = ({ navigation }) => {
   };
 
   // useFocusEffect para fazer o fetch e calcular o progresso quando a tela é focada
-  useFocusEffect(
-    useCallback(() => {
-      // Realiza o fetch de dados
-      fetchData().then(() => {
-        // Log de valores recebidos
-        console.log("totalCalorias:", totalCalorias);
-        console.log("kcalObjetivo:", kcalObjetivo);
-
-        // Calcular o valor de progress depois de pegar os dados
-        if (kcalObjetivo > 0) {
-          const progress = (totalCalorias / kcalObjetivo) * 100;
-          setCurrentProgress(progress);
-          console.log("Novo valor de currentProgress:", progress);
-        }
-      });
-    }, [totalCalorias, kcalObjetivo]) // Quando totalCalorias ou kcalObjetivo mudarem, refaz a lógica
-  );
+ 
 
   // Função onRefresh, que também atualizará o progress após o refresh
   const onRefresh = async () => {
     setRefreshing(true); // Inicia o processo de refresh
-    await fetchCaloriasConsumidas();
-    await fetchObjetivo();
-    await fetchData();
+    fetchCaloriasConsumidas().then(() => setRefreshing(false));
+    fetchObjetivo().then(() => setRefreshing(false));
+    
     fetchGastoCalorico().then(() => setRefreshing(false));
     setRefreshing(false); // Após completar, define refreshing como false
   };
@@ -162,61 +198,24 @@ const Home: React.FC<Props> = ({ navigation }) => {
     useCallback(() => {
       fetchCaloriasConsumidas();
       fetchObjetivo();
-      fetchData();
+     
       fetchGastoCalorico();
     }, [])
   );
 
-  const ProgressRing: React.FC<{
-    progress: number;
-    radius: number;
-    strokeWidth: number;
-    color: string;
-  }> = ({ progress, radius, strokeWidth, color }) => {
-    const normalizedRadius = radius - strokeWidth;
-    const circumference = normalizedRadius * 2 * Math.PI;
-    const strokeDashoffset = circumference - (progress / 100) * circumference;
+  useEffect(() => {
+    if (!loading && kcalObjetivo > 0) {
+      const novoProgress = ((totalCalorias - totalGastoCalorico) / kcalObjetivo) * 100;
+      setCurrentProgress(novoProgress);
+    }
+  }, [totalCalorias, kcalObjetivo, totalGastoCalorico, loading]);
 
-    return (
-      <Svg
-        height={radius * 2}
-        width={radius * 2}
-        viewBox={`0 0 ${radius * 2} ${radius * 2}`}
-      >
-        <Circle
-          stroke="#d3d3d3"
-          fill="none"
-          strokeWidth={strokeWidth}
-          r={normalizedRadius}
-          cx={radius}
-          cy={radius}
-        />
-        <Circle
-          stroke={color}
-          fill="none"
-          strokeWidth={strokeWidth}
-          r={normalizedRadius}
-          cx={radius}
-          cy={radius}
-          strokeDasharray={`${circumference} ${circumference}`}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          transform={`rotate(-90 ${radius} ${radius})`}
-        />
-        <SvgText
-          x={radius}
-          y={radius}
-          fill="black"
-          fontSize="16"
-          fontWeight="bold"
-          textAnchor="middle"
-          dy=".3em"
-        >
-          {progress > 0 ? `${Math.round(progress)}%` : "0%"}
-        </SvgText>
-      </Svg>
-    );
-  };
+  if (loading) {
+    return <Text>Carregando...</Text>; // Exibe algo enquanto carrega
+  }
+  
+
+  
 
   return (
     <View style={Styles.container}>
@@ -225,42 +224,42 @@ const Home: React.FC<Props> = ({ navigation }) => {
         <View style={Styles.statsContainer}>
           <View style={Styles.stats}>
             <Text style={Styles.statLabel}>Gasto</Text>
-            <Text style={Styles.statValue}>{`${totalGastoCalorico > 0 ? totalGastoCalorico.toFixed(2) : 0} Kcal`}</Text>
+            <Text style={Styles.statValue}>{`${totalGastoCalorico > 0 ? totalGastoCalorico.toFixed(0) : 0} Kcal`}</Text>
           </View>
           <View style={Styles.stats}>
             <Text style={Styles.totalText}>Total</Text>
-            <Speedometer key = {progress} progress={totalCalorias > 0 ? ((totalCalorias-totalGastoCalorico) / objetivoCalorias) * 100 : 0} />
-            <Text style={Styles.statSpeedometerValue}>{totalCalorias > 0 ? (((totalCalorias - totalGastoCalorico) / objetivoCalorias) * 100).toFixed(2) : "0.00"} %
+            <Speedometer key = {progress} progress={progress} />
+            <Text style={Styles.statSpeedometerValue}>{totalCalorias > 0 ? (((totalCalorias - totalGastoCalorico) / kcalObjetivo) * 100).toFixed(0) : "0"} %
+            </Text>
+            <Text style={Styles.statSpeedometerValue}>{totalCalorias > 0 ? (((totalCalorias - totalGastoCalorico))).toFixed(0) : "0"} Kcal
             </Text>
           </View>
           <View style={Styles.stats}>
             <Text style={Styles.statLabel}>Consumo</Text>
-            <Text style={Styles.statValue}>{`${
-              totalCalorias > 0 ? totalCalorias.toFixed(0) : 0
-            } Kcal`}</Text>
+            <Text style={Styles.statValue}>{`${totalCalorias > 0 ? totalCalorias.toFixed(0) : 0} Kcal`}</Text>
           </View>
         </View>
       </View>
+
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       <View style={Styles.doubleCard}>
         {/* Calorias */}
         <View style={Styles.cardStats}>
           <Text style={Styles.totalText2}>Calorias</Text>
           <View style={Styles.progressContainer}>
             <ProgressRing
-              progress={
-                totalCalorias > 0 ? (totalCalorias / kcalObjetivo) * 100 : 0
-              }
+              progress={totalCalorias > 0 ? (totalCalorias / kcalObjetivo) * 100 : 0}
               radius={50}
               strokeWidth={10}
               color="#00cc99"
             />
             <View style={Styles.progressInfo}>
               <Text style={Styles.detailText}>
-                {`Objetivo: ${kcalObjetivo.toFixed(2)} Kcal`}
+                {`Objetivo: ${kcalObjetivo.toFixed(0)} Kcal`}
               </Text>
               <Text style={Styles.detailText}>
                 {`Consumido: ${
-                  totalCalorias > 0 ? totalCalorias.toFixed(2) : 0
+                  totalCalorias > 0 ? totalCalorias.toFixed(0) : 0
                 } Kcal`}
               </Text>
             </View>
@@ -283,11 +282,11 @@ const Home: React.FC<Props> = ({ navigation }) => {
             {/* Carboidratos */}
             <View style={Styles.progressInfo}>
               <Text style={Styles.detailText}>
-                {`Objetivo: ${carboidratoObjetivo.toFixed(2)}g`}
+                {`Objetivo: ${carboidratoObjetivo.toFixed(0)}g`}
               </Text>
               <Text style={Styles.detailText}>
                 {`Consumido: ${
-                  totalCarboidratos > 0 ? totalCarboidratos.toFixed(2) : 0
+                  totalCarboidratos > 0 ? totalCarboidratos.toFixed(0) : 0
                 }g`}
               </Text>
             </View>
@@ -311,11 +310,11 @@ const Home: React.FC<Props> = ({ navigation }) => {
             />
             <View style={Styles.progressInfo}>
               <Text style={Styles.detailText}>
-                {`Objetivo: ${proteinaObjetivo.toFixed(2)}g`}
+                {`Objetivo: ${proteinaObjetivo.toFixed(0)}g`}
               </Text>
               <Text style={Styles.detailText}>
                 {`Consumido: ${
-                  totalProteinas > 0 ? totalProteinas.toFixed(2) : 0
+                  totalProteinas > 0 ? totalProteinas.toFixed(0) : 0
                 }g`}
               </Text>
             </View>
@@ -336,14 +335,15 @@ const Home: React.FC<Props> = ({ navigation }) => {
             <View style={Styles.progressInfo}>
               <Text
                 style={Styles.detailText}
-              >{`Objetivo: ${acucarObjetivo.toFixed(2)}g`}</Text>
+              >{`Objetivo: ${acucarObjetivo.toFixed(0)}g`}</Text>
               <Text style={Styles.detailText}>{`Consumido: ${
-                totalAcucar > 0 ? totalAcucar.toFixed(2) : 0
+                totalAcucar > 0 ? totalAcucar.toFixed(0) : 0
               }g`}</Text>
             </View>
           </View>
         </View>
       </View>
+      </ScrollView>
       <MenuInferior navigation={navigation} />
     </View>
   );

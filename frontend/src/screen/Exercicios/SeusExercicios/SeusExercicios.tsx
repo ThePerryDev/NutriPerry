@@ -10,7 +10,7 @@ import axios from "axios";
 import { AuthContext } from "../../../context";
 import { useFocusEffect } from "@react-navigation/native";
 
-const API_URL = "http://192.168.18.46:3000/gastocalorico";
+const API_URL = "http://192.168.1.4:3000/gastocalorico";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -49,7 +49,7 @@ const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rast
       }
   
       // Construir a URL corretamente com o userID
-      const responseExercicios = await axios.get(`http://192.168.18.46:3000/gastocalorico/gastos/${user.id}`);
+      const responseExercicios = await axios.get(`http://192.168.1.4:3000/gastocalorico/gastos/${user.id}`);
   
       // A resposta já deve vir com todos os exercícios relacionados ao userID
       const exercicios = responseExercicios.data.map((exercicio: any) => ({
@@ -90,7 +90,7 @@ const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rast
       }
   
       // Chamada para o backend, passando o termo de pesquisa para o campo 'atividadeFisica'
-      const responseExercicios = await axios.get(`http://192.168.18.46:3000/gastocalorico/gastos/${user.id}`, {
+      const responseExercicios = await axios.get(`http://192.168.1.4:3000/gastocalorico/gastos/${user.id}`, {
         params: {
           atividadeFisica: text, // Envia o termo de pesquisa
         },
@@ -123,7 +123,7 @@ const SeusExercicios: React.FC<Props> = ({ navigation }) => {// Estado para rast
           onPress: async () => {
             try {
               // URL agora usa '/delete/:id', que é o parâmetro correto
-              const response = await axios.delete(`http://192.168.18.46:3000/gastocalorico/delete/${id}`);
+              const response = await axios.delete(`http://192.168.1.4:3000/gastocalorico/delete/${id}`);
               console.log(response);
   
               // Atualiza o estado removendo o exercício deletado
