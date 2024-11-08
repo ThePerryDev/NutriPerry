@@ -13,7 +13,21 @@ interface GastoCaloricoData {
   tempo: number;
 }
 
-class GastoCaloricoService {
+// GastoCaloricoService.ts
+interface GastoCaloricoService {
+  search(searchText: string): Promise<GastoCaloricoData[]>;
+}
+
+class GastoCaloricoService {// GastoCaloricoService.ts
+  async search(searchText: string): Promise<GastoCaloricoData[]> {
+    try {
+      const response = await axios.get(`https://api.example.com/exercicios?search=${searchText}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
   async getAll(): Promise<GastoCaloricoData[]> {
     try {
       const response = await axios.get(API_URL);

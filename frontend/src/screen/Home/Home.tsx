@@ -31,9 +31,15 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const [totalPeso, setTotalPeso] = useState<number>(0);
   const [totalProteinas, setTotalProteinas] = useState<number>(0);
   const [totalAcucar, setTotalAcucar] = useState<number>(0);
-  const [carboidratoObjetivo, setCarboidratoObjetivo] = useState<number>(0);
-  const [proteinaObjetivo, setProteinaObjetivo] = useState<number>(0);
-  const [acucarObjetivo, setAcucarObjetivo] = useState<number>(0);
+  const [totalCalorias, setTotalCalorias] = useState<number>(0); 
+  const [refreshing, setRefreshing] = useState(false); 
+  const { user } = useContext(AuthContext);
+  const [totalGastoCalorico, setTotalGastoCalorico] = useState<number>(0);
+
+  const objetivoCalorias = 2000;
+  const objetivoCarboidratos = 250;
+  const objetivoProteinas = 100;
+  const objetivoAcucar = 50;
 
   const fetchCaloriasConsumidas = async () => {
     const dataAtual = moment().format("YYYY-MM-DD");
@@ -75,6 +81,30 @@ const Home: React.FC<Props> = ({ navigation }) => {
     } catch (error) {
       console.error("Erro ao buscar dados", error);
     }
+
+  const fetchGastoCalorico = async () => {
+    const dataAtual = moment().format("YYYY-MM-DD");
+
+    try {
+      const response = await axios.get(`http://192.168.0.138:3000/gastocalorico/total/${user?.id}`, {
+        params: { data: dataAtual }
+      });
+
+      const { totalGastoCalorico } = response.data;
+
+      console.log("Resposta do gasto calórico:", response.data);
+
+      setTotalGastoCalorico(totalGastoCalorico ?? 0);
+    } catch (error) {
+      console.error("Erro ao buscar o gasto calórico", error);
+    }
+  };
+  
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    fetchCaloriasConsumidas().then(() => setRefreshing(false));
+    fetchGastoCalorico().then(() => setRefreshing(false));
   };
 
   const fetchData = async () => {
@@ -132,6 +162,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
       fetchCaloriasConsumidas();
       fetchObjetivo();
       fetchData();
+      fetchGastoCalorico();
     }, [])
   );
 
@@ -151,11 +182,21 @@ const Home: React.FC<Props> = ({ navigation }) => {
             <Text style={Styles.totalText}>Total</Text>
             <Speedometer key = {progress} progress={progress} />
 
-          </View>
-          <View style={Styles.stats}>
-            <Text style={Styles.statLabel}>Consumo</Text>
-            <Text style={Styles.statValue}>{`${totalCalorias > 0 ? totalCalorias.toFixed(0) : 0} Kcal`}</Text>
-            
+        {/* Calorias */}
+        <View style={Styles.card}>
+          <Text style={Styles.totalText}>Calorias</Text>
+          <View style={Styles.progressContainer}>
+            <ProgressRing 
+              progress={totalCalorias > 0 ? ((totalCalorias-totalGastoCalorico) / objetivoCalorias) * 100 : 0} 
+              radius={50} 
+              strokeWidth={10} 
+              color="#00cc99" 
+            />
+            <View style={Styles.progressInfo}>
+              <Text style={Styles.detailText}>{`Objetivo: ${objetivoCalorias.toFixed(2)} Kcal`}</Text>
+              <Text style={Styles.detailText}>{`Consumido: ${totalCalorias > 0 ? totalCalorias.toFixed(2) : 0} Kcal`}</Text>
+              <Text style={Styles.detailText}>{`Gasto: ${totalGastoCalorico > 0 ? totalGastoCalorico.toFixed(2) : 0} Kcal`}</Text>
+            </View>
           </View>
         </View>
       </View>

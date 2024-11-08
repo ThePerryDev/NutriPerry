@@ -128,7 +128,29 @@ const styles = StyleSheet.create({
     checkbox: {
       margin: 8,
       color:"#24B77F",
-    },
+  },
+  deleteButton: {
+    // add styles for the delete button here
+    backgroundColor: 'red',
+    padding: 5,
+    borderRadius: 5,
+  },
+  deleteButtonText: {
+    fontSize: 10,
+    color: '#fff',
+  },
+  botao: {
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5f5f5",
+    borderRadius: 5,
+  },
+  icone: {
+    width: 20,
+    height: 20,
+  },
 }); 
 
 export default styles;

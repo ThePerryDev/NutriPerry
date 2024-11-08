@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {ScrollView, TextInput, TouchableOpacity, View, Text, Image,} from "react-native";
 import styles from "./styles"
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -7,6 +7,7 @@ import { setaVolta } from "../../../assets";
 import MenuInferior from "../../../components/MenuInferior/MenuInferior";
 import axios from 'axios';
 import moment from "moment";
+import { AuthContext } from "../../../context";
 
 const API_URL = 'http://192.168.0.20:3000/gastocalorico';
 type ContinuarScreenNavigationProp = StackNavigationProp<
@@ -22,13 +23,14 @@ const NewExercicise: React.FC<Props> = ({ navigation }) => {
   const [nomeExercicio, setNomeExercicio] = useState("");
   const [tempo, setTempo] = useState("");
   const [calorias, setCalorias] = useState("");
+  const { user } = useContext(AuthContext);
 
   const handleAdicionar = async () => {
     try {
       const formattedDate = moment().format("YYYY-MM-DD");
 
       const gastoCalorico = {
-        userID: '67074140dbf77240420381b1', // substitua por um ID válido
+        userID: user?.id, // substitua por um ID válido
         atividadeFisica: nomeExercicio,
         gastoCalorico: parseInt(calorias), // converte a string para um número
         data:formattedDate, // cria uma data atual
