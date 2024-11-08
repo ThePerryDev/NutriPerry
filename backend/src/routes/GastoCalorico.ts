@@ -3,10 +3,11 @@ import controller from "../controller/GastoCaloricoController";
 
 const router = Router();
 
-router.get("/", controller.getAll);
-router.get("/:id", controller.getById);
+//router.get("/", controller.getAll);
+router.get("/gastos/:userID", controller.getById);
 router.post("/", controller.create);
 router.put("/:id", controller.update);
-router.delete("/:id", controller.delete);
+router.delete("/delete/:id", controller.delete);
+router.get("/total/:userID", controller.getTotalGastoCalorico);
 
 export default router;

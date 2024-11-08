@@ -1,27 +1,39 @@
 // InputWithIcon.tsx
-import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Image, TextInputProps } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Image,
+  TextInputProps,
+} from "react-native";
 import styles from "./styles";
 
-// Definindo o tipo das props do componente
 interface InputWithIconProps extends TextInputProps {
-  iconSource: any; // Tipo da fonte da imagem (pode ser uma URI ou require)
+  iconSource: any;
+  style?: any;
 }
 
-const InputWithIcon: React.FC<InputWithIconProps> = ({ iconSource, placeholder, secureTextEntry, ...rest }) => {
-  const [value, setValue] = useState('');
+const InputWithIcon: React.FC<InputWithIconProps> = ({
+  iconSource,
+  placeholder,
+  secureTextEntry,
+  style,
+  ...rest
+}) => {
+  const [value, setValue] = useState("");
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Image source={iconSource} style={styles.icon} />
       <TextInput
-        placeholder={placeholder}
-        style={styles.textinput}
+        placeholder={placeholder || ""}
+        style={[styles.textinput, style]}
         value={value}
         onChangeText={setValue}
-        secureTextEntry={secureTextEntry}  // Usando a prop secureTextEntry
-        accessibilityLabel={placeholder} // Melhora a acessibilidade
-        {...rest}  // Passa todas as outras props restantes
+        secureTextEntry={secureTextEntry}
+        accessibilityLabel={placeholder}
+        {...rest}
       />
     </View>
   );

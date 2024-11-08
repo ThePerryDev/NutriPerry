@@ -20,7 +20,7 @@ const MenuInferior: React.FC<Props> = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate("MonitorCalorico")}>
         <Image source={Receitas} style={Styles.logo} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+      <TouchableOpacity onPress={() => navigation.navigate("TelaPerfil")}>
         <Image source={Perfil} style={Styles.logo} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("TelaConfiguracoes")}>

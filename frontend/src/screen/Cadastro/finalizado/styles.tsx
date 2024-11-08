@@ -33,6 +33,14 @@ const styles = StyleSheet.create({
   buttoncontainer: {
     marginTop: 70,
   },
+  arrowContainer: {
+    padding: 10, // Ajuste de padding para tornar o botão mais fácil de tocar
+  },
+  arrow: {
+    width: 24, // Certifique-se de definir largura e altura para a seta
+    height: 24,
+    resizeMode: "contain",
+  }
 });
 
 export default styles;

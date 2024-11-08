@@ -16,9 +16,9 @@ export type RootStackParamList = {
     CadastroNutriTelefone:undefined;
     PesquisaAlimento: undefined;
     AdicionarAlimento: {
-      product: AlimentoTaco | Product | null; // Agora aceita ambos os tipos
+    product: AlimentoTaco | Product | null; // Agora aceita ambos os tipos
     };
-    //AdicionarAlimento:undefined;
+    
     CadastrarAlimento:undefined;
     ErroAlimento:undefined;
     MonitorCalorico:undefined;
@@ -37,5 +37,9 @@ export type RootStackParamList = {
     SeusExercicios: undefined;
     NewExercicise: undefined;
     MenuInferior: undefined;
+    ConsumoAgua:undefined;
+    TelaPeso: undefined;
+    TelaPerfil: undefined;
+    GraficoConsumoAgua:undefined;
 }
 

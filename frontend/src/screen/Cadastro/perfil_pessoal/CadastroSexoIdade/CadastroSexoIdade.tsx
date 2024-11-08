@@ -1,12 +1,14 @@
-import React, { useState, useContext } from "react";
-import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { imagem3, setaVolta } from "../../../../assets";
 import styles from "./styles";
-import { Picker } from "@react-native-picker/picker";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
-import { useUserContext } from "../../../../context/userContext";
-
+import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
+import CustomPicker from "../../../../components/Cadastro/Picker/picker";
+import { useUserCadastro } from "../../../../context/UserCadastroContext";
+import moment from "moment";
+import DatePickerRegisterComponent from "../../../../components/Cadastro/DatePickerCadastro/datepicker";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -18,19 +20,23 @@ type Props = {
 };
 
 const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
-  const { setUserData } = useUserContext(); // Obtendo o setUserData do contexto
+  const { updateUserData } = useUserCadastro();
   const [sexo, setSexo] = useState<string>("");
-  const [idade, setIdade] = useState<string>("");
+  const [dataNascimento, setDataNascimento] = useState<Date>(moment().toDate()); // Garantindo que não seja undefined
 
+  const genderOptions = [
+    { label: "", value: "" },
+    { label: "Masculino", value: "masculino" },
+    { label: "Feminino", value: "feminino" },
+  ];
+
+  
   const handleContinue = () => {
-    // Atualiza os dados do usuário no contexto
-    setUserData((prevData:any) => ({
-      ...prevData,
-      sexo: sexo,
-      idade: idade,
-    }));
-    // Navega para a próxima tela
-    navigation.navigate("CadastroAlturaPeso");
+    if (dataNascimento) {
+      updateUserData({ gender: sexo, birthdate: moment(dataNascimento).format("YYYY-MM-DD") }); // Passa 'sexo' corretamente
+      navigation.navigate("CadastroAlturaPeso");
+      console.log(updateUserData);
+    }
   };
 
   return (
@@ -45,23 +51,20 @@ const CadastroSexoIdade: React.FC<Props> = ({ navigation }) => {
         <Text style={styles.headerlabel}>(3/5)</Text>
       </View>
       <Image source={imagem3} style={styles.image} resizeMode="contain" />
-      <Text style={styles.textgeral}>Insira seu sexo</Text>
-      <View style={styles.pickerContainer}>
-        <Picker selectedValue={sexo} onValueChange={(itemValue) => setSexo(itemValue)}>
-          <Picker.Item label="Masculino" value="masculino" />
-          <Picker.Item label="Feminino" value="feminino" />
-        </Picker>
-      </View>
-      <Text style={styles.textgeral}>Insira sua idade</Text>
-      <TextInput
-        value={idade}
-        onChangeText={setIdade}
-        style={styles.input}
-        keyboardType="numeric"
+      <CustomPicker
+        label="Insira seu sexo"
+        selectedValue={sexo}
+        onValueChange={(itemValue) => setSexo(itemValue)}
+        items={genderOptions}
       />
-      <TouchableOpacity style={styles.button} onPress={handleContinue}>
-        <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
-      </TouchableOpacity>
+      <Text style={styles.textgeral}>Insira sua data de nascimento</Text>
+      <DatePickerRegisterComponent
+        selectedDate={dataNascimento} // Agora é garantido que não será undefined
+        onDateChange={setDataNascimento}
+      />
+      <View style={styles.buttoncontainer}>
+        <ContinueButton onPress={handleContinue} />
+      </View>
     </View>
   );
 };

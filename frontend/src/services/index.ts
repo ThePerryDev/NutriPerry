@@ -1,3 +1,4 @@
 import ConsumoCaloricoService from "./ConsumoCalorico"
+import UserCadastroService from "./UserCadastroService"
 
-export{ConsumoCaloricoService}
+export{UserCadastroService, ConsumoCaloricoService}

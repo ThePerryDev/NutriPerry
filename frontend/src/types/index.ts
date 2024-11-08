@@ -19,6 +19,7 @@ export interface UsersProps {
   isLogged: boolean; // Indica se o usuário está logado
 }
 
+
 export interface Error {
   error: string;
   props: string;
@@ -28,7 +29,7 @@ export interface Error {
 export interface ConsumoCaloricoProps {
   id?: string; // Opcional caso não tenha durante a criação
   user: string;
-  data: Date;
+  data: string;
   tipoRefeicao: string;
   nomeAlimento: string;
   kcal: number;

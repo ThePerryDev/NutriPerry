@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {ScrollView, TextInput, TouchableOpacity, View, Text, Image,} from "react-native";
 import styles from "./styles"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../types/rootStack";
 import { setaVolta } from "../../../assets";
 import MenuInferior from "../../../components/MenuInferior/MenuInferior";
+import axios from 'axios';
+import moment from "moment";
+import { AuthContext } from "../../../context";
 
+const API_URL = 'http://192.168.1.4:3000/gastocalorico';
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "NewExercicise"
@@ -19,6 +23,28 @@ const NewExercicise: React.FC<Props> = ({ navigation }) => {
   const [nomeExercicio, setNomeExercicio] = useState("");
   const [tempo, setTempo] = useState("");
   const [calorias, setCalorias] = useState("");
+  const { user } = useContext(AuthContext);
+
+  const handleAdicionar = async () => {
+    try {
+      const formattedDate = moment().format("YYYY-MM-DD");
+
+      const gastoCalorico = {
+        userID: user?.id, // substitua por um ID válido
+        atividadeFisica: nomeExercicio,
+        gastoCalorico: parseInt(calorias), // converte a string para um número
+        data:formattedDate, // cria uma data atual
+        tempo: parseInt(tempo), // converte a string para um número
+      };
+
+      console.log("Dados enviados para o backend:", gastoCalorico)
+      await axios.post(API_URL, gastoCalorico);
+      alert("Exercício adicionado com sucesso!");
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao adicionar exercício");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -52,7 +78,7 @@ const NewExercicise: React.FC<Props> = ({ navigation }) => {
         keyboardType="numeric"
       />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.saveButton}>
+        <TouchableOpacity style={styles.saveButton} onPress={handleAdicionar}>
           <Text style={styles.saveButtonText}>Adicionar</Text>
         </TouchableOpacity>
       </View>

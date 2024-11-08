@@ -3,14 +3,6 @@ import { UsersProps } from "../types";
 import Search from "../utils/Search";
 
 export const useApi = () => ({
-  // VALIDAÇÃO DE TOKEN DESATIVADA PORQUE USA-SE O MONGO
-  /*
-    validateToken: async (token: string) => {
-        const response = await api.post('/validate', {token});
-        return response.data;
-    },
-    */
-
   validateUser: async (name: string) => {
     const user = await getUser(name);
     let response;
@@ -26,7 +18,7 @@ export const useApi = () => ({
     let user = await getUser(email);
     if (user && user.password === password) {
       const { id, name, nickname, height, weight, activityLevel, gender, goal, birthdate, nutricionista } = user;
-      const isLogged = true;     
+      const isLogged = true;
       return await service.put({
         id,
         email,
@@ -113,14 +105,12 @@ async function getUserPosition(email: string) {
 
   let s_number = new Search<number>();
 
-  console.log(users);
   return s_number.sequential_ws(email, mailList);
 }
 
 async function getUser(email: string) {
   let position = await getUserPosition(email);
 
-  /* Se o nome ainda não estiver no banco de dados, ele então é cadastrado */
   if (position === -1) {
     console.log("Usuário não cadastrado!");
     return null;

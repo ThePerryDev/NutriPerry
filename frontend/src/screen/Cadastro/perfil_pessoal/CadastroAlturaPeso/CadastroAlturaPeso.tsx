@@ -1,11 +1,21 @@
-import React, { useContext, useState } from "react";
-import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
+} from "react-native";
 import { imagem4, setaVolta } from "../../../../assets";
 import styles from "./Styles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../../types/rootStack";
-import user from "../../../../services/userService";
-import { useUserContext } from "../../../../context/userContext";
+import { useUserCadastro } from "../../../../context/UserCadastroContext";
+import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
 
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -17,78 +27,71 @@ type Props = {
 };
 
 const CadastroAlturaPeso: React.FC<Props> = ({ navigation }) => {
-  const { userData, setUserData } = useUserContext(); // Obtendo userData e setUserData do contexto
+  const { updateUserData } = useUserCadastro();
   const [height, setHeight] = useState<string>("");
   const [weight, setWeight] = useState<string>("");
+  const [showImage, setShowImage] = useState(true);
 
-  const handleRegister = async () => {
-    if (height && weight) {
-      const heightNumber = parseFloat(height);
-      const weightNumber = parseFloat(weight);
-      const birthdate = new Date(2020, 1, 2); // Exemplo de data de nascimento
-
-      if (!isNaN(heightNumber) && !isNaN(weightNumber)) {
-        // Atualiza os dados do usuário no contexto
-        setUserData({
-          ...userData,
-          height: heightNumber,
-          weight: weightNumber,
-        });
-
-        await user.post({
-          email: userData.email, // Assume que o email foi salvo anteriormente
-          password: userData.password,
-          name: userData.name,
-          nickname: userData.nickname,
-          activityLevel: "sedentario",
-          gender: userData.sexo, // Obtém o sexo do contexto
-          goal: "perda de peso",
-          birthdate: birthdate,
-          height: heightNumber,
-          weight: weightNumber,
-          isLogged: false,
-        });
-
-        // Navega para a próxima tela
-        navigation.navigate("TelaPPObjetivo");
-      } else {
-        alert("Insira valores numéricos válidos");
-      }
-    } else {
-      alert("Preencha todos os campos");
-    }
+  const handleContinue = () => {
+    updateUserData({ height: Number(height), weight: Number(weight) });
+    navigation.navigate("TelaPPObjetivo");
+    console.log("dados a serem enviados", updateUserData);
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-          <TouchableOpacity
-            style={styles.arrow}
-            onPress={() => navigation.navigate("CadastroSexoIdade")}
-          >
-            <Image source={setaVolta} style={styles.arrow} />
-          </TouchableOpacity>
-          <Text style={styles.headerlabel}>(4/5)</Text>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{ flex: 1 }}>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity
+              style={styles.arrow}
+              onPress={() => navigation.navigate("CadastroSexoIdade")}
+            >
+              <Image source={setaVolta} style={styles.arrow} />
+            </TouchableOpacity>
+            <Text style={styles.headerlabel}>(4/5)</Text>
+          </View>
+          {showImage && (
+            <Image source={imagem4} style={styles.image} resizeMode="contain" />
+          )}
+          <Text style={styles.textgeral}>Insira sua altura</Text>
+          <TextInput
+            value={height}
+            onChangeText={(height) => {
+              setHeight(height);
+              setShowImage(false); // Ocultar imagem ao focar no input
+            }}
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onFocus={() => setShowImage(false)} // Ocultar imagem ao focar no input
+            onBlur={() => setShowImage(true)} // Mostrar imagem ao desfocar
+            onSubmitEditing={Keyboard.dismiss}
+          />
+          <Text style={styles.textgeral}>Insira seu peso</Text>
+          <TextInput
+            value={weight}
+            onChangeText={(weight) => {
+              setWeight(weight);
+              setShowImage(false); // Ocultar imagem ao focar no input
+            }}
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onFocus={() => setShowImage(false)} // Ocultar imagem ao focar no input
+            onBlur={() => setShowImage(true)} // Mostrar imagem ao desfocar
+            onSubmitEditing={Keyboard.dismiss}
+          />
+          <View style={styles.buttoncontainer}>
+            <ContinueButton onPress={handleContinue} />
+          </View>
         </View>
-      <Image source={imagem4} style={styles.image} resizeMode="contain" />
-      <Text style={styles.textgeral}>Insira sua altura</Text>
-      <TextInput
-        value={height}
-        onChangeText={setHeight}
-        style={styles.input}
-        keyboardType="numeric"
-      />
-      <Text style={styles.textgeral}>Insira seu peso</Text>
-      <TextInput
-        value={weight}
-        onChangeText={setWeight}
-        style={styles.input}
-        keyboardType="numeric"
-      />
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={{ color: "#FFFFFF", fontSize: 30 }}>CONTINUAR</Text>
-      </TouchableOpacity>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

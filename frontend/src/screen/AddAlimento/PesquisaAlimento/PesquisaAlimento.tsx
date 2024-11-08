@@ -23,8 +23,8 @@ type Props = {
 const buscarAlimentoTaco = async (termo: string): Promise<AlimentoTaco[]> => {
   try {
     
-    const response = await axios.get(`http://localhost:3000/alimentotaco`, 
-    //const response = await axios.get(`http://10.68.55.162:3000/alimentotaco`,
+    //const response = await axios.get(`http://192.168.1.4:3000/alimentotaco`, 
+    const response = await axios.get(`http://192.168.1.4:3000/alimentotaco`,
     {
       params: {
         description: termo,
@@ -32,7 +32,7 @@ const buscarAlimentoTaco = async (termo: string): Promise<AlimentoTaco[]> => {
     });
 
     // Verifique a estrutura da resposta
-    console.log("Response do AlimentoTaco:", response.data); // Log para verificar a resposta
+    //console.log("Response do AlimentoTaco:", response.data); // Log para verificar a resposta
 
     // Verifica se response.data é um array
     if (Array.isArray(response.data)) {
@@ -180,9 +180,11 @@ const PesquisaAlimento: React.FC<Props> = ({ navigation }) => {
           onChangeText={setNomeProduct}
           style={styles.input}
         />
+        {/*
         <TouchableOpacity style={styles.camera} disabled={true}>
           <Image source={camera} />
         </TouchableOpacity>
+         */}
       </View>
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />

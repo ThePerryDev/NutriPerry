@@ -1,22 +1,26 @@
-import React, { useContext, useState } from "react"; 
-import { View, Text, TouchableOpacity, Image } from "react-native"; 
-import CustomPicker from "../../../../components/Cadastro/Picker/picker"; 
-import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar"; 
-import { StackNavigationProp } from "@react-navigation/stack"; 
-import { RootStackParamList } from "../../../../types/rootStack"; 
-import styles from "./styles"; 
-import { setaVolta } from "../../../../assets"; 
-import user from "../../../../services/userService"; 
-import { useUserContext } from "../../../../context/userContext"; 
+import React, { useState } from "react"; 
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import CustomPicker from "../../../../components/Cadastro/Picker/picker";
+import ContinueButton from "../../../../components/Cadastro/Continuar/botao_continuar";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../../types/rootStack";
+import styles from "./styles";
+import { setaVolta } from "../../../../assets";
+import { useUserCadastro } from "../../../../context/UserCadastroContext";
 
-type ContinuarScreenNavigationProp = StackNavigationProp<RootStackParamList, "TelaPPObjetivo">;
+type ContinuarScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "TelaPPObjetivo"
+>;
 
-type Props = { navigation: ContinuarScreenNavigationProp; };
+type Props = {
+  navigation: ContinuarScreenNavigationProp;
+};
 
 const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
-  const { userData } = useUserContext(); 
-  const [selectGoal, setSelectGoal] = useState(""); 
-  const [selectExerciseTime, setSelectExerciseTime] = useState("");
+  const { updateUserData, createUser } = useUserCadastro(); 
+  const [selectGoal, setSelectGoal] = useState<string>("");
+  const [selectExerciseTime, setSelectExerciseTime] = useState<string>("");
 
   const goalOptions = [
     { label: "", value: "" },
@@ -33,34 +37,17 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
     { label: "Muito ativo", value: "muito ativo" },
   ];
 
-  const handleSubmit = async () => {
-    const { email, password, name, nickname, height, weight, gender } = userData;
-  
-    if (selectGoal && selectExerciseTime) {
-      try {
-        await user.post({
-          email,
-          password,
-          name,
-          nickname,
-          height,
-          weight,
-          activityLevel: selectExerciseTime,
-          gender, 
-          goal: selectGoal,
-          birthdate: new Date(2020, 1, 2), 
-          isLogged: true,
-        });
-        navigation.navigate("TelaFinalizado"); 
-      } catch (error) {
-        console.error("Erro ao cadastrar:", error);
-        alert("Erro ao cadastrar. Tente novamente.");
-      }
-    } else {
-      alert("Por favor, preencha todos os campos.");
-    }
+  const handleContinue = async () => {
+    // Atualiza o contexto antes de continuar
+    await updateUserData({ 
+      goal: selectGoal, 
+      activityLevel: selectExerciseTime 
+    });
+    
+
+    // Navega para a próxima etapa após atualizar o contexto
+    navigation.navigate("TelaFinalizado");
   };
-  
   return (
     <View style={styles.container}>
       <View>
@@ -75,7 +62,10 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
         </View>
 
         <View style={styles.imagecontainer}>
-          <Image source={require("../../../../assets/pp_objetivos.png")} style={styles.image} />
+          <Image
+            source={require("../../../../assets/pp_objetivos.png")}
+            style={styles.image}
+          />
         </View>
 
         <CustomPicker
@@ -93,7 +83,7 @@ const TelaPPObjetivo: React.FC<Props> = ({ navigation }) => {
       </View>
 
       <View style={styles.buttoncontainer}>
-        <ContinueButton onPress={handleSubmit} />
+        <ContinueButton onPress={handleContinue} />
       </View>
     </View>
   );
