@@ -44,7 +44,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
 
-      const responseAlimentos = await axios.get("http://192.168.0.20:3000/consumos/alimento", {
+      const responseAlimentos = await axios.get("http://192.168.18.46:3000/consumos/alimento", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -60,7 +60,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
       setProdutos(alimentos);
 
-      const responseTotais = await axios.get("http://192.168.0.20:3000/consumos/listarconsumo", {
+      const responseTotais = await axios.get("http://192.168.18.46:3000/consumos/listarconsumo", {
         params: {
           userId: user?.id,
           data: formattedDate,
@@ -78,7 +78,7 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://192.168.0.20:3000/consumos/delete/${id}`);
+      await axios.delete(`http://192.168.18.46:3000/consumos/delete/${id}`);
       
       setProdutos((prevProdutos) => {
         const updatedProdutos = prevProdutos.filter((produto) => produto.id !== id);
@@ -109,9 +109,6 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
     <View style={styles.row}>
       <Text style={styles.alimento}>{item.nome}</Text>
       <Text style={styles.quantidade}>{item.quantidade}</Text>
-      <TouchableOpacity style={styles.botao}>
-        <Image source={Editar} style={styles.icone} />
-      </TouchableOpacity>
       <TouchableOpacity style={styles.botao} onPress={() => handleDelete(item.id)}>
         <Image source={Deletar} style={styles.icone} />
       </TouchableOpacity>
@@ -143,7 +140,6 @@ const CafedaManha: React.FC<Props> = ({ navigation }) => {
       <View style={styles.row}>
         <Text style={styles.columnHeaderAlimento}>Alimento</Text>
         <Text style={styles.columnHeaderQuantidade}>Qtd.</Text>
-        <Text style={styles.columnHeaderBotao}>Edit.</Text>
         <Text style={styles.columnHeaderBotao}>Del.</Text>
       </View>
 

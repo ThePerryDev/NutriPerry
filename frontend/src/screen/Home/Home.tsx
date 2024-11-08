@@ -31,22 +31,19 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const [totalPeso, setTotalPeso] = useState<number>(0);
   const [totalProteinas, setTotalProteinas] = useState<number>(0);
   const [totalAcucar, setTotalAcucar] = useState<number>(0);
-  const [totalCalorias, setTotalCalorias] = useState<number>(0); 
-  const [refreshing, setRefreshing] = useState(false); 
-  const { user } = useContext(AuthContext);
+  const [carboidratoObjetivo, setCarboidratoObjetivo] = useState<number>(0);
+  const [proteinaObjetivo, setProteinaObjetivo] = useState<number>(0);
+  const [acucarObjetivo, setAcucarObjetivo] = useState<number>(0);
   const [totalGastoCalorico, setTotalGastoCalorico] = useState<number>(0);
 
   const objetivoCalorias = 2000;
-  const objetivoCarboidratos = 250;
-  const objetivoProteinas = 100;
-  const objetivoAcucar = 50;
 
   const fetchCaloriasConsumidas = async () => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.0.20:3000/consumos/totalkcal`, {
+      const response = await axios.get(`http://192.168.18.46:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
@@ -67,7 +64,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const fetchObjetivo = async () => {
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://192.168.0.20:3000/user/objetivo`, {
+      const response = await axios.get(`http://192.168.18.46:3000/user/objetivo`, {
         params: { userId: user?.id }
       });
 
@@ -81,12 +78,33 @@ const Home: React.FC<Props> = ({ navigation }) => {
     } catch (error) {
       console.error("Erro ao buscar dados", error);
     }
+  };
+
+  const fetchData = async () => {
+    try {
+      const dataAtual = moment().format("YYYY-MM-DD");
+
+      // Buscando o total de calorias consumidas (exemplo com axios)
+      const caloriasResponse = await axios.get("http://192.168.18.46:3000/consumos/totalkcal", {
+        params: { userId: user?.id, data: dataAtual },
+      });
+      setTotalCalorias(caloriasResponse.data.totalKcal ?? 0);
+
+      // Buscando o objetivo de calorias
+      const objetivoResponse = await axios.get("http://192.168.18.46:3000/user/objetivo", {
+        params: { userId: user?.id },
+      });
+      setkcalObjetivo(objetivoResponse.data.kcalObjetivo ?? 0);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
 
   const fetchGastoCalorico = async () => {
     const dataAtual = moment().format("YYYY-MM-DD");
 
     try {
-      const response = await axios.get(`http://192.168.0.138:3000/gastocalorico/total/${user?.id}`, {
+      const response = await axios.get(`http://192.168.18.46:3000/gastocalorico/total/${user?.id}`, {
         params: { data: dataAtual }
       });
 
@@ -97,33 +115,6 @@ const Home: React.FC<Props> = ({ navigation }) => {
       setTotalGastoCalorico(totalGastoCalorico ?? 0);
     } catch (error) {
       console.error("Erro ao buscar o gasto calórico", error);
-    }
-  };
-  
-
-  const onRefresh = () => {
-    setRefreshing(true);
-    fetchCaloriasConsumidas().then(() => setRefreshing(false));
-    fetchGastoCalorico().then(() => setRefreshing(false));
-  };
-
-  const fetchData = async () => {
-    try {
-      const dataAtual = moment().format("YYYY-MM-DD");
-
-      // Buscando o total de calorias consumidas (exemplo com axios)
-      const caloriasResponse = await axios.get("http://192.168.0.20:3000/consumos/totalkcal", {
-        params: { userId: user?.id, data: dataAtual },
-      });
-      setTotalCalorias(caloriasResponse.data.totalKcal ?? 0);
-
-      // Buscando o objetivo de calorias
-      const objetivoResponse = await axios.get("http://192.168.0.20:3000/user/objetivo", {
-        params: { userId: user?.id },
-      });
-      setkcalObjetivo(objetivoResponse.data.kcalObjetivo ?? 0);
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
     }
   };
 
@@ -152,7 +143,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
     await fetchCaloriasConsumidas();
     await fetchObjetivo();
     await fetchData();
-  
+    fetchGastoCalorico().then(() => setRefreshing(false));
     setRefreshing(false); // Após completar, define refreshing como false
   };
   
@@ -167,7 +158,6 @@ const Home: React.FC<Props> = ({ navigation }) => {
   );
 
 
-
   return (
     <View style={Styles.container}>
       
@@ -175,45 +165,22 @@ const Home: React.FC<Props> = ({ navigation }) => {
       <View style={Styles.card}>
         <View style={Styles.statsContainer}>
           <View style={Styles.stats}>
-            <Text style={Styles.statLabel}>Gastos</Text>
-            <Text style={Styles.statValue}>- calorias</Text>
+            <Text style={Styles.statLabel}>Gasto</Text>
+            <Text style={Styles.statValue}>{`${totalGastoCalorico > 0 ? totalGastoCalorico.toFixed(2) : 0} Kcal`}</Text>
           </View>
           <View style={Styles.stats}>
             <Text style={Styles.totalText}>Total</Text>
-            <Speedometer key = {progress} progress={progress} />
-
-        {/* Calorias */}
-        <View style={Styles.card}>
-          <Text style={Styles.totalText}>Calorias</Text>
-          <View style={Styles.progressContainer}>
-            <ProgressRing 
-              progress={totalCalorias > 0 ? ((totalCalorias-totalGastoCalorico) / objetivoCalorias) * 100 : 0} 
-              radius={50} 
-              strokeWidth={10} 
-              color="#00cc99" 
-            />
-            <View style={Styles.progressInfo}>
-              <Text style={Styles.detailText}>{`Objetivo: ${objetivoCalorias.toFixed(2)} Kcal`}</Text>
-              <Text style={Styles.detailText}>{`Consumido: ${totalCalorias > 0 ? totalCalorias.toFixed(2) : 0} Kcal`}</Text>
-              <Text style={Styles.detailText}>{`Gasto: ${totalGastoCalorico > 0 ? totalGastoCalorico.toFixed(2) : 0} Kcal`}</Text>
-            </View>
+            <Speedometer key = {progress} progress={totalCalorias > 0 ? ((totalCalorias-totalGastoCalorico) / objetivoCalorias) * 100 : 0} />
+            <Text style={Styles.statSpeedometerValue}>{totalCalorias > 0 ? (((totalCalorias - totalGastoCalorico) / objetivoCalorias) * 100).toFixed(2) : "0.00"} %
+            </Text>
+          </View>
+          <View style={Styles.stats}>
+            <Text style={Styles.statLabel}>Consumo</Text>
+            <Text style={Styles.statValue}>{`${totalCalorias > 0 ? totalCalorias.toFixed(0) : 0} Kcal`}</Text>
+            
           </View>
         </View>
       </View>
-      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        {["Café da Manhã", "Almoço", "Jantar", "Lanches"].map((meal, index) => (
-          <View key={index} style={Styles.mealItem}>
-            <MaterialIcons name={"check-box-outline-blank"} size={24} />
-            <View style={Styles.mealInfo}>
-              <Text style={Styles.mealName}>{meal}</Text>
-              <Text style={Styles.mealDetail}>Sem cardápio cadastrado</Text>
-            </View>
-            <TouchableOpacity onPress={() => navigation.navigate("PesquisaAlimento")}>
-              <Ionicons name="add-circle-outline" size={28} color="green" />
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
       <MenuInferior navigation={navigation} />
     </View>
   );

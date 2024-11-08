@@ -9,7 +9,7 @@ import axios from 'axios';
 import moment from "moment";
 import { AuthContext } from "../../../context";
 
-const API_URL = 'http://192.168.0.20:3000/gastocalorico';
+const API_URL = 'http://192.168.18.46:3000/gastocalorico';
 type ContinuarScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "NewExercicise"

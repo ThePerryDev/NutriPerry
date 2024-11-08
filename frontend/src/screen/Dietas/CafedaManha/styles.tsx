@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   columnHeaderAlimento: {
-    width: 169,
+    width: 200,
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   alimento: {
-    width: 169,
+    width: 200,
     height: 40,
     fontSize: 14,
     fontWeight: "bold",

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 5,
-    marginRight: 60,
+    marginRight: 100,
     marginBottom: 15,
     marginTop: 30,
   },
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   columnHeaderAlimento: {
-    width: 169,
+    width: 200,
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     color: "#2C4B4E",
   },
   alimento: {
-    width: 169,
+    width: 200,
     height: 40,
     fontSize: 14,
     fontWeight: "bold",

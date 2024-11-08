@@ -49,6 +49,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
+  statSpeedometerValue: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight:"bold",
+    marginTop:10
+  },
+
   chart: {
     justifyContent: "center",
     alignItems: "center",

@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#ffffff",
     justifyContent: "center",
-    paddingLeft: 20,
+    alignItems: "center",
+    textAlign:"center",
   },
   infocontainer: {
     height: 305,
