@@ -40,7 +40,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://10.68.55.153:3000/consumos/totalkcal`, {
+      const response = await axios.get(`http://192.168.18.46:3000/consumos/totalkcal`, {
         params: { userId: user?.id, data: dataAtual }
       });
 
@@ -61,7 +61,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const fetchObjetivo = async () => {
     try {
       //console.log("ID do usuário:", user?.id);
-      const response = await axios.get(`http://10.68.55.153:3000/user/objetivo`, {
+      const response = await axios.get(`http://192.168.18.46:3000/user/objetivo`, {
         params: { userId: user?.id }
       });
 
@@ -82,13 +82,13 @@ const Home: React.FC<Props> = ({ navigation }) => {
       const dataAtual = moment().format("YYYY-MM-DD");
 
       // Buscando o total de calorias consumidas (exemplo com axios)
-      const caloriasResponse = await axios.get("http://10.68.55.153:3000/consumos/totalkcal", {
+      const caloriasResponse = await axios.get("http://192.168.18.46:3000/consumos/totalkcal", {
         params: { userId: user?.id, data: dataAtual },
       });
       setTotalCalorias(caloriasResponse.data.totalKcal ?? 0);
 
       // Buscando o objetivo de calorias
-      const objetivoResponse = await axios.get("http://10.68.55.153:3000/user/objetivo", {
+      const objetivoResponse = await axios.get("http://192.168.18.46:3000/user/objetivo", {
         params: { userId: user?.id },
       });
       setkcalObjetivo(objetivoResponse.data.kcalObjetivo ?? 0);
@@ -159,20 +159,6 @@ const Home: React.FC<Props> = ({ navigation }) => {
           </View>
         </View>
       </View>
-      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        {["Café da Manhã", "Almoço", "Jantar", "Lanches"].map((meal, index) => (
-          <View key={index} style={Styles.mealItem}>
-            <MaterialIcons name={"check-box-outline-blank"} size={24} />
-            <View style={Styles.mealInfo}>
-              <Text style={Styles.mealName}>{meal}</Text>
-              <Text style={Styles.mealDetail}>Sem cardápio cadastrado</Text>
-            </View>
-            <TouchableOpacity onPress={() => navigation.navigate("PesquisaAlimento")}>
-              <Ionicons name="add-circle-outline" size={28} color="green" />
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
       <MenuInferior navigation={navigation} />
     </View>
   );

@@ -23,8 +23,8 @@ type Props = {
 const buscarAlimentoTaco = async (termo: string): Promise<AlimentoTaco[]> => {
   try {
     
-    //const response = await axios.get(`http://10.68.55.153:3000/alimentotaco`, 
-    const response = await axios.get(`http://10.68.55.153:3000/alimentotaco`,
+    //const response = await axios.get(`http://192.168.18.46:3000/alimentotaco`, 
+    const response = await axios.get(`http://192.168.18.46:3000/alimentotaco`,
     {
       params: {
         description: termo,
