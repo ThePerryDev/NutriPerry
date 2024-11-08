@@ -41,7 +41,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
     try {
       //console.log("ID do usuário:", user?.id);
       const response = await axios.get(
-        `http://192.168.0.101:3000/consumos/totalkcal`,
+        `http://192.168.1.76:3000/consumos/totalkcal`,
         {
           params: { userId: user?.id, data: dataAtual },
         }
@@ -71,7 +71,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
     try {
       //console.log("ID do usuário:", user?.id);
       const response = await axios.get(
-        `http://192.168.0.101:3000/user/objetivo`,
+        `http://192.168.1.76:3000/user/objetivo`,
         {
           params: { userId: user?.id },
         }
@@ -100,7 +100,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
       // Buscando o total de calorias consumidas (exemplo com axios)
       const caloriasResponse = await axios.get(
-        "http://192.168.0.101:3000/consumos/totalkcal",
+        "http://192.168.1.76:3000/consumos/totalkcal",
         {
           params: { userId: user?.id, data: dataAtual },
         }
@@ -109,7 +109,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
       // Buscando o objetivo de calorias
       const objetivoResponse = await axios.get(
-        "http://192.168.0.101:3000/user/objetivo",
+        "http://192.168.1.76:3000/user/objetivo",
         {
           params: { userId: user?.id },
         }

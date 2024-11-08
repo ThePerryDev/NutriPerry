@@ -1,11 +1,13 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { Row } from "react-native-table-component";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
     backgroundColor: "#fff",
+    alignContent: "center",
   },
 
   header: {
@@ -20,6 +22,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     marginBottom: 20,
+    justifyContent: "center",
   },
 
   cardStats: {
