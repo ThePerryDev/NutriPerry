@@ -37,40 +37,32 @@ const y2 = cy - r * sin(endAngle);
 const d = `M ${x1} ${y1} A ${r} ${r} 0 1 0 ${x2} ${y2}`;
 
 const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
-  
   // Ajuste para compartilhar o valor do progresso
   const sharedProgress = useSharedValue(progress);
 
-  
   // Atualize o sharedProgress sempre que o valor de progress mudar
   useEffect(() => {
-   
     sharedProgress.value = withTiming(progress, {
       duration: 1000,
       easing: Easing.inOut(Easing.ease),
     });
-
-    
   }, [progress]); // Atualiza quando progress muda
 
   const circumference = r * A;
-  
-
 
   // Usando useDerivedValue para garantir que o valor seja reativo
   const animatedProgress = useDerivedValue(() => {
     // Log para verificar o valor animado
-  
+
     return sharedProgress.value; // Valor reativo para o progresso
   });
-
 
   // Propriedades animadas para o caminho (barra de progresso)
   const animatedProps = useAnimatedProps(() => {
     "worklet";
     const alpha = ((100 - progress) / 100) * circumference;
-    
-    //console.log("Valor de ANIMATED atualizado:", progress); 
+
+    //console.log("Valor de ANIMATED atualizado:", progress);
     return {
       strokeDashoffset: alpha, // Atualiza a animação da barra com o progresso
     };
@@ -78,18 +70,13 @@ const Speedometer: React.FC<SpeedometerProps> = ({ progress }) => {
 
   // Propriedades animadas para o ponteiro
   const pointerProps = useAnimatedProps(() => {
-    
     "worklet";
-    const rotation = interpolate(sharedProgress.value, [0, 100], [-120, 120]);
+    const rotation = interpolate(sharedProgress.value, [0, 100], [-90, 90]);
 
     return {
       transform: `rotate(${rotation} ${cx} ${cy})`, // A rotação é feita no ponto central (cx, cy)
-      
     };
-    
   });
-
-  
 
   return (
     <View style={Styles.container}>
