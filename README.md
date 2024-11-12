@@ -8,18 +8,14 @@
     <a href="#metricas">Métricas do time</a> &nbsp |&nbsp &nbsp
 </p>
 
-O projeto constitui na construção de uma aplicação mobile que auxilie o monitoramento da dieta de um usuário através da inserção de consumo e gastos calóricos. Com base nessa estruturação a sprint 02 consistiu em horas voltadas para o desenvolvimento de mais telas do aplicativo e criação de mais informações no banco de dados, assim como melhoria no estilo das telas.
-
-[LINK DE APRESENTAÇÃO DA SPRINT 02](https://youtu.be/mZhYl-Wf9Bk)
+O projeto tem como objetivo desenvolver um aplicativo mobile que facilite o monitoramento da dieta do usuário, permitindo o registro do consumo e do gasto calórico. Na sprint 03, os esforços foram direcionados à implementação de novas telas no aplicativo, à expansão das informações no banco de dados e à melhoria do design das interfaces.
 
 <span id="objetivos">
 
 ## :dart: Objetivos da Sprint
 Os requisitos (funcionais e não funcionais) abrangidos por essa sprint são:
-- RF 01: Cadastro do usuário na plataforma
-- RF 03: Cadastro de novos alimentos
-- RF 05: Registrar refeições e adicionar itens nelas
-- RF 07: Registrar atividades físicas
+- RF 06: Definir metas
+- RF 08: Ver macros das refeições
 - RNF 09: Documentação e gerenciamento no GitHub
 - RNF 10: Processo Scrum
 - RNF 11: Back-end: TypeScript e Node.js
