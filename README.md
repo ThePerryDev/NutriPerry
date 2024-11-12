@@ -14,6 +14,7 @@ O projeto tem como objetivo desenvolver um aplicativo mobile que facilite o moni
 
 ## :dart: Objetivos da Sprint
 Os requisitos (funcionais e não funcionais) abrangidos por essa sprint são:
+- RF 01: Cadastro do usuário na plataforma
 - RF 06: Definir metas
 - RF 08: Ver macros das refeições
 - RNF 09: Documentação e gerenciamento no GitHub
@@ -30,30 +31,24 @@ Os requisitos (funcionais e não funcionais) abrangidos por essa sprint são:
         
 ## :heavy_check_mark: Entregas
 
+
 ### Cadastro de usuário na plataforma
 
-Nessa sprint conseguimos realizar o cadastro do usuário no banco de dados utilizando uma extensão do Visual Studio Code, chamada Thunder Client, que permite a realização de testes que conferem se os dados estão sendo salvos no banco de dados. Com esses testes foi possível constar que estava tudo em ordem, faltando apenas integrar com as telas de cadastro.
+Durante esta sprint, implementamos o cadastro de usuários no banco de dados e concluímos a integração entre o backend e o frontend. Agora, os usuários podem criar uma conta diretamente pelo aplicativo e realizar o login de forma funcional.
 
 → [Voltar ao topo](#topo)
 
 
-### Cadastro de novos alimentos
+### Definir metas
 
-Também entregamos a possibilidade do usuário cadastrar alimentos em seu banco de dados, tanto pela API Open Food Facts, quanto pelo banco de dados chamado TACO. Esse também foi testado pela extensão Thunder Client e está funcionando corretamente.
-
-→ [Voltar ao topo](#topo)
-
-
-### Registrar refeições e adicionar itens nelas
-
-Nessa entrega realizamos a parte visual da tela para registrar as refeições, com botões, locais para inserir os dados e a navegação dessa página com as outras, assim como a integração com o banco de dados.
+Nesta sprint, implementamos a funcionalidade que permite aos usuários definir metas personalizadas para a ingestão de nutrientes e o consumo de água.
 
 → [Voltar ao topo](#topo)
 
 
-### Registrar atividades físicas
+### Ver macros das refeições
 
-Assim como no tópico anterior, nessa entrega realizamos a parte visual da tela de registro de atividades físicas e criamos a tabela no banco de dados que será registrado esses dados, porém ainda não concluimos a integração da parte visual com o banco de dados.
+Nesta sprint, desenvolvemos a tela principal (home), onde são exibidos os macronutrientes das refeições do usuário. Com essa funcionalidade, o usuário pode monitorar o consumo de calorias, avaliar o progresso de sua dieta e decidir se deseja realizar ajustes ou manter o plano atual.
 
 
 Sendo assim, finalizamos os requisitos propostos para esta sprint.
