@@ -52,7 +52,7 @@ const Perfil: React.FC<Props> = ({ navigation }) => {
     // Função para buscar os dados do usuário
     const fetchUserData = async () => {
         try {
-            const response = await fetch(`http://192.168.1.4:3000/user/objetivo?userId=${user?.id}`);
+            const response = await fetch(`http://192.168.0.107:3000/user/objetivo?userId=${user?.id}`);
             if (!response.ok) {
                 throw new Error("Erro ao buscar dados do usuário");
             }
