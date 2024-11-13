@@ -8,7 +8,6 @@
     <a href="#user-stories">User Stories</a>  |    
     <a href="#tecnologias">Tecnologias</a>  |  
     <a href="#equipe">Equipe</a>  |  
-    <a href="#final">Apresentação Final</a>
 </p>
 
 <span id="sobre">
